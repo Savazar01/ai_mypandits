@@ -1,0 +1,38 @@
+:root {
+  /* Colors - Vedic Sanctuary Palette */
+  --color-background: #faf9f6; /* Sandalwood Cream */
+  --color-surface: #faf9f6;
+  --color-surface-container-low: #f4f3f1;
+  --color-surface-container-high: #e9e8e5;
+  --color-surface-container-highest: #e3e2e0;
+  --color-surface-container-lowest: #ffffff;
+
+  --color-primary: #8f4e00; /* Burnt Saffron (Dharma) */
+  --color-primary-container: #ff9933; /* Glowing Flame */
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #693800;
+
+  --color-secondary: #735c00; /* Weathered Gold */
+  --color-secondary-container: #fed65b;
+  --color-on-secondary: #ffffff;
+
+  --color-tertiary: #b52619; /* Kumkum Red */
+  --color-tertiary-container: #ff9585;
+
+  --color-on-surface: #1a1c1a; /* Deep Ancient Amber */
+  --color-on-surface-variant: #554336; /* Earthy Brown */
+  
+  --color-outline: #887364;
+  --color-outline-variant: rgba(136, 115, 100, 0.2); /* Ghost Border */
+
+  /* Typography */
+  --font-headline: 'Noto Serif', serif;
+  --font-body: 'Public Sans', sans-serif;
+
+  /* Spacing & Geometry */
+  --radius-standard: 1rem; /* ROUND_EIGHT */
+  --radius-temple-top: 1.5rem 1.5rem 0.5rem 0.5rem; /* Arch shape */
+  
+  /* Elevation - Soft Ambient Shadows */
+  --shadow-ambient: 0 32px 64px rgba(85, 67, 54, 0.06);
+}

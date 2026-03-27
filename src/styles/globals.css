@@ -1,0 +1,97 @@
+@import "./variables.css";
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4 {
+  font-family: var(--font-headline);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h1 { font-size: 3.5rem; letter-spacing: -0.02em; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 1.75rem; }
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-on-surface-variant);
+}
+
+/* The "No-Line" Rule: Define boundaries through tonal shifts */
+section {
+  padding: 4rem 2rem;
+}
+
+.surface-low {
+  background-color: var(--color-surface-container-low);
+}
+
+.surface-white {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: var(--radius-standard);
+}
+
+/* Temple Arch Geometry */
+.temple-arch {
+  border-radius: var(--radius-temple-top);
+}
+
+/* Buttons: Pressed Gold Style */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
+  color: var(--color-on-primary);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: var(--radius-standard);
+  font-family: var(--font-body);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-ambient);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Glassmorphism Navigation */
+.nav-glass {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+  background-color: rgba(250, 249, 246, 0.8);
+  padding: 1.5rem 2rem;
+}
+
+/* Intentional Asymmetry Utilities */
+.asymmetric-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .asymmetric-layout {
+    grid-template-columns: 1fr;
+  }
+}

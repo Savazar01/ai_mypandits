@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MyPandits - Join the Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#e9e8e5",
+              "on-secondary-container": "#745c00",
+              "inverse-primary": "#ffb77a",
+              "error": "#ba1a1a",
+              "on-surface-variant": "#554336",
+              "tertiary-container": "#ff9585",
+              "primary": "#8f4e00",
+              "tertiary-fixed": "#ffdad4",
+              "surface-variant": "#e3e2e0",
+              "error-container": "#ffdad6",
+              "on-primary-container": "#693800",
+              "on-tertiary-container": "#8e0301",
+              "secondary": "#735c00",
+              "primary-fixed-dim": "#ffb77a",
+              "inverse-surface": "#2f312f",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed": "#410000",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "surface": "#faf9f6",
+              "on-tertiary": "#ffffff",
+              "on-background": "#1a1c1a",
+              "outline": "#887364",
+              "on-error": "#ffffff",
+              "secondary-fixed": "#ffe088",
+              "on-surface": "#1a1c1a",
+              "on-secondary-fixed": "#241a00",
+              "background": "#faf9f6",
+              "secondary-container": "#fed65b",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#920703",
+              "surface-container-low": "#f4f3f1",
+              "surface-tint": "#8f4e00",
+              "primary-fixed": "#ffdcc2",
+              "surface-container-highest": "#e3e2e0",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#2e1500",
+              "surface-bright": "#faf9f6",
+              "secondary-fixed-dim": "#e9c349",
+              "primary-container": "#ff9933",
+              "outline-variant": "#dbc2b0",
+              "on-primary-fixed-variant": "#6d3a00",
+              "tertiary": "#b52619",
+              "tertiary-fixed-dim": "#ffb4a8",
+              "surface-dim": "#dbdad7",
+              "on-secondary-fixed-variant": "#574500"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Public Sans"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+    }
+.sacred-gradient-btn {
+    background: linear-gradient(135deg, #f93 0%, #d4af37 100%);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4)
+    }
+.mandala-bg {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDM1AGnQ1UpnVME46ioASuSFmHzBbDTMRgigYhid4KlaVUtJtSPAOD5fgq1UiOflbVs9VyEB6nGqv0jFYP2Ewjnb6Huaz3uYP1K3LBXayvaZlqiS9fGVeJfV1g6vAntymOSw1VMkOJHOorq4vjJLLgwkt3s4nvcqmP9QOzGGnhHXE4wOfvHTV1aIMtTGAz2BtoeHc6OLYdtf6EJaa-Rcs4qqjW3SCpBe16YM5EgyYnrYojD8TUC351BAeGEQXufQ37DGNioXYUe4Vc);
+    background-size: cover;
+    background-position: center;
+    opacity: 0.04
+    }</style>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex items-center justify-center relative overflow-hidden">
+<!-- Decorative Elements -->
+<div class="absolute inset-0 mandala-bg pointer-events-none" data-alt="close-up detail of a traditional circular stone carved mandala with intricate geometric patterns and sacred symbols in soft light"></div>
+<!-- Top Nav Anchor (Manual execution from Shared Components) -->
+<header class="fixed top-0 w-full z-50 bg-[#faf9f6]/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 shadow-[0_30px_60px_-15px_rgba(143,78,0,0.08)]">
+<div class="text-2xl font-headline font-bold text-orange-900 tracking-tight">Vedic Sanctuary</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-stone-500 hover:text-orange-700 transition-colors duration-300 cursor-pointer">help</span>
+<span class="material-symbols-outlined text-stone-500 hover:text-orange-700 transition-colors duration-300 cursor-pointer">settings</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-xl px-6 py-20 relative z-10 flex flex-col items-center">
+<!-- Register Card -->
+<div class="w-full bg-surface-container-lowest/20 backdrop-blur-[16px] rounded-[2.5rem] p-10 md:p-16 flex flex-col items-center shadow-[0_40px_100px_-20px_rgba(143,78,0,0.06)]">
+<!-- Headline -->
+<h1 class="font-body font-light text-4xl text-on-surface tracking-tight mb-2 text-center">Join the Sanctuary</h1>
+<p class="font-headline italic text-primary/60 text-sm mb-12">Begin your journey toward spiritual alignment</p>
+<form class="w-full space-y-10">
+<!-- Role Selector (Mandatory) -->
+<div class="flex justify-center p-1 bg-surface-container-low rounded-full w-full max-w-xs mx-auto mb-8">
+<button class="flex-1 py-2 px-6 rounded-full bg-surface-container-lowest text-on-surface text-sm font-medium shadow-sm transition-all" type="button">
+                        Customer
+                    </button>
+<button class="flex-1 py-2 px-6 rounded-full text-stone-400 text-sm font-medium hover:text-primary transition-all" type="button">
+                        Provider
+                    </button>
+</div>
+<!-- Fields -->
+<div class="space-y-8">
+<div class="relative">
+<input class="peer block w-full px-0 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface placeholder-transparent" id="full_name" placeholder=" " required="" type="text"/>
+<label class="absolute left-0 -top-4 text-xs font-medium text-primary/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary uppercase tracking-widest" for="full_name">Full Name</label>
+</div>
+<div class="relative">
+<input class="peer block w-full px-0 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface placeholder-transparent" id="email" placeholder=" " required="" type="email"/>
+<label class="absolute left-0 -top-4 text-xs font-medium text-primary/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary uppercase tracking-widest" for="email">Email Address</label>
+</div>
+<div class="relative">
+<input class="peer block w-full px-0 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface placeholder-transparent" id="password" placeholder=" " required="" type="password"/>
+<label class="absolute left-0 -top-4 text-xs font-medium text-primary/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary uppercase tracking-widest" for="password">Password</label>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-6">
+<button class="w-full py-5 rounded-full sacred-gradient-btn text-white font-medium text-lg tracking-wide hover:scale-[1.02] active:scale-95 transition-all duration-300" type="submit">
+                        Create Account
+                    </button>
+</div>
+</form>
+<!-- Footer Link -->
+<div class="mt-10 text-center">
+<p class="text-stone-400 text-sm">
+                    Already have an account? 
+                    <a class="text-primary font-medium hover:underline underline-offset-4 ml-1" href="#">Sign In</a>
+</p>
+</div>
+</div>
+<!-- Decorative Footer Anchor -->
+<div class="mt-12 flex items-center justify-center opacity-20">
+<div class="h-[1px] w-12 bg-primary"></div>
+<span class="material-symbols-outlined mx-4 text-primary" style="font-variation-settings: 'FILL' 1;">spa</span>
+<div class="h-[1px] w-12 bg-primary"></div>
+</div>
+</main>
+<!-- Bottom Ornament (Visual balance) -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 blur-[120px] rounded-full -z-10"></div>
+</body></html>

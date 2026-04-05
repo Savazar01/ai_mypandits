@@ -6,6 +6,10 @@
 - **Development Server**: [localhost:3090](http://localhost:3090)
 - **Database (PostgreSQL/Prisma)**: [localhost:5433](http://localhost:5433)
 
+## Git Strategy
+- **Main Branch**: Current active development and source-of-truth implementation.
+- **Tag v0.1-baseline**: The confirmed stable state of the initial 3 pages (Landing, Login, Register) with "Sacred Modernity" design. Use this as a recovery point for UI regression.
+
 ## Tech Stack
 - Frontend: Next.js (App Router), Tailwind CSS v4, Framer Motion
 - Auth: BetterAuth (Email/Password)

@@ -125,6 +125,10 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   name: 'name',
   role: 'role',
+  whatsapp: 'whatsapp',
+  banned: 'banned',
+  banReason: 'banReason',
+  banExpires: 'banExpires',
   profile_data: 'profile_data',
   emailVerified: 'emailVerified',
   image: 'image',
@@ -168,6 +172,18 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CatalogItemScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  price: 'price',
+  priceUnit: 'priceUnit',
+  description: 'description',
+  category: 'category',
+  currency: 'currency',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -203,7 +219,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  CatalogItem: 'CatalogItem'
 };
 
 /**

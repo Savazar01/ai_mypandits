@@ -25,4 +25,5 @@ const nextConfig: NextConfig = {
   },
 };
 
+// Vedic Sanctuary: Schema Synchronization Force Reboot [4/5/2026]
 export default nextConfig;

@@ -2,28 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import Header from "@/components/Header";
 
 export default function LandingPage() {
   return (
     <div className="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen">
-      {/* TopNavBar */}
-      <nav className="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md shadow-sm shadow-orange-900/5">
-        <div className="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
-          <div className="text-2xl font-headline font-bold text-orange-800 tracking-tight">
-            MyPandits
-          </div>
-          <div className="hidden md:flex items-center space-x-10">
-            <Link className="text-orange-800 border-b-2 border-orange-600 font-semibold py-1" href="#">Sanctuary</Link>
-            <Link className="text-stone-600 hover:text-orange-700 transition-colors py-1" href="#">Rituals</Link>
-            <Link className="text-stone-600 hover:text-orange-700 transition-colors py-1" href="#">Astrology</Link>
-            <Link className="text-stone-600 hover:text-orange-700 transition-colors py-1" href="#">Wisdom</Link>
-          </div>
-          <div className="flex items-center space-x-6">
-            <Link href="/login" className="text-stone-600 hover:text-orange-700 transition-all duration-300 font-semibold px-4 py-2">Sign In</Link>
-            <Link href="/register" className="bg-primary text-white px-8 py-2.5 rounded-full font-semibold hover:bg-primary/90 transition-all active:scale-95 duration-200 ease-in-out shadow-lg shadow-primary/20">Register</Link>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
       <main className="pt-20">
         {/* Hero Section */}
@@ -42,20 +26,23 @@ export default function LandingPage() {
           <div className="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 space-y-8">
               <div className="inline-block px-4 py-1.5 rounded-full bg-primary-container/20 text-primary font-semibold tracking-wider text-xs uppercase">
-                Vedic Wisdom meets Artificial Intelligence
+                Authentic Traditions, Seamlessly Orchestrated
               </div>
               <h1 className="text-6xl md:text-8xl font-headline font-bold text-on-surface leading-[1.1] tracking-tight">
                 Your Ritual, <br/>
                 <span className="text-primary italic">Orchestrated</span> by AI.
               </h1>
-              <p className="text-xl md:text-2xl text-on-surface-variant max-w-xl font-light leading-relaxed">
-                Connecting ancient traditions with modern intelligence to bring the divine into your digital life.
+              <p className="text-xl md:text-2xl text-on-surface-variant max-w-3xl font-light leading-relaxed">
+                Connect with nearby Pandits, Decorators, Caterers, Photographers, Venue Providers, Temples, Puja Supplies, Media & Design, DJs, and Event Planners to bring the divine into your most sacred moments.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="bg-primary text-on-primary px-10 py-5 rounded-full font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all flex items-center justify-center gap-3">
-                  Enter the Sanctuary
+                <Link href="/register" className="bg-primary text-on-primary px-10 py-5 rounded-full font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all flex items-center justify-center gap-3">
+                  Register
                   <span className="material-symbols-outlined">arrow_forward</span>
-                </button>
+                </Link>
+                <Link href="/login" className="bg-white text-on-surface border border-outline px-10 py-5 rounded-full font-bold text-lg hover:bg-stone-50 transition-all text-center">
+                  Sign In
+                </Link>
               </div>
             </div>
             <div className="lg:col-span-5 relative hidden lg:block">
@@ -70,7 +57,7 @@ export default function LandingPage() {
                   unoptimized
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
-                  <p className="text-white/90 font-headline italic text-lg">"Tradition is not the worship of ashes, but the preservation of fire."</p>
+                  <p className="text-white/90 font-headline italic text-lg">"Precision in every mantra. Beauty in every ritual."</p>
                 </div>
               </div>
             </div>
@@ -82,17 +69,16 @@ export default function LandingPage() {
           <div className="max-w-7xl mx-auto px-8">
             <div className="mb-16 text-center max-w-3xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-headline font-bold mb-6">Sacred Rituals, Elevated</h2>
-              <p className="text-lg text-on-surface-variant">Experience the richness of Vedic ceremonies through a seamless, premium lifestyle interface designed for the modern seeker.</p>
+              <p className="text-lg text-on-surface-variant">Experience the richness of Vedic ceremonies through a seamless, premium interface connecting Customers with verified Pandits, Decorators, and Caterers.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Feature Card 1 */}
               <div className="md:col-span-2 group relative overflow-hidden rounded-3xl bg-surface-container-lowest aspect-video md:aspect-auto h-[400px]">
                 <Image 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFZt_dxlzVPURUDZNUaA6Px5iN4nP4BasXOGmRlMrliFVnusA-FEeJ4s2BEH7UrTwvHskqROV9HA5HrBQcsBnUbbzsjWRsf246AVNI65ZDcXngD40Z78pYF7FzJXUKahhDBiFFi3-nuWLSSI9sznpWDJlfmH45NGyCMlY5THJ-ARkYnSRxq59GoGe5IuI3vCgJwqLSFDq-sZeoslsROuRBBRoPgcE0mm7kzf0VpZrt-3fWFE27gFxWYJ8b3-S7tYTzuDnJd48d_RQ"
+                  src="/vedic_wedding_puja_1775391547447.png"
                   alt="Elegant close-up of a Pandit's hands performing a ritual with sacred fire and grains in a high-end setting"
                   fill
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/20 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-10 space-y-4">
@@ -247,9 +233,9 @@ export default function LandingPage() {
                 <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mb-6">
                   <span className="material-symbols-outlined text-primary text-4xl">temple_hindu</span>
                 </div>
-                <h4 className="text-3xl font-headline font-bold mb-4 text-on-surface">Join our Sangha</h4>
-                <p className="text-on-surface-variant mb-8 max-w-sm">Are you a verified Acharya or Pandit looking to digitalize your practice?</p>
-                <button className="bg-on-surface text-surface px-8 py-3 rounded-full font-bold hover:bg-primary transition-all">Apply as an Expert</button>
+                <h4 className="text-3xl font-headline font-bold mb-4 text-on-surface">Join the Sangha</h4>
+                <p className="text-on-surface-variant mb-8 max-w-sm">Are you a verified Pandit, Decorator, or Event Professional looking to digitalize your practice?</p>
+                <Link href="/register" className="bg-on-surface text-white px-8 py-3 rounded-full font-bold hover:bg-primary transition-all">Apply as a Provider</Link>
               </div>
             </div>
           </div>
@@ -273,7 +259,10 @@ export default function LandingPage() {
       <footer className="bg-stone-50 w-full border-t border-stone-200/20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-12 py-16 max-w-7xl mx-auto">
           <div className="space-y-6">
-            <div className="font-serif italic text-stone-900 text-3xl">MyPandits</div>
+            <Link href="/" className="font-headline font-bold text-orange-800 text-3xl flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary-container text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
+              MyPandits
+            </Link>
             <p className="font-sans text-sm uppercase tracking-widest text-stone-500 max-w-xs leading-relaxed">
               © 2024 MyPandits. The Digital Sanctuary. All Rights Reserved.
             </p>

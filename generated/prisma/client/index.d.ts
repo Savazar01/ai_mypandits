@@ -33,6 +33,11 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  * 
  */
 export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
+/**
+ * Model CatalogItem
+ * 
+ */
+export type CatalogItem = $Result.DefaultSelection<Prisma.$CatalogItemPayload>
 
 /**
  * Enums
@@ -212,6 +217,16 @@ export class PrismaClient<
     * ```
     */
   get verification(): Prisma.VerificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.catalogItem`: Exposes CRUD operations for the **CatalogItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CatalogItems
+    * const catalogItems = await prisma.catalogItem.findMany()
+    * ```
+    */
+  get catalogItem(): Prisma.CatalogItemDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -649,7 +664,8 @@ export namespace Prisma {
     User: 'User',
     Session: 'Session',
     Account: 'Account',
-    Verification: 'Verification'
+    Verification: 'Verification',
+    CatalogItem: 'CatalogItem'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -665,7 +681,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification"
+      modelProps: "user" | "session" | "account" | "verification" | "catalogItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -965,6 +981,80 @@ export namespace Prisma {
           }
         }
       }
+      CatalogItem: {
+        payload: Prisma.$CatalogItemPayload<ExtArgs>
+        fields: Prisma.CatalogItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CatalogItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CatalogItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload>
+          }
+          findFirst: {
+            args: Prisma.CatalogItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CatalogItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload>
+          }
+          findMany: {
+            args: Prisma.CatalogItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload>[]
+          }
+          create: {
+            args: Prisma.CatalogItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload>
+          }
+          createMany: {
+            args: Prisma.CatalogItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CatalogItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload>[]
+          }
+          delete: {
+            args: Prisma.CatalogItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload>
+          }
+          update: {
+            args: Prisma.CatalogItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.CatalogItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CatalogItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CatalogItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.CatalogItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CatalogItemPayload>
+          }
+          aggregate: {
+            args: Prisma.CatalogItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCatalogItem>
+          }
+          groupBy: {
+            args: Prisma.CatalogItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CatalogItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CatalogItemCountArgs<ExtArgs>
+            result: $Utils.Optional<CatalogItemCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1077,6 +1167,7 @@ export namespace Prisma {
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
+    catalogItem?: CatalogItemOmit
   }
 
   /* Types for Logging */
@@ -1159,11 +1250,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     sessions: number
     accounts: number
+    catalogItems: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+    catalogItems?: boolean | UserCountOutputTypeCountCatalogItemsArgs
   }
 
   // Custom InputTypes
@@ -1191,6 +1284,13 @@ export namespace Prisma {
     where?: AccountWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCatalogItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CatalogItemWhereInput
+  }
+
 
   /**
    * Models
@@ -1211,6 +1311,10 @@ export namespace Prisma {
     email: string | null
     name: string | null
     role: $Enums.Role | null
+    whatsapp: string | null
+    banned: boolean | null
+    banReason: string | null
+    banExpires: Date | null
     emailVerified: boolean | null
     image: string | null
     createdAt: Date | null
@@ -1222,6 +1326,10 @@ export namespace Prisma {
     email: string | null
     name: string | null
     role: $Enums.Role | null
+    whatsapp: string | null
+    banned: boolean | null
+    banReason: string | null
+    banExpires: Date | null
     emailVerified: boolean | null
     image: string | null
     createdAt: Date | null
@@ -1233,6 +1341,10 @@ export namespace Prisma {
     email: number
     name: number
     role: number
+    whatsapp: number
+    banned: number
+    banReason: number
+    banExpires: number
     profile_data: number
     emailVerified: number
     image: number
@@ -1247,6 +1359,10 @@ export namespace Prisma {
     email?: true
     name?: true
     role?: true
+    whatsapp?: true
+    banned?: true
+    banReason?: true
+    banExpires?: true
     emailVerified?: true
     image?: true
     createdAt?: true
@@ -1258,6 +1374,10 @@ export namespace Prisma {
     email?: true
     name?: true
     role?: true
+    whatsapp?: true
+    banned?: true
+    banReason?: true
+    banExpires?: true
     emailVerified?: true
     image?: true
     createdAt?: true
@@ -1269,6 +1389,10 @@ export namespace Prisma {
     email?: true
     name?: true
     role?: true
+    whatsapp?: true
+    banned?: true
+    banReason?: true
+    banExpires?: true
     profile_data?: true
     emailVerified?: true
     image?: true
@@ -1354,6 +1478,10 @@ export namespace Prisma {
     email: string
     name: string | null
     role: $Enums.Role
+    whatsapp: string | null
+    banned: boolean | null
+    banReason: string | null
+    banExpires: Date | null
     profile_data: JsonValue | null
     emailVerified: boolean
     image: string | null
@@ -1383,6 +1511,10 @@ export namespace Prisma {
     email?: boolean
     name?: boolean
     role?: boolean
+    whatsapp?: boolean
+    banned?: boolean
+    banReason?: boolean
+    banExpires?: boolean
     profile_data?: boolean
     emailVerified?: boolean
     image?: boolean
@@ -1390,6 +1522,7 @@ export namespace Prisma {
     updatedAt?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    catalogItems?: boolean | User$catalogItemsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1398,6 +1531,10 @@ export namespace Prisma {
     email?: boolean
     name?: boolean
     role?: boolean
+    whatsapp?: boolean
+    banned?: boolean
+    banReason?: boolean
+    banExpires?: boolean
     profile_data?: boolean
     emailVerified?: boolean
     image?: boolean
@@ -1410,6 +1547,10 @@ export namespace Prisma {
     email?: boolean
     name?: boolean
     role?: boolean
+    whatsapp?: boolean
+    banned?: boolean
+    banReason?: boolean
+    banExpires?: boolean
     profile_data?: boolean
     emailVerified?: boolean
     image?: boolean
@@ -1422,6 +1563,10 @@ export namespace Prisma {
     email?: boolean
     name?: boolean
     role?: boolean
+    whatsapp?: boolean
+    banned?: boolean
+    banReason?: boolean
+    banExpires?: boolean
     profile_data?: boolean
     emailVerified?: boolean
     image?: boolean
@@ -1429,10 +1574,11 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "role" | "profile_data" | "emailVerified" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "role" | "whatsapp" | "banned" | "banReason" | "banExpires" | "profile_data" | "emailVerified" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    catalogItems?: boolean | User$catalogItemsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1443,12 +1589,17 @@ export namespace Prisma {
     objects: {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
+      catalogItems: Prisma.$CatalogItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
       name: string | null
       role: $Enums.Role
+      whatsapp: string | null
+      banned: boolean | null
+      banReason: string | null
+      banExpires: Date | null
       profile_data: Prisma.JsonValue | null
       emailVerified: boolean
       image: string | null
@@ -1850,6 +2001,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    catalogItems<T extends User$catalogItemsArgs<ExtArgs> = {}>(args?: Subset<T, User$catalogItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1883,6 +2035,10 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
+    readonly whatsapp: FieldRef<"User", 'String'>
+    readonly banned: FieldRef<"User", 'Boolean'>
+    readonly banReason: FieldRef<"User", 'String'>
+    readonly banExpires: FieldRef<"User", 'DateTime'>
     readonly profile_data: FieldRef<"User", 'Json'>
     readonly emailVerified: FieldRef<"User", 'Boolean'>
     readonly image: FieldRef<"User", 'String'>
@@ -2326,6 +2482,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+  }
+
+  /**
+   * User.catalogItems
+   */
+  export type User$catalogItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+    where?: CatalogItemWhereInput
+    orderBy?: CatalogItemOrderByWithRelationInput | CatalogItemOrderByWithRelationInput[]
+    cursor?: CatalogItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CatalogItemScalarFieldEnum | CatalogItemScalarFieldEnum[]
   }
 
   /**
@@ -5630,6 +5810,1155 @@ export namespace Prisma {
 
 
   /**
+   * Model CatalogItem
+   */
+
+  export type AggregateCatalogItem = {
+    _count: CatalogItemCountAggregateOutputType | null
+    _avg: CatalogItemAvgAggregateOutputType | null
+    _sum: CatalogItemSumAggregateOutputType | null
+    _min: CatalogItemMinAggregateOutputType | null
+    _max: CatalogItemMaxAggregateOutputType | null
+  }
+
+  export type CatalogItemAvgAggregateOutputType = {
+    price: number | null
+  }
+
+  export type CatalogItemSumAggregateOutputType = {
+    price: number | null
+  }
+
+  export type CatalogItemMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    price: number | null
+    priceUnit: string | null
+    description: string | null
+    category: string | null
+    currency: string | null
+    createdAt: Date | null
+  }
+
+  export type CatalogItemMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    price: number | null
+    priceUnit: string | null
+    description: string | null
+    category: string | null
+    currency: string | null
+    createdAt: Date | null
+  }
+
+  export type CatalogItemCountAggregateOutputType = {
+    id: number
+    userId: number
+    name: number
+    price: number
+    priceUnit: number
+    description: number
+    category: number
+    currency: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CatalogItemAvgAggregateInputType = {
+    price?: true
+  }
+
+  export type CatalogItemSumAggregateInputType = {
+    price?: true
+  }
+
+  export type CatalogItemMinAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    price?: true
+    priceUnit?: true
+    description?: true
+    category?: true
+    currency?: true
+    createdAt?: true
+  }
+
+  export type CatalogItemMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    price?: true
+    priceUnit?: true
+    description?: true
+    category?: true
+    currency?: true
+    createdAt?: true
+  }
+
+  export type CatalogItemCountAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    price?: true
+    priceUnit?: true
+    description?: true
+    category?: true
+    currency?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CatalogItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CatalogItem to aggregate.
+     */
+    where?: CatalogItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CatalogItems to fetch.
+     */
+    orderBy?: CatalogItemOrderByWithRelationInput | CatalogItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CatalogItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CatalogItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CatalogItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CatalogItems
+    **/
+    _count?: true | CatalogItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CatalogItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CatalogItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CatalogItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CatalogItemMaxAggregateInputType
+  }
+
+  export type GetCatalogItemAggregateType<T extends CatalogItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateCatalogItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCatalogItem[P]>
+      : GetScalarType<T[P], AggregateCatalogItem[P]>
+  }
+
+
+
+
+  export type CatalogItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CatalogItemWhereInput
+    orderBy?: CatalogItemOrderByWithAggregationInput | CatalogItemOrderByWithAggregationInput[]
+    by: CatalogItemScalarFieldEnum[] | CatalogItemScalarFieldEnum
+    having?: CatalogItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CatalogItemCountAggregateInputType | true
+    _avg?: CatalogItemAvgAggregateInputType
+    _sum?: CatalogItemSumAggregateInputType
+    _min?: CatalogItemMinAggregateInputType
+    _max?: CatalogItemMaxAggregateInputType
+  }
+
+  export type CatalogItemGroupByOutputType = {
+    id: string
+    userId: string
+    name: string
+    price: number | null
+    priceUnit: string | null
+    description: string | null
+    category: string | null
+    currency: string | null
+    createdAt: Date
+    _count: CatalogItemCountAggregateOutputType | null
+    _avg: CatalogItemAvgAggregateOutputType | null
+    _sum: CatalogItemSumAggregateOutputType | null
+    _min: CatalogItemMinAggregateOutputType | null
+    _max: CatalogItemMaxAggregateOutputType | null
+  }
+
+  type GetCatalogItemGroupByPayload<T extends CatalogItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CatalogItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CatalogItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CatalogItemGroupByOutputType[P]>
+            : GetScalarType<T[P], CatalogItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CatalogItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    price?: boolean
+    priceUnit?: boolean
+    description?: boolean
+    category?: boolean
+    currency?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["catalogItem"]>
+
+  export type CatalogItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    price?: boolean
+    priceUnit?: boolean
+    description?: boolean
+    category?: boolean
+    currency?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["catalogItem"]>
+
+  export type CatalogItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    price?: boolean
+    priceUnit?: boolean
+    description?: boolean
+    category?: boolean
+    currency?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["catalogItem"]>
+
+  export type CatalogItemSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    price?: boolean
+    priceUnit?: boolean
+    description?: boolean
+    category?: boolean
+    currency?: boolean
+    createdAt?: boolean
+  }
+
+  export type CatalogItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "price" | "priceUnit" | "description" | "category" | "currency" | "createdAt", ExtArgs["result"]["catalogItem"]>
+  export type CatalogItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CatalogItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CatalogItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CatalogItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CatalogItem"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      name: string
+      price: number | null
+      priceUnit: string | null
+      description: string | null
+      category: string | null
+      currency: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["catalogItem"]>
+    composites: {}
+  }
+
+  type CatalogItemGetPayload<S extends boolean | null | undefined | CatalogItemDefaultArgs> = $Result.GetResult<Prisma.$CatalogItemPayload, S>
+
+  type CatalogItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CatalogItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CatalogItemCountAggregateInputType | true
+    }
+
+  export interface CatalogItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CatalogItem'], meta: { name: 'CatalogItem' } }
+    /**
+     * Find zero or one CatalogItem that matches the filter.
+     * @param {CatalogItemFindUniqueArgs} args - Arguments to find a CatalogItem
+     * @example
+     * // Get one CatalogItem
+     * const catalogItem = await prisma.catalogItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CatalogItemFindUniqueArgs>(args: SelectSubset<T, CatalogItemFindUniqueArgs<ExtArgs>>): Prisma__CatalogItemClient<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CatalogItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CatalogItemFindUniqueOrThrowArgs} args - Arguments to find a CatalogItem
+     * @example
+     * // Get one CatalogItem
+     * const catalogItem = await prisma.catalogItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CatalogItemFindUniqueOrThrowArgs>(args: SelectSubset<T, CatalogItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CatalogItemClient<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CatalogItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CatalogItemFindFirstArgs} args - Arguments to find a CatalogItem
+     * @example
+     * // Get one CatalogItem
+     * const catalogItem = await prisma.catalogItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CatalogItemFindFirstArgs>(args?: SelectSubset<T, CatalogItemFindFirstArgs<ExtArgs>>): Prisma__CatalogItemClient<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CatalogItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CatalogItemFindFirstOrThrowArgs} args - Arguments to find a CatalogItem
+     * @example
+     * // Get one CatalogItem
+     * const catalogItem = await prisma.catalogItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CatalogItemFindFirstOrThrowArgs>(args?: SelectSubset<T, CatalogItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__CatalogItemClient<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CatalogItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CatalogItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CatalogItems
+     * const catalogItems = await prisma.catalogItem.findMany()
+     * 
+     * // Get first 10 CatalogItems
+     * const catalogItems = await prisma.catalogItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const catalogItemWithIdOnly = await prisma.catalogItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CatalogItemFindManyArgs>(args?: SelectSubset<T, CatalogItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CatalogItem.
+     * @param {CatalogItemCreateArgs} args - Arguments to create a CatalogItem.
+     * @example
+     * // Create one CatalogItem
+     * const CatalogItem = await prisma.catalogItem.create({
+     *   data: {
+     *     // ... data to create a CatalogItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends CatalogItemCreateArgs>(args: SelectSubset<T, CatalogItemCreateArgs<ExtArgs>>): Prisma__CatalogItemClient<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CatalogItems.
+     * @param {CatalogItemCreateManyArgs} args - Arguments to create many CatalogItems.
+     * @example
+     * // Create many CatalogItems
+     * const catalogItem = await prisma.catalogItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CatalogItemCreateManyArgs>(args?: SelectSubset<T, CatalogItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CatalogItems and returns the data saved in the database.
+     * @param {CatalogItemCreateManyAndReturnArgs} args - Arguments to create many CatalogItems.
+     * @example
+     * // Create many CatalogItems
+     * const catalogItem = await prisma.catalogItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CatalogItems and only return the `id`
+     * const catalogItemWithIdOnly = await prisma.catalogItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CatalogItemCreateManyAndReturnArgs>(args?: SelectSubset<T, CatalogItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CatalogItem.
+     * @param {CatalogItemDeleteArgs} args - Arguments to delete one CatalogItem.
+     * @example
+     * // Delete one CatalogItem
+     * const CatalogItem = await prisma.catalogItem.delete({
+     *   where: {
+     *     // ... filter to delete one CatalogItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CatalogItemDeleteArgs>(args: SelectSubset<T, CatalogItemDeleteArgs<ExtArgs>>): Prisma__CatalogItemClient<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CatalogItem.
+     * @param {CatalogItemUpdateArgs} args - Arguments to update one CatalogItem.
+     * @example
+     * // Update one CatalogItem
+     * const catalogItem = await prisma.catalogItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CatalogItemUpdateArgs>(args: SelectSubset<T, CatalogItemUpdateArgs<ExtArgs>>): Prisma__CatalogItemClient<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CatalogItems.
+     * @param {CatalogItemDeleteManyArgs} args - Arguments to filter CatalogItems to delete.
+     * @example
+     * // Delete a few CatalogItems
+     * const { count } = await prisma.catalogItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CatalogItemDeleteManyArgs>(args?: SelectSubset<T, CatalogItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CatalogItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CatalogItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CatalogItems
+     * const catalogItem = await prisma.catalogItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CatalogItemUpdateManyArgs>(args: SelectSubset<T, CatalogItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CatalogItems and returns the data updated in the database.
+     * @param {CatalogItemUpdateManyAndReturnArgs} args - Arguments to update many CatalogItems.
+     * @example
+     * // Update many CatalogItems
+     * const catalogItem = await prisma.catalogItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CatalogItems and only return the `id`
+     * const catalogItemWithIdOnly = await prisma.catalogItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CatalogItemUpdateManyAndReturnArgs>(args: SelectSubset<T, CatalogItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CatalogItem.
+     * @param {CatalogItemUpsertArgs} args - Arguments to update or create a CatalogItem.
+     * @example
+     * // Update or create a CatalogItem
+     * const catalogItem = await prisma.catalogItem.upsert({
+     *   create: {
+     *     // ... data to create a CatalogItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CatalogItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CatalogItemUpsertArgs>(args: SelectSubset<T, CatalogItemUpsertArgs<ExtArgs>>): Prisma__CatalogItemClient<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CatalogItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CatalogItemCountArgs} args - Arguments to filter CatalogItems to count.
+     * @example
+     * // Count the number of CatalogItems
+     * const count = await prisma.catalogItem.count({
+     *   where: {
+     *     // ... the filter for the CatalogItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends CatalogItemCountArgs>(
+      args?: Subset<T, CatalogItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CatalogItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CatalogItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CatalogItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CatalogItemAggregateArgs>(args: Subset<T, CatalogItemAggregateArgs>): Prisma.PrismaPromise<GetCatalogItemAggregateType<T>>
+
+    /**
+     * Group by CatalogItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CatalogItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CatalogItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CatalogItemGroupByArgs['orderBy'] }
+        : { orderBy?: CatalogItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CatalogItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCatalogItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CatalogItem model
+   */
+  readonly fields: CatalogItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CatalogItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CatalogItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CatalogItem model
+   */
+  interface CatalogItemFieldRefs {
+    readonly id: FieldRef<"CatalogItem", 'String'>
+    readonly userId: FieldRef<"CatalogItem", 'String'>
+    readonly name: FieldRef<"CatalogItem", 'String'>
+    readonly price: FieldRef<"CatalogItem", 'Float'>
+    readonly priceUnit: FieldRef<"CatalogItem", 'String'>
+    readonly description: FieldRef<"CatalogItem", 'String'>
+    readonly category: FieldRef<"CatalogItem", 'String'>
+    readonly currency: FieldRef<"CatalogItem", 'String'>
+    readonly createdAt: FieldRef<"CatalogItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CatalogItem findUnique
+   */
+  export type CatalogItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+    /**
+     * Filter, which CatalogItem to fetch.
+     */
+    where: CatalogItemWhereUniqueInput
+  }
+
+  /**
+   * CatalogItem findUniqueOrThrow
+   */
+  export type CatalogItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+    /**
+     * Filter, which CatalogItem to fetch.
+     */
+    where: CatalogItemWhereUniqueInput
+  }
+
+  /**
+   * CatalogItem findFirst
+   */
+  export type CatalogItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+    /**
+     * Filter, which CatalogItem to fetch.
+     */
+    where?: CatalogItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CatalogItems to fetch.
+     */
+    orderBy?: CatalogItemOrderByWithRelationInput | CatalogItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CatalogItems.
+     */
+    cursor?: CatalogItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CatalogItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CatalogItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CatalogItems.
+     */
+    distinct?: CatalogItemScalarFieldEnum | CatalogItemScalarFieldEnum[]
+  }
+
+  /**
+   * CatalogItem findFirstOrThrow
+   */
+  export type CatalogItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+    /**
+     * Filter, which CatalogItem to fetch.
+     */
+    where?: CatalogItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CatalogItems to fetch.
+     */
+    orderBy?: CatalogItemOrderByWithRelationInput | CatalogItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CatalogItems.
+     */
+    cursor?: CatalogItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CatalogItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CatalogItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CatalogItems.
+     */
+    distinct?: CatalogItemScalarFieldEnum | CatalogItemScalarFieldEnum[]
+  }
+
+  /**
+   * CatalogItem findMany
+   */
+  export type CatalogItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+    /**
+     * Filter, which CatalogItems to fetch.
+     */
+    where?: CatalogItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CatalogItems to fetch.
+     */
+    orderBy?: CatalogItemOrderByWithRelationInput | CatalogItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CatalogItems.
+     */
+    cursor?: CatalogItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CatalogItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CatalogItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CatalogItems.
+     */
+    distinct?: CatalogItemScalarFieldEnum | CatalogItemScalarFieldEnum[]
+  }
+
+  /**
+   * CatalogItem create
+   */
+  export type CatalogItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CatalogItem.
+     */
+    data: XOR<CatalogItemCreateInput, CatalogItemUncheckedCreateInput>
+  }
+
+  /**
+   * CatalogItem createMany
+   */
+  export type CatalogItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CatalogItems.
+     */
+    data: CatalogItemCreateManyInput | CatalogItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CatalogItem createManyAndReturn
+   */
+  export type CatalogItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many CatalogItems.
+     */
+    data: CatalogItemCreateManyInput | CatalogItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CatalogItem update
+   */
+  export type CatalogItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CatalogItem.
+     */
+    data: XOR<CatalogItemUpdateInput, CatalogItemUncheckedUpdateInput>
+    /**
+     * Choose, which CatalogItem to update.
+     */
+    where: CatalogItemWhereUniqueInput
+  }
+
+  /**
+   * CatalogItem updateMany
+   */
+  export type CatalogItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CatalogItems.
+     */
+    data: XOR<CatalogItemUpdateManyMutationInput, CatalogItemUncheckedUpdateManyInput>
+    /**
+     * Filter which CatalogItems to update
+     */
+    where?: CatalogItemWhereInput
+    /**
+     * Limit how many CatalogItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CatalogItem updateManyAndReturn
+   */
+  export type CatalogItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * The data used to update CatalogItems.
+     */
+    data: XOR<CatalogItemUpdateManyMutationInput, CatalogItemUncheckedUpdateManyInput>
+    /**
+     * Filter which CatalogItems to update
+     */
+    where?: CatalogItemWhereInput
+    /**
+     * Limit how many CatalogItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CatalogItem upsert
+   */
+  export type CatalogItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CatalogItem to update in case it exists.
+     */
+    where: CatalogItemWhereUniqueInput
+    /**
+     * In case the CatalogItem found by the `where` argument doesn't exist, create a new CatalogItem with this data.
+     */
+    create: XOR<CatalogItemCreateInput, CatalogItemUncheckedCreateInput>
+    /**
+     * In case the CatalogItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CatalogItemUpdateInput, CatalogItemUncheckedUpdateInput>
+  }
+
+  /**
+   * CatalogItem delete
+   */
+  export type CatalogItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+    /**
+     * Filter which CatalogItem to delete.
+     */
+    where: CatalogItemWhereUniqueInput
+  }
+
+  /**
+   * CatalogItem deleteMany
+   */
+  export type CatalogItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CatalogItems to delete
+     */
+    where?: CatalogItemWhereInput
+    /**
+     * Limit how many CatalogItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CatalogItem without action
+   */
+  export type CatalogItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CatalogItem
+     */
+    select?: CatalogItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CatalogItem
+     */
+    omit?: CatalogItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CatalogItemInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5648,6 +6977,10 @@ export namespace Prisma {
     email: 'email',
     name: 'name',
     role: 'role',
+    whatsapp: 'whatsapp',
+    banned: 'banned',
+    banReason: 'banReason',
+    banExpires: 'banExpires',
     profile_data: 'profile_data',
     emailVerified: 'emailVerified',
     image: 'image',
@@ -5701,6 +7034,21 @@ export namespace Prisma {
   };
 
   export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+  export const CatalogItemScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    name: 'name',
+    price: 'price',
+    priceUnit: 'priceUnit',
+    description: 'description',
+    category: 'category',
+    currency: 'currency',
+    createdAt: 'createdAt'
+  };
+
+  export type CatalogItemScalarFieldEnum = (typeof CatalogItemScalarFieldEnum)[keyof typeof CatalogItemScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5778,20 +7126,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Json'
-   */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-  /**
-   * Reference to a field of type 'QueryMode'
-   */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -5809,6 +7143,34 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -5837,6 +7199,10 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     name?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
+    whatsapp?: StringNullableFilter<"User"> | string | null
+    banned?: BoolNullableFilter<"User"> | boolean | null
+    banReason?: StringNullableFilter<"User"> | string | null
+    banExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     profile_data?: JsonNullableFilter<"User">
     emailVerified?: BoolFilter<"User"> | boolean
     image?: StringNullableFilter<"User"> | string | null
@@ -5844,6 +7210,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    catalogItems?: CatalogItemListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5851,6 +7218,10 @@ export namespace Prisma {
     email?: SortOrder
     name?: SortOrderInput | SortOrder
     role?: SortOrder
+    whatsapp?: SortOrderInput | SortOrder
+    banned?: SortOrderInput | SortOrder
+    banReason?: SortOrderInput | SortOrder
+    banExpires?: SortOrderInput | SortOrder
     profile_data?: SortOrderInput | SortOrder
     emailVerified?: SortOrder
     image?: SortOrderInput | SortOrder
@@ -5858,6 +7229,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
+    catalogItems?: CatalogItemOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5868,6 +7240,10 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
+    whatsapp?: StringNullableFilter<"User"> | string | null
+    banned?: BoolNullableFilter<"User"> | boolean | null
+    banReason?: StringNullableFilter<"User"> | string | null
+    banExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     profile_data?: JsonNullableFilter<"User">
     emailVerified?: BoolFilter<"User"> | boolean
     image?: StringNullableFilter<"User"> | string | null
@@ -5875,6 +7251,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    catalogItems?: CatalogItemListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -5882,6 +7259,10 @@ export namespace Prisma {
     email?: SortOrder
     name?: SortOrderInput | SortOrder
     role?: SortOrder
+    whatsapp?: SortOrderInput | SortOrder
+    banned?: SortOrderInput | SortOrder
+    banReason?: SortOrderInput | SortOrder
+    banExpires?: SortOrderInput | SortOrder
     profile_data?: SortOrderInput | SortOrder
     emailVerified?: SortOrder
     image?: SortOrderInput | SortOrder
@@ -5900,6 +7281,10 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
+    whatsapp?: StringNullableWithAggregatesFilter<"User"> | string | null
+    banned?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
+    banReason?: StringNullableWithAggregatesFilter<"User"> | string | null
+    banExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     profile_data?: JsonNullableWithAggregatesFilter<"User">
     emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -6129,11 +7514,92 @@ export namespace Prisma {
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Verification"> | Date | string | null
   }
 
+  export type CatalogItemWhereInput = {
+    AND?: CatalogItemWhereInput | CatalogItemWhereInput[]
+    OR?: CatalogItemWhereInput[]
+    NOT?: CatalogItemWhereInput | CatalogItemWhereInput[]
+    id?: StringFilter<"CatalogItem"> | string
+    userId?: StringFilter<"CatalogItem"> | string
+    name?: StringFilter<"CatalogItem"> | string
+    price?: FloatNullableFilter<"CatalogItem"> | number | null
+    priceUnit?: StringNullableFilter<"CatalogItem"> | string | null
+    description?: StringNullableFilter<"CatalogItem"> | string | null
+    category?: StringNullableFilter<"CatalogItem"> | string | null
+    currency?: StringNullableFilter<"CatalogItem"> | string | null
+    createdAt?: DateTimeFilter<"CatalogItem"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type CatalogItemOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    price?: SortOrderInput | SortOrder
+    priceUnit?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    category?: SortOrderInput | SortOrder
+    currency?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CatalogItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CatalogItemWhereInput | CatalogItemWhereInput[]
+    OR?: CatalogItemWhereInput[]
+    NOT?: CatalogItemWhereInput | CatalogItemWhereInput[]
+    userId?: StringFilter<"CatalogItem"> | string
+    name?: StringFilter<"CatalogItem"> | string
+    price?: FloatNullableFilter<"CatalogItem"> | number | null
+    priceUnit?: StringNullableFilter<"CatalogItem"> | string | null
+    description?: StringNullableFilter<"CatalogItem"> | string | null
+    category?: StringNullableFilter<"CatalogItem"> | string | null
+    currency?: StringNullableFilter<"CatalogItem"> | string | null
+    createdAt?: DateTimeFilter<"CatalogItem"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type CatalogItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    price?: SortOrderInput | SortOrder
+    priceUnit?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    category?: SortOrderInput | SortOrder
+    currency?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: CatalogItemCountOrderByAggregateInput
+    _avg?: CatalogItemAvgOrderByAggregateInput
+    _max?: CatalogItemMaxOrderByAggregateInput
+    _min?: CatalogItemMinOrderByAggregateInput
+    _sum?: CatalogItemSumOrderByAggregateInput
+  }
+
+  export type CatalogItemScalarWhereWithAggregatesInput = {
+    AND?: CatalogItemScalarWhereWithAggregatesInput | CatalogItemScalarWhereWithAggregatesInput[]
+    OR?: CatalogItemScalarWhereWithAggregatesInput[]
+    NOT?: CatalogItemScalarWhereWithAggregatesInput | CatalogItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CatalogItem"> | string
+    userId?: StringWithAggregatesFilter<"CatalogItem"> | string
+    name?: StringWithAggregatesFilter<"CatalogItem"> | string
+    price?: FloatNullableWithAggregatesFilter<"CatalogItem"> | number | null
+    priceUnit?: StringNullableWithAggregatesFilter<"CatalogItem"> | string | null
+    description?: StringNullableWithAggregatesFilter<"CatalogItem"> | string | null
+    category?: StringNullableWithAggregatesFilter<"CatalogItem"> | string | null
+    currency?: StringNullableWithAggregatesFilter<"CatalogItem"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"CatalogItem"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
     name?: string | null
     role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified: boolean
     image?: string | null
@@ -6141,6 +7607,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    catalogItems?: CatalogItemCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6148,6 +7615,10 @@ export namespace Prisma {
     email: string
     name?: string | null
     role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified: boolean
     image?: string | null
@@ -6155,6 +7626,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    catalogItems?: CatalogItemUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6162,6 +7634,10 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6169,6 +7645,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    catalogItems?: CatalogItemUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6176,6 +7653,10 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6183,6 +7664,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    catalogItems?: CatalogItemUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6190,6 +7672,10 @@ export namespace Prisma {
     email: string
     name?: string | null
     role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified: boolean
     image?: string | null
@@ -6202,6 +7688,10 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6214,6 +7704,10 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6471,6 +7965,89 @@ export namespace Prisma {
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type CatalogItemCreateInput = {
+    id?: string
+    name: string
+    price?: number | null
+    priceUnit?: string | null
+    description?: string | null
+    category?: string | null
+    currency?: string | null
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutCatalogItemsInput
+  }
+
+  export type CatalogItemUncheckedCreateInput = {
+    id?: string
+    userId: string
+    name: string
+    price?: number | null
+    priceUnit?: string | null
+    description?: string | null
+    category?: string | null
+    currency?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CatalogItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    priceUnit?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCatalogItemsNestedInput
+  }
+
+  export type CatalogItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    priceUnit?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CatalogItemCreateManyInput = {
+    id?: string
+    userId: string
+    name: string
+    price?: number | null
+    priceUnit?: string | null
+    description?: string | null
+    category?: string | null
+    currency?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CatalogItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    priceUnit?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CatalogItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    priceUnit?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6506,6 +8083,22 @@ export namespace Prisma {
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
     notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -6559,6 +8152,12 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
+  export type CatalogItemListRelationFilter = {
+    every?: CatalogItemWhereInput
+    some?: CatalogItemWhereInput
+    none?: CatalogItemWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -6572,11 +8171,19 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type CatalogItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     name?: SortOrder
     role?: SortOrder
+    whatsapp?: SortOrder
+    banned?: SortOrder
+    banReason?: SortOrder
+    banExpires?: SortOrder
     profile_data?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
@@ -6589,6 +8196,10 @@ export namespace Prisma {
     email?: SortOrder
     name?: SortOrder
     role?: SortOrder
+    whatsapp?: SortOrder
+    banned?: SortOrder
+    banReason?: SortOrder
+    banExpires?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
     createdAt?: SortOrder
@@ -6600,6 +8211,10 @@ export namespace Prisma {
     email?: SortOrder
     name?: SortOrder
     role?: SortOrder
+    whatsapp?: SortOrder
+    banned?: SortOrder
+    banReason?: SortOrder
+    banExpires?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
     createdAt?: SortOrder
@@ -6650,6 +8265,28 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -6738,17 +8375,6 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type AccountCountOrderByAggregateInput = {
     id?: SortOrder
     accountId?: SortOrder
@@ -6797,20 +8423,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type VerificationCountOrderByAggregateInput = {
     id?: SortOrder
     identifier?: SortOrder
@@ -6838,6 +8450,77 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type CatalogItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    priceUnit?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    currency?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CatalogItemAvgOrderByAggregateInput = {
+    price?: SortOrder
+  }
+
+  export type CatalogItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    priceUnit?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    currency?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CatalogItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    priceUnit?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    currency?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CatalogItemSumOrderByAggregateInput = {
+    price?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6850,6 +8533,13 @@ export namespace Prisma {
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type CatalogItemCreateNestedManyWithoutUserInput = {
+    create?: XOR<CatalogItemCreateWithoutUserInput, CatalogItemUncheckedCreateWithoutUserInput> | CatalogItemCreateWithoutUserInput[] | CatalogItemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CatalogItemCreateOrConnectWithoutUserInput | CatalogItemCreateOrConnectWithoutUserInput[]
+    createMany?: CatalogItemCreateManyUserInputEnvelope
+    connect?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
   }
 
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -6866,6 +8556,13 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
+  export type CatalogItemUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CatalogItemCreateWithoutUserInput, CatalogItemUncheckedCreateWithoutUserInput> | CatalogItemCreateWithoutUserInput[] | CatalogItemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CatalogItemCreateOrConnectWithoutUserInput | CatalogItemCreateOrConnectWithoutUserInput[]
+    createMany?: CatalogItemCreateManyUserInputEnvelope
+    connect?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -6876,6 +8573,14 @@ export namespace Prisma {
 
   export type EnumRoleFieldUpdateOperationsInput = {
     set?: $Enums.Role
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -6914,6 +8619,20 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
+  export type CatalogItemUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CatalogItemCreateWithoutUserInput, CatalogItemUncheckedCreateWithoutUserInput> | CatalogItemCreateWithoutUserInput[] | CatalogItemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CatalogItemCreateOrConnectWithoutUserInput | CatalogItemCreateOrConnectWithoutUserInput[]
+    upsert?: CatalogItemUpsertWithWhereUniqueWithoutUserInput | CatalogItemUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CatalogItemCreateManyUserInputEnvelope
+    set?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
+    disconnect?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
+    delete?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
+    connect?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
+    update?: CatalogItemUpdateWithWhereUniqueWithoutUserInput | CatalogItemUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CatalogItemUpdateManyWithWhereWithoutUserInput | CatalogItemUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CatalogItemScalarWhereInput | CatalogItemScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6942,6 +8661,20 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
+  export type CatalogItemUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CatalogItemCreateWithoutUserInput, CatalogItemUncheckedCreateWithoutUserInput> | CatalogItemCreateWithoutUserInput[] | CatalogItemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CatalogItemCreateOrConnectWithoutUserInput | CatalogItemCreateOrConnectWithoutUserInput[]
+    upsert?: CatalogItemUpsertWithWhereUniqueWithoutUserInput | CatalogItemUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CatalogItemCreateManyUserInputEnvelope
+    set?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
+    disconnect?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
+    delete?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
+    connect?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
+    update?: CatalogItemUpdateWithWhereUniqueWithoutUserInput | CatalogItemUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CatalogItemUpdateManyWithWhereWithoutUserInput | CatalogItemUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CatalogItemScalarWhereInput | CatalogItemScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutSessionsInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -6962,16 +8695,34 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
     upsert?: UserUpsertWithoutAccountsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
+  }
+
+  export type UserCreateNestedOneWithoutCatalogItemsInput = {
+    create?: XOR<UserCreateWithoutCatalogItemsInput, UserUncheckedCreateWithoutCatalogItemsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCatalogItemsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutCatalogItemsNestedInput = {
+    create?: XOR<UserCreateWithoutCatalogItemsInput, UserUncheckedCreateWithoutCatalogItemsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCatalogItemsInput
+    upsert?: UserUpsertWithoutCatalogItemsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCatalogItemsInput, UserUpdateWithoutCatalogItemsInput>, UserUncheckedUpdateWithoutCatalogItemsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7007,6 +8758,22 @@ export namespace Prisma {
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
     notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -7090,6 +8857,28 @@ export namespace Prisma {
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
   }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -7136,29 +8925,31 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type SessionCreateWithoutUserInput = {
@@ -7231,6 +9022,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CatalogItemCreateWithoutUserInput = {
+    id?: string
+    name: string
+    price?: number | null
+    priceUnit?: string | null
+    description?: string | null
+    category?: string | null
+    currency?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CatalogItemUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    price?: number | null
+    priceUnit?: string | null
+    description?: string | null
+    category?: string | null
+    currency?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CatalogItemCreateOrConnectWithoutUserInput = {
+    where: CatalogItemWhereUniqueInput
+    create: XOR<CatalogItemCreateWithoutUserInput, CatalogItemUncheckedCreateWithoutUserInput>
+  }
+
+  export type CatalogItemCreateManyUserInputEnvelope = {
+    data: CatalogItemCreateManyUserInput | CatalogItemCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
@@ -7296,17 +9119,53 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
+  export type CatalogItemUpsertWithWhereUniqueWithoutUserInput = {
+    where: CatalogItemWhereUniqueInput
+    update: XOR<CatalogItemUpdateWithoutUserInput, CatalogItemUncheckedUpdateWithoutUserInput>
+    create: XOR<CatalogItemCreateWithoutUserInput, CatalogItemUncheckedCreateWithoutUserInput>
+  }
+
+  export type CatalogItemUpdateWithWhereUniqueWithoutUserInput = {
+    where: CatalogItemWhereUniqueInput
+    data: XOR<CatalogItemUpdateWithoutUserInput, CatalogItemUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CatalogItemUpdateManyWithWhereWithoutUserInput = {
+    where: CatalogItemScalarWhereInput
+    data: XOR<CatalogItemUpdateManyMutationInput, CatalogItemUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CatalogItemScalarWhereInput = {
+    AND?: CatalogItemScalarWhereInput | CatalogItemScalarWhereInput[]
+    OR?: CatalogItemScalarWhereInput[]
+    NOT?: CatalogItemScalarWhereInput | CatalogItemScalarWhereInput[]
+    id?: StringFilter<"CatalogItem"> | string
+    userId?: StringFilter<"CatalogItem"> | string
+    name?: StringFilter<"CatalogItem"> | string
+    price?: FloatNullableFilter<"CatalogItem"> | number | null
+    priceUnit?: StringNullableFilter<"CatalogItem"> | string | null
+    description?: StringNullableFilter<"CatalogItem"> | string | null
+    category?: StringNullableFilter<"CatalogItem"> | string | null
+    currency?: StringNullableFilter<"CatalogItem"> | string | null
+    createdAt?: DateTimeFilter<"CatalogItem"> | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     email: string
     name?: string | null
     role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified: boolean
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
+    catalogItems?: CatalogItemCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -7314,12 +9173,17 @@ export namespace Prisma {
     email: string
     name?: string | null
     role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified: boolean
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    catalogItems?: CatalogItemUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -7343,12 +9207,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    catalogItems?: CatalogItemUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -7356,12 +9225,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    catalogItems?: CatalogItemUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -7369,12 +9243,17 @@ export namespace Prisma {
     email: string
     name?: string | null
     role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified: boolean
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
+    catalogItems?: CatalogItemCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -7382,12 +9261,17 @@ export namespace Prisma {
     email: string
     name?: string | null
     role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified: boolean
     image?: string | null
     createdAt: Date | string
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    catalogItems?: CatalogItemUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -7411,12 +9295,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    catalogItems?: CatalogItemUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -7424,12 +9313,105 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profile_data?: NullableJsonNullValueInput | InputJsonValue
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    catalogItems?: CatalogItemUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCatalogItemsInput = {
+    id?: string
+    email: string
+    name?: string | null
+    role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
+    profile_data?: NullableJsonNullValueInput | InputJsonValue
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCatalogItemsInput = {
+    id?: string
+    email: string
+    name?: string | null
+    role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
+    profile_data?: NullableJsonNullValueInput | InputJsonValue
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCatalogItemsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCatalogItemsInput, UserUncheckedCreateWithoutCatalogItemsInput>
+  }
+
+  export type UserUpsertWithoutCatalogItemsInput = {
+    update: XOR<UserUpdateWithoutCatalogItemsInput, UserUncheckedUpdateWithoutCatalogItemsInput>
+    create: XOR<UserCreateWithoutCatalogItemsInput, UserUncheckedCreateWithoutCatalogItemsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCatalogItemsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCatalogItemsInput, UserUncheckedUpdateWithoutCatalogItemsInput>
+  }
+
+  export type UserUpdateWithoutCatalogItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profile_data?: NullableJsonNullValueInput | InputJsonValue
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCatalogItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profile_data?: NullableJsonNullValueInput | InputJsonValue
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SessionCreateManyUserInput = {
@@ -7455,6 +9437,17 @@ export namespace Prisma {
     password?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+  }
+
+  export type CatalogItemCreateManyUserInput = {
+    id?: string
+    name: string
+    price?: number | null
+    priceUnit?: string | null
+    description?: string | null
+    category?: string | null
+    currency?: string | null
+    createdAt?: Date | string
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -7530,6 +9523,39 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CatalogItemUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    priceUnit?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CatalogItemUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    priceUnit?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CatalogItemUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    priceUnit?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -44,3 +44,6 @@
 ## Environment Requirements
 - **Tailwind Plugins**: `@tailwindcss/forms` and `@tailwindcss/container-queries` must be installed.
 - **Next.js Images**: `lh3.googleusercontent.com` and `googleusercontent.com` are whitelisted in `next.config.ts` for Stitch-based image delivery.
+- **WhatsApp Isolation**: `.wwebjs_auth` is excluded from bundler processing via `serverExternalPackages` and `transpilePackages`.
+- **Middleware Convention**: `src/proxy.ts` implements the Next.js 16.x-compliant auth/routing bridge to silence deprecation warnings.
+- **Nixpacks (Coolify)**: `nixpacks.toml` includes `chromium` for headless WhatsApp bridge operation. Use `npm run start` for production.

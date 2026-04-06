@@ -17,6 +17,7 @@ export default function LandingPage() {
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvd95KSpe72Y_vv7ykHF7srGYmBY_uPo3iJA_VHXEml8n27BNUADhGzrUVNPgu2bcdy6nlYFR5XCo7qUt4r1QqEATKL6GVuSAggGS2YCnaee4s8zCnwiS8Q__Gxx1SfYcneFUo2c6yewajE69T8A3Cb54vcz2hnHXxnJf87hGMkaEuAQWOFKbDtbpfAWWANRxTrl7q8nQmcZFKQA5DUty7NNXCxX5YL0Z1TvTQSpL6t6Bx4NtYd_-mc75OEL2iFGbD9bLzsPM8tUA"
               alt="Cinematic shot of a peaceful Hindu temple interior at dawn with soft sunlight beams filtering through stone arches and incense smoke swirling"
               fill
+              sizes="100vw"
               className="object-cover opacity-20 scale-105"
               priority
               unoptimized
@@ -78,6 +79,7 @@ export default function LandingPage() {
                   src="/vedic_wedding_puja_1775391547447.png"
                   alt="Elegant close-up of a Pandit's hands performing a ritual with sacred fire and grains in a high-end setting"
                   fill
+                  sizes="(max-width: 768px) 100vw, 66vw"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/20 to-transparent"></div>

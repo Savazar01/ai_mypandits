@@ -8,10 +8,10 @@ export default function Header() {
       <div className="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
         <Link 
           href="/" 
-          className="text-2xl font-headline font-bold text-orange-800 tracking-tight hover:opacity-80 transition-opacity flex items-center gap-2"
+          className="text-3xl font-headline font-bold text-orange-800 tracking-tight hover:opacity-80 transition-opacity flex items-center gap-3"
         >
           {/* Logo Icon - Replaceable later */}
-          <span className="material-symbols-outlined text-primary-container text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
+          <span className="material-symbols-outlined text-primary-container text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
           <span>MyPandits</span>
         </Link>
         <div className="flex items-center space-x-6 shrink-0">

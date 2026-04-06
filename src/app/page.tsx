@@ -36,12 +36,12 @@ export default function LandingPage() {
                 Connect with nearby Pandits, Decorators, Caterers, Photographers, Venue Providers, Temples, Puja Supplies, Media & Design, DJs, and Event Planners to bring the divine into your most sacred moments.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/register" className="bg-primary text-on-primary px-10 py-5 rounded-full font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all flex items-center justify-center gap-3">
-                  Register
-                  <span className="material-symbols-outlined">arrow_forward</span>
+                <Link href="/register/customer" className="bg-primary text-on-primary px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all flex items-center justify-center gap-2">
+                  Register as Customer
+                  <span className="material-symbols-outlined text-xl">arrow_forward</span>
                 </Link>
-                <Link href="/login" className="bg-white text-on-surface border border-outline px-10 py-5 rounded-full font-bold text-lg hover:bg-stone-50 transition-all text-center">
-                  Sign In
+                <Link href="/register/provider" className="bg-white text-primary border-2 border-primary/20 px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/5 transition-all text-center">
+                  Apply as Provider
                 </Link>
               </div>
             </div>
@@ -235,7 +235,7 @@ export default function LandingPage() {
                 </div>
                 <h4 className="text-3xl font-headline font-bold mb-4 text-on-surface">Join the Sangha</h4>
                 <p className="text-on-surface-variant mb-8 max-w-sm">Are you a verified Pandit, Decorator, or Event Professional looking to digitalize your practice?</p>
-                <Link href="/register" className="bg-on-surface text-white px-8 py-3 rounded-full font-bold hover:bg-primary transition-all">Apply as a Provider</Link>
+                <Link href="/register/provider" className="bg-on-surface text-white px-8 py-3 rounded-full font-bold hover:bg-primary transition-all inline-block">Apply as a Provider</Link>
               </div>
             </div>
           </div>

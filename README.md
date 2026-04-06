@@ -30,6 +30,7 @@ Providers can manage their entire service inventory using a **Unified Catalog Sy
 ### 🔐 Secure Authentication & Multi-Entry Identity
 - **Dual-Login Parity**: Unified authentication flow supports both **Email/Password** and **WhatsApp (OTP)** logins with identical permissions and behavior.
 - **WhatsApp Integration**: High-fidelity manual session injection ensures a seamless mobile-first identity experience.
+- **Registration Split**: Dedicated, mobile-optimized recruitment paths at `/register/customer` and `/register/provider` for clear user steering.
 - **Role-Based Access**: Strict middleware steering and dedicated dashboards for Customers and Providers.
 - **Social Integration**: Instant sign-in via Google (Gmail).
 - **Session Privacy**: Secure, hashing-aware token management via BetterAuth v1.5.6.

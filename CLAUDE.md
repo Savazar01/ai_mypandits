@@ -10,6 +10,8 @@
 - **Main Branch**: Current active development and source-of-truth implementation.
 - **Tag v0.1-baseline**: Initial stable state for core UI.
 - **Tag v0.2-unified-auth**: Complete 'Zero-Difference' authentication for Email and WhatsApp (High-Fidelity). Use this to restore the production-grade identity layer.
+- **Tag v0.3-ui-housekeeping**: Cleaned login/registration UI, removed 'ghost' artifacts, and enlarged brand logos.
+- **Tag v0.4-registration-refactor**: Split registration into dedicated `/customer` and `/provider` routes with a simplified Choice page and fully responsive forms.
 
 ## Tech Stack
 - Frontend: Next.js (App Router), Tailwind CSS v4, Framer Motion
@@ -33,6 +35,11 @@
   - Expert -> `PROVIDER`
 - Maintenance:
   - `npm run wa:bridge`: Required for WhatsApp Login testing.
+- **Registration Architecture**:
+  - `src/app/register/page.tsx`: Role selection 'Choice' page (simplified).
+  - `src/app/register/customer/page.tsx`: Dedicated seeker sign-up.
+  - `src/app/register/provider/page.tsx`: Dedicated expert application.
+  - `src/components/RegistrationForm.tsx`: Shared, responsive form component.
 
 ## Environment Requirements
 - **Tailwind Plugins**: `@tailwindcss/forms` and `@tailwindcss/container-queries` must be installed.

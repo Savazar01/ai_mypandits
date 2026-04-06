@@ -12,7 +12,7 @@ import { COUNTRIES } from "@/lib/countries";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
-  const [loginMode, setLoginMode] = useState<"email" | "whatsapp">("email");
+  const [loginMode, setLoginMode] = useState<"email" | "whatsapp">("whatsapp");
   
   // Email Form State
   const [email, setEmail] = useState("");
@@ -121,9 +121,8 @@ export default function LoginPage() {
   return (
     <div className="bg-surface font-body text-on-surface min-h-screen flex flex-col items-center justify-center vedic-gradient-bg overflow-hidden relative">
       <Header />
-      {/* Subtle Background Motifs */}
+      {/* Subtle Background Motifs - Removed ghost image as requested */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.03] flex items-center justify-center">
-        <span className="material-symbols-outlined text-[600px] rotate-12">filter_vintage</span>
       </div>
 
       {/* Main Content Canvas */}
@@ -132,22 +131,25 @@ export default function LoginPage() {
         <div className="glass-card temple-arch p-10 flex flex-col items-center shadow-2xl shadow-primary/5">
           {/* Saffron Lotus Icon */}
           <div className="mb-6">
-            <span className="material-symbols-outlined text-primary-container text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
+            <span className="material-symbols-outlined text-primary-container text-6xl" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
           </div>
-          {/* Title */}
-          {/* Mode Toggle */}
+          
+          {/* Card Headline */}
+          <h1 className="font-body font-light text-4xl text-on-surface tracking-tight mb-8 text-center">Login to MyPandits</h1>
+
+          {/* Mode Toggle - WhatsApp First */}
           <div className="flex bg-surface-variant/10 rounded-full p-1 mb-10 w-full max-w-[280px]">
-            <button 
-              onClick={() => { setLoginMode("email"); setError(""); }}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${loginMode === "email" ? "bg-white text-primary shadow-sm" : "text-on-surface-variant/60 hover:text-primary"}`}
-            >
-              <Mail size={14} /> Email
-            </button>
             <button 
               onClick={() => { setLoginMode("whatsapp"); setError(""); }}
               className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${loginMode === "whatsapp" ? "bg-white text-[#25D366] shadow-sm" : "text-on-surface-variant/60 hover:text-[#25D366]"}`}
             >
-              <WhatsAppIcon size={14} /> WhatsApp
+              <WhatsAppIcon size={18} /> WhatsApp
+            </button>
+            <button 
+              onClick={() => { setLoginMode("email"); setError(""); }}
+              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${loginMode === "email" ? "bg-white text-primary shadow-sm" : "text-on-surface-variant/60 hover:text-primary"}`}
+            >
+              <Mail size={18} /> Email
             </button>
           </div>
 
@@ -203,9 +205,9 @@ export default function LoginPage() {
             </form>
           ) : (
             <div className="w-full space-y-6">
-              <div className="flex gap-4 items-end">
+              <div className="flex">
                 <select 
-                  className="bg-transparent border-0 border-b-2 border-outline-variant py-3 text-sm focus:ring-0 focus:border-primary font-medium"
+                  className="w-24 px-2 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface focus:outline-none"
                   value={whatsappCode}
                   onChange={(e) => setWhatsappCode(e.target.value)}
                 >
@@ -215,7 +217,7 @@ export default function LoginPage() {
                 </select>
                 <div className="relative flex-1">
                   <input 
-                    className="peer block w-full px-4 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface placeholder-transparent focus:outline-none pr-16" 
+                    className="peer block w-full px-4 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface placeholder-transparent focus:outline-none pr-24" 
                     id="whatsapp" 
                     placeholder=" " 
                     required 
@@ -224,19 +226,19 @@ export default function LoginPage() {
                     onChange={(e) => setWhatsapp(e.target.value)}
                   />
                   <label 
-                    className="absolute left-4 -top-4 text-xs font-medium text-primary/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary uppercase tracking-widest pointer-events-none" 
+                    className="absolute left-4 -top-4 text-xs font-bold text-[#25D366] transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#25D366] peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-[#25D366] peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#25D366] uppercase tracking-widest pointer-events-none flex items-center gap-1.5" 
                     htmlFor="whatsapp"
                   >
-                    WhatsApp Number
+                    <WhatsAppIcon size={12} /> WhatsApp Number
                   </label>
                   <div className="absolute right-0 top-1/2 -translate-y-1/2">
                     <button 
                       type="button"
                       onClick={handleSendLoginOtp}
                       disabled={verificationStep === "sending" || !whatsapp || timer > 0}
-                      className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-primary/80 disabled:opacity-30 transition-colors py-2"
+                      className="text-[10px] font-bold uppercase tracking-[0.1em] text-primary hover:text-primary/80 disabled:opacity-50 transition-colors flex items-center gap-1.5 px-3 py-1.5"
                     >
-                      {verificationStep === "sending" ? <Loader2 size={14} className="animate-spin" /> : timer > 0 ? `${timer}s` : "Get OTP"}
+                      {verificationStep === "sending" ? <Loader2 size={12} className="animate-spin" /> : timer > 0 ? `${timer}s` : "Get OTP"}
                     </button>
                   </div>
                 </div>
@@ -272,9 +274,6 @@ export default function LoginPage() {
           )}
           {/* Secondary Links */}
           <div className="mt-10 flex flex-col items-center space-y-4 w-full">
-            <Link className="text-xs font-label uppercase tracking-widest text-outline hover:text-primary transition-colors duration-300" href="#">
-              Forgot Password
-            </Link>
             <div className="w-8 h-[1px] bg-outline-variant/30"></div>
             <p className="text-xs font-label text-on-surface-variant/70 uppercase tracking-widest">
               New to the journey? 
@@ -286,8 +285,8 @@ export default function LoginPage() {
         </div>
         {/* Decorative Subtle Branding */}
         <div className="mt-12 text-center">
-          <Link href="/" className="font-headline font-bold text-primary/40 tracking-widest text-xl flex items-center justify-center gap-2">
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
+          <Link href="/" className="font-headline font-bold text-primary/40 tracking-widest text-3xl flex items-center justify-center gap-3">
+            <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
             MyPandits
           </Link>
         </div>
@@ -304,17 +303,7 @@ export default function LoginPage() {
         </div>
       </footer>
 
-      {/* Decorative Corner Mandala */}
-      <div className="fixed top-0 right-0 p-12 opacity-[0.05] pointer-events-none hidden lg:block">
-        <Image 
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCedZrQpM6TppMwEKqXTm86nLB_yh0_X5s8UmwPdi4PYDVsrm8zQqq7b7XXs-DYwHfu8_g9Ph2Amm-uhnHtBO7kTGmOY1iMmYtakIZwNa4mj16YbtK4YcUU7IAByESUoiNpeNUfFv5oqDaelzQkh4_ebH6mMz7fYthuJpHR_Kt5wW_F4mb_RB2Elcks4d0nCymwCdJO_3KnXEU1i1bs20Maz5FCLCg2ru0YU4-fi-GlEDf1qz2zJC-E_BUZrjzNkjft5TFn7KJVjlE" 
-          alt="Intricate circular gold mandala pattern with sacred geometry symmetry and soft ethereal glow on cream paper texture" 
-          width={256}
-          height={256}
-          className="mix-blend-multiply" 
-          unoptimized
-        />
-      </div>
+
     </div>
   );
 }

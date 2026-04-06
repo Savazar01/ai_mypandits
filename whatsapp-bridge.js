@@ -146,6 +146,7 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
-server.listen(3095, '127.0.0.1', () => {
-    console.log('WhatsApp API Server listening on http://localhost:3095');
+const PORT = process.env.WHATSAPP_PORT || 3095;
+server.listen(PORT, '127.0.0.1', () => {
+    console.log(`WhatsApp API Server listening on http://localhost:${PORT}`);
 });

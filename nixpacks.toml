@@ -8,5 +8,5 @@ cmds = ["npm install"]
 cmds = ["npx prisma generate", "npm run build"]
 
 [start]
-# Starts both the Web Server and the WhatsApp Bridge in the background
-cmd = "npm run start -- -p 3090 & node whatsapp-bridge.js"
+# Starts Web Server on 3090 and WhatsApp Bridge on 3095
+cmd = "npm run start -- -p 3090 & WHATSAPP_PORT=3095 node whatsapp-bridge.js"

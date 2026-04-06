@@ -25,7 +25,7 @@ model User {
   email         String    @unique
   name          String?
   role          Role      @default(CUSTOMER)
-  whatsapp      String?
+  whatsapp      String?   @unique
   
   // BetterAuth Admin Plugin Fields
   banned        Boolean?  @default(false)
@@ -81,12 +81,12 @@ model Account {
 }
 
 model Verification {
-  id         String    @id
+  id         String    @id @default(cuid())
   identifier String
   value      String
   expiresAt  DateTime
-  createdAt  DateTime?
-  updatedAt  DateTime?
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @updatedAt
 
   @@map("verification")
 }

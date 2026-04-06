@@ -102,12 +102,7 @@ body {
   -webkit-backdrop-filter: blur(16px);
 }
 
-.mandala-bg {
-  background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDM1AGnQ1UpnVME46ioASuSFmHzBbDTMRgigYhid4KlaVUtJtSPAOD5fgq1UiOflbVs9VyEB6nGqv0jFYP2Ewjnb6Huaz3uYP1K3LBXayvaZlqiS9fGVeJfV1g6vAntymOSw1VMkOJHOorq4vjJLLgwkt3s4nvcqmP9QOzGGnhHXE4wOfvHTV1aIMtTGAz2BtoeHc6OLYdtf6EJaa-Rcs4qqjW3SCpBe16YM5EgyYnrYojD8TUC351BAeGEQXufQ37DGNioXYUe4Vc);
-  background-size: cover;
-  background-position: center;
-  opacity: 0.04;
-}
+/* Mandala background class removed as requested to eliminate ghost artifacts */
 
 .sacred-gradient-btn {
   background: linear-gradient(135deg, #f93 0%, #d4af37 100%);

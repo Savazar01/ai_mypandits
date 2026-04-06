@@ -7903,7 +7903,7 @@ export namespace Prisma {
   }
 
   export type VerificationCreateInput = {
-    id: string
+    id?: string
     identifier: string
     value: string
     expiresAt: Date | string
@@ -7912,7 +7912,7 @@ export namespace Prisma {
   }
 
   export type VerificationUncheckedCreateInput = {
-    id: string
+    id?: string
     identifier: string
     value: string
     expiresAt: Date | string
@@ -7939,7 +7939,7 @@ export namespace Prisma {
   }
 
   export type VerificationCreateManyInput = {
-    id: string
+    id?: string
     identifier: string
     value: string
     expiresAt: Date | string

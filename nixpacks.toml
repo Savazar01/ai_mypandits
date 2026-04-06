@@ -1,5 +1,12 @@
 [phases.setup]
-nixPkgs = ["...", "chromium"]
+nixPkgs = ["nodejs_20", "chromium", "nss", "freetype", "harfbuzz", "ca-certificates", "libglvnd"]
+
+[phases.install]
+cmds = ["npm install"]
+
+[phases.build]
+cmds = ["npx prisma generate", "npm run build"]
 
 [start]
-cmd = "npm run start"
+# Starts both the Web Server and the WhatsApp Bridge in the background
+cmd = "npm run start -- -p 3090 & node whatsapp-bridge.js"

@@ -29,7 +29,7 @@ function createClient() {
             remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
         },
         puppeteer: {
-            headless: false, // Set to true for production/VPS
+            headless: true, // Set to true for production/VPS
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',

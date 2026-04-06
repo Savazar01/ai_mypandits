@@ -4,7 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { Loader2, ArrowRight } from "lucide-react";
+import { Loader2, ArrowRight, CheckCircle2, MessageSquare, ShieldCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
+import { COUNTRIES } from "@/lib/countries";
 import Header from "@/components/Header";
 
 export default function RegisterPage() {
@@ -15,7 +17,76 @@ export default function RegisterPage() {
   const [whatsappCode, setWhatsappCode] = useState("+91");
   const [whatsapp, setWhatsapp] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  // Verification States
+  const [verificationStep, setVerificationStep] = useState<"idle" | "sending" | "sent" | "verifying" | "verified">("idle");
+  const [otp, setOtp] = useState("");
+  const [verificationError, setVerificationError] = useState("");
+  const [timer, setTimer] = useState(0);
+
   const router = useRouter();
+
+  const fullWhatsapp = `${whatsappCode}${whatsapp}`;
+
+  const handleSendOtp = async () => {
+    if (!whatsapp || whatsapp.length < 8) {
+      setVerificationError("Please enter a valid WhatsApp number");
+      return;
+    }
+    setVerificationStep("sending");
+    setVerificationError("");
+    
+    try {
+      const res = await fetch("/api/auth/whatsapp/send", {
+        method: "POST",
+        body: JSON.stringify({ whatsapp: fullWhatsapp }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setVerificationStep("sent");
+        setTimer(60);
+        // Start countdown
+        const interval = setInterval(() => {
+          setTimer((prev) => {
+            if (prev <= 1) {
+              clearInterval(interval);
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+      } else {
+        setVerificationError(data.error || "Failed to send code");
+        setVerificationStep("idle");
+      }
+    } catch (err) {
+      setVerificationError("Network error. Try again.");
+      setVerificationStep("idle");
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    if (otp.length !== 6) return;
+    setVerificationStep("verifying");
+    setVerificationError("");
+
+    try {
+      const res = await fetch("/api/auth/whatsapp/verify", {
+        method: "POST",
+        body: JSON.stringify({ whatsapp: fullWhatsapp, code: otp }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setVerificationStep("verified");
+      } else {
+        setVerificationError(data.error || "Invalid code");
+        setVerificationStep("sent");
+      }
+    } catch (err) {
+      setVerificationError("Verification failed. Try again.");
+      setVerificationStep("sent");
+    }
+  };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,13 +113,7 @@ export default function RegisterPage() {
     }
   };
 
-  const handleGoogleRegister = async () => {
-    setLoading(true);
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: `/dashboard?role=${role}`,
-    });
-  };
+
 
   return (
     <div className="bg-surface font-body text-on-surface min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -107,30 +172,80 @@ export default function RegisterPage() {
                     value={whatsappCode}
                     onChange={(e) => setWhatsappCode(e.target.value)}
                   >
-                    <option value="+91">+91 (IN)</option>
-                    <option value="+1">+1 (US/CA)</option>
-                    <option value="+44">+44 (UK)</option>
-                    <option value="+61">+61 (AU)</option>
-                    <option value="+65">+65 (SG)</option>
+                    {COUNTRIES.map(c => (
+                      <option key={c.code} value={c.dialCode}>{c.flag} {c.dialCode} ({c.code})</option>
+                    ))}
                   </select>
                   <div className="relative flex-1">
                     <input 
-                      className="peer block w-full px-4 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface placeholder-transparent focus:outline-none" 
+                      className="peer block w-full px-4 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface placeholder-transparent focus:outline-none pr-24" 
                       id="whatsapp" 
                       placeholder=" " 
                       required 
                       type="text"
+                      disabled={verificationStep === "verified"}
                       value={whatsapp}
-                      onChange={(e) => setWhatsapp(e.target.value)}
+                      onChange={(e) => {
+                        setWhatsapp(e.target.value);
+                        if (verificationStep !== "idle") setVerificationStep("idle");
+                      }}
                     />
                     <label 
-                      className="absolute left-4 -top-4 text-xs font-medium text-primary/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-primary uppercase tracking-widest pointer-events-none" 
+                      className="absolute left-4 -top-4 text-xs font-bold text-[#25D366] transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#25D366] peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-[#25D366] peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#25D366] uppercase tracking-widest pointer-events-none flex items-center gap-1.5" 
                       htmlFor="whatsapp"
                     >
-                      WhatsApp Number
+                      <WhatsAppIcon size={12} /> WhatsApp Number
                     </label>
+
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2">
+                      {verificationStep === "verified" ? (
+                        <span className="flex items-center gap-1 text-green-600 text-[10px] font-bold uppercase tracking-wider bg-green-50 px-2 py-1 rounded-full border border-green-100">
+                          <CheckCircle2 size={12} /> Verified
+                        </span>
+                      ) : (
+                        <button 
+                          type="button"
+                          onClick={handleSendOtp}
+                          disabled={verificationStep === "sending" || !whatsapp}
+                          className="text-[10px] font-bold uppercase tracking-[0.1em] text-primary hover:text-primary/80 disabled:opacity-50 transition-colors flex items-center gap-1.5 px-3 py-1.5"
+                        >
+                          {verificationStep === "sending" ? <Loader2 size={12} className="animate-spin" /> : <ShieldCheck size={12} />}
+                          {verificationStep === "sent" ? "Resend" : "Verify"}
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
+                {verificationError && <p className="text-[10px] text-red-500 font-medium mt-1 ml-2">{verificationError}</p>}
+                
+                {/* OTP Input Section */}
+                {verificationStep === "sent" || verificationStep === "verifying" ? (
+                  <div className="mt-4 p-5 bg-primary/5 rounded-2xl border border-primary/10 space-y-4 animate-in slide-in-from-top-2 duration-300">
+                    <div className="flex items-center justify-between">
+                      <label className="text-[10px] font-bold text-primary/60 uppercase tracking-widest">Enter 6-Digit Code</label>
+                      {timer > 0 && <span className="text-[10px] font-medium text-stone-500">Resend in {timer}s</span>}
+                    </div>
+                    <div className="flex gap-4">
+                      <input 
+                        type="text"
+                        maxLength={6}
+                        placeholder="000000"
+                        className="flex-1 bg-white border-2 border-outline-variant rounded-xl px-4 py-3 text-center text-xl font-bold tracking-[0.5em] focus:border-primary focus:outline-none transition-all"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+                      />
+                      <button 
+                        type="button"
+                        onClick={handleVerifyOtp}
+                        disabled={otp.length !== 6 || verificationStep === "verifying"}
+                        className="px-6 bg-primary text-white rounded-xl font-bold text-sm hover:shadow-lg transition-all disabled:opacity-50"
+                      >
+                        {verificationStep === "verifying" ? <Loader2 size={18} className="animate-spin" /> : "Verify"}
+                      </button>
+                    </div>
+                    <p className="text-[10px] text-stone-500 italic">Code sent to {whatsappCode}{whatsapp}. Check your WhatsApp.</p>
+                  </div>
+                ) : null}
               </div>
 
               <div className="relative">
@@ -174,35 +289,13 @@ export default function RegisterPage() {
               <button 
                 className="w-full py-5 rounded-full sacred-gradient-btn text-white font-medium text-lg tracking-wide hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50" 
                 type="submit"
-                disabled={loading}
+                disabled={loading || verificationStep !== "verified"}
               >
                 {loading && <Loader2 className="animate-spin" size={20} />}
-                Create Account
-                {!loading && <ArrowRight size={20} strokeWidth={1.5} />}
+                {verificationStep !== "verified" ? "Verify WhatsApp to Continue" : "Create Account"}
+                {!loading && verificationStep === "verified" && <ArrowRight size={20} strokeWidth={1.5} />}
               </button>
 
-              <div className="flex items-center gap-4 py-2">
-                <div className="h-[1px] flex-1 bg-outline-variant"></div>
-                <span className="text-xs font-bold text-stone-400 uppercase tracking-widest">Or</span>
-                <div className="h-[1px] flex-1 bg-outline-variant"></div>
-              </div>
-
-              <button 
-                type="button"
-                onClick={handleGoogleRegister}
-                disabled={loading}
-                className="w-full py-4 rounded-full bg-white border border-outline-variant text-on-surface font-medium hover:bg-stone-50 transition-all flex items-center justify-center gap-3"
-              >
-                {loading ? <Loader2 size={18} className="animate-spin" /> : (
-                  <svg className="w-5 h-5" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                  </svg>
-                )}
-                Continue with Google
-              </button>
             </div>
           </form>
 

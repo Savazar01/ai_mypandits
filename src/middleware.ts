@@ -1,35 +1,87 @@
-import { auth } from "@/lib/auth";
 import { type NextRequest, NextResponse } from "next/server";
 
 export default async function middleware(request: NextRequest) {
-	// Use fetch for session check to stay Edge-compatible (avoids direct Prisma/Crypto imports)
-	const sessionResponse = await fetch(`${request.nextUrl.origin}/api/auth/get-session`, {
-		headers: {
-			cookie: request.headers.get("cookie") || "",
-		},
-	});
+  const { pathname } = request.nextUrl;
+  
+  // Skip check for non-dashboard/admin routes
+  if (!pathname.startsWith("/dashboard") && !pathname.startsWith("/admin")) {
+    return NextResponse.next();
+  }
 
-	const session = sessionResponse.ok ? await sessionResponse.json() : null;
-	const { pathname } = request.nextUrl;
+  const cookieHeader = request.headers.get("cookie") || "";
 
-	if (!session) {
-		if (pathname.startsWith("/dashboard") || pathname.startsWith("/admin")) {
-			return NextResponse.redirect(new URL("/login", request.url));
-		}
-		return NextResponse.next();
-	}
+  try {
+    console.log(`[Middleware] Auth Check: ${pathname} | Has Cookies: ${cookieHeader.includes('better-auth')}`);
+    
+    // 1. Call the UNIVERSAL session endpoint (shadowed) for stable handshake
+    const sessionResponse = await fetch(`${request.nextUrl.origin}/api/auth/get-session`, {
+      headers: {
+        cookie: cookieHeader,
+      },
+      next: { revalidate: 0 }, 
+    });
 
-	// Session exists, check for ADMIN role on /admin routes
-	if (pathname.startsWith("/admin")) {
-		const isAdmin = session.user.role === "ADMIN" || session.user.email === process.env.ADMIN_EMAIL;
-		if (!isAdmin) {
-			return NextResponse.redirect(new URL("/dashboard", request.url));
-		}
-	}
+    if (!sessionResponse.ok) {
+      console.log(`[Middleware] ⚠️ Session API Error: ${sessionResponse.status}`);
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
 
-	return NextResponse.next();
+    const session = await sessionResponse.json();
+
+    if (!session || !session.user) {
+      console.log(`[Middleware] ❌ Session Rejected: Access Denied to ${pathname}`);
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+
+    const role = session.user.role;
+    const email = session.user.email;
+    console.log(`[Middleware] ✅ Session Found: User ${email} | Role ${role}`);
+
+    // 2. Role-Based Redirection (Steering) Logic
+    
+    // Admin Protection
+    if (pathname.startsWith("/admin")) {
+      const isAdmin = role === "ADMIN" || email === process.env.ADMIN_EMAIL;
+      if (!isAdmin) {
+        console.log(`[Middleware] 🛡️ Non-Admin Blocked: Steering to dashboard`);
+        return NextResponse.redirect(new URL("/dashboard", request.url));
+      }
+      return NextResponse.next();
+    }
+
+    // Auto-Steer /dashboard to Role-Specific Dashboard
+    // If the path is exactly /dashboard, redirect them to their specific folder
+    if (pathname === "/dashboard") {
+      if (role === "PROVIDER") {
+        console.log(`[Middleware] 🔄 Root Dashboard ➔ Steering to /dashboard/provider`);
+        return NextResponse.redirect(new URL("/dashboard/provider", request.url));
+      } else {
+        console.log(`[Middleware] 🔄 Root Dashboard ➔ Steering to /dashboard/customer`);
+        return NextResponse.redirect(new URL("/dashboard/customer", request.url));
+      }
+    }
+
+    // Role Enforcement (Isolation) on sub-pages
+    if (pathname.startsWith("/dashboard/provider") && role !== "PROVIDER") {
+      console.log(`[Middleware] 🛡️ Role Block: Redirecting non-provider ${email} to /dashboard/customer`);
+      return NextResponse.redirect(new URL("/dashboard/customer", request.url));
+    }
+    
+    if (pathname.startsWith("/dashboard/customer") && role !== "CUSTOMER") {
+      // Allow Providers to land on customer path ONLY IF they are not explicitly restricted,
+      // but here the user wants SEPARATION.
+      console.log(`[Middleware] 🛡️ Role Block: Redirecting non-customer ${role} ${email} to /dashboard/provider`);
+      return NextResponse.redirect(new URL("/dashboard/provider", request.url));
+    }
+
+    return NextResponse.next();
+  } catch (err) {
+    console.error("[Middleware] ⚠️ Auth Check Execution Error:", err);
+    // Fail-safe: Redirect to login if auth check is non-responsive
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 }
 
 export const config = {
-	matcher: ["/dashboard/:path*", "/admin/:path*"],
+  matcher: ["/dashboard/:path*", "/admin/:path*"],
 };

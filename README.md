@@ -27,10 +27,12 @@ Providers can manage their entire service inventory using a **Unified Catalog Sy
 - **Flexible Pricing**: Support for hourly, per-pc, and event-based pricing models.
 - **Regional Currency**: Automatic detection of currency based on provider location.
 
-### 🔐 Secure Authentication
-- **Role-Based Access**: Dedicated dashboards for Customers and Providers.
+### 🔐 Secure Authentication & Multi-Entry Identity
+- **Dual-Login Parity**: Unified authentication flow supports both **Email/Password** and **WhatsApp (OTP)** logins with identical permissions and behavior.
+- **WhatsApp Integration**: High-fidelity manual session injection ensures a seamless mobile-first identity experience.
+- **Role-Based Access**: Strict middleware steering and dedicated dashboards for Customers and Providers.
 - **Social Integration**: Instant sign-in via Google (Gmail).
-- **Session Privacy**: Secure token management via BetterAuth.
+- **Session Privacy**: Secure, hashing-aware token management via BetterAuth v1.5.6.
 
 ---
 
@@ -65,7 +67,11 @@ npx prisma db push
 
 ### 4. Running the Application
 ```bash
+# Terminal 1: Application Dev Server
 npm run dev
+
+# Terminal 2: WhatsApp Authentication Bridge (Required for WA Login)
+npm run wa:bridge
 ```
 Open **[http://localhost:3090](http://localhost:3090)** to view the Vedic Sanctuary.
 

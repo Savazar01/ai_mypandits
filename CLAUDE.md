@@ -8,7 +8,8 @@
 
 ## Git Strategy
 - **Main Branch**: Current active development and source-of-truth implementation.
-- **Tag v0.1-baseline**: The confirmed stable state of the initial 3 pages (Landing, Login, Register) with "Sacred Modernity" design. Use this as a recovery point for UI regression.
+- **Tag v0.1-baseline**: Initial stable state for core UI.
+- **Tag v0.2-unified-auth**: Complete 'Zero-Difference' authentication for Email and WhatsApp (High-Fidelity). Use this to restore the production-grade identity layer.
 
 ## Tech Stack
 - Frontend: Next.js (App Router), Tailwind CSS v4, Framer Motion
@@ -24,11 +25,14 @@
 - **Separation**: "No-Line" Rule - Use `bg-surface-container-low` for component boundaries.
 
 ## Authentication Logic
-- Integration: `src/lib/auth-client.ts`
-- Client Hooks: `authClient.signIn.email`, `authClient.signUp.email`
+- Authentication Bridges:
+  - `src/app/api/auth/get-session/route.ts`: Dual-lookup (Plain/Hashed) identification.
+  - `src/app/api/auth/update-user/route.ts`: Absolute permission bridge.
 - Role Mapping: 
   - Seeker -> `CUSTOMER`
   - Expert -> `PROVIDER`
+- Maintenance:
+  - `npm run wa:bridge`: Required for WhatsApp Login testing.
 
 ## Environment Requirements
 - **Tailwind Plugins**: `@tailwindcss/forms` and `@tailwindcss/container-queries` must be installed.

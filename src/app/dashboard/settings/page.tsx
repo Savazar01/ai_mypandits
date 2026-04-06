@@ -4,18 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import { useSession } from "@/lib/auth-client";
 import { authClient } from "@/lib/auth-client";
 import { Loader2, Save, MapPin, User as UserIcon, Phone, Globe, Camera, Sparkles, Bell, Download, X, Info, CheckCircle, HelpCircle } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { SignOutButton } from "@/components/SignOutButton";
 import Link from "next/link";
 import Image from "next/image";
 
-const countries = [
-  { code: "IN", name: "India" },
-  { code: "US", name: "USA" },
-  { code: "CA", name: "Canada" },
-  { code: "UK", name: "United Kingdom" },
-  { code: "AU", name: "Australia" },
-  { code: "SG", name: "Singapore" },
-];
+import { COUNTRIES } from "@/lib/countries";
 
 const ALL_SKILLS = ["Pandit", "Decorator", "Caterer", "Photographer", "Event Planner", "Venue Provider", "Puja Supplies", "Media and Design", "Temple", "DJ", "Other"];
 
@@ -62,7 +56,7 @@ export default function SettingsPage() {
     formData.address.street,
     formData.address.city,
     formData.address.state,
-    countries.find(c => c.code === formData.address.country)?.name || formData.address.country,
+    COUNTRIES.find(c => c.code === formData.address.country)?.name || formData.address.country,
     formData.address.zip
   ].filter(Boolean).join('-');
 
@@ -73,13 +67,13 @@ export default function SettingsPage() {
         : session.user.profile_data || {};
         
       let wCode = "+91";
+      // @ts-expect-error - BetterAuth additionalFields not yet synchronized with client types
       let wNum = session.user.whatsapp || "";
-      if (wNum.startsWith("+")) {
-        const codeMatch = wNum.match(/^(\+\d{1,3})(.*)$/);
-        if (codeMatch) {
-          wCode = codeMatch[1];
-          wNum = codeMatch[2];
-        }
+      const knownCodes = COUNTRIES.map(c => c.dialCode);
+      const matchedCode = knownCodes.find(code => wNum.startsWith(code));
+      if (matchedCode) {
+        wCode = matchedCode;
+        wNum = wNum.slice(matchedCode.length);
       }
 
       setFormData({
@@ -291,18 +285,18 @@ export default function SettingsPage() {
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-stone-400 uppercase tracking-wider">WhatsApp Number</label>
+                      <label className="text-xs font-bold text-[#25D366] uppercase tracking-[0.2em] flex items-center gap-1.5">
+                        <WhatsAppIcon size={12} /> WhatsApp Number
+                      </label>
                       <div className="flex gap-2">
                         <select
                           className="w-24 px-2 py-3 rounded-xl border border-stone-200 bg-transparent focus:border-primary focus:outline-none transition-all"
                           value={formData.whatsappCode}
                           onChange={(e) => setFormData({...formData, whatsappCode: e.target.value})}
                         >
-                          <option value="+91">+91 (IN)</option>
-                          <option value="+1">+1 (US/CA)</option>
-                          <option value="+44">+44 (UK)</option>
-                          <option value="+61">+61 (AU)</option>
-                          <option value="+65">+65 (SG)</option>
+                          {COUNTRIES.map(c => (
+                            <option key={c.code} value={c.dialCode}>{c.flag} {c.dialCode} ({c.code})</option>
+                          ))}
                         </select>
                         <input 
                           type="text" 
@@ -328,7 +322,7 @@ export default function SettingsPage() {
                         onChange={(e) => setFormData({...formData, address: {...formData.address, country: e.target.value}})}
                         className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-primary outline-none bg-white transition-colors"
                       >
-                        {countries.map(c => <option key={c.code} value={c.code}>{c.name}</option>)}
+                        {COUNTRIES.map(c => <option key={c.code} value={c.code}>{c.flag} {c.name}</option>)}
                       </select>
                     </div>
                     <div className="sm:col-span-2 space-y-1.5">

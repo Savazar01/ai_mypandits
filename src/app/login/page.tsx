@@ -6,27 +6,42 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { Loader2, ArrowRight, Smartphone, Mail, MessageSquare, CheckCircle2, ShieldCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
+import { COUNTRIES } from "@/lib/countries";
 
 export default function LoginPage() {
+  const [loading, setLoading] = useState(false);
+  const [loginMode, setLoginMode] = useState<"email" | "whatsapp">("email");
+  
+  // Email Form State
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  // WhatsApp Form State
+  const [whatsappCode, setWhatsappCode] = useState("+91");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [otp, setOtp] = useState("");
+  const [verificationStep, setVerificationStep] = useState<"idle" | "sending" | "sent" | "verifying">("idle");
+  const [error, setError] = useState("");
+  const [timer, setTimer] = useState(0);
+
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
-    const { data, error } = await authClient.signIn.email({
+    const { data, error: authError } = await authClient.signIn.email({
       email,
       password,
       callbackURL: "/dashboard",
     });
 
-    if (error) {
+    if (authError) {
       setLoading(false);
-      alert(error.message || "Login failed. Please check your credentials.");
+      setError(authError.message || "Login failed. Please check your credentials.");
       return;
     }
 
@@ -35,13 +50,73 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    setLoading(true);
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/dashboard",
-    });
+  const handleSendLoginOtp = async () => {
+    if (!whatsapp || whatsapp.length < 8) {
+      setError("Please enter a valid WhatsApp number");
+      return;
+    }
+    setVerificationStep("sending");
+    setError("");
+    
+    try {
+      const fullWhatsapp = `${whatsappCode}${whatsapp}`;
+      const res = await fetch("/api/auth/whatsapp/login/send", {
+        method: "POST",
+        body: JSON.stringify({ whatsapp: fullWhatsapp }),
+      });
+      const data = await res.json();
+      
+      if (res.ok) {
+        setVerificationStep("sent");
+        setTimer(60);
+        const interval = setInterval(() => {
+          setTimer((prev) => {
+            if (prev <= 1) {
+              clearInterval(interval);
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+      } else {
+        setError(data.error || "Failed to send code");
+        setVerificationStep("idle");
+      }
+    } catch (err) {
+      setError("Network error. Try again.");
+      setVerificationStep("idle");
+    }
   };
+
+  const handleVerifyLoginOtp = async () => {
+    if (otp.length !== 6) return;
+    setVerificationStep("verifying");
+    setError("");
+
+    try {
+      const fullWhatsapp = `${whatsappCode}${whatsapp}`;
+      const res = await fetch("/api/auth/whatsapp/login/verify", {
+        method: "POST",
+        body: JSON.stringify({ whatsapp: fullWhatsapp, code: otp }),
+      });
+      const data = await res.json();
+      
+      if (res.ok) {
+        // Allow cookie to settle before redirecting
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 500);
+      } else {
+        setError(data.error || "Invalid code");
+        setVerificationStep("sent");
+      }
+    } catch (err) {
+      setError("Verification failed. Try again.");
+      setVerificationStep("sent");
+    }
+  };
+
+
 
   return (
     <div className="bg-surface font-body text-on-surface min-h-screen flex flex-col items-center justify-center vedic-gradient-bg overflow-hidden relative">
@@ -60,84 +135,141 @@ export default function LoginPage() {
             <span className="material-symbols-outlined text-primary-container text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
           </div>
           {/* Title */}
-          <h1 className="text-3xl font-light tracking-tight text-on-surface mb-10 text-center">
-            Enter the Sanctuary
-          </h1>
-          {/* Login Form */}
-          <form className="w-full space-y-8" onSubmit={handleLogin}>
-            {/* Email Field */}
-            <div className="relative">
-              <input 
-                className="peer w-full bg-transparent border-0 border-b-2 border-outline-variant py-3 px-0 focus:ring-0 focus:border-primary transition-all duration-300 placeholder-transparent" 
-                id="email" 
-                name="email" 
-                placeholder=" " 
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <label 
-                className="absolute left-0 top-3 text-on-surface-variant/60 font-label text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-primary uppercase tracking-widest" 
-                htmlFor="email"
-              >
-                Email Address
-              </label>
-            </div>
-            {/* Password Field */}
-            <div className="relative">
-              <input 
-                className="peer w-full bg-transparent border-0 border-b-2 border-outline-variant py-3 px-0 focus:ring-0 focus:border-primary transition-all duration-300 placeholder-transparent" 
-                id="password" 
-                name="password" 
-                placeholder=" " 
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <label 
-                className="absolute left-0 top-3 text-on-surface-variant/60 font-label text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-primary uppercase tracking-widest" 
-                htmlFor="password"
-              >
-                Password
-              </label>
-            </div>
-            {/* Action Button */}
-            <div className="pt-6 space-y-4">
-              <button 
-                className="saffron-gold-gradient w-full py-4 rounded-full text-white font-semibold text-lg tracking-wide hover:shadow-lg hover:shadow-primary/20 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50" 
-                type="submit"
-                disabled={loading}
-              >
-                {loading && <Loader2 className="animate-spin" size={20} />}
-                Sign In
-              </button>
+          {/* Mode Toggle */}
+          <div className="flex bg-surface-variant/10 rounded-full p-1 mb-10 w-full max-w-[280px]">
+            <button 
+              onClick={() => { setLoginMode("email"); setError(""); }}
+              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${loginMode === "email" ? "bg-white text-primary shadow-sm" : "text-on-surface-variant/60 hover:text-primary"}`}
+            >
+              <Mail size={14} /> Email
+            </button>
+            <button 
+              onClick={() => { setLoginMode("whatsapp"); setError(""); }}
+              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${loginMode === "whatsapp" ? "bg-white text-[#25D366] shadow-sm" : "text-on-surface-variant/60 hover:text-[#25D366]"}`}
+            >
+              <WhatsAppIcon size={14} /> WhatsApp
+            </button>
+          </div>
 
-              <div className="flex items-center gap-4 py-2">
-                <div className="h-[1px] flex-1 bg-outline-variant/30"></div>
-                <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Or</span>
-                <div className="h-[1px] flex-1 bg-outline-variant/30"></div>
+          {loginMode === "email" ? (
+            <form className="w-full space-y-8" onSubmit={handleEmailLogin}>
+              <div className="relative">
+                <input 
+                  className="peer w-full bg-transparent border-0 border-b-2 border-outline-variant py-3 px-0 focus:ring-0 focus:border-primary transition-all duration-300 placeholder-transparent" 
+                  id="email" 
+                  name="email" 
+                  placeholder=" " 
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <label 
+                  className="absolute left-0 top-3 text-on-surface-variant/60 font-label text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-primary uppercase tracking-widest" 
+                  htmlFor="email"
+                >
+                  Email Address
+                </label>
+              </div>
+              <div className="relative">
+                <input 
+                  className="peer w-full bg-transparent border-0 border-b-2 border-outline-variant py-3 px-0 focus:ring-0 focus:border-primary transition-all duration-300 placeholder-transparent" 
+                  id="password" 
+                  name="password" 
+                  placeholder=" " 
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <label 
+                  className="absolute left-0 top-3 text-on-surface-variant/60 font-label text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-primary uppercase tracking-widest" 
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+              </div>
+              {error && <p className="text-[10px] text-red-500 font-medium text-center">{error}</p>}
+              <div className="pt-6">
+                <button 
+                  className="saffron-gold-gradient w-full py-4 rounded-full text-white font-semibold text-lg tracking-wide hover:shadow-lg hover:shadow-primary/20 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50" 
+                  type="submit"
+                  disabled={loading}
+                >
+                  {loading && <Loader2 className="animate-spin" size={20} />}
+                  Sign In
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="w-full space-y-6">
+              <div className="flex gap-4 items-end">
+                <select 
+                  className="bg-transparent border-0 border-b-2 border-outline-variant py-3 text-sm focus:ring-0 focus:border-primary font-medium"
+                  value={whatsappCode}
+                  onChange={(e) => setWhatsappCode(e.target.value)}
+                >
+                  {COUNTRIES.map(c => (
+                    <option key={c.code} value={c.dialCode}>{c.flag} {c.dialCode} ({c.code})</option>
+                  ))}
+                </select>
+                <div className="relative flex-1">
+                  <input 
+                    className="peer block w-full px-4 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface placeholder-transparent focus:outline-none pr-16" 
+                    id="whatsapp" 
+                    placeholder=" " 
+                    required 
+                    type="text"
+                    value={whatsapp}
+                    onChange={(e) => setWhatsapp(e.target.value)}
+                  />
+                  <label 
+                    className="absolute left-4 -top-4 text-xs font-medium text-primary/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-primary uppercase tracking-widest pointer-events-none" 
+                    htmlFor="whatsapp"
+                  >
+                    WhatsApp Number
+                  </label>
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2">
+                    <button 
+                      type="button"
+                      onClick={handleSendLoginOtp}
+                      disabled={verificationStep === "sending" || !whatsapp || timer > 0}
+                      className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-primary/80 disabled:opacity-30 transition-colors py-2"
+                    >
+                      {verificationStep === "sending" ? <Loader2 size={14} className="animate-spin" /> : timer > 0 ? `${timer}s` : "Get OTP"}
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              <button 
-                type="button"
-                onClick={handleGoogleSignIn}
-                disabled={loading}
-                className="w-full py-3.5 rounded-full bg-white border border-outline-variant text-on-surface font-medium hover:bg-stone-50 transition-all flex items-center justify-center gap-3 text-sm shadow-sm"
-              >
-                {loading ? <Loader2 size={16} className="animate-spin" /> : (
-                  <svg className="w-4 h-4" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                  </svg>
-                )}
-                Sign in with Google
-              </button>
+              {error && <p className="text-[10px] text-red-500 font-medium text-center">{error}</p>}
+
+              {/* OTP Entry */}
+              {(verificationStep === "sent" || verificationStep === "verifying") && (
+                <div className="pt-4 space-y-6 animate-in fade-in slide-in-from-top-2 duration-500">
+                  <div className="relative">
+                    <input 
+                      type="text"
+                      maxLength={6}
+                      placeholder="000000"
+                      className="w-full bg-primary/5 border-2 border-primary/10 rounded-2xl px-4 py-4 text-center text-2xl font-bold tracking-[0.5em] focus:border-primary focus:outline-none transition-all"
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+                    />
+                    <label className="block text-center text-[10px] font-bold text-primary/40 uppercase tracking-[0.2em] mt-2 italic">Enter 6-digit code</label>
+                  </div>
+                  <button 
+                    onClick={handleVerifyLoginOtp}
+                    disabled={otp.length !== 6 || verificationStep === "verifying"}
+                    className="saffron-gold-gradient w-full py-4 rounded-full text-white font-semibold text-lg hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {verificationStep === "verifying" && <Loader2 className="animate-spin" size={20} />}
+                    Verify & Enter
+                  </button>
+                </div>
+              )}
             </div>
-          </form>
+          )}
           {/* Secondary Links */}
           <div className="mt-10 flex flex-col items-center space-y-4 w-full">
             <Link className="text-xs font-label uppercase tracking-widest text-outline hover:text-primary transition-colors duration-300" href="#">

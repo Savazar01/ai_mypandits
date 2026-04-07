@@ -1,5 +1,25 @@
+# [phases.setup] - old April 7th.
+# nixPkgs = ["nodejs_20", "chromium", "nss", "freetype", "harfbuzz", "ca-certificates", "libglvnd"]
+
 [phases.setup]
-nixPkgs = ["nodejs_20", "chromium", "nss", "freetype", "harfbuzz", "ca-certificates", "libglvnd"]
+# Use Nix only for the core engines
+nixPkgs = ["nodejs_20", "chromium"] 
+
+# Use APT (Debian) for the system libraries needed by Chromium/Puppeteer
+aptPkgs = [
+  "ca-certificates",
+  "libnss3", 
+  "libatk1.0-0", 
+  "libatk-bridge2.0-0", 
+  "libcups2", 
+  "libgbm1", 
+  "libasound2", 
+  "libpangocairo-1.0-0", 
+  "libxss1", 
+  "libgtk-3-0", 
+  "curl", 
+  "wget"
+]
 
 [phases.install]
 cmds = ["npm install"]

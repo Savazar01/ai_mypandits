@@ -18,29 +18,24 @@ let isInitializing = false;
 
 function createClient() {
     if (isInitializing) return;
-    // --- CLINICAL LOCK REMOVAL (Linux/VPS Only) ---
+    // --- CLINICAL FORCE-CLEAR (Linux/Docker Only) ---
     if (process.platform === 'linux') {
-        const sessionDir = path.join(__dirname, '.wwebjs_auth', 'session');
-        const lockFiles = ['SingletonLock', 'SingletonCookie', 'SingletonSocket'];
+        // Path to your specific session profile lock
+        const lockPath = path.join(__dirname, '.wwebjs_auth', 'session', 'SingletonLock');
 
         try {
-            if (fs.existsSync(sessionDir)) {
-                lockFiles.forEach(file => {
-                    const filePath = path.join(sessionDir, file);
-                    if (fs.existsSync(filePath)) {
-                        console.log(`--- [Server] Cleaning stale lock: ${file} ---`);
-                        fs.unlinkSync(filePath);
-                    }
-                });
+            if (fs.existsSync(lockPath)) {
+                console.log('--- [Server] Forcefully removing persistent Chromium lock... ---');
+                // Using shell 'rm -f' is the most reliable way to break a stale symbolic link in Docker
+                execSync(`rm -f "${lockPath}"`);
+                console.log('--- [Server] Lock cleared successfully. ---');
             }
         } catch (err) {
-            console.log(`[Server] Lock removal skipped: ${err.message}`);
+            console.log(`[Server] Lock removal warning: ${err.message}`);
         }
-    } else {
-        console.log('[Local] Windows detected. Skipping SingletonLock cleanup.');
     }
+    // ------------------------------------------------
 
-    // ----------------------------
     isInitializing = true;
     isReady = false;
 

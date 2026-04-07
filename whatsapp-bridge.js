@@ -2,6 +2,8 @@ const { execSync } = require('child_process');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
 /**
  * WhatsApp Background Bridge
@@ -16,6 +18,17 @@ let isInitializing = false;
 
 function createClient() {
     if (isInitializing) return;
+    // --- CLINICAL LOCK REMOVAL ---
+    const lockPath = path.join(__dirname, '.wwebjs_auth', 'session', 'SingletonLock');
+    try {
+        if (fs.existsSync(lockPath)) {
+            console.log('--- Detected stale Chromium lock. Deleting... ---');
+            fs.unlinkSync(lockPath);
+        }
+    } catch (err) {
+        console.log(`[System] Lock removal skip (likely not present): ${err.message}`);
+    }
+    // ----------------------------
     isInitializing = true;
     isReady = false;
 

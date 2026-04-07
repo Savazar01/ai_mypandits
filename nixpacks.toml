@@ -2,22 +2,20 @@
 # nixPkgs = ["nodejs_20", "chromium", "nss", "freetype", "harfbuzz", "ca-certificates", "libglvnd"]
 
 [phases.setup]
-# Core engines
 nixPkgs = ["nodejs_20", "chromium"] 
 
-# Debian system libraries for Chromium
 aptPkgs = [
   "ca-certificates",
   "libnss3", 
-  "libatk1.0-0", 
-  "libatk-bridge2.0-0", 
+  "libatk1.0-0t64",     # Updated for modern Debian/Ubuntu
+  "libatk-bridge2.0-0t64", # Updated for modern Debian/Ubuntu
   "libcups2", 
   "libgbm1", 
-  "libasound2t64",      # The new Debian standard for ALSA
-  "libasound2-data",    # Required data files for ALSA
+  "libasound2t64",      # Fixed the "no installation candidate" error
+  "libasound2-data", 
   "libpangocairo-1.0-0", 
   "libxss1", 
-  "libgtk-3-0", 
+  "libgtk-3-0t64",      # Updated for modern Debian/Ubuntu
   "curl", 
   "wget"
 ]

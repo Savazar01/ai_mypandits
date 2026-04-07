@@ -1,7 +1,25 @@
 [phases.setup]
 # This specific archive provides Node 22.14.0 and satisfies Prisma's strict check
 nixpkgsArchive = "28ace32529a63842e4f8103e4f9b24960cf6c23a"
-nixPkgs = ["nodejs_22", "chromium"]
+nixPkgs = [
+    "nodejs_22", 
+    "chromium",
+    "atk",
+    "at-spi2-atk",
+    "cups",
+    "libdrm",
+    "libxkbcommon",
+    "mesa",
+    "nspr",
+    "nss",
+    "pango",
+    "xorg.libX11",
+    "xorg.libXcomposite",
+    "xorg.libXdamage",
+    "xorg.libXext",
+    "xorg.libXfixes",
+    "xorg.libXrandr"
+]
 
 aptPkgs = [
     "ca-certificates", "libnss3", "libatk1.0-0t64", "libatk-bridge2.0-0t64",

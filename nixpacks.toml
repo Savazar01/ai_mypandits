@@ -1,7 +1,7 @@
 [phases.setup]
-# This 'nixpkgsArchive' is the secret. It pins Node.js to a version Prisma accepts.
-nixpkgsArchive = "51ad838b03a05b1de6f9f2a0fffecee64a9788ee"
-nixPkgs = ["nodejs_20", "chromium"] 
+# This specific archive provides Node 22.14.0 and satisfies Prisma's strict check
+nixpkgsArchive = "28ace32529a63842e4f8103e4f9b24960cf6c23a"
+nixPkgs = ["nodejs_22", "chromium"] 
 
 aptPkgs = [
   "ca-certificates", "libnss3", "libatk1.0-0t64", "libatk-bridge2.0-0t64", 
@@ -10,11 +10,10 @@ aptPkgs = [
 ]
 
 [phases.install]
-# We clean the cache and use --force to handle the Next.js 16 peer conflict
+# Keeping --force for the Next.js 16 vs Better-Auth conflict
 cmds = ["npm cache clean --force", "npm install --force"]
 
 [phases.build]
-# Standard build commands.
 cmds = ["npx prisma generate", "npm run build"]
 
 [start]

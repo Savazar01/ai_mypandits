@@ -2,8 +2,10 @@
 # nixPkgs = ["nodejs_20", "chromium", "nss", "freetype", "harfbuzz", "ca-certificates", "libglvnd"]
 
 [phases.setup]
+# Core engines
 nixPkgs = ["nodejs_20", "chromium"] 
 
+# Debian system libraries for Chromium
 aptPkgs = [
   "ca-certificates",
   "libnss3", 
@@ -11,8 +13,8 @@ aptPkgs = [
   "libatk-bridge2.0-0", 
   "libcups2", 
   "libgbm1", 
-  "libasound2",      # Standard Debian name
-  "libasound2-dev",  # Ensures headers are present for the bridge
+  "libasound2t64",      # The new Debian standard for ALSA
+  "libasound2-data",    # Required data files for ALSA
   "libpangocairo-1.0-0", 
   "libxss1", 
   "libgtk-3-0", 

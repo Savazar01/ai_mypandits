@@ -21,10 +21,12 @@ aptPkgs = [
 ]
 
 [phases.install]
+# This flag bypasses the Next.js 16 vs Better Auth version check
 cmds = ["npm install --legacy-peer-deps"]
 
 [phases.build]
-cmds = ["npx prisma generate", "npm run build"]
+# Ensuring the flag is present during any build-time checks as well
+cmds = ["npx prisma generate", "npm run build --legacy-peer-deps"]
 
 [start]
 # Starts Web Server on 3090 and WhatsApp Bridge on 3095

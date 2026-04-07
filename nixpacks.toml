@@ -21,7 +21,7 @@ aptPkgs = [
 ]
 
 [phases.install]
-cmds = ["npm install"]
+cmds = ["npm install --legacy-peer-deps"]
 
 [phases.build]
 cmds = ["npx prisma generate", "npm run build"]

@@ -29,12 +29,24 @@ export async function POST(req: Request) {
       },
     });
 
-    // Real sending via our self-hosted bridge
+    // Real sending via our self-hosted bridge (JIT Managed)
     try {
       await sendWhatsappOTP(whatsapp, otp);
-    } catch (sendError) {
-      console.error("WhatsApp Send Error:", sendError);
-      return NextResponse.json({ error: "WhatsApp bridge is not ready. Please scan the QR code in the server terminal." }, { status: 503 });
+    } catch (sendError: any) {
+      console.error("WhatsApp Send Error Handling:", sendError.message);
+      
+      // JIT TRIGGERED: Bridge is initializing
+      if (sendError.message === "WHATSAPP_INITIALIZING") {
+        return NextResponse.json(
+          { error: "WhatsApp Service is initializing. Please retry in 15 seconds." }, 
+          { status: 503 }
+        );
+      }
+
+      return NextResponse.json(
+        { error: sendError.message || "WhatsApp bridge is not ready. Please scan the QR code in the server terminal." }, 
+        { status: 503 }
+      );
     }
 
     return NextResponse.json({ success: true, message: "Verification code sent!" });

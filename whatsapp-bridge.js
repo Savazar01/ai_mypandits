@@ -4,44 +4,45 @@ const qrcode = require('qrcode-terminal');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 /**
- * WhatsApp Background Bridge
- * 
- * Runs a persistent WhatsApp Web session and exposes a mini HTTP API on Port 3095
- * for the Next.js app to send OTPs.
+ * WhatsApp Background Bridge - Production Stable Version
+ * Supports: Windows (Local Dev) & Linux/Docker (Coolify)
  */
 
 let client;
 let isReady = false;
 let isInitializing = false;
 
-function createClient() {
-    if (isInitializing) return;
-    // --- CLINICAL FORCE-CLEAR (Linux/Docker Only) ---
-    if (process.platform === 'linux') {
-        // Path to your specific session profile lock
-        const lockPath = path.join(__dirname, '.wwebjs_auth', 'session', 'SingletonLock');
+async function createClient() {
+    // 1. GUARD: Prevent multiple simultaneous launch attempts
+    if (isInitializing || isReady) return;
 
+    // 2. CLINICAL CLEANUP (Linux/VPS Only)
+    // Removes stale Singleton files that cause "Code 21" crashes in Docker
+    if (process.platform === 'linux') {
+        const sessionDir = path.join(__dirname, '.wwebjs_auth', 'session');
         try {
-            if (fs.existsSync(lockPath)) {
-                console.log('--- [Server] Forcefully removing persistent Chromium lock... ---');
-                // Using shell 'rm -f' is the most reliable way to break a stale symbolic link in Docker
-                execSync(`rm -f "${lockPath}"`);
-                console.log('--- [Server] Lock cleared successfully. ---');
+            if (fs.existsSync(sessionDir)) {
+                const files = fs.readdirSync(sessionDir);
+                files.forEach(file => {
+                    if (file.startsWith('Singleton')) {
+                        console.log(`--- [Server] Clearing stale lock: ${file} ---`);
+                        fs.unlinkSync(path.join(sessionDir, file));
+                    }
+                });
             }
         } catch (err) {
-            console.log(`[Server] Lock removal warning: ${err.message}`);
+            console.log(`[Server] Lock removal skipped: ${err.message}`);
         }
     }
-    // ------------------------------------------------
 
     isInitializing = true;
     isReady = false;
 
     console.log('--- Initializing WhatsApp Client... ---');
 
-    // --- CLINICAL ENVIRONMENT CHECK ---
     let puppeteerConfig = {
         headless: true,
         args: [
@@ -49,30 +50,23 @@ function createClient() {
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
             '--disable-gpu',
-            '--disable-features=IsolateOrigins,site-per-process',
-            '--disable-site-isolation-trials',
         ]
     };
 
-    // Only inject executablePath if we are on the Linux Server
+    // 4. ENVIRONMENT-SPECIFIC CHROMIUM PATH
     if (process.platform === 'linux') {
-        try {
-            const { execSync } = require('child_process');
-            const nixPath = execSync('which chromium').toString().trim();
-            if (nixPath) {
-                puppeteerConfig.executablePath = nixPath;
-                console.log(`[Server] Nix Chromium detected: ${nixPath}`);
-            }
-        } catch (e) {
-            // Fallback for standard Linux if Nix search fails
-            puppeteerConfig.executablePath = '/usr/bin/chromium';
-            console.log(`[Server] Using Linux fallback: ${puppeteerConfig.executablePath}`);
+        const linuxPath = '/usr/bin/chromium';
+        if (fs.existsSync(linuxPath)) {
+            puppeteerConfig.executablePath = linuxPath;
+            console.log(`[Server] Using Linux Chromium: ${puppeteerConfig.executablePath}`);
+        } else {
+            console.log('[Server] /usr/bin/chromium not found. Using default.');
         }
     } else {
-        console.log('[Local] Windows detected. Using default local Puppeteer config.');
+        console.log('[Local] Windows detected. Using default Puppeteer.');
     }
-    // ----------------------------------
 
+    // 5. CONSTRUCTOR: Integrated with Remote Version Cache
     client = new Client({
         authStrategy: new LocalAuth({
             dataPath: './.wwebjs_auth'
@@ -81,9 +75,10 @@ function createClient() {
             type: 'remote',
             remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
         },
-        puppeteer: puppeteerConfig // Uses the OS-specific config defined above
+        puppeteer: puppeteerConfig
     });
 
+    // 6. EVENT LISTENERS (Moved inside for scope safety)
     client.on('qr', (qr) => {
         console.log('\n--- WHATSAPP QR CODE ---');
         qrcode.generate(qr, { small: true });
@@ -91,9 +86,9 @@ function createClient() {
     });
 
     client.on('ready', () => {
-        console.log('--- WhatsApp Bridge is READY on Port 3095 ---');
         isReady = true;
         isInitializing = false;
+        console.log('--- WhatsApp Bridge is READY on Port 3095 ---');
     });
 
     client.on('auth_failure', (msg) => {
@@ -110,10 +105,13 @@ function createClient() {
         setTimeout(createClient, 5000);
     });
 
-    client.initialize().catch(err => {
+    // 7. EXECUTION
+    try {
+        await client.initialize();
+    } catch (err) {
         console.error('Initialization Error:', err);
         isInitializing = false;
-    });
+    }
 }
 
 // Initial Launch
@@ -121,7 +119,6 @@ createClient();
 
 // Create mini-API server
 const server = http.createServer(async (req, res) => {
-    // Enable CORS for localhost
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -144,7 +141,7 @@ const server = http.createServer(async (req, res) => {
 
                 if (!isReady || !client) {
                     res.writeHead(503, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ error: 'WhatsApp Bridge is not ready or re-initializing' }));
+                    res.end(JSON.stringify({ error: 'WhatsApp Bridge is not ready' }));
                     return;
                 }
 
@@ -160,18 +157,13 @@ const server = http.createServer(async (req, res) => {
                 } catch (sendErr) {
                     console.error('Send Error:', sendErr.message);
 
-                    // Handle detached frame or destroyed context
                     if (sendErr.message.includes('detached Frame') || sendErr.message.includes('Execution context was destroyed')) {
                         console.log('--- CRITICAL: Frame Detached. Attempting recovery... ---');
                         isReady = false;
-                        // Sometimes a simple re-auth or client.initialize() works, but a full recreate is safer
-                        // Let's try to just wait for the next 'ready' or re-init if it persists
-                        res.writeHead(503, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ error: 'Bridge context lost. Automatically recovering, please wait 10 seconds and retry.' }));
-
-                        // Destroy current client and re-init
-                        try { client.destroy(); } catch (e) { }
+                        try { await client.destroy(); } catch (e) { }
                         createClient();
+                        res.writeHead(503, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: 'Bridge context lost. Recovering...' }));
                     } else {
                         throw sendErr;
                     }

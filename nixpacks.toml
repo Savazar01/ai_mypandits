@@ -25,4 +25,4 @@ cmds = [
 ]
 
 [start]
-cmd = "npm run start -- -p 3090 & WHATSAPP_PORT=3095 node whatsapp-bridge.js"
+cmd = "npm run start -- -p 3090"

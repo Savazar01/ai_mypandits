@@ -1,10 +1,11 @@
+import { exec } from "child_process";
+
 /**
  * WhatsApp Proxy Client
  * 
- * Instead of running the heavy browser in the Next.js process, it simply
- * talks to the standalone WhatsApp Bridge on http://localhost:3001.
+ * Talk to the standalone WhatsApp Bridge on http://localhost:3095.
  * 
- * This keeps the Next.js server fast and responsive.
+ * If the bridge is not running, we trigger a kickstart (JIT) using child_process.
  */
 
 export const sendWhatsappOTP = async (number: string, otp: string) => {
@@ -27,11 +28,23 @@ export const sendWhatsappOTP = async (number: string, otp: string) => {
         console.log(`Successfully proxied OTP send to ${number}`);
         return { success: true };
     } catch (error: any) {
+        // DETECT: Is the bridge down?
+        if (error.message.includes("fetch failed") || error.code === "ECONNREFUSED") {
+            console.log("--- WhatsApp Bridge is DOWN. Kickstarting JIT... ---");
+            
+            // EXEC: Start the bridge process in the background
+            // We use 'node whatsapp-bridge.js' directly to ensure it matches the script
+            exec("node whatsapp-bridge.js", (err) => {
+                if (err) {
+                    console.error("Failed to kickstart WhatsApp Bridge:", err);
+                }
+            });
+
+            // Throw special initializing error
+            throw new Error("WHATSAPP_INITIALIZING");
+        }
+
         console.error("WhatsApp Proxy Error:", error);
-        throw new Error(
-            error.message.includes("fetch failed")
-                ? "The WhatsApp Bridge is not running. Please start it with 'npm run wa:bridge'."
-                : error.message
-        );
+        throw error;
     }
 };

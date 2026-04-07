@@ -70,13 +70,25 @@ async function createClient() {
         }
 
         // B. Library Linkage Fix (LD_LIBRARY_PATH)
-        // Helps Chromium find shared libraries like libatk-1.0 and libnss3
         puppeteerConfig.env = {
             ...process.env,
             LD_LIBRARY_PATH: '/nix/var/nix/profiles/default/lib'
         };
+
+        // C. Namespace Sandbox & RAM Fixes for VPS Kernel
+        puppeteerConfig.args = [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--no-zygote',
+            '--disable-dev-shm-usage',
+            '--disable-gpu'
+        ];
     } else {
         console.log('[Local] Windows/macOS detected. Using default Puppeteer flow for ROG.');
+        // Minimal args for ROG Laptop local dev
+        puppeteerConfig.args = [
+            '--disable-gpu'
+        ];
     }
 
     // 5. CONSTRUCTOR: Integrated with Remote Version Cache

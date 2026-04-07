@@ -50,17 +50,25 @@ async function createClient() {
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
             '--disable-gpu',
+            '--no-zygote',
         ]
     };
 
-    // 4. ENVIRONMENT-SPECIFIC CHROMIUM PATH
+    // 4. ENVIRONMENT-SPECIFIC CHROMIUM PATH (Multi-Path Lookup)
     if (process.platform === 'linux') {
-        const linuxPath = '/usr/bin/chromium';
-        if (fs.existsSync(linuxPath)) {
+        const potentialPaths = [
+            '/usr/bin/chromium',
+            '/usr/bin/chromium-browser',
+            '/usr/bin/google-chrome'
+        ];
+        
+        const linuxPath = potentialPaths.find(p => fs.existsSync(p));
+        
+        if (linuxPath) {
             puppeteerConfig.executablePath = linuxPath;
             console.log(`[Server] Using Linux Chromium: ${puppeteerConfig.executablePath}`);
         } else {
-            console.log('[Server] /usr/bin/chromium not found. Using default.');
+            console.log('[Server] No standard Chromium path found. Using default.');
         }
     } else {
         console.log('[Local] Windows detected. Using default Puppeteer.');

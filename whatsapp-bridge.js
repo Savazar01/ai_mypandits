@@ -21,16 +21,37 @@ function createClient() {
 
     console.log('--- Initializing WhatsApp Client... ---');
 
-    // --- SMART CHROMIUM PATH (Works for Local & VPS) ---
-    let chromiumPath = '/usr/bin/chromium'; // Your original default
-    try {
-        // This command checks if 'chromium' is in the system path (like in Nix)
-        chromiumPath = execSync('which chromium').toString().trim();
-    } catch (e) {
-        // If 'which' fails (like on some local setups), it keeps the default above
-        console.log('[System] Using default Chromium path fallback');
+    // --- CLINICAL ENVIRONMENT CHECK ---
+    let puppeteerConfig = {
+        headless: true,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--disable-features=IsolateOrigins,site-per-process',
+            '--disable-site-isolation-trials',
+        ]
+    };
+
+    // Only inject executablePath if we are on the Linux Server
+    if (process.platform === 'linux') {
+        try {
+            const { execSync } = require('child_process');
+            const nixPath = execSync('which chromium').toString().trim();
+            if (nixPath) {
+                puppeteerConfig.executablePath = nixPath;
+                console.log(`[Server] Nix Chromium detected: ${nixPath}`);
+            }
+        } catch (e) {
+            // Fallback for standard Linux if Nix search fails
+            puppeteerConfig.executablePath = '/usr/bin/chromium';
+            console.log(`[Server] Using Linux fallback: ${puppeteerConfig.executablePath}`);
+        }
+    } else {
+        console.log('[Local] Windows detected. Using default local Puppeteer config.');
     }
-    // --------------------------------------------------
+    // ----------------------------------
 
     client = new Client({
         authStrategy: new LocalAuth({
@@ -40,18 +61,7 @@ function createClient() {
             type: 'remote',
             remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
         },
-        puppeteer: {
-            executablePath: chromiumPath, // <--- Updated to use the smart path
-            headless: true,
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-gpu',
-                '--disable-features=IsolateOrigins,site-per-process',
-                '--disable-site-isolation-trials',
-            ]
-        }
+        puppeteer: puppeteerConfig // Uses the OS-specific config defined above
     });
 
     client.on('qr', (qr) => {

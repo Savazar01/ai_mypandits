@@ -41,7 +41,7 @@ async function createClient() {
     isInitializing = true;
     isReady = false;
 
-    console.log('--- Initializing WhatsApp Client... ---');
+    console.log(`--- [Server] OS Detected: ${process.platform} ---`);
 
     let puppeteerConfig = {
         headless: true,
@@ -54,24 +54,29 @@ async function createClient() {
         ]
     };
 
-    // 4. ENVIRONMENT-SPECIFIC CHROMIUM PATH (Multi-Path Lookup)
+    // 4. PLATFORM-AWARE CONFIGURATION
     if (process.platform === 'linux') {
-        const potentialPaths = [
-            '/usr/bin/chromium',
-            '/usr/bin/chromium-browser',
-            '/usr/bin/google-chrome'
-        ];
-        
-        const linuxPath = potentialPaths.find(p => fs.existsSync(p));
-        
-        if (linuxPath) {
-            puppeteerConfig.executablePath = linuxPath;
-            console.log(`[Server] Using Linux Chromium: ${puppeteerConfig.executablePath}`);
-        } else {
-            console.log('[Server] No standard Chromium path found. Using default.');
+        console.log('[Server] Configuring specialized Linux (Nix) environment...');
+
+        // A. Dynamic Chromium Lookup in Nix Store
+        try {
+            const nixStorePath = execSync('find /nix/store -name chromium | grep bin/chromium | head -n 1', { encoding: 'utf8' }).trim();
+            if (nixStorePath) {
+                puppeteerConfig.executablePath = nixStorePath;
+                console.log(`[Server] Found Nix Chromium: ${puppeteerConfig.executablePath}`);
+            }
+        } catch (err) {
+            console.log('[Server] Nix store search failed. Falling back to default path.');
         }
+
+        // B. Library Linkage Fix (LD_LIBRARY_PATH)
+        // Helps Chromium find shared libraries like libatk-1.0 and libnss3
+        puppeteerConfig.env = {
+            ...process.env,
+            LD_LIBRARY_PATH: '/nix/var/nix/profiles/default/lib'
+        };
     } else {
-        console.log('[Local] Windows detected. Using default Puppeteer.');
+        console.log('[Local] Windows/macOS detected. Using default Puppeteer flow for ROG.');
     }
 
     // 5. CONSTRUCTOR: Integrated with Remote Version Cache

@@ -18,7 +18,8 @@ nixPkgs = [
     "xorg.libXdamage",
     "xorg.libXext",
     "xorg.libXfixes",
-    "xorg.libXrandr"
+    "xorg.libXrandr",
+    "glib"
 ]
 
 aptPkgs = [

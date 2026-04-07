@@ -1,3 +1,4 @@
+const { execSync } = require('child_process');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const http = require('http');
@@ -20,6 +21,17 @@ function createClient() {
 
     console.log('--- Initializing WhatsApp Client... ---');
 
+    // --- SMART CHROMIUM PATH (Works for Local & VPS) ---
+    let chromiumPath = '/usr/bin/chromium'; // Your original default
+    try {
+        // This command checks if 'chromium' is in the system path (like in Nix)
+        chromiumPath = execSync('which chromium').toString().trim();
+    } catch (e) {
+        // If 'which' fails (like on some local setups), it keeps the default above
+        console.log('[System] Using default Chromium path fallback');
+    }
+    // --------------------------------------------------
+
     client = new Client({
         authStrategy: new LocalAuth({
             dataPath: './.wwebjs_auth'
@@ -29,7 +41,8 @@ function createClient() {
             remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
         },
         puppeteer: {
-            headless: true, // Set to true for production/VPS
+            executablePath: chromiumPath, // <--- Updated to use the smart path
+            headless: true,
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
@@ -116,7 +129,7 @@ const server = http.createServer(async (req, res) => {
                     res.end(JSON.stringify({ success: true }));
                 } catch (sendErr) {
                     console.error('Send Error:', sendErr.message);
-                    
+
                     // Handle detached frame or destroyed context
                     if (sendErr.message.includes('detached Frame') || sendErr.message.includes('Execution context was destroyed')) {
                         console.log('--- CRITICAL: Frame Detached. Attempting recovery... ---');
@@ -125,9 +138,9 @@ const server = http.createServer(async (req, res) => {
                         // Let's try to just wait for the next 'ready' or re-init if it persists
                         res.writeHead(503, { 'Content-Type': 'application/json' });
                         res.end(JSON.stringify({ error: 'Bridge context lost. Automatically recovering, please wait 10 seconds and retry.' }));
-                        
+
                         // Destroy current client and re-init
-                        try { client.destroy(); } catch(e) {}
+                        try { client.destroy(); } catch (e) { }
                         createClient();
                     } else {
                         throw sendErr;

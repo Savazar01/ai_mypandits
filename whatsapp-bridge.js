@@ -18,16 +18,28 @@ let isInitializing = false;
 
 function createClient() {
     if (isInitializing) return;
-    // --- CLINICAL LOCK REMOVAL ---
-    const lockPath = path.join(__dirname, '.wwebjs_auth', 'session', 'SingletonLock');
-    try {
-        if (fs.existsSync(lockPath)) {
-            console.log('--- Detected stale Chromium lock. Deleting... ---');
-            fs.unlinkSync(lockPath);
+    // --- CLINICAL LOCK REMOVAL (Linux/VPS Only) ---
+    if (process.platform === 'linux') {
+        const sessionDir = path.join(__dirname, '.wwebjs_auth', 'session');
+        const lockFiles = ['SingletonLock', 'SingletonCookie', 'SingletonSocket'];
+
+        try {
+            if (fs.existsSync(sessionDir)) {
+                lockFiles.forEach(file => {
+                    const filePath = path.join(sessionDir, file);
+                    if (fs.existsSync(filePath)) {
+                        console.log(`--- [Server] Cleaning stale lock: ${file} ---`);
+                        fs.unlinkSync(filePath);
+                    }
+                });
+            }
+        } catch (err) {
+            console.log(`[Server] Lock removal skipped: ${err.message}`);
         }
-    } catch (err) {
-        console.log(`[System] Lock removal skip (likely not present): ${err.message}`);
+    } else {
+        console.log('[Local] Windows detected. Skipping SingletonLock cleanup.');
     }
+
     // ----------------------------
     isInitializing = true;
     isReady = false;

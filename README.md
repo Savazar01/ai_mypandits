@@ -71,10 +71,27 @@ npx prisma db push
 # Terminal 1: Application Dev Server
 npm run dev
 
-# Terminal 2: WhatsApp Authentication Bridge (Required for WA Login)
-npm run wa:bridge
+# WhatsApp Bridge (Just-In-Time)
+# The WhatsApp bridge no longer requires a manual background process.
+# It is automatically initialized JIT (Just-In-Time) when you trigger 
+# a login or registration flow.
 ```
 Open **[http://localhost:3090](http://localhost:3090)** to view the Vedic Sanctuary.
+
+---
+
+## 🚀 Production Deployment (v2.0.1)
+
+### 🏗️ Docker Architecture
+The production environment is standardized on a robust **Debian-based Docker architecture** (`node:20-bookworm`). This provides maximum stability for Chromium-based services and future AI workers.
+
+- **Engine**: Native Docker on Coolify.
+- **Base Image**: `node:20-bookworm`.
+- **Chromium Path**: `/usr/bin/chromium` (Static).
+- **System Dependencies**: Managed via the Dockerfile `apt-get` layer (includes `libatk`, `libnss3`, `libgbm1`, etc.).
+
+### ⚡ JIT WhatsApp Bridge
+Production uses a **Managed JIT Service** for WhatsApp connectivity. Instead of a background service that runs 24/7, the bridge is dynamically kickstarted by the `/api/auth/whatsapp/send` or registration logic. This prevents Chromium profile locks and optimizes VPS resource usage.
 
 ---
 
@@ -92,13 +109,13 @@ The project's visual soul is defined in the [**`design-assets/`**](file:///c:/Us
 
 ---
 
-## 📜 Technology Stack
+- **Infrastructure**: Native Docker (Debian Bookworm)
 - **Design Orchestration**: [Google Stitch](https://stitch.google.com/)
 - **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
 - **ORM**: [Prisma](https://www.prisma.io/)
-- **Authentication**: [BetterAuth](https://better-auth.com/)
+- **Authentication**: [BetterAuth](https://better-auth.com/) & JIT WhatsApp Bridge
 - **Database**: [PostgreSQL](https://www.postgresql.org/)
-- **Styling**: Vanilla CSS and Glassmorphism principles defined in our Design System.
+- **Styling**: Vanilla CSS and Glassmorphism principles.
 
 ---
 © 2026 MyPandits Ecosystem. All rights reserved.

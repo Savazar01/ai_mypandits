@@ -46,4 +46,8 @@
 - **Next.js Images**: `lh3.googleusercontent.com` and `googleusercontent.com` are whitelisted in `next.config.ts` for Stitch-based image delivery.
 - **WhatsApp Isolation**: `.wwebjs_auth` is excluded from bundler processing via `serverExternalPackages` and `transpilePackages`.
 - **Middleware Convention**: `src/proxy.ts` implements the Next.js 16.x-compliant auth/routing bridge to silence deprecation warnings.
-- **Nixpacks (Coolify)**: `nixpacks.toml` includes `chromium` for headless WhatsApp bridge operation. Use `npm run start` for production.
+- **Docker Architecture (v2.0.1)**:
+  - **Environment**: Managed Debian `node:20-bookworm` Native Docker on Coolify.
+  - **Chromium**: Fixed path `/usr/bin/chromium` via `PUPPETEER_EXECUTABLE_PATH`.
+  - **JIT Bridge Logic**: The WhatsApp server is no longer a background service. It is triggered JIT in `src/lib/whatsapp.ts` when an OTP or registration event occurs.
+  - **Platform-Awareness**: Bridge uses `/usr/bin/chromium` on Linux (Production) and default Puppeteer on Windows (Local ROG laptop).

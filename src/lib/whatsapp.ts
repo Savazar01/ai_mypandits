@@ -7,15 +7,16 @@ import { exec } from "child_process";
  */
 
 export const sendWhatsappOTP = async (number: string, otp: string) => {
-    // [PROD CHECK] Enforce environment-aware service URL
-    const WHATSAPP_SERVICE_URL = process.env.WHATSAPP_SERVICE_URL || 
+    // [PROD CHECK] Robust Environment-Aware URL Management
+    const rawUrl = process.env.WHATSAPP_SERVICE_URL || 
         (process.platform === 'linux' ? 'http://whatsapp-service:3095' : 'http://localhost:3095');
+    
+    // Standardize URL: Remove extra slashes and trim spaces
+    const SERVICE_URL = rawUrl.trim().replace(/\/+$/, "");
 
-    console.log(">>>> [PROD CHECK] WhatsApp Service URL:", WHATSAPP_SERVICE_URL);
+    console.log(">>>> [PROD CHECK] WhatsApp Service URL (Normalized):", SERVICE_URL);
 
     const isLinux = process.platform === 'linux';
-    const SERVICE_URL = WHATSAPP_SERVICE_URL;
-
     console.log(`--- [v2.1.0-hybrid] Target: ${isLinux ? 'VPS/Standalone' : 'ROG/Local'} via ${SERVICE_URL} ---`);
 
     try {
@@ -23,13 +24,23 @@ export const sendWhatsappOTP = async (number: string, otp: string) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json", // Explicit Accept header for robustness
             },
             body: JSON.stringify({ number, otp }),
         });
 
         if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.error || "Failed to send code");
+            let errorBody;
+            try {
+                errorBody = await response.json();
+            } catch (e) {
+                errorBody = await response.text();
+            }
+            
+            // LOG: Expanded error reporting for production debugging
+            console.error(`>>>> [PROD ERROR] WhatsApp Worker responded with ${response.status}:`, errorBody);
+            
+            throw new Error(errorBody?.error || errorBody || "Internal Server Error");
         }
 
         console.log(`Successfully proxied OTP send to ${number}`);

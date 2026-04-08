@@ -102,18 +102,31 @@ const server = http.createServer((req, res) => {
                     return;
                 }
 
-                const formattedNumber = number.includes('@c.us') ? number : `${number}@c.us`;
-                const message = `Your MyPandits verification code is: ${otp}\n\nValid for 5 minutes. Do not share this code.`;
+                // DETECT & STRIP: Remove non-digits (like +, -, spaces) for Puppeteer/WA-Web compatibility
+                const cleanNumber = number.replace(/\D/g, '');
+                const formattedNumber = `${cleanNumber}@c.us`;
+
+                console.log(`>>>> [v2.1.0] Sending OTP to sanitized number: ${formattedNumber}`);
+
+                if (!isReady) {
+                    res.writeHead(503, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: 'WhatsApp Service is not ready yet', details: 'Client is in: initializing state' }));
+                    return;
+                }
 
                 await client.sendMessage(formattedNumber, message);
-                console.log(`--- [v2.1.0] OTP Sent to ${number} ---`);
+                console.log(`--- [v2.1.0] OTP Sent to ${cleanNumber} ---`);
 
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: true }));
             } catch (error) {
                 console.error('Error sending message:', error);
                 res.writeHead(500, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ error: 'Internal Server Error', details: error.message }));
+                res.end(JSON.stringify({ 
+                    error: 'Internal Server Error', 
+                    details: error.message || 'Unknown Worker Error',
+                    code: error.code || 'SEND_FAILURE'
+                }));
             }
         });
         return;

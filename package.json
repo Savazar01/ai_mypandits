@@ -40,5 +40,13 @@
     "prisma": "^7.6.0",
     "tailwindcss": "^4.2.2",
     "typescript": "^5"
+  },
+  "overrides": {
+    "rimraf": "^6.0.0",
+    "glob": "^11.0.0",
+    "hono": "^4.12.11"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }

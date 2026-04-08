@@ -134,6 +134,7 @@ const server = http.createServer((req, res) => {
                     return;
                 }
 
+                const message = `Your MyPandits verification code is: ${otp}`;
                 await client.sendMessage(formattedNumber, message);
                 console.log(`--- [v2.1.0] OTP Sent to ${cleanNumber} ---`);
 

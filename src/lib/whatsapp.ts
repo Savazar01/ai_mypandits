@@ -8,9 +8,9 @@ import { exec } from "child_process";
 
 export const sendWhatsappOTP = async (number: string, otp: string) => {
     // [PROD CHECK] Robust Environment-Aware URL Management
-    const rawUrl = process.env.WHATSAPP_SERVICE_URL || 
+    const rawUrl = process.env.WHATSAPP_SERVICE_URL ||
         (process.platform === 'linux' ? 'http://whatsapp-service:3095' : 'http://localhost:3095');
-    
+
     // Standardize URL: Remove extra slashes and trim spaces
     const SERVICE_URL = rawUrl.trim().replace(/\/+$/, "");
 
@@ -19,14 +19,19 @@ export const sendWhatsappOTP = async (number: string, otp: string) => {
     const isLinux = process.platform === 'linux';
     console.log(`--- [v2.1.0-hybrid] Target: ${isLinux ? 'VPS/Standalone' : 'ROG/Local'} via ${SERVICE_URL} ---`);
 
+    console.log(`>>>> [V3-HANDSHAKE] Sending to Worker: ${number}`);
+
     try {
         const response = await fetch(`${SERVICE_URL}/send-otp`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json", // Explicit Accept header for robustness
+                "Accept": "application/json",
             },
-            body: JSON.stringify({ number, otp }),
+            body: JSON.stringify({ 
+                number: number.replace(/\D/g, ''), 
+                otp: otp 
+            }),
         });
 
         if (!response.ok) {
@@ -36,10 +41,10 @@ export const sendWhatsappOTP = async (number: string, otp: string) => {
             } catch (e) {
                 errorBody = await response.text();
             }
-            
+
             // LOG: Expanded error reporting for production debugging
             console.error(`>>>> [PROD ERROR] WhatsApp Worker responded with ${response.status}:`, errorBody);
-            
+
             throw new Error(errorBody?.error || errorBody || "Internal Server Error");
         }
 
@@ -48,7 +53,7 @@ export const sendWhatsappOTP = async (number: string, otp: string) => {
     } catch (error: any) {
         // DETECT: Is the service down or DNS not resolved?
         if (error.message.includes("fetch failed") || error.code === "ECONNREFUSED" || error.code === "ENOTFOUND") {
-            
+
             // ROG Mode: Automatically kickstart the local bridge (Windows fallback)
             if (!isLinux) {
                 console.log("--- [v2.1.0-hybrid] ROG Fallback: Kickstarting Local Bridge... ---");

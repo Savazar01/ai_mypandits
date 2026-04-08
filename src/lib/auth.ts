@@ -48,19 +48,14 @@ export const auth = betterAuth({
     emailAndPassword: {
         enabled: true,
     },
-    socialProviders: {
-        google: {
-            clientId: process.env.GOOGLE_CLIENT_ID || "",
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-        },
-    },
     plugins: [
         admin(),
     ],
     advanced: {
         // 4. Secure cookies logic (Secure=true for Linux, false for Windows)
         useSecureCookies: isLinux,
-        // Tell Better-auth to trust the X-Forwarded-Proto header from Traefik (Linux ONLY)
+        // Only trust proxy headers on Linux/Production (behind Traefik)
+        // Enabling this on Windows causes origin mismatches during local dev
         trustProxyHeaders: isLinux 
     },
     user: {

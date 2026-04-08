@@ -46,8 +46,9 @@
 - **Next.js Images**: `lh3.googleusercontent.com` and `googleusercontent.com` are whitelisted in `next.config.ts` for Stitch-based image delivery.
 - **WhatsApp Isolation**: `.wwebjs_auth` is excluded from bundler processing via `serverExternalPackages` and `transpilePackages`.
 - **Middleware Convention**: `src/proxy.ts` implements the Next.js 16.x-compliant auth/routing bridge to silence deprecation warnings.
-- **Docker Architecture (v2.0.1)**:
-  - **Environment**: Managed Debian `node:20-bookworm` Native Docker on Coolify.
-  - **Chromium**: Fixed path `/usr/bin/chromium` via `PUPPETEER_EXECUTABLE_PATH`.
-  - **JIT Bridge Logic**: The WhatsApp server is no longer a background service. It is triggered JIT in `src/lib/whatsapp.ts` when an OTP or registration event occurs.
-  - **Platform-Awareness**: Bridge uses `/usr/bin/chromium` on Linux (Production) and default Puppeteer on Windows (Local ROG laptop).
+- **Hybrid Architecture (v2.1.0-hybrid)**:
+  - **VPS (Production)**: Standalone `whatsapp-service/` container (Port 3095) + Slim Main Container (Port 3090).
+  - **ROG (Development)**: Local monolith flow using `whatsapp-bridge.js`.
+  - **Platform Detection**: `src/lib/whatsapp.ts` automatically switches between `http://whatsapp-service:3095` (Linux) and `http://localhost:3095` with JIT kickstart (Windows).
+  - **Storage**: VPS requires a persistent volume: `whatsapp_data:/data/whatsapp_session`.
+  - **Build Integrity**: Uses Docker-optimized `npm ci` for all services.

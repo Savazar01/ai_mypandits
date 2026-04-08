@@ -4,17 +4,17 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
-# 🤖 Agentic AI & Event Orchestration (v2.0.1+)
+# 🤖 Agentic AI & Event Orchestration (v2.1.0-hybrid)
 
 ## Infrastructure Foundation
-The MyPandits ecosystem is now built on a **Debian-based Docker architecture** (`node:20-bookworm`). This provides a hardened Linux environment with all necessary system libraries (`libatk`, `libnss3`, etc.) for advanced agent operations.
+The MyPandits ecosystem utilizes a **Hybrid Architecture** for maximum cross-platform stability:
+- **Production (Linux)**: Robust **Debian-based Docker architecture** (`node:20-bookworm-slim`) with isolated standalone services.
+- **Development (Windows)**: Local JIT-managed monolith flow for rapid iteration.
 
 ## AI Worker Stability
-- **Headless Capabilities**: Standardized Chromium paths ensure that AI workers performing web-scraping or browser-based automation have a 100% reliable execution environment.
-- **Event Orchestration**: The stable Docker base allows for the integration of low-latency message queues and background workers to manage complex Vedic ritual lifecycles.
+- **Headless Capabilities**: Standardized Chromium paths in the standalone **WhatsApp Service** ensure that AI workers have a 100% reliable execution environment on the VPS.
+- **Service Awareness**: Agents should be aware that services like the WhatsApp Bridge are now **Hybrid**. At runtime, they are accessible via internal service networking (e.g., `http://whatsapp-service:3095`) on Linux, or managed via JIT-kickstarted local processes on Windows.
+- **Persistent Sessions**: Support for persistent data storage at `/data/whatsapp_session` ensures session stability across worker restarts.
 
-## JIT Awareness
-Agents should be aware that services like the WhatsApp Bridge are **Just-In-Time (JIT)**. They should be invoked on-demand via API triggers rather than assumed to be always-on background processes.
-
-## Scaling Vision
-The long-term roadmap for agentic operations involves transitioning from monolithic task execution to a distributed micro-agent architecture. Agents should prioritize modularity, ensuring that individual tasks (e.g., horoscope generation, ritual scheduling, user notification) can be scaled independently across multiple worker nodes as demand increases.
+## Scaling Vision (v2.1.0+)
+The long-term roadmap for agentic operations involves transitioning from monolithic task execution to a distributed micro-agent architecture. The v2.1.0-hybrid release is the foundational first step towards this vision.

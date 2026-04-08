@@ -21,11 +21,23 @@ Connect with specialized service providers across 11 core roles:
 - **Event Planner**: End-to-end ritual coordination.
 - **Other**: Specialized services (e.g., Rangoli artists, Mehendi).
 
+
 ### 📦 Dynamic Catalog Management
 Providers can manage their entire service inventory using a **Unified Catalog System**.
 - **Bulk Upload**: Standardized CSV-based service integration.
 - **Flexible Pricing**: Support for hourly, per-pc, and event-based pricing models.
 - **Regional Currency**: Automatic detection of currency based on provider location.
+
+## AI Worker Stability
+- **Headless Capabilities**: Standardized Chromium paths in the standalone **WhatsApp Service** ensure that AI workers have a 100% reliable execution environment on the VPS.
+- **Hybrid Service Orchestration**: The system automatically adapts to its environment, providing a robust micro-service isolation in production and a lightweight monolith flow for developers on the ROG.
+- **Event Orchestration**: The stable Docker base allows for the integration of low-latency message queues to manage complex Vedic ritual lifecycles.
+
+## Service Awareness
+Agents should be aware that services like the WhatsApp Bridge are now **Hybrid**. At runtime, they are accessible via internal service networking (e.g., `http://whatsapp-service:3095`) on Linux, or managed via JIT-kickstarted local processes on Windows.
+
+## scaling Vision (v2.1.0+)
+The long-term roadmap for agentic operations involves transitioning from monolithic task execution to a distributed micro-agent architecture. The v2.1.0-hybrid release is the foundational first step towards this vision.
 
 ### 🔐 Secure Authentication & Multi-Entry Identity
 - **Dual-Login Parity**: Unified authentication flow supports both **Email/Password** and **WhatsApp (OTP)** logins with identical permissions and behavior.
@@ -80,18 +92,15 @@ Open **[http://localhost:3090](http://localhost:3090)** to view the Vedic Sanctu
 
 ---
 
-## 🚀 Production Deployment (v2.0.1)
+## 🚀 Production Deployment (v2.1.0)
 
 ### 🏗️ Docker Architecture
-The production environment is standardized on a robust **Debian-based Docker architecture** (`node:20-bookworm`). This provides maximum stability for Chromium-based services and future AI workers.
-
-- **Engine**: Native Docker on Coolify.
-- **Base Image**: `node:20-bookworm`.
-- **Chromium Path**: `/usr/bin/chromium` (Static).
-- **System Dependencies**: Managed via the Dockerfile `apt-get` layer (includes `libatk`, `libnss3`, `libgbm1`, etc.).
-
-### ⚡ JIT WhatsApp Bridge
-Production uses a **Managed JIT Service** for WhatsApp connectivity. Instead of a background service that runs 24/7, the bridge is dynamically kickstarted by the `/api/auth/whatsapp/send` or registration logic. This prevents Chromium profile locks and optimizes VPS resource usage.
+- **Hybrid Architecture (v2.1.0-hybrid)**:
+  - **VPS (Production)**: Standalone `whatsapp-service/` container (Port 3095) + Slim Main Container (Port 3090).
+  - **ROG (Development)**: Local monolith flow using `whatsapp-bridge.js`.
+  - **Platform Detection**: `src/lib/whatsapp.ts` automatically switches between `http://whatsapp-service:3095` (Linux) and `http://localhost:3095` with JIT kickstart (Windows).
+  - **Storage**: VPS requires a persistent volume: `whatsapp_data:/data/whatsapp_session`.
+  - **Build Integrity**: Uses Docker-optimized `npm ci` for all services.
 
 ---
 
@@ -109,11 +118,17 @@ The project's visual soul is defined in the [**`design-assets/`**](file:///c:/Us
 
 ---
 
-- **Infrastructure**: Native Docker (Debian Bookworm)
-- **Design Orchestration**: [Google Stitch](https://stitch.google.com/)
+- **Infrastructure**: Native Docker (Hybrid Architecture v2.1.0)
+- **WhatsApp Bridge**: 
+  - **VPS (Production)**: Standalone Micro-service (`whatsapp-service/`)
+  - **ROG (Development)**: Local Monolith (`whatsapp-bridge.js`)
+- **Discovery Strategy**: Automatic Platform-Aware Routing (win32 vs linux)
+- **Session Persistence**: 
+  - **VPS**: Coolify Volume (`/data/whatsapp_session`)
+  - **ROG**: Local `.wwebjs_auth/`
 - **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
 - **ORM**: [Prisma](https://www.prisma.io/)
-- **Authentication**: [BetterAuth](https://better-auth.com/) & JIT WhatsApp Bridge
+- **Authentication**: [BetterAuth](https://better-auth.com/)
 - **Database**: [PostgreSQL](https://www.postgresql.org/)
 - **Styling**: Vanilla CSS and Glassmorphism principles.
 

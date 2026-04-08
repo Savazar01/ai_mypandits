@@ -1,18 +1,21 @@
 import { exec } from "child_process";
 
 /**
- * WhatsApp Proxy Client
+ * WhatsApp Proxy Client (v2.1.0-hybrid)
  * 
- * Talk to the standalone WhatsApp Bridge on http://localhost:3095.
- * 
- * If the bridge is not running, we trigger a kickstart (JIT) using child_process.
+ * Target: Standalone Service (Linux) OR Local Bridge (Windows).
  */
 
 export const sendWhatsappOTP = async (number: string, otp: string) => {
-    console.log(`--- Requesting OTP send to ${number} via Bridge ---`);
+    const isLinux = process.platform === 'linux';
+    const SERVICE_URL = isLinux 
+        ? (process.env.WHATSAPP_SERVICE_URL || "http://whatsapp-service:3095")
+        : "http://localhost:3095";
+
+    console.log(`--- [v2.1.0-hybrid] Target: ${isLinux ? 'VPS/Standalone' : 'ROG/Local'} via ${SERVICE_URL} ---`);
 
     try {
-        const response = await fetch("http://localhost:3095/send-otp", {
+        const response = await fetch(`${SERVICE_URL}/send-otp`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -22,26 +25,27 @@ export const sendWhatsappOTP = async (number: string, otp: string) => {
 
         if (!response.ok) {
             const data = await response.json();
-            throw new Error(data.error || "Failed to send code via bridge");
+            throw new Error(data.error || "Failed to send code");
         }
 
         console.log(`Successfully proxied OTP send to ${number}`);
         return { success: true };
     } catch (error: any) {
-        // DETECT: Is the bridge down?
-        if (error.message.includes("fetch failed") || error.code === "ECONNREFUSED") {
-            console.log("--- WhatsApp Bridge is DOWN. Kickstarting JIT... ---");
+        // DETECT: Is the service down or DNS not resolved?
+        if (error.message.includes("fetch failed") || error.code === "ECONNREFUSED" || error.code === "ENOTFOUND") {
             
-            // EXEC: Start the bridge process in the background
-            // We use 'node whatsapp-bridge.js' directly to ensure it matches the script
-            exec("node whatsapp-bridge.js", (err) => {
-                if (err) {
-                    console.error("Failed to kickstart WhatsApp Bridge:", err);
-                }
-            });
+            // ROG Mode: Automatically kickstart the local bridge (Windows fallback)
+            if (!isLinux) {
+                console.log("--- [v2.1.0-hybrid] ROG Fallback: Kickstarting Local Bridge... ---");
+                exec("node whatsapp-bridge.js", (err) => {
+                    if (err) console.error("Failed to kickstart local bridge:", err);
+                });
+                throw new Error("WHATSAPP_INITIALIZING");
+            }
 
-            // Throw special initializing error
-            throw new Error("WHATSAPP_INITIALIZING");
+            // VPS Mode: Service must be managed by Coolify (No JIT fallback)
+            console.error("--- [v2.1.0-hybrid] Standalone Service UNREACHABLE (VPS Mode) ---");
+            throw new Error("WHATSAPP_SERVICE_OFFLINE");
         }
 
         console.error("WhatsApp Proxy Error:", error);

@@ -34,9 +34,10 @@ ENV WHATSAPP_SESSION_PATH=/data/whatsapp_session
 # 3. Workspace Initialization
 WORKDIR /usr/src/app
 
-# 4. Dependency Layer: Deterministic 'npm ci'
+# 4. Dependency Layer: Resilient Install
 COPY package*.json ./
-RUN npm ci
+# Prefer clean install for speed/security; fallback if lockfile is missing
+RUN npm ci || npm install
 
 # 5. Application Layer
 COPY . .

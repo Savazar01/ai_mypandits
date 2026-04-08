@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install -y \
   libxrandr2 \
   libgbm1 \
   libpango-1.0-0 \
-  asound2 \
   ca-certificates \
   fonts-liberation \
   libasound2 \

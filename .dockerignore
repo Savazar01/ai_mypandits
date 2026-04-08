@@ -1,0 +1,30 @@
+# --- Build Exclusion List ---
+# Exclude node_modules to ensure a clean install in the container
+node_modules
+npm-debug.log
+
+# Exclude build artifacts
+.next
+out
+build
+
+# Exclude version control metadata
+.git
+.gitignore
+
+# Exclude local environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Exclude WhatsApp session data (MUST remain local)
+.wwebjs_auth
+whatsapp_session
+
+# Other exclusions
+.DS_Store
+*.md
+Dockerfile
+.dockerignore
+nixpacks.toml

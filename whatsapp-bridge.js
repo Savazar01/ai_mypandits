@@ -56,26 +56,13 @@ async function createClient() {
 
     // 4. PLATFORM-AWARE CONFIGURATION
     if (process.platform === 'linux') {
-        console.log('[Server] Configuring specialized Linux (Nix) environment...');
+        console.log('[Server] Configuring Specialized Debian/Docker environment...');
 
-        // A. Dynamic Chromium Lookup in Nix Store
-        try {
-            const nixStorePath = execSync('find /nix/store -name chromium | grep bin/chromium | head -n 1', { encoding: 'utf8' }).trim();
-            if (nixStorePath) {
-                puppeteerConfig.executablePath = nixStorePath;
-                console.log(`[Server] Found Nix Chromium: ${puppeteerConfig.executablePath}`);
-            }
-        } catch (err) {
-            console.log('[Server] Nix store search failed. Falling back to default path.');
-        }
+        // Standardized path in the Bookworm image
+        puppeteerConfig.executablePath = '/usr/bin/chromium';
+        console.log(`[Server] Using Debian Chromium: ${puppeteerConfig.executablePath}`);
 
-        // B. Library Linkage Fix (LD_LIBRARY_PATH)
-        puppeteerConfig.env = {
-            ...process.env,
-            LD_LIBRARY_PATH: '/nix/var/nix/profiles/default/lib'
-        };
-
-        // C. Namespace Sandbox & RAM Fixes for VPS Kernel
+        // A. Sandbox & RAM Fixes for VPS Kernel
         puppeteerConfig.args = [
             '--no-sandbox',
             '--disable-setuid-sandbox',

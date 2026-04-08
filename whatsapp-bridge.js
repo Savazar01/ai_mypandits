@@ -193,7 +193,11 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
+// [PROD CHECK] Verify the service URL early in the lifecycle
+console.log(">>>> [PROD CHECK] WhatsApp Service URL:", process.env.WHATSAPP_SERVICE_URL);
+
 const PORT = process.env.WHATSAPP_PORT || 3095;
-server.listen(PORT, '127.0.0.1', () => {
-    console.log(`WhatsApp API Server listening on http://localhost:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+    const URL = process.env.WHATSAPP_SERVICE_URL || `http://localhost:${PORT}`;
+    console.log(`WhatsApp API Server listening on ${URL}`);
 });

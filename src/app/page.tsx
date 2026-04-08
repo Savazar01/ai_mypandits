@@ -1,5 +1,10 @@
 "use client";
 
+// [PROD CHECK] Verify the service URL during initialization
+if (typeof window === "undefined") {
+  console.log(">>>> [PROD CHECK] WhatsApp Service URL:", process.env.WHATSAPP_SERVICE_URL);
+}
+
 import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";

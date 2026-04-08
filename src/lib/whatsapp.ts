@@ -7,10 +7,14 @@ import { exec } from "child_process";
  */
 
 export const sendWhatsappOTP = async (number: string, otp: string) => {
+    // [PROD CHECK] Enforce environment-aware service URL
+    const WHATSAPP_SERVICE_URL = process.env.WHATSAPP_SERVICE_URL || 
+        (process.platform === 'linux' ? 'http://whatsapp-service:3095' : 'http://localhost:3095');
+
+    console.log(">>>> [PROD CHECK] WhatsApp Service URL:", WHATSAPP_SERVICE_URL);
+
     const isLinux = process.platform === 'linux';
-    const SERVICE_URL = isLinux 
-        ? (process.env.WHATSAPP_SERVICE_URL || "http://whatsapp-service:3095")
-        : "http://localhost:3095";
+    const SERVICE_URL = WHATSAPP_SERVICE_URL;
 
     console.log(`--- [v2.1.0-hybrid] Target: ${isLinux ? 'VPS/Standalone' : 'ROG/Local'} via ${SERVICE_URL} ---`);
 

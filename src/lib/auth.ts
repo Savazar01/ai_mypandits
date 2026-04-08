@@ -59,7 +59,9 @@ export const auth = betterAuth({
     ],
     advanced: {
         // 4. Secure cookies logic (Secure=true for Linux, false for Windows)
-        useSecureCookies: isLinux 
+        useSecureCookies: isLinux,
+        // Tell Better-auth to trust the X-Forwarded-Proto header from Traefik (Linux ONLY)
+        trustProxyHeaders: isLinux 
     },
     user: {
         additionalFields: {

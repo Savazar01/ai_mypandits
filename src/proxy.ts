@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { auth } from "./lib/auth";
 
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -13,29 +14,37 @@ export default async function middleware(request: NextRequest) {
   try {
     console.log(`[Middleware] Auth Check: ${pathname} | Has Cookies: ${cookieHeader.includes('better-auth')}`);
     
-    // 1. Call the UNIVERSAL session endpoint (shadowed) for stable handshake
-    const sessionResponse = await fetch(`${request.nextUrl.origin}/api/auth/get-session`, {
-      headers: {
-        cookie: cookieHeader,
-      },
-      next: { revalidate: 0 }, 
-    });
+    const isLinux = process.platform === "linux";
+    const platformLabel = isLinux ? "[Middleware:VPS]" : "[Middleware:ROG]";
+    
+    let session: any = null;
 
-    if (!sessionResponse.ok) {
-      console.log(`[Middleware] ⚠️ Session API Error: ${sessionResponse.status}`);
-      return NextResponse.redirect(new URL("/login", request.url));
+    if (isLinux) {
+      // 1a. VPS Mode: Direct Session API to bypass TLS/SSL handshake conflicts
+      session = await auth.api.getSession({
+        headers: request.headers,
+      });
+    } else {
+      // 1b. ROG Mode: Original Fetch logic (Stable on Windows Localhost)
+      const sessionResponse = await fetch(`${request.nextUrl.origin}/api/auth/get-session`, {
+        headers: {
+          cookie: cookieHeader,
+        },
+        next: { revalidate: 0 }, 
+      });
+
+      if (sessionResponse.ok) {
+        session = await sessionResponse.json();
+      }
     }
-
-    const session = await sessionResponse.json();
-
+    
     if (!session || !session.user) {
-      console.log(`[Middleware] ❌ Session Rejected: Access Denied to ${pathname}`);
+      console.log(`${platformLabel} ❌ Session Rejected: Access Denied to ${pathname}`);
       return NextResponse.redirect(new URL("/login", request.url));
     }
-
-    const role = session.user.role;
-    const email = session.user.email;
-    console.log(`[Middleware] ✅ Session Found: User ${email} | Role ${role}`);
+    
+    const { role, email } = session.user;
+    console.log(`${platformLabel} ✅ Session Found: User ${email} | Role ${role}`);
 
     // 2. Role-Based Redirection (Steering) Logic
     

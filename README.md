@@ -39,12 +39,7 @@ Agents should be aware that services like the WhatsApp Bridge are now **Hybrid**
 ## scaling Vision (v2.1.0+)
 The long-term roadmap for agentic operations involves transitioning from monolithic task execution to a distributed micro-agent architecture. The v2.1.0-hybrid release is the foundational first step towards this vision.
 
-### 🔐 Secure Authentication & Multi-Entry Identity
-- **Dual-Login Parity**: Unified authentication flow supports both **Email/Password** and **WhatsApp (OTP)** logins with identical permissions and behavior.
-- **WhatsApp Integration**: High-fidelity manual session injection ensures a seamless mobile-first identity experience.
-- **Registration Split**: Dedicated, mobile-optimized recruitment paths at `/register/customer` and `/register/provider` for clear user steering.
 - **Role-Based Access**: Strict middleware steering and dedicated dashboards for Customers and Providers.
-- **Social Integration**: Instant sign-in via Google (Gmail).
 - **Session Privacy**: Secure, hashing-aware token management via BetterAuth v1.5.6.
 
 ---
@@ -65,10 +60,11 @@ DATABASE_URL="postgresql://postgres:user@localhost:5433/mypandits_factory?schema
 # BetterAuth Security
 BETTER_AUTH_SECRET="your_generated_secret"
 BETTER_AUTH_URL="http://localhost:3090"
+BETTER_AUTH_ORIGINS="http://localhost:3090"
 
-# Google OAuth (Social Login)
-GOOGLE_CLIENT_ID="your_google_id"
-GOOGLE_CLIENT_SECRET="your_google_secret"
+# WhatsApp Service (Local)
+WHATSAPP_SERVICE_URL="http://localhost:3095"
+
 ```
 
 ### 3. Database Initialization
@@ -94,13 +90,32 @@ Open **[http://localhost:3090](http://localhost:3090)** to view the Vedic Sanctu
 
 ## 🚀 Production Deployment (v2.1.0)
 
-### 🏗️ Docker Architecture
-- **Hybrid Architecture (v2.1.0-hybrid)**:
-  - **VPS (Production)**: Standalone `whatsapp-service/` container (Port 3095) + Slim Main Container (Port 3090).
-  - **ROG (Development)**: Local monolith flow using `whatsapp-bridge.js`.
-  - **Platform Detection**: `src/lib/whatsapp.ts` automatically switches between `http://whatsapp-service:3095` (Linux) and `http://localhost:3095` with JIT kickstart (Windows).
-  - **Storage**: VPS requires a persistent volume: `whatsapp_data:/data/whatsapp_session`.
-  - **Build Integrity**: Uses Docker-optimized `npm ci` for all services.
+### 🏗️ Hybrid Architecture (v2.1.0-hybrid)
+
+The MyPandits ecosystem uses a decoupled, hybrid architecture to ensure maximum stability across platform transitions.
+
+#### 1. Service Orchestration
+- **Main Application**: Next.js service running on Port 3090.
+- **WhatsApp Bridge**: 
+    - **Production (Linux)**: Standalone micro-service container on Port 3095. Internal communication via Docker networking (e.g., `http://whatsapp-service:3095`).
+    - **Development (Windows)**: Managed JIT (Just-In-Time) monolith flow using `whatsapp-bridge.js`.
+- **Platform Branching**: `src/lib/whatsapp.ts` automatically detects the environment (`win32` vs `linux`) to route traffic to the appropriate bridge.
+
+#### 2. Environment Variables (Definitive Table)
+
+| Service | Variable | Purpose |
+| :--- | :--- | :--- |
+| **Main App** | `BETTER_AUTH_SECRET` | Primary encryption secret for session tokens. |
+| | `BETTER_AUTH_URL` | Base identity URL (Primary domain). |
+| | `BETTER_AUTH_ORIGINS` | Comma-separated allowlist for sub-domains. |
+| | `WHATSAPP_SERVICE_URL`| Internal URL of the WhatsApp Bridge. |
+| **Worker** | `WHATSAPP_PORT` | Port the standalone service listens on (Default: 3095). |
+| | `WHATSAPP_SESSION_PATH`| Persistent volume path for browser session storage. |
+| | `PUPPETEER_EXECUTABLE_PATH`| Path to the Chromium/Chrome binary for headless mode. |
+
+#### 3. Self-Healing & Persistence
+- **Chromium Startup**: The WhatsApp Worker implements a **Self-healing Cleanup** block that automatically purges stale `SingletonLock`, `SingletonCookie`, and `SingletonSocket` files from the session directory before initialization, preventing launch failures in production.
+- **Volume Storage**: Production requires a persistent Docker volume mapped to `/data/whatsapp_session` to avoid re-authentication on container restarts.
 
 ---
 

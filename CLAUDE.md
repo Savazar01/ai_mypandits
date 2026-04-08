@@ -45,10 +45,14 @@
 - **Tailwind Plugins**: `@tailwindcss/forms` and `@tailwindcss/container-queries` must be installed.
 - **Next.js Images**: `lh3.googleusercontent.com` and `googleusercontent.com` are whitelisted in `next.config.ts` for Stitch-based image delivery.
 - **WhatsApp Isolation**: `.wwebjs_auth` is excluded from bundler processing via `serverExternalPackages` and `transpilePackages`.
-- **Middleware Convention**: `src/proxy.ts` implements the Next.js 16.x-compliant auth/routing bridge to silence deprecation warnings.
+- **Middleware Convention**: `src/proxy.ts` implements a hybrid session check.
+  - **Linux (Production)**: Uses `auth.api.getSession` (Direct server-side API) to bypass Traefik/SSL handshake conflicts.
+  - **Windows (Development)**: Uses `fetch` for standard origin verification.
+- **Proxy Configuration**: `trustProxyHeaders` is enabled only on Linux (`isLinux`) to support Traefik-forwarded headers without breaking local dev.
 - **Hybrid Architecture (v2.1.0-hybrid)**:
   - **VPS (Production)**: Standalone `whatsapp-service/` container (Port 3095) + Slim Main Container (Port 3090).
   - **ROG (Development)**: Local monolith flow using `whatsapp-bridge.js`.
   - **Platform Detection**: `src/lib/whatsapp.ts` automatically switches between `http://whatsapp-service:3095` (Linux) and `http://localhost:3095` with JIT kickstart (Windows).
   - **Storage**: VPS requires a persistent volume: `whatsapp_data:/data/whatsapp_session`.
   - **Build Integrity**: Uses Docker-optimized `npm ci` for all services.
+  - **Self-Healing**: Startup cleanup block removes stale Chromium locks from `/data/whatsapp_session/session`.

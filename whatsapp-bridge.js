@@ -22,19 +22,20 @@ async function createClient() {
     // 2. CLINICAL CLEANUP (Linux/VPS Only)
     // Removes stale Singleton files that cause "Code 21" crashes in Docker
     if (process.platform === 'linux') {
+        const lockFiles = ['SingletonLock', 'SingletonCookie', 'SingletonSocket'];
         const sessionDir = path.join(__dirname, '.wwebjs_auth', 'session');
         try {
             if (fs.existsSync(sessionDir)) {
                 const files = fs.readdirSync(sessionDir);
                 files.forEach(file => {
-                    if (file.startsWith('Singleton')) {
-                        console.log(`--- [Server] Clearing stale lock: ${file} ---`);
+                    if (lockFiles.includes(file)) {
+                        console.log(`--- [Server] Startup Cleanup: Removing stale lock: ${file} ---`);
                         fs.unlinkSync(path.join(sessionDir, file));
                     }
                 });
             }
         } catch (err) {
-            console.log(`[Server] Lock removal skipped: ${err.message}`);
+            console.warn(`[Server] Lock removal skipped: ${err.message}`);
         }
     }
 

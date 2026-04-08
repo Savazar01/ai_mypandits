@@ -1,6 +1,8 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
 /**
  * WhatsApp Standalone Service (v2.1.0)
@@ -15,6 +17,24 @@ const SESSION_PATH = process.env.WHATSAPP_SESSION_PATH || '/data/whatsapp_sessio
 console.log(`--- [v2.1.0] Starting Standalone WhatsApp Service on Port ${PORT} ---`);
 console.log(`--- Session Persistence Path: ${SESSION_PATH} ---`);
 
+// [STARTUP CLEANUP] Self-healing Chromium block to prevent SingletonLock errors
+const lockFiles = ['SingletonLock', 'SingletonCookie', 'SingletonSocket'];
+const sessionInnerDir = path.join(SESSION_PATH, 'session');
+
+try {
+    if (fs.existsSync(sessionInnerDir)) {
+        const files = fs.readdirSync(sessionInnerDir);
+        files.forEach(file => {
+            if (lockFiles.includes(file)) {
+                console.log(`--- [Server] Startup Cleanup: Removing stale lock: ${file} ---`);
+                fs.unlinkSync(path.join(sessionInnerDir, file));
+            }
+        });
+    }
+} catch (outerErr) {
+    console.warn(`[STARTUP] Lock cleanup block skipped: ${outerErr.message}`);
+}
+
 // 1. Initialize WhatsApp Client with LocalAuth Persistence
 const client = new Client({
     authStrategy: new LocalAuth({
@@ -26,7 +46,7 @@ const client = new Client({
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--no-zygote',
-            '--disable-dev-shm-usage',
+            '--disable-dev-shm-usage', // Robustness for tight VPS RAM
             '--disable-gpu'
         ]
     }

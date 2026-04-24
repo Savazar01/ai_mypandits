@@ -17,7 +17,7 @@ async function runTests() {
   const API_BASE = "http://127.0.0.1:8000/api/v1";
 
   // Helper for requests
-  const doPost = async (endpoint, payload) => {
+  const doPost = async (endpoint: string, payload: any) => {
     const res = await fetch(`${API_BASE}${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

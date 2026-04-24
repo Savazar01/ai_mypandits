@@ -62,9 +62,10 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (session?.user) {
-      const profile = typeof session.user.profile_data === "string" 
-        ? JSON.parse(session.user.profile_data || "{}") 
-        : session.user.profile_data || {};
+      const userAny = session.user as any;
+      const profile = typeof userAny.profile_data === "string" 
+        ? JSON.parse(userAny.profile_data || "{}") 
+        : userAny.profile_data || {};
         
       let wCode = "+91";
       // @ts-expect-error - BetterAuth additionalFields not yet synchronized with client types
@@ -144,7 +145,7 @@ export default function SettingsPage() {
         // @ts-expect-error - BetterAuth additionalFields handled via server hooks
         whatsapp: `${formData.whatsappCode}${formData.whatsappNumber}`,
         profile_data: JSON.stringify({
-          ...JSON.parse(session?.user?.profile_data || "{}"),
+          ...JSON.parse((session?.user as any)?.profile_data || "{}"),
           address: formData.address,
           location: generatedLocation,
           expertise: formData.expertise

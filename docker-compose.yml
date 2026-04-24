@@ -11,7 +11,8 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      # Use the volume name Coolify already created
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - mypandits-network
 
@@ -68,7 +69,8 @@ services:
     ports:
       - "3095:3095"
     volumes:
-      - whatsapp_data:/data/whatsapp_session
+      # Use the volume name Coolify already created for WhatsApp session data
+      - whatsapp-data:/data/whatsapp_session
     environment:
       - WHATSAPP_SERVICE_URL=${WHATSAPP_SERVICE_URL:-http://whatsapp-service:3095}
     networks:
@@ -79,5 +81,8 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data:
-  whatsapp_data:
+  # Define volume names that match Coolify's existing storage to preserve data
+  postgres-data:
+    external: false
+  whatsapp-data:
+    external: false

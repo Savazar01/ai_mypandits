@@ -4,6 +4,11 @@ from routes import events, orchestration
 
 app = FastAPI(title="SavazAI Event Orchestration API", version="1.0.0")
 
+# Ensure database tables are created on startup
+from database import engine
+import models
+models.Base.metadata.create_all(bind=engine)
+
 # Enable CORS for the Next.js frontend
 app.add_middleware(
     CORSMiddleware,

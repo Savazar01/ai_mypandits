@@ -46,3 +46,6 @@ next-env.d.ts
 .wwebjs_auth/
 .wwebjs_cache/
 
+# Docker overrides
+docker-compose.override.yml
+

@@ -9,10 +9,12 @@ load_dotenv(os.path.join(os.path.dirname(__file__), '../../.env'))
 
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
 
-# If DATABASE_URL starts with postgresql://, change it to postgresql+psycopg2:// for SQLAlchemy compatibility if needed
-# but SQLAlchemy 2.0+ usually handles it or depends on the driver specified.
-if SQLALCHEMY_DATABASE_URL and SQLALCHEMY_DATABASE_URL.startswith("postgresql://"):
-    SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
+# If DATABASE_URL starts with postgres:// or postgresql://, change it to postgresql+psycopg2:// for SQLAlchemy compatibility
+if SQLALCHEMY_DATABASE_URL:
+    if SQLALCHEMY_DATABASE_URL.startswith("postgres://"):
+        SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
+    elif SQLALCHEMY_DATABASE_URL.startswith("postgresql://"):
+        SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
 
 if SQLALCHEMY_DATABASE_URL and "?schema=" in SQLALCHEMY_DATABASE_URL:
     SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.split("?schema=")[0]

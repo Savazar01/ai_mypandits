@@ -1,5 +1,5 @@
 services:
-  # 1. Database Layer: Fully aligned with production standards
+  # 1. Database Layer: Falls back to local container if no external DATABASE_URL provided
   db:
     image: postgres:16-alpine
     container_name: mypandits-db
@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-PanditAdmin2026}
       - POSTGRES_DB=${POSTGRES_DB:-mypandits}
     ports:
-      - "5433:5432" # Keep 5433 for external access if needed
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -20,23 +20,22 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: ${DOCKER_TARGET:-runner} # Defaults to production 'runner' stage
+      target: ${DOCKER_TARGET:-runner}
     container_name: mypandits-next
     restart: always
     ports:
       - "3090:3090"
     environment:
       - NODE_ENV=${NODE_ENV:-production}
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-PanditAdmin2026}@db:5432/${POSTGRES_DB:-mypandits}?schema=public
-      - PYTHON_BACKEND_URL=http://ai-backend:8090
-      - WHATSAPP_SERVICE_URL=http://whatsapp-service:3095
+      # Prioritize external DATABASE_URL (Coolify) over local container
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:PanditAdmin2026@db:5432/mypandits?schema=public}
+      - PYTHON_BACKEND_URL=${PYTHON_BACKEND_URL:-http://ai-backend:8090}
+      - WHATSAPP_SERVICE_URL=${WHATSAPP_SERVICE_URL:-http://whatsapp-service:3095}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - BETTER_AUTH_URL=${BETTER_AUTH_URL}
+      - BETTER_AUTH_ORIGINS=${BETTER_AUTH_ORIGINS}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-    depends_on:
-      - db
-      - ai-backend
     networks:
       - mypandits-network
 
@@ -50,10 +49,9 @@ services:
     ports:
       - "8090:8090"
     environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-PanditAdmin2026}@db:5432/${POSTGRES_DB:-mypandits}?schema=public
+      # Prioritize external DATABASE_URL (Coolify) over local container
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:PanditAdmin2026@db:5432/mypandits?schema=public}
       - REFRESH_MODE=${REFRESH_MODE:-false}
-    depends_on:
-      - db
     networks:
       - mypandits-network
 
@@ -69,7 +67,7 @@ services:
     volumes:
       - whatsapp_data:/data/whatsapp_session
     environment:
-      - WHATSAPP_SERVICE_URL=http://whatsapp-service:3095
+      - WHATSAPP_SERVICE_URL=${WHATSAPP_SERVICE_URL:-http://whatsapp-service:3095}
     networks:
       - mypandits-network
 

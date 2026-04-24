@@ -20,7 +20,9 @@ export const auth = betterAuth({
         provider: "postgresql",
     }),
     // 2. The baseURL determines the primary identity
-    baseURL: isWindows ? localUrl : process.env.BETTER_AUTH_URL,
+    baseURL: isWindows 
+        ? localUrl 
+        : (process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL || localUrl),
 
     // 3. trustedOrigins handles all sub-domains and local ports
     trustedOrigins: [

@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 COPY package*.json ./
 # Skip scripts to avoid Chromium download on VPS, but allow critical build scripts
-RUN npm ci --ignore-scripts
+RUN NODE_ENV=development npm ci --include=dev --ignore-scripts
 
 # Stage 2: Builder Stage
 FROM node:22-bookworm AS builder
@@ -47,7 +47,7 @@ RUN npm run build
 FROM node:22-bookworm AS development
 WORKDIR /usr/src/app
 COPY package*.json ./
-RUN npm ci --ignore-scripts
+RUN NODE_ENV=development npm ci --include=dev --ignore-scripts
 COPY . .
 RUN npx prisma generate
 EXPOSE 3090

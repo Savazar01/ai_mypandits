@@ -22,12 +22,7 @@ services:
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
     networks:
       - coolify
-    deploy:
-      resources:
-        limits:
-          memory: 4096M
-        reservations:
-          memory: 512M
+
 
   # 2. AI Backend: Python FastAPI Service
   ai-backend:
@@ -43,12 +38,7 @@ services:
       - REFRESH_MODE=${REFRESH_MODE:-false}
     networks:
       - coolify
-    deploy:
-      resources:
-        limits:
-          memory: 1024M
-        reservations:
-          memory: 256M
+
 
 networks:
   coolify:

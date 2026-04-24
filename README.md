@@ -81,15 +81,15 @@ npx prisma generate
 npx prisma db push
 ```
 
-### 4. Running the Application
-```bash
-# Terminal 1: Application Dev Server
-npm run dev
+### 4. Running the Application (Docker Desktop)
+We use Docker Desktop on Windows to guarantee environment parity with our production Linux VPS.
 
-# WhatsApp Bridge (Just-In-Time)
-# The WhatsApp bridge no longer requires a manual background process.
-# It is automatically initialized JIT (Just-In-Time) when you trigger 
-# a login or registration flow. Note: Requires Node.js 20+ for stable Chromium execution.
+```bash
+# Start all services (Next.js, AI Backend, Database, WhatsApp)
+docker compose up --build -d
+
+# View live logs
+docker compose logs -f
 ```
 Open **[http://localhost:3090](http://localhost:3090)** to view the MyPandits Platform.
 
@@ -97,16 +97,15 @@ Open **[http://localhost:3090](http://localhost:3090)** to view the MyPandits Pl
 
 ## 🚀 Production Deployment (v2.1.0)
 
-### 🏗️ Hybrid Architecture (v2.1.0-hybrid)
+### 🏗️ Docker Compose Architecture (v2.2.0-compose)
 
-The MyPandits ecosystem uses a decoupled, hybrid architecture to ensure maximum stability across platform transitions.
+The MyPandits ecosystem uses a decoupled, hybrid architecture to ensure maximum stability across platform transitions. We have explicitly moved away from isolated `Dockerfile` deployments. **Both Local (Windows Docker Desktop) and Production (Linux Coolify) now use `docker-compose`** to guarantee 100% environment parity.
 
 #### 1. Service Orchestration
-- **Main Application**: Next.js service running on Port 3090.
-- **WhatsApp Bridge**: 
-    - **Production (Linux)**: Standalone micro-service container on Port 3095. Internal communication via Docker networking (e.g., `http://whatsapp-service:3095`).
-    - **Development (Windows)**: Managed JIT (Just-In-Time) monolith flow using `whatsapp-bridge.js`.
-- **Platform Branching**: `src/lib/whatsapp.ts` automatically detects the environment (`win32` vs `linux`) to route traffic to the appropriate bridge.
+- **Main Application**: Next.js service (`next-app`) running on Port 3090.
+- **AI Backend**: FastAPI service (`ai-backend`) strictly running on Port 8090.
+- **WhatsApp Bridge**: Standalone micro-service container on Port 3095.
+- **Platform Branching**: Internal service communication happens strictly over Docker DNS (e.g., `http://whatsapp-service:3095` and `http://ai-backend:8090`).
 
 #### 2. Environment Variables (Definitive Table)
 

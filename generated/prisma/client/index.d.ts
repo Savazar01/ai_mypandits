@@ -38,6 +38,31 @@ export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
  * 
  */
 export type CatalogItem = $Result.DefaultSelection<Prisma.$CatalogItemPayload>
+/**
+ * Model Event
+ * 
+ */
+export type Event = $Result.DefaultSelection<Prisma.$EventPayload>
+/**
+ * Model EventDay
+ * 
+ */
+export type EventDay = $Result.DefaultSelection<Prisma.$EventDayPayload>
+/**
+ * Model Activity
+ * 
+ */
+export type Activity = $Result.DefaultSelection<Prisma.$ActivityPayload>
+/**
+ * Model Invitation
+ * 
+ */
+export type Invitation = $Result.DefaultSelection<Prisma.$InvitationPayload>
+/**
+ * Model OrchestrationLog
+ * 
+ */
+export type OrchestrationLog = $Result.DefaultSelection<Prisma.$OrchestrationLogPayload>
 
 /**
  * Enums
@@ -227,6 +252,56 @@ export class PrismaClient<
     * ```
     */
   get catalogItem(): Prisma.CatalogItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.event`: Exposes CRUD operations for the **Event** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Events
+    * const events = await prisma.event.findMany()
+    * ```
+    */
+  get event(): Prisma.EventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.eventDay`: Exposes CRUD operations for the **EventDay** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EventDays
+    * const eventDays = await prisma.eventDay.findMany()
+    * ```
+    */
+  get eventDay(): Prisma.EventDayDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.activity`: Exposes CRUD operations for the **Activity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Activities
+    * const activities = await prisma.activity.findMany()
+    * ```
+    */
+  get activity(): Prisma.ActivityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.invitation`: Exposes CRUD operations for the **Invitation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Invitations
+    * const invitations = await prisma.invitation.findMany()
+    * ```
+    */
+  get invitation(): Prisma.InvitationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.orchestrationLog`: Exposes CRUD operations for the **OrchestrationLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OrchestrationLogs
+    * const orchestrationLogs = await prisma.orchestrationLog.findMany()
+    * ```
+    */
+  get orchestrationLog(): Prisma.OrchestrationLogDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -277,7 +352,7 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 7.6.0
+   * Prisma Client JS version: 7.7.0
    * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
    */
   export type PrismaVersion = {
@@ -665,7 +740,12 @@ export namespace Prisma {
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification',
-    CatalogItem: 'CatalogItem'
+    CatalogItem: 'CatalogItem',
+    Event: 'Event',
+    EventDay: 'EventDay',
+    Activity: 'Activity',
+    Invitation: 'Invitation',
+    OrchestrationLog: 'OrchestrationLog'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -681,7 +761,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "catalogItem"
+      modelProps: "user" | "session" | "account" | "verification" | "catalogItem" | "event" | "eventDay" | "activity" | "invitation" | "orchestrationLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1055,6 +1135,376 @@ export namespace Prisma {
           }
         }
       }
+      Event: {
+        payload: Prisma.$EventPayload<ExtArgs>
+        fields: Prisma.EventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          findFirst: {
+            args: Prisma.EventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          findMany: {
+            args: Prisma.EventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>[]
+          }
+          create: {
+            args: Prisma.EventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          createMany: {
+            args: Prisma.EventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>[]
+          }
+          delete: {
+            args: Prisma.EventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          update: {
+            args: Prisma.EventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          deleteMany: {
+            args: Prisma.EventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>[]
+          }
+          upsert: {
+            args: Prisma.EventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          aggregate: {
+            args: Prisma.EventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEvent>
+          }
+          groupBy: {
+            args: Prisma.EventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EventCountArgs<ExtArgs>
+            result: $Utils.Optional<EventCountAggregateOutputType> | number
+          }
+        }
+      }
+      EventDay: {
+        payload: Prisma.$EventDayPayload<ExtArgs>
+        fields: Prisma.EventDayFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventDayFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventDayFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload>
+          }
+          findFirst: {
+            args: Prisma.EventDayFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventDayFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload>
+          }
+          findMany: {
+            args: Prisma.EventDayFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload>[]
+          }
+          create: {
+            args: Prisma.EventDayCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload>
+          }
+          createMany: {
+            args: Prisma.EventDayCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EventDayCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload>[]
+          }
+          delete: {
+            args: Prisma.EventDayDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload>
+          }
+          update: {
+            args: Prisma.EventDayUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload>
+          }
+          deleteMany: {
+            args: Prisma.EventDayDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventDayUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EventDayUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload>[]
+          }
+          upsert: {
+            args: Prisma.EventDayUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventDayPayload>
+          }
+          aggregate: {
+            args: Prisma.EventDayAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEventDay>
+          }
+          groupBy: {
+            args: Prisma.EventDayGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventDayGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EventDayCountArgs<ExtArgs>
+            result: $Utils.Optional<EventDayCountAggregateOutputType> | number
+          }
+        }
+      }
+      Activity: {
+        payload: Prisma.$ActivityPayload<ExtArgs>
+        fields: Prisma.ActivityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ActivityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ActivityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          findFirst: {
+            args: Prisma.ActivityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ActivityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          findMany: {
+            args: Prisma.ActivityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>[]
+          }
+          create: {
+            args: Prisma.ActivityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          createMany: {
+            args: Prisma.ActivityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ActivityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>[]
+          }
+          delete: {
+            args: Prisma.ActivityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          update: {
+            args: Prisma.ActivityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          deleteMany: {
+            args: Prisma.ActivityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ActivityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ActivityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>[]
+          }
+          upsert: {
+            args: Prisma.ActivityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          aggregate: {
+            args: Prisma.ActivityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActivity>
+          }
+          groupBy: {
+            args: Prisma.ActivityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActivityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ActivityCountArgs<ExtArgs>
+            result: $Utils.Optional<ActivityCountAggregateOutputType> | number
+          }
+        }
+      }
+      Invitation: {
+        payload: Prisma.$InvitationPayload<ExtArgs>
+        fields: Prisma.InvitationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InvitationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InvitationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          findFirst: {
+            args: Prisma.InvitationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InvitationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          findMany: {
+            args: Prisma.InvitationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>[]
+          }
+          create: {
+            args: Prisma.InvitationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          createMany: {
+            args: Prisma.InvitationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InvitationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>[]
+          }
+          delete: {
+            args: Prisma.InvitationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          update: {
+            args: Prisma.InvitationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          deleteMany: {
+            args: Prisma.InvitationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InvitationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InvitationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>[]
+          }
+          upsert: {
+            args: Prisma.InvitationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          aggregate: {
+            args: Prisma.InvitationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInvitation>
+          }
+          groupBy: {
+            args: Prisma.InvitationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InvitationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InvitationCountArgs<ExtArgs>
+            result: $Utils.Optional<InvitationCountAggregateOutputType> | number
+          }
+        }
+      }
+      OrchestrationLog: {
+        payload: Prisma.$OrchestrationLogPayload<ExtArgs>
+        fields: Prisma.OrchestrationLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OrchestrationLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OrchestrationLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload>
+          }
+          findFirst: {
+            args: Prisma.OrchestrationLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OrchestrationLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload>
+          }
+          findMany: {
+            args: Prisma.OrchestrationLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload>[]
+          }
+          create: {
+            args: Prisma.OrchestrationLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload>
+          }
+          createMany: {
+            args: Prisma.OrchestrationLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OrchestrationLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload>[]
+          }
+          delete: {
+            args: Prisma.OrchestrationLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload>
+          }
+          update: {
+            args: Prisma.OrchestrationLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.OrchestrationLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OrchestrationLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OrchestrationLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload>[]
+          }
+          upsert: {
+            args: Prisma.OrchestrationLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrchestrationLogPayload>
+          }
+          aggregate: {
+            args: Prisma.OrchestrationLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOrchestrationLog>
+          }
+          groupBy: {
+            args: Prisma.OrchestrationLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OrchestrationLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OrchestrationLogCountArgs<ExtArgs>
+            result: $Utils.Optional<OrchestrationLogCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1168,6 +1618,11 @@ export namespace Prisma {
     account?: AccountOmit
     verification?: VerificationOmit
     catalogItem?: CatalogItemOmit
+    event?: EventOmit
+    eventDay?: EventDayOmit
+    activity?: ActivityOmit
+    invitation?: InvitationOmit
+    orchestrationLog?: OrchestrationLogOmit
   }
 
   /* Types for Logging */
@@ -1251,12 +1706,14 @@ export namespace Prisma {
     sessions: number
     accounts: number
     catalogItems: number
+    events: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     catalogItems?: boolean | UserCountOutputTypeCountCatalogItemsArgs
+    events?: boolean | UserCountOutputTypeCountEventsArgs
   }
 
   // Custom InputTypes
@@ -1289,6 +1746,133 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCatalogItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CatalogItemWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
+  }
+
+
+  /**
+   * Count Type EventCountOutputType
+   */
+
+  export type EventCountOutputType = {
+    days: number
+    activities: number
+    invitations: number
+    logs: number
+  }
+
+  export type EventCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    days?: boolean | EventCountOutputTypeCountDaysArgs
+    activities?: boolean | EventCountOutputTypeCountActivitiesArgs
+    invitations?: boolean | EventCountOutputTypeCountInvitationsArgs
+    logs?: boolean | EventCountOutputTypeCountLogsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCountOutputType
+     */
+    select?: EventCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountDaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventDayWhereInput
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityWhereInput
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrchestrationLogWhereInput
+  }
+
+
+  /**
+   * Count Type EventDayCountOutputType
+   */
+
+  export type EventDayCountOutputType = {
+    activities: number
+  }
+
+  export type EventDayCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activities?: boolean | EventDayCountOutputTypeCountActivitiesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EventDayCountOutputType without action
+   */
+  export type EventDayCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDayCountOutputType
+     */
+    select?: EventDayCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventDayCountOutputType without action
+   */
+  export type EventDayCountOutputTypeCountActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityWhereInput
+  }
+
+
+  /**
+   * Count Type ActivityCountOutputType
+   */
+
+  export type ActivityCountOutputType = {
+    invitations: number
+  }
+
+  export type ActivityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invitations?: boolean | ActivityCountOutputTypeCountInvitationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ActivityCountOutputType without action
+   */
+  export type ActivityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityCountOutputType
+     */
+    select?: ActivityCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ActivityCountOutputType without action
+   */
+  export type ActivityCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
   }
 
 
@@ -1523,6 +2107,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     catalogItems?: boolean | User$catalogItemsArgs<ExtArgs>
+    events?: boolean | User$eventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1579,6 +2164,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     catalogItems?: boolean | User$catalogItemsArgs<ExtArgs>
+    events?: boolean | User$eventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1590,6 +2176,7 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       catalogItems: Prisma.$CatalogItemPayload<ExtArgs>[]
+      events: Prisma.$EventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2002,6 +2589,7 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     catalogItems<T extends User$catalogItemsArgs<ExtArgs> = {}>(args?: Subset<T, User$catalogItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CatalogItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    events<T extends User$eventsArgs<ExtArgs> = {}>(args?: Subset<T, User$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2506,6 +3094,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CatalogItemScalarFieldEnum | CatalogItemScalarFieldEnum[]
+  }
+
+  /**
+   * User.events
+   */
+  export type User$eventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    cursor?: EventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
   }
 
   /**
@@ -6959,6 +7571,5841 @@ export namespace Prisma {
 
 
   /**
+   * Model Event
+   */
+
+  export type AggregateEvent = {
+    _count: EventCountAggregateOutputType | null
+    _min: EventMinAggregateOutputType | null
+    _max: EventMaxAggregateOutputType | null
+  }
+
+  export type EventMinAggregateOutputType = {
+    id: string | null
+    owner_id: string | null
+    title: string | null
+    description: string | null
+    event_type: string | null
+    start_date: Date | null
+    end_date: Date | null
+    status: string | null
+    location: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type EventMaxAggregateOutputType = {
+    id: string | null
+    owner_id: string | null
+    title: string | null
+    description: string | null
+    event_type: string | null
+    start_date: Date | null
+    end_date: Date | null
+    status: string | null
+    location: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type EventCountAggregateOutputType = {
+    id: number
+    owner_id: number
+    title: number
+    description: number
+    event_type: number
+    start_date: number
+    end_date: number
+    status: number
+    location: number
+    orchestration_state: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type EventMinAggregateInputType = {
+    id?: true
+    owner_id?: true
+    title?: true
+    description?: true
+    event_type?: true
+    start_date?: true
+    end_date?: true
+    status?: true
+    location?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type EventMaxAggregateInputType = {
+    id?: true
+    owner_id?: true
+    title?: true
+    description?: true
+    event_type?: true
+    start_date?: true
+    end_date?: true
+    status?: true
+    location?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type EventCountAggregateInputType = {
+    id?: true
+    owner_id?: true
+    title?: true
+    description?: true
+    event_type?: true
+    start_date?: true
+    end_date?: true
+    status?: true
+    location?: true
+    orchestration_state?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type EventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Event to aggregate.
+     */
+    where?: EventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Events to fetch.
+     */
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Events from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Events.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Events
+    **/
+    _count?: true | EventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventMaxAggregateInputType
+  }
+
+  export type GetEventAggregateType<T extends EventAggregateArgs> = {
+        [P in keyof T & keyof AggregateEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEvent[P]>
+      : GetScalarType<T[P], AggregateEvent[P]>
+  }
+
+
+
+
+  export type EventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithAggregationInput | EventOrderByWithAggregationInput[]
+    by: EventScalarFieldEnum[] | EventScalarFieldEnum
+    having?: EventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventCountAggregateInputType | true
+    _min?: EventMinAggregateInputType
+    _max?: EventMaxAggregateInputType
+  }
+
+  export type EventGroupByOutputType = {
+    id: string
+    owner_id: string
+    title: string
+    description: string | null
+    event_type: string
+    start_date: Date | null
+    end_date: Date | null
+    status: string
+    location: string | null
+    orchestration_state: JsonValue | null
+    created_at: Date
+    updated_at: Date
+    _count: EventCountAggregateOutputType | null
+    _min: EventMinAggregateOutputType | null
+    _max: EventMaxAggregateOutputType | null
+  }
+
+  type GetEventGroupByPayload<T extends EventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventGroupByOutputType[P]>
+            : GetScalarType<T[P], EventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    owner_id?: boolean
+    title?: boolean
+    description?: boolean
+    event_type?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    status?: boolean
+    location?: boolean
+    orchestration_state?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    owner?: boolean | UserDefaultArgs<ExtArgs>
+    days?: boolean | Event$daysArgs<ExtArgs>
+    activities?: boolean | Event$activitiesArgs<ExtArgs>
+    invitations?: boolean | Event$invitationsArgs<ExtArgs>
+    logs?: boolean | Event$logsArgs<ExtArgs>
+    _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["event"]>
+
+  export type EventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    owner_id?: boolean
+    title?: boolean
+    description?: boolean
+    event_type?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    status?: boolean
+    location?: boolean
+    orchestration_state?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    owner?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["event"]>
+
+  export type EventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    owner_id?: boolean
+    title?: boolean
+    description?: boolean
+    event_type?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    status?: boolean
+    location?: boolean
+    orchestration_state?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    owner?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["event"]>
+
+  export type EventSelectScalar = {
+    id?: boolean
+    owner_id?: boolean
+    title?: boolean
+    description?: boolean
+    event_type?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    status?: boolean
+    location?: boolean
+    orchestration_state?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "owner_id" | "title" | "description" | "event_type" | "start_date" | "end_date" | "status" | "location" | "orchestration_state" | "created_at" | "updated_at", ExtArgs["result"]["event"]>
+  export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    owner?: boolean | UserDefaultArgs<ExtArgs>
+    days?: boolean | Event$daysArgs<ExtArgs>
+    activities?: boolean | Event$activitiesArgs<ExtArgs>
+    invitations?: boolean | Event$invitationsArgs<ExtArgs>
+    logs?: boolean | Event$logsArgs<ExtArgs>
+    _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    owner?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type EventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    owner?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Event"
+    objects: {
+      owner: Prisma.$UserPayload<ExtArgs>
+      days: Prisma.$EventDayPayload<ExtArgs>[]
+      activities: Prisma.$ActivityPayload<ExtArgs>[]
+      invitations: Prisma.$InvitationPayload<ExtArgs>[]
+      logs: Prisma.$OrchestrationLogPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      owner_id: string
+      title: string
+      description: string | null
+      event_type: string
+      start_date: Date | null
+      end_date: Date | null
+      status: string
+      location: string | null
+      orchestration_state: Prisma.JsonValue | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["event"]>
+    composites: {}
+  }
+
+  type EventGetPayload<S extends boolean | null | undefined | EventDefaultArgs> = $Result.GetResult<Prisma.$EventPayload, S>
+
+  type EventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EventCountAggregateInputType | true
+    }
+
+  export interface EventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Event'], meta: { name: 'Event' } }
+    /**
+     * Find zero or one Event that matches the filter.
+     * @param {EventFindUniqueArgs} args - Arguments to find a Event
+     * @example
+     * // Get one Event
+     * const event = await prisma.event.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventFindUniqueArgs>(args: SelectSubset<T, EventFindUniqueArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Event that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EventFindUniqueOrThrowArgs} args - Arguments to find a Event
+     * @example
+     * // Get one Event
+     * const event = await prisma.event.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventFindUniqueOrThrowArgs>(args: SelectSubset<T, EventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Event that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFindFirstArgs} args - Arguments to find a Event
+     * @example
+     * // Get one Event
+     * const event = await prisma.event.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventFindFirstArgs>(args?: SelectSubset<T, EventFindFirstArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Event that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFindFirstOrThrowArgs} args - Arguments to find a Event
+     * @example
+     * // Get one Event
+     * const event = await prisma.event.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventFindFirstOrThrowArgs>(args?: SelectSubset<T, EventFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Events that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Events
+     * const events = await prisma.event.findMany()
+     * 
+     * // Get first 10 Events
+     * const events = await prisma.event.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventWithIdOnly = await prisma.event.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventFindManyArgs>(args?: SelectSubset<T, EventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Event.
+     * @param {EventCreateArgs} args - Arguments to create a Event.
+     * @example
+     * // Create one Event
+     * const Event = await prisma.event.create({
+     *   data: {
+     *     // ... data to create a Event
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventCreateArgs>(args: SelectSubset<T, EventCreateArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Events.
+     * @param {EventCreateManyArgs} args - Arguments to create many Events.
+     * @example
+     * // Create many Events
+     * const event = await prisma.event.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventCreateManyArgs>(args?: SelectSubset<T, EventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Events and returns the data saved in the database.
+     * @param {EventCreateManyAndReturnArgs} args - Arguments to create many Events.
+     * @example
+     * // Create many Events
+     * const event = await prisma.event.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Events and only return the `id`
+     * const eventWithIdOnly = await prisma.event.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EventCreateManyAndReturnArgs>(args?: SelectSubset<T, EventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Event.
+     * @param {EventDeleteArgs} args - Arguments to delete one Event.
+     * @example
+     * // Delete one Event
+     * const Event = await prisma.event.delete({
+     *   where: {
+     *     // ... filter to delete one Event
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventDeleteArgs>(args: SelectSubset<T, EventDeleteArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Event.
+     * @param {EventUpdateArgs} args - Arguments to update one Event.
+     * @example
+     * // Update one Event
+     * const event = await prisma.event.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventUpdateArgs>(args: SelectSubset<T, EventUpdateArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Events.
+     * @param {EventDeleteManyArgs} args - Arguments to filter Events to delete.
+     * @example
+     * // Delete a few Events
+     * const { count } = await prisma.event.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventDeleteManyArgs>(args?: SelectSubset<T, EventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Events.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Events
+     * const event = await prisma.event.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventUpdateManyArgs>(args: SelectSubset<T, EventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Events and returns the data updated in the database.
+     * @param {EventUpdateManyAndReturnArgs} args - Arguments to update many Events.
+     * @example
+     * // Update many Events
+     * const event = await prisma.event.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Events and only return the `id`
+     * const eventWithIdOnly = await prisma.event.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EventUpdateManyAndReturnArgs>(args: SelectSubset<T, EventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Event.
+     * @param {EventUpsertArgs} args - Arguments to update or create a Event.
+     * @example
+     * // Update or create a Event
+     * const event = await prisma.event.upsert({
+     *   create: {
+     *     // ... data to create a Event
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Event we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventUpsertArgs>(args: SelectSubset<T, EventUpsertArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Events.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCountArgs} args - Arguments to filter Events to count.
+     * @example
+     * // Count the number of Events
+     * const count = await prisma.event.count({
+     *   where: {
+     *     // ... the filter for the Events we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventCountArgs>(
+      args?: Subset<T, EventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Event.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventAggregateArgs>(args: Subset<T, EventAggregateArgs>): Prisma.PrismaPromise<GetEventAggregateType<T>>
+
+    /**
+     * Group by Event.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventGroupByArgs['orderBy'] }
+        : { orderBy?: EventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Event model
+   */
+  readonly fields: EventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Event.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    days<T extends Event$daysArgs<ExtArgs> = {}>(args?: Subset<T, Event$daysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activities<T extends Event$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, Event$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invitations<T extends Event$invitationsArgs<ExtArgs> = {}>(args?: Subset<T, Event$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    logs<T extends Event$logsArgs<ExtArgs> = {}>(args?: Subset<T, Event$logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Event model
+   */
+  interface EventFieldRefs {
+    readonly id: FieldRef<"Event", 'String'>
+    readonly owner_id: FieldRef<"Event", 'String'>
+    readonly title: FieldRef<"Event", 'String'>
+    readonly description: FieldRef<"Event", 'String'>
+    readonly event_type: FieldRef<"Event", 'String'>
+    readonly start_date: FieldRef<"Event", 'DateTime'>
+    readonly end_date: FieldRef<"Event", 'DateTime'>
+    readonly status: FieldRef<"Event", 'String'>
+    readonly location: FieldRef<"Event", 'String'>
+    readonly orchestration_state: FieldRef<"Event", 'Json'>
+    readonly created_at: FieldRef<"Event", 'DateTime'>
+    readonly updated_at: FieldRef<"Event", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Event findUnique
+   */
+  export type EventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter, which Event to fetch.
+     */
+    where: EventWhereUniqueInput
+  }
+
+  /**
+   * Event findUniqueOrThrow
+   */
+  export type EventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter, which Event to fetch.
+     */
+    where: EventWhereUniqueInput
+  }
+
+  /**
+   * Event findFirst
+   */
+  export type EventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter, which Event to fetch.
+     */
+    where?: EventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Events to fetch.
+     */
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Events.
+     */
+    cursor?: EventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Events from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Events.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Events.
+     */
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * Event findFirstOrThrow
+   */
+  export type EventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter, which Event to fetch.
+     */
+    where?: EventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Events to fetch.
+     */
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Events.
+     */
+    cursor?: EventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Events from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Events.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Events.
+     */
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * Event findMany
+   */
+  export type EventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter, which Events to fetch.
+     */
+    where?: EventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Events to fetch.
+     */
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Events.
+     */
+    cursor?: EventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Events from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Events.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Events.
+     */
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * Event create
+   */
+  export type EventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Event.
+     */
+    data: XOR<EventCreateInput, EventUncheckedCreateInput>
+  }
+
+  /**
+   * Event createMany
+   */
+  export type EventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Events.
+     */
+    data: EventCreateManyInput | EventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Event createManyAndReturn
+   */
+  export type EventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * The data used to create many Events.
+     */
+    data: EventCreateManyInput | EventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Event update
+   */
+  export type EventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Event.
+     */
+    data: XOR<EventUpdateInput, EventUncheckedUpdateInput>
+    /**
+     * Choose, which Event to update.
+     */
+    where: EventWhereUniqueInput
+  }
+
+  /**
+   * Event updateMany
+   */
+  export type EventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Events.
+     */
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyInput>
+    /**
+     * Filter which Events to update
+     */
+    where?: EventWhereInput
+    /**
+     * Limit how many Events to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Event updateManyAndReturn
+   */
+  export type EventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * The data used to update Events.
+     */
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyInput>
+    /**
+     * Filter which Events to update
+     */
+    where?: EventWhereInput
+    /**
+     * Limit how many Events to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Event upsert
+   */
+  export type EventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Event to update in case it exists.
+     */
+    where: EventWhereUniqueInput
+    /**
+     * In case the Event found by the `where` argument doesn't exist, create a new Event with this data.
+     */
+    create: XOR<EventCreateInput, EventUncheckedCreateInput>
+    /**
+     * In case the Event was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventUpdateInput, EventUncheckedUpdateInput>
+  }
+
+  /**
+   * Event delete
+   */
+  export type EventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter which Event to delete.
+     */
+    where: EventWhereUniqueInput
+  }
+
+  /**
+   * Event deleteMany
+   */
+  export type EventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Events to delete
+     */
+    where?: EventWhereInput
+    /**
+     * Limit how many Events to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Event.days
+   */
+  export type Event$daysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+    where?: EventDayWhereInput
+    orderBy?: EventDayOrderByWithRelationInput | EventDayOrderByWithRelationInput[]
+    cursor?: EventDayWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventDayScalarFieldEnum | EventDayScalarFieldEnum[]
+  }
+
+  /**
+   * Event.activities
+   */
+  export type Event$activitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    where?: ActivityWhereInput
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    cursor?: ActivityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityScalarFieldEnum | ActivityScalarFieldEnum[]
+  }
+
+  /**
+   * Event.invitations
+   */
+  export type Event$invitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    where?: InvitationWhereInput
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    cursor?: InvitationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Event.logs
+   */
+  export type Event$logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+    where?: OrchestrationLogWhereInput
+    orderBy?: OrchestrationLogOrderByWithRelationInput | OrchestrationLogOrderByWithRelationInput[]
+    cursor?: OrchestrationLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrchestrationLogScalarFieldEnum | OrchestrationLogScalarFieldEnum[]
+  }
+
+  /**
+   * Event without action
+   */
+  export type EventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EventDay
+   */
+
+  export type AggregateEventDay = {
+    _count: EventDayCountAggregateOutputType | null
+    _avg: EventDayAvgAggregateOutputType | null
+    _sum: EventDaySumAggregateOutputType | null
+    _min: EventDayMinAggregateOutputType | null
+    _max: EventDayMaxAggregateOutputType | null
+  }
+
+  export type EventDayAvgAggregateOutputType = {
+    sequence_number: number | null
+  }
+
+  export type EventDaySumAggregateOutputType = {
+    sequence_number: number | null
+  }
+
+  export type EventDayMinAggregateOutputType = {
+    id: string | null
+    event_id: string | null
+    date: Date | null
+    sequence_number: number | null
+    created_at: Date | null
+  }
+
+  export type EventDayMaxAggregateOutputType = {
+    id: string | null
+    event_id: string | null
+    date: Date | null
+    sequence_number: number | null
+    created_at: Date | null
+  }
+
+  export type EventDayCountAggregateOutputType = {
+    id: number
+    event_id: number
+    date: number
+    sequence_number: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type EventDayAvgAggregateInputType = {
+    sequence_number?: true
+  }
+
+  export type EventDaySumAggregateInputType = {
+    sequence_number?: true
+  }
+
+  export type EventDayMinAggregateInputType = {
+    id?: true
+    event_id?: true
+    date?: true
+    sequence_number?: true
+    created_at?: true
+  }
+
+  export type EventDayMaxAggregateInputType = {
+    id?: true
+    event_id?: true
+    date?: true
+    sequence_number?: true
+    created_at?: true
+  }
+
+  export type EventDayCountAggregateInputType = {
+    id?: true
+    event_id?: true
+    date?: true
+    sequence_number?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type EventDayAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventDay to aggregate.
+     */
+    where?: EventDayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventDays to fetch.
+     */
+    orderBy?: EventDayOrderByWithRelationInput | EventDayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventDayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventDays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventDays.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EventDays
+    **/
+    _count?: true | EventDayCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EventDayAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EventDaySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventDayMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventDayMaxAggregateInputType
+  }
+
+  export type GetEventDayAggregateType<T extends EventDayAggregateArgs> = {
+        [P in keyof T & keyof AggregateEventDay]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEventDay[P]>
+      : GetScalarType<T[P], AggregateEventDay[P]>
+  }
+
+
+
+
+  export type EventDayGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventDayWhereInput
+    orderBy?: EventDayOrderByWithAggregationInput | EventDayOrderByWithAggregationInput[]
+    by: EventDayScalarFieldEnum[] | EventDayScalarFieldEnum
+    having?: EventDayScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventDayCountAggregateInputType | true
+    _avg?: EventDayAvgAggregateInputType
+    _sum?: EventDaySumAggregateInputType
+    _min?: EventDayMinAggregateInputType
+    _max?: EventDayMaxAggregateInputType
+  }
+
+  export type EventDayGroupByOutputType = {
+    id: string
+    event_id: string
+    date: Date
+    sequence_number: number
+    created_at: Date
+    _count: EventDayCountAggregateOutputType | null
+    _avg: EventDayAvgAggregateOutputType | null
+    _sum: EventDaySumAggregateOutputType | null
+    _min: EventDayMinAggregateOutputType | null
+    _max: EventDayMaxAggregateOutputType | null
+  }
+
+  type GetEventDayGroupByPayload<T extends EventDayGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventDayGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventDayGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventDayGroupByOutputType[P]>
+            : GetScalarType<T[P], EventDayGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventDaySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event_id?: boolean
+    date?: boolean
+    sequence_number?: boolean
+    created_at?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    activities?: boolean | EventDay$activitiesArgs<ExtArgs>
+    _count?: boolean | EventDayCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventDay"]>
+
+  export type EventDaySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event_id?: boolean
+    date?: boolean
+    sequence_number?: boolean
+    created_at?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventDay"]>
+
+  export type EventDaySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event_id?: boolean
+    date?: boolean
+    sequence_number?: boolean
+    created_at?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventDay"]>
+
+  export type EventDaySelectScalar = {
+    id?: boolean
+    event_id?: boolean
+    date?: boolean
+    sequence_number?: boolean
+    created_at?: boolean
+  }
+
+  export type EventDayOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "event_id" | "date" | "sequence_number" | "created_at", ExtArgs["result"]["eventDay"]>
+  export type EventDayInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    activities?: boolean | EventDay$activitiesArgs<ExtArgs>
+    _count?: boolean | EventDayCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EventDayIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type EventDayIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+
+  export type $EventDayPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EventDay"
+    objects: {
+      event: Prisma.$EventPayload<ExtArgs>
+      activities: Prisma.$ActivityPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      event_id: string
+      date: Date
+      sequence_number: number
+      created_at: Date
+    }, ExtArgs["result"]["eventDay"]>
+    composites: {}
+  }
+
+  type EventDayGetPayload<S extends boolean | null | undefined | EventDayDefaultArgs> = $Result.GetResult<Prisma.$EventDayPayload, S>
+
+  type EventDayCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EventDayFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EventDayCountAggregateInputType | true
+    }
+
+  export interface EventDayDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EventDay'], meta: { name: 'EventDay' } }
+    /**
+     * Find zero or one EventDay that matches the filter.
+     * @param {EventDayFindUniqueArgs} args - Arguments to find a EventDay
+     * @example
+     * // Get one EventDay
+     * const eventDay = await prisma.eventDay.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventDayFindUniqueArgs>(args: SelectSubset<T, EventDayFindUniqueArgs<ExtArgs>>): Prisma__EventDayClient<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EventDay that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EventDayFindUniqueOrThrowArgs} args - Arguments to find a EventDay
+     * @example
+     * // Get one EventDay
+     * const eventDay = await prisma.eventDay.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventDayFindUniqueOrThrowArgs>(args: SelectSubset<T, EventDayFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventDayClient<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventDay that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventDayFindFirstArgs} args - Arguments to find a EventDay
+     * @example
+     * // Get one EventDay
+     * const eventDay = await prisma.eventDay.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventDayFindFirstArgs>(args?: SelectSubset<T, EventDayFindFirstArgs<ExtArgs>>): Prisma__EventDayClient<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventDay that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventDayFindFirstOrThrowArgs} args - Arguments to find a EventDay
+     * @example
+     * // Get one EventDay
+     * const eventDay = await prisma.eventDay.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventDayFindFirstOrThrowArgs>(args?: SelectSubset<T, EventDayFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventDayClient<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EventDays that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventDayFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EventDays
+     * const eventDays = await prisma.eventDay.findMany()
+     * 
+     * // Get first 10 EventDays
+     * const eventDays = await prisma.eventDay.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventDayWithIdOnly = await prisma.eventDay.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventDayFindManyArgs>(args?: SelectSubset<T, EventDayFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EventDay.
+     * @param {EventDayCreateArgs} args - Arguments to create a EventDay.
+     * @example
+     * // Create one EventDay
+     * const EventDay = await prisma.eventDay.create({
+     *   data: {
+     *     // ... data to create a EventDay
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventDayCreateArgs>(args: SelectSubset<T, EventDayCreateArgs<ExtArgs>>): Prisma__EventDayClient<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EventDays.
+     * @param {EventDayCreateManyArgs} args - Arguments to create many EventDays.
+     * @example
+     * // Create many EventDays
+     * const eventDay = await prisma.eventDay.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventDayCreateManyArgs>(args?: SelectSubset<T, EventDayCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EventDays and returns the data saved in the database.
+     * @param {EventDayCreateManyAndReturnArgs} args - Arguments to create many EventDays.
+     * @example
+     * // Create many EventDays
+     * const eventDay = await prisma.eventDay.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EventDays and only return the `id`
+     * const eventDayWithIdOnly = await prisma.eventDay.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EventDayCreateManyAndReturnArgs>(args?: SelectSubset<T, EventDayCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EventDay.
+     * @param {EventDayDeleteArgs} args - Arguments to delete one EventDay.
+     * @example
+     * // Delete one EventDay
+     * const EventDay = await prisma.eventDay.delete({
+     *   where: {
+     *     // ... filter to delete one EventDay
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventDayDeleteArgs>(args: SelectSubset<T, EventDayDeleteArgs<ExtArgs>>): Prisma__EventDayClient<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EventDay.
+     * @param {EventDayUpdateArgs} args - Arguments to update one EventDay.
+     * @example
+     * // Update one EventDay
+     * const eventDay = await prisma.eventDay.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventDayUpdateArgs>(args: SelectSubset<T, EventDayUpdateArgs<ExtArgs>>): Prisma__EventDayClient<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EventDays.
+     * @param {EventDayDeleteManyArgs} args - Arguments to filter EventDays to delete.
+     * @example
+     * // Delete a few EventDays
+     * const { count } = await prisma.eventDay.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventDayDeleteManyArgs>(args?: SelectSubset<T, EventDayDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventDays.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventDayUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EventDays
+     * const eventDay = await prisma.eventDay.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventDayUpdateManyArgs>(args: SelectSubset<T, EventDayUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventDays and returns the data updated in the database.
+     * @param {EventDayUpdateManyAndReturnArgs} args - Arguments to update many EventDays.
+     * @example
+     * // Update many EventDays
+     * const eventDay = await prisma.eventDay.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EventDays and only return the `id`
+     * const eventDayWithIdOnly = await prisma.eventDay.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EventDayUpdateManyAndReturnArgs>(args: SelectSubset<T, EventDayUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EventDay.
+     * @param {EventDayUpsertArgs} args - Arguments to update or create a EventDay.
+     * @example
+     * // Update or create a EventDay
+     * const eventDay = await prisma.eventDay.upsert({
+     *   create: {
+     *     // ... data to create a EventDay
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EventDay we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventDayUpsertArgs>(args: SelectSubset<T, EventDayUpsertArgs<ExtArgs>>): Prisma__EventDayClient<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EventDays.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventDayCountArgs} args - Arguments to filter EventDays to count.
+     * @example
+     * // Count the number of EventDays
+     * const count = await prisma.eventDay.count({
+     *   where: {
+     *     // ... the filter for the EventDays we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventDayCountArgs>(
+      args?: Subset<T, EventDayCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventDayCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EventDay.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventDayAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventDayAggregateArgs>(args: Subset<T, EventDayAggregateArgs>): Prisma.PrismaPromise<GetEventDayAggregateType<T>>
+
+    /**
+     * Group by EventDay.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventDayGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventDayGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventDayGroupByArgs['orderBy'] }
+        : { orderBy?: EventDayGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventDayGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventDayGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EventDay model
+   */
+  readonly fields: EventDayFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EventDay.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventDayClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    event<T extends EventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDefaultArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    activities<T extends EventDay$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, EventDay$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EventDay model
+   */
+  interface EventDayFieldRefs {
+    readonly id: FieldRef<"EventDay", 'String'>
+    readonly event_id: FieldRef<"EventDay", 'String'>
+    readonly date: FieldRef<"EventDay", 'DateTime'>
+    readonly sequence_number: FieldRef<"EventDay", 'Int'>
+    readonly created_at: FieldRef<"EventDay", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EventDay findUnique
+   */
+  export type EventDayFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+    /**
+     * Filter, which EventDay to fetch.
+     */
+    where: EventDayWhereUniqueInput
+  }
+
+  /**
+   * EventDay findUniqueOrThrow
+   */
+  export type EventDayFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+    /**
+     * Filter, which EventDay to fetch.
+     */
+    where: EventDayWhereUniqueInput
+  }
+
+  /**
+   * EventDay findFirst
+   */
+  export type EventDayFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+    /**
+     * Filter, which EventDay to fetch.
+     */
+    where?: EventDayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventDays to fetch.
+     */
+    orderBy?: EventDayOrderByWithRelationInput | EventDayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventDays.
+     */
+    cursor?: EventDayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventDays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventDays.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventDays.
+     */
+    distinct?: EventDayScalarFieldEnum | EventDayScalarFieldEnum[]
+  }
+
+  /**
+   * EventDay findFirstOrThrow
+   */
+  export type EventDayFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+    /**
+     * Filter, which EventDay to fetch.
+     */
+    where?: EventDayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventDays to fetch.
+     */
+    orderBy?: EventDayOrderByWithRelationInput | EventDayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventDays.
+     */
+    cursor?: EventDayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventDays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventDays.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventDays.
+     */
+    distinct?: EventDayScalarFieldEnum | EventDayScalarFieldEnum[]
+  }
+
+  /**
+   * EventDay findMany
+   */
+  export type EventDayFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+    /**
+     * Filter, which EventDays to fetch.
+     */
+    where?: EventDayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventDays to fetch.
+     */
+    orderBy?: EventDayOrderByWithRelationInput | EventDayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EventDays.
+     */
+    cursor?: EventDayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventDays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventDays.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventDays.
+     */
+    distinct?: EventDayScalarFieldEnum | EventDayScalarFieldEnum[]
+  }
+
+  /**
+   * EventDay create
+   */
+  export type EventDayCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EventDay.
+     */
+    data: XOR<EventDayCreateInput, EventDayUncheckedCreateInput>
+  }
+
+  /**
+   * EventDay createMany
+   */
+  export type EventDayCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EventDays.
+     */
+    data: EventDayCreateManyInput | EventDayCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventDay createManyAndReturn
+   */
+  export type EventDayCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * The data used to create many EventDays.
+     */
+    data: EventDayCreateManyInput | EventDayCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EventDay update
+   */
+  export type EventDayUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EventDay.
+     */
+    data: XOR<EventDayUpdateInput, EventDayUncheckedUpdateInput>
+    /**
+     * Choose, which EventDay to update.
+     */
+    where: EventDayWhereUniqueInput
+  }
+
+  /**
+   * EventDay updateMany
+   */
+  export type EventDayUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EventDays.
+     */
+    data: XOR<EventDayUpdateManyMutationInput, EventDayUncheckedUpdateManyInput>
+    /**
+     * Filter which EventDays to update
+     */
+    where?: EventDayWhereInput
+    /**
+     * Limit how many EventDays to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventDay updateManyAndReturn
+   */
+  export type EventDayUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * The data used to update EventDays.
+     */
+    data: XOR<EventDayUpdateManyMutationInput, EventDayUncheckedUpdateManyInput>
+    /**
+     * Filter which EventDays to update
+     */
+    where?: EventDayWhereInput
+    /**
+     * Limit how many EventDays to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EventDay upsert
+   */
+  export type EventDayUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EventDay to update in case it exists.
+     */
+    where: EventDayWhereUniqueInput
+    /**
+     * In case the EventDay found by the `where` argument doesn't exist, create a new EventDay with this data.
+     */
+    create: XOR<EventDayCreateInput, EventDayUncheckedCreateInput>
+    /**
+     * In case the EventDay was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventDayUpdateInput, EventDayUncheckedUpdateInput>
+  }
+
+  /**
+   * EventDay delete
+   */
+  export type EventDayDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+    /**
+     * Filter which EventDay to delete.
+     */
+    where: EventDayWhereUniqueInput
+  }
+
+  /**
+   * EventDay deleteMany
+   */
+  export type EventDayDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventDays to delete
+     */
+    where?: EventDayWhereInput
+    /**
+     * Limit how many EventDays to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventDay.activities
+   */
+  export type EventDay$activitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    where?: ActivityWhereInput
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    cursor?: ActivityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityScalarFieldEnum | ActivityScalarFieldEnum[]
+  }
+
+  /**
+   * EventDay without action
+   */
+  export type EventDayDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventDay
+     */
+    select?: EventDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventDay
+     */
+    omit?: EventDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventDayInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Activity
+   */
+
+  export type AggregateActivity = {
+    _count: ActivityCountAggregateOutputType | null
+    _min: ActivityMinAggregateOutputType | null
+    _max: ActivityMaxAggregateOutputType | null
+  }
+
+  export type ActivityMinAggregateOutputType = {
+    id: string | null
+    day_id: string | null
+    event_id: string | null
+    title: string | null
+    start_time: Date | null
+    end_time: Date | null
+    location_type: string | null
+    location: string | null
+    status: string | null
+    is_orchestrated: boolean | null
+    created_at: Date | null
+  }
+
+  export type ActivityMaxAggregateOutputType = {
+    id: string | null
+    day_id: string | null
+    event_id: string | null
+    title: string | null
+    start_time: Date | null
+    end_time: Date | null
+    location_type: string | null
+    location: string | null
+    status: string | null
+    is_orchestrated: boolean | null
+    created_at: Date | null
+  }
+
+  export type ActivityCountAggregateOutputType = {
+    id: number
+    day_id: number
+    event_id: number
+    title: number
+    start_time: number
+    end_time: number
+    location_type: number
+    location: number
+    status: number
+    is_orchestrated: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type ActivityMinAggregateInputType = {
+    id?: true
+    day_id?: true
+    event_id?: true
+    title?: true
+    start_time?: true
+    end_time?: true
+    location_type?: true
+    location?: true
+    status?: true
+    is_orchestrated?: true
+    created_at?: true
+  }
+
+  export type ActivityMaxAggregateInputType = {
+    id?: true
+    day_id?: true
+    event_id?: true
+    title?: true
+    start_time?: true
+    end_time?: true
+    location_type?: true
+    location?: true
+    status?: true
+    is_orchestrated?: true
+    created_at?: true
+  }
+
+  export type ActivityCountAggregateInputType = {
+    id?: true
+    day_id?: true
+    event_id?: true
+    title?: true
+    start_time?: true
+    end_time?: true
+    location_type?: true
+    location?: true
+    status?: true
+    is_orchestrated?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type ActivityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Activity to aggregate.
+     */
+    where?: ActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activities to fetch.
+     */
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Activities
+    **/
+    _count?: true | ActivityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActivityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActivityMaxAggregateInputType
+  }
+
+  export type GetActivityAggregateType<T extends ActivityAggregateArgs> = {
+        [P in keyof T & keyof AggregateActivity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActivity[P]>
+      : GetScalarType<T[P], AggregateActivity[P]>
+  }
+
+
+
+
+  export type ActivityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityWhereInput
+    orderBy?: ActivityOrderByWithAggregationInput | ActivityOrderByWithAggregationInput[]
+    by: ActivityScalarFieldEnum[] | ActivityScalarFieldEnum
+    having?: ActivityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActivityCountAggregateInputType | true
+    _min?: ActivityMinAggregateInputType
+    _max?: ActivityMaxAggregateInputType
+  }
+
+  export type ActivityGroupByOutputType = {
+    id: string
+    day_id: string
+    event_id: string
+    title: string
+    start_time: Date
+    end_time: Date
+    location_type: string
+    location: string | null
+    status: string
+    is_orchestrated: boolean
+    created_at: Date
+    _count: ActivityCountAggregateOutputType | null
+    _min: ActivityMinAggregateOutputType | null
+    _max: ActivityMaxAggregateOutputType | null
+  }
+
+  type GetActivityGroupByPayload<T extends ActivityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActivityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActivityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActivityGroupByOutputType[P]>
+            : GetScalarType<T[P], ActivityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ActivitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    day_id?: boolean
+    event_id?: boolean
+    title?: boolean
+    start_time?: boolean
+    end_time?: boolean
+    location_type?: boolean
+    location?: boolean
+    status?: boolean
+    is_orchestrated?: boolean
+    created_at?: boolean
+    day?: boolean | EventDayDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    invitations?: boolean | Activity$invitationsArgs<ExtArgs>
+    _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activity"]>
+
+  export type ActivitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    day_id?: boolean
+    event_id?: boolean
+    title?: boolean
+    start_time?: boolean
+    end_time?: boolean
+    location_type?: boolean
+    location?: boolean
+    status?: boolean
+    is_orchestrated?: boolean
+    created_at?: boolean
+    day?: boolean | EventDayDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activity"]>
+
+  export type ActivitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    day_id?: boolean
+    event_id?: boolean
+    title?: boolean
+    start_time?: boolean
+    end_time?: boolean
+    location_type?: boolean
+    location?: boolean
+    status?: boolean
+    is_orchestrated?: boolean
+    created_at?: boolean
+    day?: boolean | EventDayDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activity"]>
+
+  export type ActivitySelectScalar = {
+    id?: boolean
+    day_id?: boolean
+    event_id?: boolean
+    title?: boolean
+    start_time?: boolean
+    end_time?: boolean
+    location_type?: boolean
+    location?: boolean
+    status?: boolean
+    is_orchestrated?: boolean
+    created_at?: boolean
+  }
+
+  export type ActivityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "day_id" | "event_id" | "title" | "start_time" | "end_time" | "location_type" | "location" | "status" | "is_orchestrated" | "created_at", ExtArgs["result"]["activity"]>
+  export type ActivityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    day?: boolean | EventDayDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    invitations?: boolean | Activity$invitationsArgs<ExtArgs>
+    _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ActivityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    day?: boolean | EventDayDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type ActivityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    day?: boolean | EventDayDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+
+  export type $ActivityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Activity"
+    objects: {
+      day: Prisma.$EventDayPayload<ExtArgs>
+      event: Prisma.$EventPayload<ExtArgs>
+      invitations: Prisma.$InvitationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      day_id: string
+      event_id: string
+      title: string
+      start_time: Date
+      end_time: Date
+      location_type: string
+      location: string | null
+      status: string
+      is_orchestrated: boolean
+      created_at: Date
+    }, ExtArgs["result"]["activity"]>
+    composites: {}
+  }
+
+  type ActivityGetPayload<S extends boolean | null | undefined | ActivityDefaultArgs> = $Result.GetResult<Prisma.$ActivityPayload, S>
+
+  type ActivityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ActivityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ActivityCountAggregateInputType | true
+    }
+
+  export interface ActivityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Activity'], meta: { name: 'Activity' } }
+    /**
+     * Find zero or one Activity that matches the filter.
+     * @param {ActivityFindUniqueArgs} args - Arguments to find a Activity
+     * @example
+     * // Get one Activity
+     * const activity = await prisma.activity.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ActivityFindUniqueArgs>(args: SelectSubset<T, ActivityFindUniqueArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Activity that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ActivityFindUniqueOrThrowArgs} args - Arguments to find a Activity
+     * @example
+     * // Get one Activity
+     * const activity = await prisma.activity.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ActivityFindUniqueOrThrowArgs>(args: SelectSubset<T, ActivityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Activity that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityFindFirstArgs} args - Arguments to find a Activity
+     * @example
+     * // Get one Activity
+     * const activity = await prisma.activity.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ActivityFindFirstArgs>(args?: SelectSubset<T, ActivityFindFirstArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Activity that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityFindFirstOrThrowArgs} args - Arguments to find a Activity
+     * @example
+     * // Get one Activity
+     * const activity = await prisma.activity.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ActivityFindFirstOrThrowArgs>(args?: SelectSubset<T, ActivityFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Activities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Activities
+     * const activities = await prisma.activity.findMany()
+     * 
+     * // Get first 10 Activities
+     * const activities = await prisma.activity.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const activityWithIdOnly = await prisma.activity.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ActivityFindManyArgs>(args?: SelectSubset<T, ActivityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Activity.
+     * @param {ActivityCreateArgs} args - Arguments to create a Activity.
+     * @example
+     * // Create one Activity
+     * const Activity = await prisma.activity.create({
+     *   data: {
+     *     // ... data to create a Activity
+     *   }
+     * })
+     * 
+     */
+    create<T extends ActivityCreateArgs>(args: SelectSubset<T, ActivityCreateArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Activities.
+     * @param {ActivityCreateManyArgs} args - Arguments to create many Activities.
+     * @example
+     * // Create many Activities
+     * const activity = await prisma.activity.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ActivityCreateManyArgs>(args?: SelectSubset<T, ActivityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Activities and returns the data saved in the database.
+     * @param {ActivityCreateManyAndReturnArgs} args - Arguments to create many Activities.
+     * @example
+     * // Create many Activities
+     * const activity = await prisma.activity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Activities and only return the `id`
+     * const activityWithIdOnly = await prisma.activity.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ActivityCreateManyAndReturnArgs>(args?: SelectSubset<T, ActivityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Activity.
+     * @param {ActivityDeleteArgs} args - Arguments to delete one Activity.
+     * @example
+     * // Delete one Activity
+     * const Activity = await prisma.activity.delete({
+     *   where: {
+     *     // ... filter to delete one Activity
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ActivityDeleteArgs>(args: SelectSubset<T, ActivityDeleteArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Activity.
+     * @param {ActivityUpdateArgs} args - Arguments to update one Activity.
+     * @example
+     * // Update one Activity
+     * const activity = await prisma.activity.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ActivityUpdateArgs>(args: SelectSubset<T, ActivityUpdateArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Activities.
+     * @param {ActivityDeleteManyArgs} args - Arguments to filter Activities to delete.
+     * @example
+     * // Delete a few Activities
+     * const { count } = await prisma.activity.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ActivityDeleteManyArgs>(args?: SelectSubset<T, ActivityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Activities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Activities
+     * const activity = await prisma.activity.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ActivityUpdateManyArgs>(args: SelectSubset<T, ActivityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Activities and returns the data updated in the database.
+     * @param {ActivityUpdateManyAndReturnArgs} args - Arguments to update many Activities.
+     * @example
+     * // Update many Activities
+     * const activity = await prisma.activity.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Activities and only return the `id`
+     * const activityWithIdOnly = await prisma.activity.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ActivityUpdateManyAndReturnArgs>(args: SelectSubset<T, ActivityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Activity.
+     * @param {ActivityUpsertArgs} args - Arguments to update or create a Activity.
+     * @example
+     * // Update or create a Activity
+     * const activity = await prisma.activity.upsert({
+     *   create: {
+     *     // ... data to create a Activity
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Activity we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ActivityUpsertArgs>(args: SelectSubset<T, ActivityUpsertArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Activities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityCountArgs} args - Arguments to filter Activities to count.
+     * @example
+     * // Count the number of Activities
+     * const count = await prisma.activity.count({
+     *   where: {
+     *     // ... the filter for the Activities we want to count
+     *   }
+     * })
+    **/
+    count<T extends ActivityCountArgs>(
+      args?: Subset<T, ActivityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActivityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Activity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActivityAggregateArgs>(args: Subset<T, ActivityAggregateArgs>): Prisma.PrismaPromise<GetActivityAggregateType<T>>
+
+    /**
+     * Group by Activity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ActivityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ActivityGroupByArgs['orderBy'] }
+        : { orderBy?: ActivityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ActivityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActivityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Activity model
+   */
+  readonly fields: ActivityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Activity.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ActivityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    day<T extends EventDayDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDayDefaultArgs<ExtArgs>>): Prisma__EventDayClient<$Result.GetResult<Prisma.$EventDayPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    event<T extends EventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDefaultArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    invitations<T extends Activity$invitationsArgs<ExtArgs> = {}>(args?: Subset<T, Activity$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Activity model
+   */
+  interface ActivityFieldRefs {
+    readonly id: FieldRef<"Activity", 'String'>
+    readonly day_id: FieldRef<"Activity", 'String'>
+    readonly event_id: FieldRef<"Activity", 'String'>
+    readonly title: FieldRef<"Activity", 'String'>
+    readonly start_time: FieldRef<"Activity", 'DateTime'>
+    readonly end_time: FieldRef<"Activity", 'DateTime'>
+    readonly location_type: FieldRef<"Activity", 'String'>
+    readonly location: FieldRef<"Activity", 'String'>
+    readonly status: FieldRef<"Activity", 'String'>
+    readonly is_orchestrated: FieldRef<"Activity", 'Boolean'>
+    readonly created_at: FieldRef<"Activity", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Activity findUnique
+   */
+  export type ActivityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity to fetch.
+     */
+    where: ActivityWhereUniqueInput
+  }
+
+  /**
+   * Activity findUniqueOrThrow
+   */
+  export type ActivityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity to fetch.
+     */
+    where: ActivityWhereUniqueInput
+  }
+
+  /**
+   * Activity findFirst
+   */
+  export type ActivityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity to fetch.
+     */
+    where?: ActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activities to fetch.
+     */
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Activities.
+     */
+    cursor?: ActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Activities.
+     */
+    distinct?: ActivityScalarFieldEnum | ActivityScalarFieldEnum[]
+  }
+
+  /**
+   * Activity findFirstOrThrow
+   */
+  export type ActivityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity to fetch.
+     */
+    where?: ActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activities to fetch.
+     */
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Activities.
+     */
+    cursor?: ActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Activities.
+     */
+    distinct?: ActivityScalarFieldEnum | ActivityScalarFieldEnum[]
+  }
+
+  /**
+   * Activity findMany
+   */
+  export type ActivityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which Activities to fetch.
+     */
+    where?: ActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activities to fetch.
+     */
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Activities.
+     */
+    cursor?: ActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Activities.
+     */
+    distinct?: ActivityScalarFieldEnum | ActivityScalarFieldEnum[]
+  }
+
+  /**
+   * Activity create
+   */
+  export type ActivityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Activity.
+     */
+    data: XOR<ActivityCreateInput, ActivityUncheckedCreateInput>
+  }
+
+  /**
+   * Activity createMany
+   */
+  export type ActivityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Activities.
+     */
+    data: ActivityCreateManyInput | ActivityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Activity createManyAndReturn
+   */
+  export type ActivityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * The data used to create many Activities.
+     */
+    data: ActivityCreateManyInput | ActivityCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Activity update
+   */
+  export type ActivityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Activity.
+     */
+    data: XOR<ActivityUpdateInput, ActivityUncheckedUpdateInput>
+    /**
+     * Choose, which Activity to update.
+     */
+    where: ActivityWhereUniqueInput
+  }
+
+  /**
+   * Activity updateMany
+   */
+  export type ActivityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Activities.
+     */
+    data: XOR<ActivityUpdateManyMutationInput, ActivityUncheckedUpdateManyInput>
+    /**
+     * Filter which Activities to update
+     */
+    where?: ActivityWhereInput
+    /**
+     * Limit how many Activities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Activity updateManyAndReturn
+   */
+  export type ActivityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * The data used to update Activities.
+     */
+    data: XOR<ActivityUpdateManyMutationInput, ActivityUncheckedUpdateManyInput>
+    /**
+     * Filter which Activities to update
+     */
+    where?: ActivityWhereInput
+    /**
+     * Limit how many Activities to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Activity upsert
+   */
+  export type ActivityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Activity to update in case it exists.
+     */
+    where: ActivityWhereUniqueInput
+    /**
+     * In case the Activity found by the `where` argument doesn't exist, create a new Activity with this data.
+     */
+    create: XOR<ActivityCreateInput, ActivityUncheckedCreateInput>
+    /**
+     * In case the Activity was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ActivityUpdateInput, ActivityUncheckedUpdateInput>
+  }
+
+  /**
+   * Activity delete
+   */
+  export type ActivityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter which Activity to delete.
+     */
+    where: ActivityWhereUniqueInput
+  }
+
+  /**
+   * Activity deleteMany
+   */
+  export type ActivityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Activities to delete
+     */
+    where?: ActivityWhereInput
+    /**
+     * Limit how many Activities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Activity.invitations
+   */
+  export type Activity$invitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    where?: InvitationWhereInput
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    cursor?: InvitationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Activity without action
+   */
+  export type ActivityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Invitation
+   */
+
+  export type AggregateInvitation = {
+    _count: InvitationCountAggregateOutputType | null
+    _avg: InvitationAvgAggregateOutputType | null
+    _sum: InvitationSumAggregateOutputType | null
+    _min: InvitationMinAggregateOutputType | null
+    _max: InvitationMaxAggregateOutputType | null
+  }
+
+  export type InvitationAvgAggregateOutputType = {
+    num_guests: number | null
+  }
+
+  export type InvitationSumAggregateOutputType = {
+    num_guests: number | null
+  }
+
+  export type InvitationMinAggregateOutputType = {
+    id: string | null
+    event_id: string | null
+    activity_id: string | null
+    invitee_name: string | null
+    invitee_email: string | null
+    whatsapp_number: string | null
+    num_guests: number | null
+    rsvp_status: string | null
+    invite_sent: boolean | null
+    access_token: string | null
+    created_at: Date | null
+  }
+
+  export type InvitationMaxAggregateOutputType = {
+    id: string | null
+    event_id: string | null
+    activity_id: string | null
+    invitee_name: string | null
+    invitee_email: string | null
+    whatsapp_number: string | null
+    num_guests: number | null
+    rsvp_status: string | null
+    invite_sent: boolean | null
+    access_token: string | null
+    created_at: Date | null
+  }
+
+  export type InvitationCountAggregateOutputType = {
+    id: number
+    event_id: number
+    activity_id: number
+    invitee_name: number
+    invitee_email: number
+    whatsapp_number: number
+    num_guests: number
+    rsvp_status: number
+    invite_sent: number
+    access_token: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type InvitationAvgAggregateInputType = {
+    num_guests?: true
+  }
+
+  export type InvitationSumAggregateInputType = {
+    num_guests?: true
+  }
+
+  export type InvitationMinAggregateInputType = {
+    id?: true
+    event_id?: true
+    activity_id?: true
+    invitee_name?: true
+    invitee_email?: true
+    whatsapp_number?: true
+    num_guests?: true
+    rsvp_status?: true
+    invite_sent?: true
+    access_token?: true
+    created_at?: true
+  }
+
+  export type InvitationMaxAggregateInputType = {
+    id?: true
+    event_id?: true
+    activity_id?: true
+    invitee_name?: true
+    invitee_email?: true
+    whatsapp_number?: true
+    num_guests?: true
+    rsvp_status?: true
+    invite_sent?: true
+    access_token?: true
+    created_at?: true
+  }
+
+  export type InvitationCountAggregateInputType = {
+    id?: true
+    event_id?: true
+    activity_id?: true
+    invitee_name?: true
+    invitee_email?: true
+    whatsapp_number?: true
+    num_guests?: true
+    rsvp_status?: true
+    invite_sent?: true
+    access_token?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type InvitationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invitation to aggregate.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Invitations
+    **/
+    _count?: true | InvitationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InvitationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InvitationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InvitationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InvitationMaxAggregateInputType
+  }
+
+  export type GetInvitationAggregateType<T extends InvitationAggregateArgs> = {
+        [P in keyof T & keyof AggregateInvitation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInvitation[P]>
+      : GetScalarType<T[P], AggregateInvitation[P]>
+  }
+
+
+
+
+  export type InvitationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
+    orderBy?: InvitationOrderByWithAggregationInput | InvitationOrderByWithAggregationInput[]
+    by: InvitationScalarFieldEnum[] | InvitationScalarFieldEnum
+    having?: InvitationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InvitationCountAggregateInputType | true
+    _avg?: InvitationAvgAggregateInputType
+    _sum?: InvitationSumAggregateInputType
+    _min?: InvitationMinAggregateInputType
+    _max?: InvitationMaxAggregateInputType
+  }
+
+  export type InvitationGroupByOutputType = {
+    id: string
+    event_id: string
+    activity_id: string | null
+    invitee_name: string
+    invitee_email: string | null
+    whatsapp_number: string
+    num_guests: number
+    rsvp_status: string
+    invite_sent: boolean
+    access_token: string
+    created_at: Date
+    _count: InvitationCountAggregateOutputType | null
+    _avg: InvitationAvgAggregateOutputType | null
+    _sum: InvitationSumAggregateOutputType | null
+    _min: InvitationMinAggregateOutputType | null
+    _max: InvitationMaxAggregateOutputType | null
+  }
+
+  type GetInvitationGroupByPayload<T extends InvitationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InvitationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InvitationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InvitationGroupByOutputType[P]>
+            : GetScalarType<T[P], InvitationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InvitationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event_id?: boolean
+    activity_id?: boolean
+    invitee_name?: boolean
+    invitee_email?: boolean
+    whatsapp_number?: boolean
+    num_guests?: boolean
+    rsvp_status?: boolean
+    invite_sent?: boolean
+    access_token?: boolean
+    created_at?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    activity?: boolean | Invitation$activityArgs<ExtArgs>
+  }, ExtArgs["result"]["invitation"]>
+
+  export type InvitationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event_id?: boolean
+    activity_id?: boolean
+    invitee_name?: boolean
+    invitee_email?: boolean
+    whatsapp_number?: boolean
+    num_guests?: boolean
+    rsvp_status?: boolean
+    invite_sent?: boolean
+    access_token?: boolean
+    created_at?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    activity?: boolean | Invitation$activityArgs<ExtArgs>
+  }, ExtArgs["result"]["invitation"]>
+
+  export type InvitationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event_id?: boolean
+    activity_id?: boolean
+    invitee_name?: boolean
+    invitee_email?: boolean
+    whatsapp_number?: boolean
+    num_guests?: boolean
+    rsvp_status?: boolean
+    invite_sent?: boolean
+    access_token?: boolean
+    created_at?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    activity?: boolean | Invitation$activityArgs<ExtArgs>
+  }, ExtArgs["result"]["invitation"]>
+
+  export type InvitationSelectScalar = {
+    id?: boolean
+    event_id?: boolean
+    activity_id?: boolean
+    invitee_name?: boolean
+    invitee_email?: boolean
+    whatsapp_number?: boolean
+    num_guests?: boolean
+    rsvp_status?: boolean
+    invite_sent?: boolean
+    access_token?: boolean
+    created_at?: boolean
+  }
+
+  export type InvitationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "event_id" | "activity_id" | "invitee_name" | "invitee_email" | "whatsapp_number" | "num_guests" | "rsvp_status" | "invite_sent" | "access_token" | "created_at", ExtArgs["result"]["invitation"]>
+  export type InvitationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    activity?: boolean | Invitation$activityArgs<ExtArgs>
+  }
+  export type InvitationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    activity?: boolean | Invitation$activityArgs<ExtArgs>
+  }
+  export type InvitationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    activity?: boolean | Invitation$activityArgs<ExtArgs>
+  }
+
+  export type $InvitationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Invitation"
+    objects: {
+      event: Prisma.$EventPayload<ExtArgs>
+      activity: Prisma.$ActivityPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      event_id: string
+      activity_id: string | null
+      invitee_name: string
+      invitee_email: string | null
+      whatsapp_number: string
+      num_guests: number
+      rsvp_status: string
+      invite_sent: boolean
+      access_token: string
+      created_at: Date
+    }, ExtArgs["result"]["invitation"]>
+    composites: {}
+  }
+
+  type InvitationGetPayload<S extends boolean | null | undefined | InvitationDefaultArgs> = $Result.GetResult<Prisma.$InvitationPayload, S>
+
+  type InvitationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InvitationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InvitationCountAggregateInputType | true
+    }
+
+  export interface InvitationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Invitation'], meta: { name: 'Invitation' } }
+    /**
+     * Find zero or one Invitation that matches the filter.
+     * @param {InvitationFindUniqueArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InvitationFindUniqueArgs>(args: SelectSubset<T, InvitationFindUniqueArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Invitation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InvitationFindUniqueOrThrowArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InvitationFindUniqueOrThrowArgs>(args: SelectSubset<T, InvitationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invitation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationFindFirstArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InvitationFindFirstArgs>(args?: SelectSubset<T, InvitationFindFirstArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invitation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationFindFirstOrThrowArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InvitationFindFirstOrThrowArgs>(args?: SelectSubset<T, InvitationFindFirstOrThrowArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Invitations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Invitations
+     * const invitations = await prisma.invitation.findMany()
+     * 
+     * // Get first 10 Invitations
+     * const invitations = await prisma.invitation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const invitationWithIdOnly = await prisma.invitation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InvitationFindManyArgs>(args?: SelectSubset<T, InvitationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Invitation.
+     * @param {InvitationCreateArgs} args - Arguments to create a Invitation.
+     * @example
+     * // Create one Invitation
+     * const Invitation = await prisma.invitation.create({
+     *   data: {
+     *     // ... data to create a Invitation
+     *   }
+     * })
+     * 
+     */
+    create<T extends InvitationCreateArgs>(args: SelectSubset<T, InvitationCreateArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Invitations.
+     * @param {InvitationCreateManyArgs} args - Arguments to create many Invitations.
+     * @example
+     * // Create many Invitations
+     * const invitation = await prisma.invitation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InvitationCreateManyArgs>(args?: SelectSubset<T, InvitationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Invitations and returns the data saved in the database.
+     * @param {InvitationCreateManyAndReturnArgs} args - Arguments to create many Invitations.
+     * @example
+     * // Create many Invitations
+     * const invitation = await prisma.invitation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Invitations and only return the `id`
+     * const invitationWithIdOnly = await prisma.invitation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InvitationCreateManyAndReturnArgs>(args?: SelectSubset<T, InvitationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Invitation.
+     * @param {InvitationDeleteArgs} args - Arguments to delete one Invitation.
+     * @example
+     * // Delete one Invitation
+     * const Invitation = await prisma.invitation.delete({
+     *   where: {
+     *     // ... filter to delete one Invitation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InvitationDeleteArgs>(args: SelectSubset<T, InvitationDeleteArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Invitation.
+     * @param {InvitationUpdateArgs} args - Arguments to update one Invitation.
+     * @example
+     * // Update one Invitation
+     * const invitation = await prisma.invitation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InvitationUpdateArgs>(args: SelectSubset<T, InvitationUpdateArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Invitations.
+     * @param {InvitationDeleteManyArgs} args - Arguments to filter Invitations to delete.
+     * @example
+     * // Delete a few Invitations
+     * const { count } = await prisma.invitation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InvitationDeleteManyArgs>(args?: SelectSubset<T, InvitationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invitations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Invitations
+     * const invitation = await prisma.invitation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InvitationUpdateManyArgs>(args: SelectSubset<T, InvitationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invitations and returns the data updated in the database.
+     * @param {InvitationUpdateManyAndReturnArgs} args - Arguments to update many Invitations.
+     * @example
+     * // Update many Invitations
+     * const invitation = await prisma.invitation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Invitations and only return the `id`
+     * const invitationWithIdOnly = await prisma.invitation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InvitationUpdateManyAndReturnArgs>(args: SelectSubset<T, InvitationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Invitation.
+     * @param {InvitationUpsertArgs} args - Arguments to update or create a Invitation.
+     * @example
+     * // Update or create a Invitation
+     * const invitation = await prisma.invitation.upsert({
+     *   create: {
+     *     // ... data to create a Invitation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Invitation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InvitationUpsertArgs>(args: SelectSubset<T, InvitationUpsertArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Invitations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationCountArgs} args - Arguments to filter Invitations to count.
+     * @example
+     * // Count the number of Invitations
+     * const count = await prisma.invitation.count({
+     *   where: {
+     *     // ... the filter for the Invitations we want to count
+     *   }
+     * })
+    **/
+    count<T extends InvitationCountArgs>(
+      args?: Subset<T, InvitationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InvitationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Invitation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InvitationAggregateArgs>(args: Subset<T, InvitationAggregateArgs>): Prisma.PrismaPromise<GetInvitationAggregateType<T>>
+
+    /**
+     * Group by Invitation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InvitationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InvitationGroupByArgs['orderBy'] }
+        : { orderBy?: InvitationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InvitationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInvitationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Invitation model
+   */
+  readonly fields: InvitationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Invitation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InvitationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    event<T extends EventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDefaultArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    activity<T extends Invitation$activityArgs<ExtArgs> = {}>(args?: Subset<T, Invitation$activityArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Invitation model
+   */
+  interface InvitationFieldRefs {
+    readonly id: FieldRef<"Invitation", 'String'>
+    readonly event_id: FieldRef<"Invitation", 'String'>
+    readonly activity_id: FieldRef<"Invitation", 'String'>
+    readonly invitee_name: FieldRef<"Invitation", 'String'>
+    readonly invitee_email: FieldRef<"Invitation", 'String'>
+    readonly whatsapp_number: FieldRef<"Invitation", 'String'>
+    readonly num_guests: FieldRef<"Invitation", 'Int'>
+    readonly rsvp_status: FieldRef<"Invitation", 'String'>
+    readonly invite_sent: FieldRef<"Invitation", 'Boolean'>
+    readonly access_token: FieldRef<"Invitation", 'String'>
+    readonly created_at: FieldRef<"Invitation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Invitation findUnique
+   */
+  export type InvitationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation findUniqueOrThrow
+   */
+  export type InvitationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation findFirst
+   */
+  export type InvitationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invitations.
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invitations.
+     */
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Invitation findFirstOrThrow
+   */
+  export type InvitationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invitations.
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invitations.
+     */
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Invitation findMany
+   */
+  export type InvitationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitations to fetch.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Invitations.
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invitations.
+     */
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Invitation create
+   */
+  export type InvitationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Invitation.
+     */
+    data: XOR<InvitationCreateInput, InvitationUncheckedCreateInput>
+  }
+
+  /**
+   * Invitation createMany
+   */
+  export type InvitationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Invitations.
+     */
+    data: InvitationCreateManyInput | InvitationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Invitation createManyAndReturn
+   */
+  export type InvitationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Invitations.
+     */
+    data: InvitationCreateManyInput | InvitationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Invitation update
+   */
+  export type InvitationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Invitation.
+     */
+    data: XOR<InvitationUpdateInput, InvitationUncheckedUpdateInput>
+    /**
+     * Choose, which Invitation to update.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation updateMany
+   */
+  export type InvitationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Invitations.
+     */
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyInput>
+    /**
+     * Filter which Invitations to update
+     */
+    where?: InvitationWhereInput
+    /**
+     * Limit how many Invitations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invitation updateManyAndReturn
+   */
+  export type InvitationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * The data used to update Invitations.
+     */
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyInput>
+    /**
+     * Filter which Invitations to update
+     */
+    where?: InvitationWhereInput
+    /**
+     * Limit how many Invitations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Invitation upsert
+   */
+  export type InvitationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Invitation to update in case it exists.
+     */
+    where: InvitationWhereUniqueInput
+    /**
+     * In case the Invitation found by the `where` argument doesn't exist, create a new Invitation with this data.
+     */
+    create: XOR<InvitationCreateInput, InvitationUncheckedCreateInput>
+    /**
+     * In case the Invitation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InvitationUpdateInput, InvitationUncheckedUpdateInput>
+  }
+
+  /**
+   * Invitation delete
+   */
+  export type InvitationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter which Invitation to delete.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation deleteMany
+   */
+  export type InvitationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invitations to delete
+     */
+    where?: InvitationWhereInput
+    /**
+     * Limit how many Invitations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invitation.activity
+   */
+  export type Invitation$activityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    where?: ActivityWhereInput
+  }
+
+  /**
+   * Invitation without action
+   */
+  export type InvitationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OrchestrationLog
+   */
+
+  export type AggregateOrchestrationLog = {
+    _count: OrchestrationLogCountAggregateOutputType | null
+    _min: OrchestrationLogMinAggregateOutputType | null
+    _max: OrchestrationLogMaxAggregateOutputType | null
+  }
+
+  export type OrchestrationLogMinAggregateOutputType = {
+    id: string | null
+    event_id: string | null
+    agent_name: string | null
+    log_message: string | null
+    timestamp: Date | null
+  }
+
+  export type OrchestrationLogMaxAggregateOutputType = {
+    id: string | null
+    event_id: string | null
+    agent_name: string | null
+    log_message: string | null
+    timestamp: Date | null
+  }
+
+  export type OrchestrationLogCountAggregateOutputType = {
+    id: number
+    event_id: number
+    agent_name: number
+    log_message: number
+    timestamp: number
+    _all: number
+  }
+
+
+  export type OrchestrationLogMinAggregateInputType = {
+    id?: true
+    event_id?: true
+    agent_name?: true
+    log_message?: true
+    timestamp?: true
+  }
+
+  export type OrchestrationLogMaxAggregateInputType = {
+    id?: true
+    event_id?: true
+    agent_name?: true
+    log_message?: true
+    timestamp?: true
+  }
+
+  export type OrchestrationLogCountAggregateInputType = {
+    id?: true
+    event_id?: true
+    agent_name?: true
+    log_message?: true
+    timestamp?: true
+    _all?: true
+  }
+
+  export type OrchestrationLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrchestrationLog to aggregate.
+     */
+    where?: OrchestrationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrchestrationLogs to fetch.
+     */
+    orderBy?: OrchestrationLogOrderByWithRelationInput | OrchestrationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OrchestrationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrchestrationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrchestrationLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OrchestrationLogs
+    **/
+    _count?: true | OrchestrationLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OrchestrationLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OrchestrationLogMaxAggregateInputType
+  }
+
+  export type GetOrchestrationLogAggregateType<T extends OrchestrationLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateOrchestrationLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOrchestrationLog[P]>
+      : GetScalarType<T[P], AggregateOrchestrationLog[P]>
+  }
+
+
+
+
+  export type OrchestrationLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrchestrationLogWhereInput
+    orderBy?: OrchestrationLogOrderByWithAggregationInput | OrchestrationLogOrderByWithAggregationInput[]
+    by: OrchestrationLogScalarFieldEnum[] | OrchestrationLogScalarFieldEnum
+    having?: OrchestrationLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OrchestrationLogCountAggregateInputType | true
+    _min?: OrchestrationLogMinAggregateInputType
+    _max?: OrchestrationLogMaxAggregateInputType
+  }
+
+  export type OrchestrationLogGroupByOutputType = {
+    id: string
+    event_id: string
+    agent_name: string
+    log_message: string
+    timestamp: Date
+    _count: OrchestrationLogCountAggregateOutputType | null
+    _min: OrchestrationLogMinAggregateOutputType | null
+    _max: OrchestrationLogMaxAggregateOutputType | null
+  }
+
+  type GetOrchestrationLogGroupByPayload<T extends OrchestrationLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OrchestrationLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OrchestrationLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OrchestrationLogGroupByOutputType[P]>
+            : GetScalarType<T[P], OrchestrationLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OrchestrationLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event_id?: boolean
+    agent_name?: boolean
+    log_message?: boolean
+    timestamp?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["orchestrationLog"]>
+
+  export type OrchestrationLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event_id?: boolean
+    agent_name?: boolean
+    log_message?: boolean
+    timestamp?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["orchestrationLog"]>
+
+  export type OrchestrationLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event_id?: boolean
+    agent_name?: boolean
+    log_message?: boolean
+    timestamp?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["orchestrationLog"]>
+
+  export type OrchestrationLogSelectScalar = {
+    id?: boolean
+    event_id?: boolean
+    agent_name?: boolean
+    log_message?: boolean
+    timestamp?: boolean
+  }
+
+  export type OrchestrationLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "event_id" | "agent_name" | "log_message" | "timestamp", ExtArgs["result"]["orchestrationLog"]>
+  export type OrchestrationLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type OrchestrationLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type OrchestrationLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+
+  export type $OrchestrationLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OrchestrationLog"
+    objects: {
+      event: Prisma.$EventPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      event_id: string
+      agent_name: string
+      log_message: string
+      timestamp: Date
+    }, ExtArgs["result"]["orchestrationLog"]>
+    composites: {}
+  }
+
+  type OrchestrationLogGetPayload<S extends boolean | null | undefined | OrchestrationLogDefaultArgs> = $Result.GetResult<Prisma.$OrchestrationLogPayload, S>
+
+  type OrchestrationLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OrchestrationLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OrchestrationLogCountAggregateInputType | true
+    }
+
+  export interface OrchestrationLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OrchestrationLog'], meta: { name: 'OrchestrationLog' } }
+    /**
+     * Find zero or one OrchestrationLog that matches the filter.
+     * @param {OrchestrationLogFindUniqueArgs} args - Arguments to find a OrchestrationLog
+     * @example
+     * // Get one OrchestrationLog
+     * const orchestrationLog = await prisma.orchestrationLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OrchestrationLogFindUniqueArgs>(args: SelectSubset<T, OrchestrationLogFindUniqueArgs<ExtArgs>>): Prisma__OrchestrationLogClient<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OrchestrationLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OrchestrationLogFindUniqueOrThrowArgs} args - Arguments to find a OrchestrationLog
+     * @example
+     * // Get one OrchestrationLog
+     * const orchestrationLog = await prisma.orchestrationLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OrchestrationLogFindUniqueOrThrowArgs>(args: SelectSubset<T, OrchestrationLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OrchestrationLogClient<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OrchestrationLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrchestrationLogFindFirstArgs} args - Arguments to find a OrchestrationLog
+     * @example
+     * // Get one OrchestrationLog
+     * const orchestrationLog = await prisma.orchestrationLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OrchestrationLogFindFirstArgs>(args?: SelectSubset<T, OrchestrationLogFindFirstArgs<ExtArgs>>): Prisma__OrchestrationLogClient<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OrchestrationLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrchestrationLogFindFirstOrThrowArgs} args - Arguments to find a OrchestrationLog
+     * @example
+     * // Get one OrchestrationLog
+     * const orchestrationLog = await prisma.orchestrationLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OrchestrationLogFindFirstOrThrowArgs>(args?: SelectSubset<T, OrchestrationLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__OrchestrationLogClient<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OrchestrationLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrchestrationLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OrchestrationLogs
+     * const orchestrationLogs = await prisma.orchestrationLog.findMany()
+     * 
+     * // Get first 10 OrchestrationLogs
+     * const orchestrationLogs = await prisma.orchestrationLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const orchestrationLogWithIdOnly = await prisma.orchestrationLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OrchestrationLogFindManyArgs>(args?: SelectSubset<T, OrchestrationLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OrchestrationLog.
+     * @param {OrchestrationLogCreateArgs} args - Arguments to create a OrchestrationLog.
+     * @example
+     * // Create one OrchestrationLog
+     * const OrchestrationLog = await prisma.orchestrationLog.create({
+     *   data: {
+     *     // ... data to create a OrchestrationLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends OrchestrationLogCreateArgs>(args: SelectSubset<T, OrchestrationLogCreateArgs<ExtArgs>>): Prisma__OrchestrationLogClient<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OrchestrationLogs.
+     * @param {OrchestrationLogCreateManyArgs} args - Arguments to create many OrchestrationLogs.
+     * @example
+     * // Create many OrchestrationLogs
+     * const orchestrationLog = await prisma.orchestrationLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OrchestrationLogCreateManyArgs>(args?: SelectSubset<T, OrchestrationLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OrchestrationLogs and returns the data saved in the database.
+     * @param {OrchestrationLogCreateManyAndReturnArgs} args - Arguments to create many OrchestrationLogs.
+     * @example
+     * // Create many OrchestrationLogs
+     * const orchestrationLog = await prisma.orchestrationLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OrchestrationLogs and only return the `id`
+     * const orchestrationLogWithIdOnly = await prisma.orchestrationLog.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OrchestrationLogCreateManyAndReturnArgs>(args?: SelectSubset<T, OrchestrationLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a OrchestrationLog.
+     * @param {OrchestrationLogDeleteArgs} args - Arguments to delete one OrchestrationLog.
+     * @example
+     * // Delete one OrchestrationLog
+     * const OrchestrationLog = await prisma.orchestrationLog.delete({
+     *   where: {
+     *     // ... filter to delete one OrchestrationLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OrchestrationLogDeleteArgs>(args: SelectSubset<T, OrchestrationLogDeleteArgs<ExtArgs>>): Prisma__OrchestrationLogClient<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OrchestrationLog.
+     * @param {OrchestrationLogUpdateArgs} args - Arguments to update one OrchestrationLog.
+     * @example
+     * // Update one OrchestrationLog
+     * const orchestrationLog = await prisma.orchestrationLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OrchestrationLogUpdateArgs>(args: SelectSubset<T, OrchestrationLogUpdateArgs<ExtArgs>>): Prisma__OrchestrationLogClient<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OrchestrationLogs.
+     * @param {OrchestrationLogDeleteManyArgs} args - Arguments to filter OrchestrationLogs to delete.
+     * @example
+     * // Delete a few OrchestrationLogs
+     * const { count } = await prisma.orchestrationLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OrchestrationLogDeleteManyArgs>(args?: SelectSubset<T, OrchestrationLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OrchestrationLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrchestrationLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OrchestrationLogs
+     * const orchestrationLog = await prisma.orchestrationLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OrchestrationLogUpdateManyArgs>(args: SelectSubset<T, OrchestrationLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OrchestrationLogs and returns the data updated in the database.
+     * @param {OrchestrationLogUpdateManyAndReturnArgs} args - Arguments to update many OrchestrationLogs.
+     * @example
+     * // Update many OrchestrationLogs
+     * const orchestrationLog = await prisma.orchestrationLog.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more OrchestrationLogs and only return the `id`
+     * const orchestrationLogWithIdOnly = await prisma.orchestrationLog.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OrchestrationLogUpdateManyAndReturnArgs>(args: SelectSubset<T, OrchestrationLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one OrchestrationLog.
+     * @param {OrchestrationLogUpsertArgs} args - Arguments to update or create a OrchestrationLog.
+     * @example
+     * // Update or create a OrchestrationLog
+     * const orchestrationLog = await prisma.orchestrationLog.upsert({
+     *   create: {
+     *     // ... data to create a OrchestrationLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OrchestrationLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OrchestrationLogUpsertArgs>(args: SelectSubset<T, OrchestrationLogUpsertArgs<ExtArgs>>): Prisma__OrchestrationLogClient<$Result.GetResult<Prisma.$OrchestrationLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OrchestrationLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrchestrationLogCountArgs} args - Arguments to filter OrchestrationLogs to count.
+     * @example
+     * // Count the number of OrchestrationLogs
+     * const count = await prisma.orchestrationLog.count({
+     *   where: {
+     *     // ... the filter for the OrchestrationLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends OrchestrationLogCountArgs>(
+      args?: Subset<T, OrchestrationLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OrchestrationLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OrchestrationLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrchestrationLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OrchestrationLogAggregateArgs>(args: Subset<T, OrchestrationLogAggregateArgs>): Prisma.PrismaPromise<GetOrchestrationLogAggregateType<T>>
+
+    /**
+     * Group by OrchestrationLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrchestrationLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OrchestrationLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OrchestrationLogGroupByArgs['orderBy'] }
+        : { orderBy?: OrchestrationLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OrchestrationLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOrchestrationLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OrchestrationLog model
+   */
+  readonly fields: OrchestrationLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OrchestrationLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OrchestrationLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    event<T extends EventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDefaultArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OrchestrationLog model
+   */
+  interface OrchestrationLogFieldRefs {
+    readonly id: FieldRef<"OrchestrationLog", 'String'>
+    readonly event_id: FieldRef<"OrchestrationLog", 'String'>
+    readonly agent_name: FieldRef<"OrchestrationLog", 'String'>
+    readonly log_message: FieldRef<"OrchestrationLog", 'String'>
+    readonly timestamp: FieldRef<"OrchestrationLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OrchestrationLog findUnique
+   */
+  export type OrchestrationLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which OrchestrationLog to fetch.
+     */
+    where: OrchestrationLogWhereUniqueInput
+  }
+
+  /**
+   * OrchestrationLog findUniqueOrThrow
+   */
+  export type OrchestrationLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which OrchestrationLog to fetch.
+     */
+    where: OrchestrationLogWhereUniqueInput
+  }
+
+  /**
+   * OrchestrationLog findFirst
+   */
+  export type OrchestrationLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which OrchestrationLog to fetch.
+     */
+    where?: OrchestrationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrchestrationLogs to fetch.
+     */
+    orderBy?: OrchestrationLogOrderByWithRelationInput | OrchestrationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OrchestrationLogs.
+     */
+    cursor?: OrchestrationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrchestrationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrchestrationLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrchestrationLogs.
+     */
+    distinct?: OrchestrationLogScalarFieldEnum | OrchestrationLogScalarFieldEnum[]
+  }
+
+  /**
+   * OrchestrationLog findFirstOrThrow
+   */
+  export type OrchestrationLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which OrchestrationLog to fetch.
+     */
+    where?: OrchestrationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrchestrationLogs to fetch.
+     */
+    orderBy?: OrchestrationLogOrderByWithRelationInput | OrchestrationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OrchestrationLogs.
+     */
+    cursor?: OrchestrationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrchestrationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrchestrationLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrchestrationLogs.
+     */
+    distinct?: OrchestrationLogScalarFieldEnum | OrchestrationLogScalarFieldEnum[]
+  }
+
+  /**
+   * OrchestrationLog findMany
+   */
+  export type OrchestrationLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which OrchestrationLogs to fetch.
+     */
+    where?: OrchestrationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrchestrationLogs to fetch.
+     */
+    orderBy?: OrchestrationLogOrderByWithRelationInput | OrchestrationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OrchestrationLogs.
+     */
+    cursor?: OrchestrationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrchestrationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrchestrationLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrchestrationLogs.
+     */
+    distinct?: OrchestrationLogScalarFieldEnum | OrchestrationLogScalarFieldEnum[]
+  }
+
+  /**
+   * OrchestrationLog create
+   */
+  export type OrchestrationLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OrchestrationLog.
+     */
+    data: XOR<OrchestrationLogCreateInput, OrchestrationLogUncheckedCreateInput>
+  }
+
+  /**
+   * OrchestrationLog createMany
+   */
+  export type OrchestrationLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OrchestrationLogs.
+     */
+    data: OrchestrationLogCreateManyInput | OrchestrationLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OrchestrationLog createManyAndReturn
+   */
+  export type OrchestrationLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * The data used to create many OrchestrationLogs.
+     */
+    data: OrchestrationLogCreateManyInput | OrchestrationLogCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OrchestrationLog update
+   */
+  export type OrchestrationLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OrchestrationLog.
+     */
+    data: XOR<OrchestrationLogUpdateInput, OrchestrationLogUncheckedUpdateInput>
+    /**
+     * Choose, which OrchestrationLog to update.
+     */
+    where: OrchestrationLogWhereUniqueInput
+  }
+
+  /**
+   * OrchestrationLog updateMany
+   */
+  export type OrchestrationLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OrchestrationLogs.
+     */
+    data: XOR<OrchestrationLogUpdateManyMutationInput, OrchestrationLogUncheckedUpdateManyInput>
+    /**
+     * Filter which OrchestrationLogs to update
+     */
+    where?: OrchestrationLogWhereInput
+    /**
+     * Limit how many OrchestrationLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OrchestrationLog updateManyAndReturn
+   */
+  export type OrchestrationLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * The data used to update OrchestrationLogs.
+     */
+    data: XOR<OrchestrationLogUpdateManyMutationInput, OrchestrationLogUncheckedUpdateManyInput>
+    /**
+     * Filter which OrchestrationLogs to update
+     */
+    where?: OrchestrationLogWhereInput
+    /**
+     * Limit how many OrchestrationLogs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OrchestrationLog upsert
+   */
+  export type OrchestrationLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OrchestrationLog to update in case it exists.
+     */
+    where: OrchestrationLogWhereUniqueInput
+    /**
+     * In case the OrchestrationLog found by the `where` argument doesn't exist, create a new OrchestrationLog with this data.
+     */
+    create: XOR<OrchestrationLogCreateInput, OrchestrationLogUncheckedCreateInput>
+    /**
+     * In case the OrchestrationLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OrchestrationLogUpdateInput, OrchestrationLogUncheckedUpdateInput>
+  }
+
+  /**
+   * OrchestrationLog delete
+   */
+  export type OrchestrationLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+    /**
+     * Filter which OrchestrationLog to delete.
+     */
+    where: OrchestrationLogWhereUniqueInput
+  }
+
+  /**
+   * OrchestrationLog deleteMany
+   */
+  export type OrchestrationLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrchestrationLogs to delete
+     */
+    where?: OrchestrationLogWhereInput
+    /**
+     * Limit how many OrchestrationLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OrchestrationLog without action
+   */
+  export type OrchestrationLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrchestrationLog
+     */
+    select?: OrchestrationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrchestrationLog
+     */
+    omit?: OrchestrationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrchestrationLogInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7049,6 +13496,80 @@ export namespace Prisma {
   };
 
   export type CatalogItemScalarFieldEnum = (typeof CatalogItemScalarFieldEnum)[keyof typeof CatalogItemScalarFieldEnum]
+
+
+  export const EventScalarFieldEnum: {
+    id: 'id',
+    owner_id: 'owner_id',
+    title: 'title',
+    description: 'description',
+    event_type: 'event_type',
+    start_date: 'start_date',
+    end_date: 'end_date',
+    status: 'status',
+    location: 'location',
+    orchestration_state: 'orchestration_state',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+  export const EventDayScalarFieldEnum: {
+    id: 'id',
+    event_id: 'event_id',
+    date: 'date',
+    sequence_number: 'sequence_number',
+    created_at: 'created_at'
+  };
+
+  export type EventDayScalarFieldEnum = (typeof EventDayScalarFieldEnum)[keyof typeof EventDayScalarFieldEnum]
+
+
+  export const ActivityScalarFieldEnum: {
+    id: 'id',
+    day_id: 'day_id',
+    event_id: 'event_id',
+    title: 'title',
+    start_time: 'start_time',
+    end_time: 'end_time',
+    location_type: 'location_type',
+    location: 'location',
+    status: 'status',
+    is_orchestrated: 'is_orchestrated',
+    created_at: 'created_at'
+  };
+
+  export type ActivityScalarFieldEnum = (typeof ActivityScalarFieldEnum)[keyof typeof ActivityScalarFieldEnum]
+
+
+  export const InvitationScalarFieldEnum: {
+    id: 'id',
+    event_id: 'event_id',
+    activity_id: 'activity_id',
+    invitee_name: 'invitee_name',
+    invitee_email: 'invitee_email',
+    whatsapp_number: 'whatsapp_number',
+    num_guests: 'num_guests',
+    rsvp_status: 'rsvp_status',
+    invite_sent: 'invite_sent',
+    access_token: 'access_token',
+    created_at: 'created_at'
+  };
+
+  export type InvitationScalarFieldEnum = (typeof InvitationScalarFieldEnum)[keyof typeof InvitationScalarFieldEnum]
+
+
+  export const OrchestrationLogScalarFieldEnum: {
+    id: 'id',
+    event_id: 'event_id',
+    agent_name: 'agent_name',
+    log_message: 'log_message',
+    timestamp: 'timestamp'
+  };
+
+  export type OrchestrationLogScalarFieldEnum = (typeof OrchestrationLogScalarFieldEnum)[keyof typeof OrchestrationLogScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7211,6 +13732,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     catalogItems?: CatalogItemListRelationFilter
+    events?: EventListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -7230,17 +13752,18 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     catalogItems?: CatalogItemOrderByRelationAggregateInput
+    events?: EventOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    whatsapp?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
-    whatsapp?: StringNullableFilter<"User"> | string | null
     banned?: BoolNullableFilter<"User"> | boolean | null
     banReason?: StringNullableFilter<"User"> | string | null
     banExpires?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -7252,7 +13775,8 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     catalogItems?: CatalogItemListRelationFilter
-  }, "id" | "email">
+    events?: EventListRelationFilter
+  }, "id" | "email" | "whatsapp">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -7591,6 +14115,404 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"CatalogItem"> | Date | string
   }
 
+  export type EventWhereInput = {
+    AND?: EventWhereInput | EventWhereInput[]
+    OR?: EventWhereInput[]
+    NOT?: EventWhereInput | EventWhereInput[]
+    id?: UuidFilter<"Event"> | string
+    owner_id?: StringFilter<"Event"> | string
+    title?: StringFilter<"Event"> | string
+    description?: StringNullableFilter<"Event"> | string | null
+    event_type?: StringFilter<"Event"> | string
+    start_date?: DateTimeNullableFilter<"Event"> | Date | string | null
+    end_date?: DateTimeNullableFilter<"Event"> | Date | string | null
+    status?: StringFilter<"Event"> | string
+    location?: StringNullableFilter<"Event"> | string | null
+    orchestration_state?: JsonNullableFilter<"Event">
+    created_at?: DateTimeFilter<"Event"> | Date | string
+    updated_at?: DateTimeFilter<"Event"> | Date | string
+    owner?: XOR<UserScalarRelationFilter, UserWhereInput>
+    days?: EventDayListRelationFilter
+    activities?: ActivityListRelationFilter
+    invitations?: InvitationListRelationFilter
+    logs?: OrchestrationLogListRelationFilter
+  }
+
+  export type EventOrderByWithRelationInput = {
+    id?: SortOrder
+    owner_id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    event_type?: SortOrder
+    start_date?: SortOrderInput | SortOrder
+    end_date?: SortOrderInput | SortOrder
+    status?: SortOrder
+    location?: SortOrderInput | SortOrder
+    orchestration_state?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    owner?: UserOrderByWithRelationInput
+    days?: EventDayOrderByRelationAggregateInput
+    activities?: ActivityOrderByRelationAggregateInput
+    invitations?: InvitationOrderByRelationAggregateInput
+    logs?: OrchestrationLogOrderByRelationAggregateInput
+  }
+
+  export type EventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EventWhereInput | EventWhereInput[]
+    OR?: EventWhereInput[]
+    NOT?: EventWhereInput | EventWhereInput[]
+    owner_id?: StringFilter<"Event"> | string
+    title?: StringFilter<"Event"> | string
+    description?: StringNullableFilter<"Event"> | string | null
+    event_type?: StringFilter<"Event"> | string
+    start_date?: DateTimeNullableFilter<"Event"> | Date | string | null
+    end_date?: DateTimeNullableFilter<"Event"> | Date | string | null
+    status?: StringFilter<"Event"> | string
+    location?: StringNullableFilter<"Event"> | string | null
+    orchestration_state?: JsonNullableFilter<"Event">
+    created_at?: DateTimeFilter<"Event"> | Date | string
+    updated_at?: DateTimeFilter<"Event"> | Date | string
+    owner?: XOR<UserScalarRelationFilter, UserWhereInput>
+    days?: EventDayListRelationFilter
+    activities?: ActivityListRelationFilter
+    invitations?: InvitationListRelationFilter
+    logs?: OrchestrationLogListRelationFilter
+  }, "id">
+
+  export type EventOrderByWithAggregationInput = {
+    id?: SortOrder
+    owner_id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    event_type?: SortOrder
+    start_date?: SortOrderInput | SortOrder
+    end_date?: SortOrderInput | SortOrder
+    status?: SortOrder
+    location?: SortOrderInput | SortOrder
+    orchestration_state?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: EventCountOrderByAggregateInput
+    _max?: EventMaxOrderByAggregateInput
+    _min?: EventMinOrderByAggregateInput
+  }
+
+  export type EventScalarWhereWithAggregatesInput = {
+    AND?: EventScalarWhereWithAggregatesInput | EventScalarWhereWithAggregatesInput[]
+    OR?: EventScalarWhereWithAggregatesInput[]
+    NOT?: EventScalarWhereWithAggregatesInput | EventScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Event"> | string
+    owner_id?: StringWithAggregatesFilter<"Event"> | string
+    title?: StringWithAggregatesFilter<"Event"> | string
+    description?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    event_type?: StringWithAggregatesFilter<"Event"> | string
+    start_date?: DateTimeNullableWithAggregatesFilter<"Event"> | Date | string | null
+    end_date?: DateTimeNullableWithAggregatesFilter<"Event"> | Date | string | null
+    status?: StringWithAggregatesFilter<"Event"> | string
+    location?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    orchestration_state?: JsonNullableWithAggregatesFilter<"Event">
+    created_at?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+  }
+
+  export type EventDayWhereInput = {
+    AND?: EventDayWhereInput | EventDayWhereInput[]
+    OR?: EventDayWhereInput[]
+    NOT?: EventDayWhereInput | EventDayWhereInput[]
+    id?: UuidFilter<"EventDay"> | string
+    event_id?: UuidFilter<"EventDay"> | string
+    date?: DateTimeFilter<"EventDay"> | Date | string
+    sequence_number?: IntFilter<"EventDay"> | number
+    created_at?: DateTimeFilter<"EventDay"> | Date | string
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+    activities?: ActivityListRelationFilter
+  }
+
+  export type EventDayOrderByWithRelationInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    date?: SortOrder
+    sequence_number?: SortOrder
+    created_at?: SortOrder
+    event?: EventOrderByWithRelationInput
+    activities?: ActivityOrderByRelationAggregateInput
+  }
+
+  export type EventDayWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EventDayWhereInput | EventDayWhereInput[]
+    OR?: EventDayWhereInput[]
+    NOT?: EventDayWhereInput | EventDayWhereInput[]
+    event_id?: UuidFilter<"EventDay"> | string
+    date?: DateTimeFilter<"EventDay"> | Date | string
+    sequence_number?: IntFilter<"EventDay"> | number
+    created_at?: DateTimeFilter<"EventDay"> | Date | string
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+    activities?: ActivityListRelationFilter
+  }, "id">
+
+  export type EventDayOrderByWithAggregationInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    date?: SortOrder
+    sequence_number?: SortOrder
+    created_at?: SortOrder
+    _count?: EventDayCountOrderByAggregateInput
+    _avg?: EventDayAvgOrderByAggregateInput
+    _max?: EventDayMaxOrderByAggregateInput
+    _min?: EventDayMinOrderByAggregateInput
+    _sum?: EventDaySumOrderByAggregateInput
+  }
+
+  export type EventDayScalarWhereWithAggregatesInput = {
+    AND?: EventDayScalarWhereWithAggregatesInput | EventDayScalarWhereWithAggregatesInput[]
+    OR?: EventDayScalarWhereWithAggregatesInput[]
+    NOT?: EventDayScalarWhereWithAggregatesInput | EventDayScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"EventDay"> | string
+    event_id?: UuidWithAggregatesFilter<"EventDay"> | string
+    date?: DateTimeWithAggregatesFilter<"EventDay"> | Date | string
+    sequence_number?: IntWithAggregatesFilter<"EventDay"> | number
+    created_at?: DateTimeWithAggregatesFilter<"EventDay"> | Date | string
+  }
+
+  export type ActivityWhereInput = {
+    AND?: ActivityWhereInput | ActivityWhereInput[]
+    OR?: ActivityWhereInput[]
+    NOT?: ActivityWhereInput | ActivityWhereInput[]
+    id?: UuidFilter<"Activity"> | string
+    day_id?: UuidFilter<"Activity"> | string
+    event_id?: UuidFilter<"Activity"> | string
+    title?: StringFilter<"Activity"> | string
+    start_time?: DateTimeFilter<"Activity"> | Date | string
+    end_time?: DateTimeFilter<"Activity"> | Date | string
+    location_type?: StringFilter<"Activity"> | string
+    location?: StringNullableFilter<"Activity"> | string | null
+    status?: StringFilter<"Activity"> | string
+    is_orchestrated?: BoolFilter<"Activity"> | boolean
+    created_at?: DateTimeFilter<"Activity"> | Date | string
+    day?: XOR<EventDayScalarRelationFilter, EventDayWhereInput>
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+    invitations?: InvitationListRelationFilter
+  }
+
+  export type ActivityOrderByWithRelationInput = {
+    id?: SortOrder
+    day_id?: SortOrder
+    event_id?: SortOrder
+    title?: SortOrder
+    start_time?: SortOrder
+    end_time?: SortOrder
+    location_type?: SortOrder
+    location?: SortOrderInput | SortOrder
+    status?: SortOrder
+    is_orchestrated?: SortOrder
+    created_at?: SortOrder
+    day?: EventDayOrderByWithRelationInput
+    event?: EventOrderByWithRelationInput
+    invitations?: InvitationOrderByRelationAggregateInput
+  }
+
+  export type ActivityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ActivityWhereInput | ActivityWhereInput[]
+    OR?: ActivityWhereInput[]
+    NOT?: ActivityWhereInput | ActivityWhereInput[]
+    day_id?: UuidFilter<"Activity"> | string
+    event_id?: UuidFilter<"Activity"> | string
+    title?: StringFilter<"Activity"> | string
+    start_time?: DateTimeFilter<"Activity"> | Date | string
+    end_time?: DateTimeFilter<"Activity"> | Date | string
+    location_type?: StringFilter<"Activity"> | string
+    location?: StringNullableFilter<"Activity"> | string | null
+    status?: StringFilter<"Activity"> | string
+    is_orchestrated?: BoolFilter<"Activity"> | boolean
+    created_at?: DateTimeFilter<"Activity"> | Date | string
+    day?: XOR<EventDayScalarRelationFilter, EventDayWhereInput>
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+    invitations?: InvitationListRelationFilter
+  }, "id">
+
+  export type ActivityOrderByWithAggregationInput = {
+    id?: SortOrder
+    day_id?: SortOrder
+    event_id?: SortOrder
+    title?: SortOrder
+    start_time?: SortOrder
+    end_time?: SortOrder
+    location_type?: SortOrder
+    location?: SortOrderInput | SortOrder
+    status?: SortOrder
+    is_orchestrated?: SortOrder
+    created_at?: SortOrder
+    _count?: ActivityCountOrderByAggregateInput
+    _max?: ActivityMaxOrderByAggregateInput
+    _min?: ActivityMinOrderByAggregateInput
+  }
+
+  export type ActivityScalarWhereWithAggregatesInput = {
+    AND?: ActivityScalarWhereWithAggregatesInput | ActivityScalarWhereWithAggregatesInput[]
+    OR?: ActivityScalarWhereWithAggregatesInput[]
+    NOT?: ActivityScalarWhereWithAggregatesInput | ActivityScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Activity"> | string
+    day_id?: UuidWithAggregatesFilter<"Activity"> | string
+    event_id?: UuidWithAggregatesFilter<"Activity"> | string
+    title?: StringWithAggregatesFilter<"Activity"> | string
+    start_time?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
+    end_time?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
+    location_type?: StringWithAggregatesFilter<"Activity"> | string
+    location?: StringNullableWithAggregatesFilter<"Activity"> | string | null
+    status?: StringWithAggregatesFilter<"Activity"> | string
+    is_orchestrated?: BoolWithAggregatesFilter<"Activity"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
+  }
+
+  export type InvitationWhereInput = {
+    AND?: InvitationWhereInput | InvitationWhereInput[]
+    OR?: InvitationWhereInput[]
+    NOT?: InvitationWhereInput | InvitationWhereInput[]
+    id?: UuidFilter<"Invitation"> | string
+    event_id?: UuidFilter<"Invitation"> | string
+    activity_id?: UuidNullableFilter<"Invitation"> | string | null
+    invitee_name?: StringFilter<"Invitation"> | string
+    invitee_email?: StringNullableFilter<"Invitation"> | string | null
+    whatsapp_number?: StringFilter<"Invitation"> | string
+    num_guests?: IntFilter<"Invitation"> | number
+    rsvp_status?: StringFilter<"Invitation"> | string
+    invite_sent?: BoolFilter<"Invitation"> | boolean
+    access_token?: StringFilter<"Invitation"> | string
+    created_at?: DateTimeFilter<"Invitation"> | Date | string
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+    activity?: XOR<ActivityNullableScalarRelationFilter, ActivityWhereInput> | null
+  }
+
+  export type InvitationOrderByWithRelationInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    activity_id?: SortOrderInput | SortOrder
+    invitee_name?: SortOrder
+    invitee_email?: SortOrderInput | SortOrder
+    whatsapp_number?: SortOrder
+    num_guests?: SortOrder
+    rsvp_status?: SortOrder
+    invite_sent?: SortOrder
+    access_token?: SortOrder
+    created_at?: SortOrder
+    event?: EventOrderByWithRelationInput
+    activity?: ActivityOrderByWithRelationInput
+  }
+
+  export type InvitationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    access_token?: string
+    AND?: InvitationWhereInput | InvitationWhereInput[]
+    OR?: InvitationWhereInput[]
+    NOT?: InvitationWhereInput | InvitationWhereInput[]
+    event_id?: UuidFilter<"Invitation"> | string
+    activity_id?: UuidNullableFilter<"Invitation"> | string | null
+    invitee_name?: StringFilter<"Invitation"> | string
+    invitee_email?: StringNullableFilter<"Invitation"> | string | null
+    whatsapp_number?: StringFilter<"Invitation"> | string
+    num_guests?: IntFilter<"Invitation"> | number
+    rsvp_status?: StringFilter<"Invitation"> | string
+    invite_sent?: BoolFilter<"Invitation"> | boolean
+    created_at?: DateTimeFilter<"Invitation"> | Date | string
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+    activity?: XOR<ActivityNullableScalarRelationFilter, ActivityWhereInput> | null
+  }, "id" | "access_token">
+
+  export type InvitationOrderByWithAggregationInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    activity_id?: SortOrderInput | SortOrder
+    invitee_name?: SortOrder
+    invitee_email?: SortOrderInput | SortOrder
+    whatsapp_number?: SortOrder
+    num_guests?: SortOrder
+    rsvp_status?: SortOrder
+    invite_sent?: SortOrder
+    access_token?: SortOrder
+    created_at?: SortOrder
+    _count?: InvitationCountOrderByAggregateInput
+    _avg?: InvitationAvgOrderByAggregateInput
+    _max?: InvitationMaxOrderByAggregateInput
+    _min?: InvitationMinOrderByAggregateInput
+    _sum?: InvitationSumOrderByAggregateInput
+  }
+
+  export type InvitationScalarWhereWithAggregatesInput = {
+    AND?: InvitationScalarWhereWithAggregatesInput | InvitationScalarWhereWithAggregatesInput[]
+    OR?: InvitationScalarWhereWithAggregatesInput[]
+    NOT?: InvitationScalarWhereWithAggregatesInput | InvitationScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Invitation"> | string
+    event_id?: UuidWithAggregatesFilter<"Invitation"> | string
+    activity_id?: UuidNullableWithAggregatesFilter<"Invitation"> | string | null
+    invitee_name?: StringWithAggregatesFilter<"Invitation"> | string
+    invitee_email?: StringNullableWithAggregatesFilter<"Invitation"> | string | null
+    whatsapp_number?: StringWithAggregatesFilter<"Invitation"> | string
+    num_guests?: IntWithAggregatesFilter<"Invitation"> | number
+    rsvp_status?: StringWithAggregatesFilter<"Invitation"> | string
+    invite_sent?: BoolWithAggregatesFilter<"Invitation"> | boolean
+    access_token?: StringWithAggregatesFilter<"Invitation"> | string
+    created_at?: DateTimeWithAggregatesFilter<"Invitation"> | Date | string
+  }
+
+  export type OrchestrationLogWhereInput = {
+    AND?: OrchestrationLogWhereInput | OrchestrationLogWhereInput[]
+    OR?: OrchestrationLogWhereInput[]
+    NOT?: OrchestrationLogWhereInput | OrchestrationLogWhereInput[]
+    id?: UuidFilter<"OrchestrationLog"> | string
+    event_id?: UuidFilter<"OrchestrationLog"> | string
+    agent_name?: StringFilter<"OrchestrationLog"> | string
+    log_message?: StringFilter<"OrchestrationLog"> | string
+    timestamp?: DateTimeFilter<"OrchestrationLog"> | Date | string
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+  }
+
+  export type OrchestrationLogOrderByWithRelationInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    agent_name?: SortOrder
+    log_message?: SortOrder
+    timestamp?: SortOrder
+    event?: EventOrderByWithRelationInput
+  }
+
+  export type OrchestrationLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: OrchestrationLogWhereInput | OrchestrationLogWhereInput[]
+    OR?: OrchestrationLogWhereInput[]
+    NOT?: OrchestrationLogWhereInput | OrchestrationLogWhereInput[]
+    event_id?: UuidFilter<"OrchestrationLog"> | string
+    agent_name?: StringFilter<"OrchestrationLog"> | string
+    log_message?: StringFilter<"OrchestrationLog"> | string
+    timestamp?: DateTimeFilter<"OrchestrationLog"> | Date | string
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+  }, "id">
+
+  export type OrchestrationLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    agent_name?: SortOrder
+    log_message?: SortOrder
+    timestamp?: SortOrder
+    _count?: OrchestrationLogCountOrderByAggregateInput
+    _max?: OrchestrationLogMaxOrderByAggregateInput
+    _min?: OrchestrationLogMinOrderByAggregateInput
+  }
+
+  export type OrchestrationLogScalarWhereWithAggregatesInput = {
+    AND?: OrchestrationLogScalarWhereWithAggregatesInput | OrchestrationLogScalarWhereWithAggregatesInput[]
+    OR?: OrchestrationLogScalarWhereWithAggregatesInput[]
+    NOT?: OrchestrationLogScalarWhereWithAggregatesInput | OrchestrationLogScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"OrchestrationLog"> | string
+    event_id?: UuidWithAggregatesFilter<"OrchestrationLog"> | string
+    agent_name?: StringWithAggregatesFilter<"OrchestrationLog"> | string
+    log_message?: StringWithAggregatesFilter<"OrchestrationLog"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"OrchestrationLog"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -7608,6 +14530,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     catalogItems?: CatalogItemCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7627,6 +14550,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     catalogItems?: CatalogItemUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUpdateInput = {
@@ -7646,6 +14570,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     catalogItems?: CatalogItemUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7665,6 +14590,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     catalogItems?: CatalogItemUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -8048,6 +14974,436 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EventCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    owner: UserCreateNestedOneWithoutEventsInput
+    days?: EventDayCreateNestedManyWithoutEventInput
+    activities?: ActivityCreateNestedManyWithoutEventInput
+    invitations?: InvitationCreateNestedManyWithoutEventInput
+    logs?: OrchestrationLogCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateInput = {
+    id?: string
+    owner_id: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    days?: EventDayUncheckedCreateNestedManyWithoutEventInput
+    activities?: ActivityUncheckedCreateNestedManyWithoutEventInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutEventInput
+    logs?: OrchestrationLogUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutEventsNestedInput
+    days?: EventDayUpdateManyWithoutEventNestedInput
+    activities?: ActivityUpdateManyWithoutEventNestedInput
+    invitations?: InvitationUpdateManyWithoutEventNestedInput
+    logs?: OrchestrationLogUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    owner_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: EventDayUncheckedUpdateManyWithoutEventNestedInput
+    activities?: ActivityUncheckedUpdateManyWithoutEventNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutEventNestedInput
+    logs?: OrchestrationLogUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventCreateManyInput = {
+    id?: string
+    owner_id: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type EventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    owner_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventDayCreateInput = {
+    id?: string
+    date: Date | string
+    sequence_number: number
+    created_at?: Date | string
+    event: EventCreateNestedOneWithoutDaysInput
+    activities?: ActivityCreateNestedManyWithoutDayInput
+  }
+
+  export type EventDayUncheckedCreateInput = {
+    id?: string
+    event_id: string
+    date: Date | string
+    sequence_number: number
+    created_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutDayInput
+  }
+
+  export type EventDayUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    sequence_number?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: EventUpdateOneRequiredWithoutDaysNestedInput
+    activities?: ActivityUpdateManyWithoutDayNestedInput
+  }
+
+  export type EventDayUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    sequence_number?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutDayNestedInput
+  }
+
+  export type EventDayCreateManyInput = {
+    id?: string
+    event_id: string
+    date: Date | string
+    sequence_number: number
+    created_at?: Date | string
+  }
+
+  export type EventDayUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    sequence_number?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventDayUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    sequence_number?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityCreateInput = {
+    id?: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+    day: EventDayCreateNestedOneWithoutActivitiesInput
+    event: EventCreateNestedOneWithoutActivitiesInput
+    invitations?: InvitationCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateInput = {
+    id?: string
+    day_id: string
+    event_id: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+    invitations?: InvitationUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    day?: EventDayUpdateOneRequiredWithoutActivitiesNestedInput
+    event?: EventUpdateOneRequiredWithoutActivitiesNestedInput
+    invitations?: InvitationUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day_id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    invitations?: InvitationUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityCreateManyInput = {
+    id?: string
+    day_id: string
+    event_id: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+  }
+
+  export type ActivityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day_id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationCreateInput = {
+    id?: string
+    invitee_name: string
+    invitee_email?: string | null
+    whatsapp_number: string
+    num_guests?: number
+    rsvp_status?: string
+    invite_sent?: boolean
+    access_token?: string
+    created_at?: Date | string
+    event: EventCreateNestedOneWithoutInvitationsInput
+    activity?: ActivityCreateNestedOneWithoutInvitationsInput
+  }
+
+  export type InvitationUncheckedCreateInput = {
+    id?: string
+    event_id: string
+    activity_id?: string | null
+    invitee_name: string
+    invitee_email?: string | null
+    whatsapp_number: string
+    num_guests?: number
+    rsvp_status?: string
+    invite_sent?: boolean
+    access_token?: string
+    created_at?: Date | string
+  }
+
+  export type InvitationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitee_name?: StringFieldUpdateOperationsInput | string
+    invitee_email?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp_number?: StringFieldUpdateOperationsInput | string
+    num_guests?: IntFieldUpdateOperationsInput | number
+    rsvp_status?: StringFieldUpdateOperationsInput | string
+    invite_sent?: BoolFieldUpdateOperationsInput | boolean
+    access_token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: EventUpdateOneRequiredWithoutInvitationsNestedInput
+    activity?: ActivityUpdateOneWithoutInvitationsNestedInput
+  }
+
+  export type InvitationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    activity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    invitee_name?: StringFieldUpdateOperationsInput | string
+    invitee_email?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp_number?: StringFieldUpdateOperationsInput | string
+    num_guests?: IntFieldUpdateOperationsInput | number
+    rsvp_status?: StringFieldUpdateOperationsInput | string
+    invite_sent?: BoolFieldUpdateOperationsInput | boolean
+    access_token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationCreateManyInput = {
+    id?: string
+    event_id: string
+    activity_id?: string | null
+    invitee_name: string
+    invitee_email?: string | null
+    whatsapp_number: string
+    num_guests?: number
+    rsvp_status?: string
+    invite_sent?: boolean
+    access_token?: string
+    created_at?: Date | string
+  }
+
+  export type InvitationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitee_name?: StringFieldUpdateOperationsInput | string
+    invitee_email?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp_number?: StringFieldUpdateOperationsInput | string
+    num_guests?: IntFieldUpdateOperationsInput | number
+    rsvp_status?: StringFieldUpdateOperationsInput | string
+    invite_sent?: BoolFieldUpdateOperationsInput | boolean
+    access_token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    activity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    invitee_name?: StringFieldUpdateOperationsInput | string
+    invitee_email?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp_number?: StringFieldUpdateOperationsInput | string
+    num_guests?: IntFieldUpdateOperationsInput | number
+    rsvp_status?: StringFieldUpdateOperationsInput | string
+    invite_sent?: BoolFieldUpdateOperationsInput | boolean
+    access_token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrchestrationLogCreateInput = {
+    id?: string
+    agent_name: string
+    log_message: string
+    timestamp?: Date | string
+    event: EventCreateNestedOneWithoutLogsInput
+  }
+
+  export type OrchestrationLogUncheckedCreateInput = {
+    id?: string
+    event_id: string
+    agent_name: string
+    log_message: string
+    timestamp?: Date | string
+  }
+
+  export type OrchestrationLogUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    agent_name?: StringFieldUpdateOperationsInput | string
+    log_message?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: EventUpdateOneRequiredWithoutLogsNestedInput
+  }
+
+  export type OrchestrationLogUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    agent_name?: StringFieldUpdateOperationsInput | string
+    log_message?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrchestrationLogCreateManyInput = {
+    id?: string
+    event_id: string
+    agent_name: string
+    log_message: string
+    timestamp?: Date | string
+  }
+
+  export type OrchestrationLogUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    agent_name?: StringFieldUpdateOperationsInput | string
+    log_message?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrchestrationLogUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    agent_name?: StringFieldUpdateOperationsInput | string
+    log_message?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8158,6 +15514,12 @@ export namespace Prisma {
     none?: CatalogItemWhereInput
   }
 
+  export type EventListRelationFilter = {
+    every?: EventWhereInput
+    some?: EventWhereInput
+    none?: EventWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -8172,6 +15534,10 @@ export namespace Prisma {
   }
 
   export type CatalogItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8521,6 +15887,333 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type UuidFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
+  export type EventDayListRelationFilter = {
+    every?: EventDayWhereInput
+    some?: EventDayWhereInput
+    none?: EventDayWhereInput
+  }
+
+  export type ActivityListRelationFilter = {
+    every?: ActivityWhereInput
+    some?: ActivityWhereInput
+    none?: ActivityWhereInput
+  }
+
+  export type InvitationListRelationFilter = {
+    every?: InvitationWhereInput
+    some?: InvitationWhereInput
+    none?: InvitationWhereInput
+  }
+
+  export type OrchestrationLogListRelationFilter = {
+    every?: OrchestrationLogWhereInput
+    some?: OrchestrationLogWhereInput
+    none?: OrchestrationLogWhereInput
+  }
+
+  export type EventDayOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ActivityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InvitationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OrchestrationLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EventCountOrderByAggregateInput = {
+    id?: SortOrder
+    owner_id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    event_type?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    status?: SortOrder
+    location?: SortOrder
+    orchestration_state?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type EventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    owner_id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    event_type?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    status?: SortOrder
+    location?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type EventMinOrderByAggregateInput = {
+    id?: SortOrder
+    owner_id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    event_type?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    status?: SortOrder
+    location?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type EventScalarRelationFilter = {
+    is?: EventWhereInput
+    isNot?: EventWhereInput
+  }
+
+  export type EventDayCountOrderByAggregateInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    date?: SortOrder
+    sequence_number?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type EventDayAvgOrderByAggregateInput = {
+    sequence_number?: SortOrder
+  }
+
+  export type EventDayMaxOrderByAggregateInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    date?: SortOrder
+    sequence_number?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type EventDayMinOrderByAggregateInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    date?: SortOrder
+    sequence_number?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type EventDaySumOrderByAggregateInput = {
+    sequence_number?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EventDayScalarRelationFilter = {
+    is?: EventDayWhereInput
+    isNot?: EventDayWhereInput
+  }
+
+  export type ActivityCountOrderByAggregateInput = {
+    id?: SortOrder
+    day_id?: SortOrder
+    event_id?: SortOrder
+    title?: SortOrder
+    start_time?: SortOrder
+    end_time?: SortOrder
+    location_type?: SortOrder
+    location?: SortOrder
+    status?: SortOrder
+    is_orchestrated?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type ActivityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    day_id?: SortOrder
+    event_id?: SortOrder
+    title?: SortOrder
+    start_time?: SortOrder
+    end_time?: SortOrder
+    location_type?: SortOrder
+    location?: SortOrder
+    status?: SortOrder
+    is_orchestrated?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type ActivityMinOrderByAggregateInput = {
+    id?: SortOrder
+    day_id?: SortOrder
+    event_id?: SortOrder
+    title?: SortOrder
+    start_time?: SortOrder
+    end_time?: SortOrder
+    location_type?: SortOrder
+    location?: SortOrder
+    status?: SortOrder
+    is_orchestrated?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type UuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type ActivityNullableScalarRelationFilter = {
+    is?: ActivityWhereInput | null
+    isNot?: ActivityWhereInput | null
+  }
+
+  export type InvitationCountOrderByAggregateInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    activity_id?: SortOrder
+    invitee_name?: SortOrder
+    invitee_email?: SortOrder
+    whatsapp_number?: SortOrder
+    num_guests?: SortOrder
+    rsvp_status?: SortOrder
+    invite_sent?: SortOrder
+    access_token?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type InvitationAvgOrderByAggregateInput = {
+    num_guests?: SortOrder
+  }
+
+  export type InvitationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    activity_id?: SortOrder
+    invitee_name?: SortOrder
+    invitee_email?: SortOrder
+    whatsapp_number?: SortOrder
+    num_guests?: SortOrder
+    rsvp_status?: SortOrder
+    invite_sent?: SortOrder
+    access_token?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type InvitationMinOrderByAggregateInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    activity_id?: SortOrder
+    invitee_name?: SortOrder
+    invitee_email?: SortOrder
+    whatsapp_number?: SortOrder
+    num_guests?: SortOrder
+    rsvp_status?: SortOrder
+    invite_sent?: SortOrder
+    access_token?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type InvitationSumOrderByAggregateInput = {
+    num_guests?: SortOrder
+  }
+
+  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type OrchestrationLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    agent_name?: SortOrder
+    log_message?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type OrchestrationLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    agent_name?: SortOrder
+    log_message?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type OrchestrationLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    event_id?: SortOrder
+    agent_name?: SortOrder
+    log_message?: SortOrder
+    timestamp?: SortOrder
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -8542,6 +16235,13 @@ export namespace Prisma {
     connect?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
   }
 
+  export type EventCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<EventCreateWithoutOwnerInput, EventUncheckedCreateWithoutOwnerInput> | EventCreateWithoutOwnerInput[] | EventUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutOwnerInput | EventCreateOrConnectWithoutOwnerInput[]
+    createMany?: EventCreateManyOwnerInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -8561,6 +16261,13 @@ export namespace Prisma {
     connectOrCreate?: CatalogItemCreateOrConnectWithoutUserInput | CatalogItemCreateOrConnectWithoutUserInput[]
     createMany?: CatalogItemCreateManyUserInputEnvelope
     connect?: CatalogItemWhereUniqueInput | CatalogItemWhereUniqueInput[]
+  }
+
+  export type EventUncheckedCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<EventCreateWithoutOwnerInput, EventUncheckedCreateWithoutOwnerInput> | EventCreateWithoutOwnerInput[] | EventUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutOwnerInput | EventCreateOrConnectWithoutOwnerInput[]
+    createMany?: EventCreateManyOwnerInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8633,6 +16340,20 @@ export namespace Prisma {
     deleteMany?: CatalogItemScalarWhereInput | CatalogItemScalarWhereInput[]
   }
 
+  export type EventUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<EventCreateWithoutOwnerInput, EventUncheckedCreateWithoutOwnerInput> | EventCreateWithoutOwnerInput[] | EventUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutOwnerInput | EventCreateOrConnectWithoutOwnerInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutOwnerInput | EventUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: EventCreateManyOwnerInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutOwnerInput | EventUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutOwnerInput | EventUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -8673,6 +16394,20 @@ export namespace Prisma {
     update?: CatalogItemUpdateWithWhereUniqueWithoutUserInput | CatalogItemUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: CatalogItemUpdateManyWithWhereWithoutUserInput | CatalogItemUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CatalogItemScalarWhereInput | CatalogItemScalarWhereInput[]
+  }
+
+  export type EventUncheckedUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<EventCreateWithoutOwnerInput, EventUncheckedCreateWithoutOwnerInput> | EventCreateWithoutOwnerInput[] | EventUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutOwnerInput | EventCreateOrConnectWithoutOwnerInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutOwnerInput | EventUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: EventCreateManyOwnerInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutOwnerInput | EventUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutOwnerInput | EventUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -8723,6 +16458,366 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCatalogItemsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCatalogItemsInput, UserUpdateWithoutCatalogItemsInput>, UserUncheckedUpdateWithoutCatalogItemsInput>
+  }
+
+  export type UserCreateNestedOneWithoutEventsInput = {
+    create?: XOR<UserCreateWithoutEventsInput, UserUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EventDayCreateNestedManyWithoutEventInput = {
+    create?: XOR<EventDayCreateWithoutEventInput, EventDayUncheckedCreateWithoutEventInput> | EventDayCreateWithoutEventInput[] | EventDayUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventDayCreateOrConnectWithoutEventInput | EventDayCreateOrConnectWithoutEventInput[]
+    createMany?: EventDayCreateManyEventInputEnvelope
+    connect?: EventDayWhereUniqueInput | EventDayWhereUniqueInput[]
+  }
+
+  export type ActivityCreateNestedManyWithoutEventInput = {
+    create?: XOR<ActivityCreateWithoutEventInput, ActivityUncheckedCreateWithoutEventInput> | ActivityCreateWithoutEventInput[] | ActivityUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutEventInput | ActivityCreateOrConnectWithoutEventInput[]
+    createMany?: ActivityCreateManyEventInputEnvelope
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+  }
+
+  export type InvitationCreateNestedManyWithoutEventInput = {
+    create?: XOR<InvitationCreateWithoutEventInput, InvitationUncheckedCreateWithoutEventInput> | InvitationCreateWithoutEventInput[] | InvitationUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutEventInput | InvitationCreateOrConnectWithoutEventInput[]
+    createMany?: InvitationCreateManyEventInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
+  export type OrchestrationLogCreateNestedManyWithoutEventInput = {
+    create?: XOR<OrchestrationLogCreateWithoutEventInput, OrchestrationLogUncheckedCreateWithoutEventInput> | OrchestrationLogCreateWithoutEventInput[] | OrchestrationLogUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: OrchestrationLogCreateOrConnectWithoutEventInput | OrchestrationLogCreateOrConnectWithoutEventInput[]
+    createMany?: OrchestrationLogCreateManyEventInputEnvelope
+    connect?: OrchestrationLogWhereUniqueInput | OrchestrationLogWhereUniqueInput[]
+  }
+
+  export type EventDayUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<EventDayCreateWithoutEventInput, EventDayUncheckedCreateWithoutEventInput> | EventDayCreateWithoutEventInput[] | EventDayUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventDayCreateOrConnectWithoutEventInput | EventDayCreateOrConnectWithoutEventInput[]
+    createMany?: EventDayCreateManyEventInputEnvelope
+    connect?: EventDayWhereUniqueInput | EventDayWhereUniqueInput[]
+  }
+
+  export type ActivityUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<ActivityCreateWithoutEventInput, ActivityUncheckedCreateWithoutEventInput> | ActivityCreateWithoutEventInput[] | ActivityUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutEventInput | ActivityCreateOrConnectWithoutEventInput[]
+    createMany?: ActivityCreateManyEventInputEnvelope
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+  }
+
+  export type InvitationUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<InvitationCreateWithoutEventInput, InvitationUncheckedCreateWithoutEventInput> | InvitationCreateWithoutEventInput[] | InvitationUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutEventInput | InvitationCreateOrConnectWithoutEventInput[]
+    createMany?: InvitationCreateManyEventInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
+  export type OrchestrationLogUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<OrchestrationLogCreateWithoutEventInput, OrchestrationLogUncheckedCreateWithoutEventInput> | OrchestrationLogCreateWithoutEventInput[] | OrchestrationLogUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: OrchestrationLogCreateOrConnectWithoutEventInput | OrchestrationLogCreateOrConnectWithoutEventInput[]
+    createMany?: OrchestrationLogCreateManyEventInputEnvelope
+    connect?: OrchestrationLogWhereUniqueInput | OrchestrationLogWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutEventsNestedInput = {
+    create?: XOR<UserCreateWithoutEventsInput, UserUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEventsInput
+    upsert?: UserUpsertWithoutEventsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEventsInput, UserUpdateWithoutEventsInput>, UserUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type EventDayUpdateManyWithoutEventNestedInput = {
+    create?: XOR<EventDayCreateWithoutEventInput, EventDayUncheckedCreateWithoutEventInput> | EventDayCreateWithoutEventInput[] | EventDayUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventDayCreateOrConnectWithoutEventInput | EventDayCreateOrConnectWithoutEventInput[]
+    upsert?: EventDayUpsertWithWhereUniqueWithoutEventInput | EventDayUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: EventDayCreateManyEventInputEnvelope
+    set?: EventDayWhereUniqueInput | EventDayWhereUniqueInput[]
+    disconnect?: EventDayWhereUniqueInput | EventDayWhereUniqueInput[]
+    delete?: EventDayWhereUniqueInput | EventDayWhereUniqueInput[]
+    connect?: EventDayWhereUniqueInput | EventDayWhereUniqueInput[]
+    update?: EventDayUpdateWithWhereUniqueWithoutEventInput | EventDayUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: EventDayUpdateManyWithWhereWithoutEventInput | EventDayUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: EventDayScalarWhereInput | EventDayScalarWhereInput[]
+  }
+
+  export type ActivityUpdateManyWithoutEventNestedInput = {
+    create?: XOR<ActivityCreateWithoutEventInput, ActivityUncheckedCreateWithoutEventInput> | ActivityCreateWithoutEventInput[] | ActivityUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutEventInput | ActivityCreateOrConnectWithoutEventInput[]
+    upsert?: ActivityUpsertWithWhereUniqueWithoutEventInput | ActivityUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: ActivityCreateManyEventInputEnvelope
+    set?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    disconnect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    delete?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    update?: ActivityUpdateWithWhereUniqueWithoutEventInput | ActivityUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: ActivityUpdateManyWithWhereWithoutEventInput | ActivityUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+  }
+
+  export type InvitationUpdateManyWithoutEventNestedInput = {
+    create?: XOR<InvitationCreateWithoutEventInput, InvitationUncheckedCreateWithoutEventInput> | InvitationCreateWithoutEventInput[] | InvitationUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutEventInput | InvitationCreateOrConnectWithoutEventInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutEventInput | InvitationUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: InvitationCreateManyEventInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutEventInput | InvitationUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutEventInput | InvitationUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type OrchestrationLogUpdateManyWithoutEventNestedInput = {
+    create?: XOR<OrchestrationLogCreateWithoutEventInput, OrchestrationLogUncheckedCreateWithoutEventInput> | OrchestrationLogCreateWithoutEventInput[] | OrchestrationLogUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: OrchestrationLogCreateOrConnectWithoutEventInput | OrchestrationLogCreateOrConnectWithoutEventInput[]
+    upsert?: OrchestrationLogUpsertWithWhereUniqueWithoutEventInput | OrchestrationLogUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: OrchestrationLogCreateManyEventInputEnvelope
+    set?: OrchestrationLogWhereUniqueInput | OrchestrationLogWhereUniqueInput[]
+    disconnect?: OrchestrationLogWhereUniqueInput | OrchestrationLogWhereUniqueInput[]
+    delete?: OrchestrationLogWhereUniqueInput | OrchestrationLogWhereUniqueInput[]
+    connect?: OrchestrationLogWhereUniqueInput | OrchestrationLogWhereUniqueInput[]
+    update?: OrchestrationLogUpdateWithWhereUniqueWithoutEventInput | OrchestrationLogUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: OrchestrationLogUpdateManyWithWhereWithoutEventInput | OrchestrationLogUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: OrchestrationLogScalarWhereInput | OrchestrationLogScalarWhereInput[]
+  }
+
+  export type EventDayUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<EventDayCreateWithoutEventInput, EventDayUncheckedCreateWithoutEventInput> | EventDayCreateWithoutEventInput[] | EventDayUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventDayCreateOrConnectWithoutEventInput | EventDayCreateOrConnectWithoutEventInput[]
+    upsert?: EventDayUpsertWithWhereUniqueWithoutEventInput | EventDayUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: EventDayCreateManyEventInputEnvelope
+    set?: EventDayWhereUniqueInput | EventDayWhereUniqueInput[]
+    disconnect?: EventDayWhereUniqueInput | EventDayWhereUniqueInput[]
+    delete?: EventDayWhereUniqueInput | EventDayWhereUniqueInput[]
+    connect?: EventDayWhereUniqueInput | EventDayWhereUniqueInput[]
+    update?: EventDayUpdateWithWhereUniqueWithoutEventInput | EventDayUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: EventDayUpdateManyWithWhereWithoutEventInput | EventDayUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: EventDayScalarWhereInput | EventDayScalarWhereInput[]
+  }
+
+  export type ActivityUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<ActivityCreateWithoutEventInput, ActivityUncheckedCreateWithoutEventInput> | ActivityCreateWithoutEventInput[] | ActivityUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutEventInput | ActivityCreateOrConnectWithoutEventInput[]
+    upsert?: ActivityUpsertWithWhereUniqueWithoutEventInput | ActivityUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: ActivityCreateManyEventInputEnvelope
+    set?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    disconnect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    delete?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    update?: ActivityUpdateWithWhereUniqueWithoutEventInput | ActivityUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: ActivityUpdateManyWithWhereWithoutEventInput | ActivityUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<InvitationCreateWithoutEventInput, InvitationUncheckedCreateWithoutEventInput> | InvitationCreateWithoutEventInput[] | InvitationUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutEventInput | InvitationCreateOrConnectWithoutEventInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutEventInput | InvitationUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: InvitationCreateManyEventInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutEventInput | InvitationUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutEventInput | InvitationUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type OrchestrationLogUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<OrchestrationLogCreateWithoutEventInput, OrchestrationLogUncheckedCreateWithoutEventInput> | OrchestrationLogCreateWithoutEventInput[] | OrchestrationLogUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: OrchestrationLogCreateOrConnectWithoutEventInput | OrchestrationLogCreateOrConnectWithoutEventInput[]
+    upsert?: OrchestrationLogUpsertWithWhereUniqueWithoutEventInput | OrchestrationLogUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: OrchestrationLogCreateManyEventInputEnvelope
+    set?: OrchestrationLogWhereUniqueInput | OrchestrationLogWhereUniqueInput[]
+    disconnect?: OrchestrationLogWhereUniqueInput | OrchestrationLogWhereUniqueInput[]
+    delete?: OrchestrationLogWhereUniqueInput | OrchestrationLogWhereUniqueInput[]
+    connect?: OrchestrationLogWhereUniqueInput | OrchestrationLogWhereUniqueInput[]
+    update?: OrchestrationLogUpdateWithWhereUniqueWithoutEventInput | OrchestrationLogUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: OrchestrationLogUpdateManyWithWhereWithoutEventInput | OrchestrationLogUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: OrchestrationLogScalarWhereInput | OrchestrationLogScalarWhereInput[]
+  }
+
+  export type EventCreateNestedOneWithoutDaysInput = {
+    create?: XOR<EventCreateWithoutDaysInput, EventUncheckedCreateWithoutDaysInput>
+    connectOrCreate?: EventCreateOrConnectWithoutDaysInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type ActivityCreateNestedManyWithoutDayInput = {
+    create?: XOR<ActivityCreateWithoutDayInput, ActivityUncheckedCreateWithoutDayInput> | ActivityCreateWithoutDayInput[] | ActivityUncheckedCreateWithoutDayInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutDayInput | ActivityCreateOrConnectWithoutDayInput[]
+    createMany?: ActivityCreateManyDayInputEnvelope
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+  }
+
+  export type ActivityUncheckedCreateNestedManyWithoutDayInput = {
+    create?: XOR<ActivityCreateWithoutDayInput, ActivityUncheckedCreateWithoutDayInput> | ActivityCreateWithoutDayInput[] | ActivityUncheckedCreateWithoutDayInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutDayInput | ActivityCreateOrConnectWithoutDayInput[]
+    createMany?: ActivityCreateManyDayInputEnvelope
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EventUpdateOneRequiredWithoutDaysNestedInput = {
+    create?: XOR<EventCreateWithoutDaysInput, EventUncheckedCreateWithoutDaysInput>
+    connectOrCreate?: EventCreateOrConnectWithoutDaysInput
+    upsert?: EventUpsertWithoutDaysInput
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutDaysInput, EventUpdateWithoutDaysInput>, EventUncheckedUpdateWithoutDaysInput>
+  }
+
+  export type ActivityUpdateManyWithoutDayNestedInput = {
+    create?: XOR<ActivityCreateWithoutDayInput, ActivityUncheckedCreateWithoutDayInput> | ActivityCreateWithoutDayInput[] | ActivityUncheckedCreateWithoutDayInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutDayInput | ActivityCreateOrConnectWithoutDayInput[]
+    upsert?: ActivityUpsertWithWhereUniqueWithoutDayInput | ActivityUpsertWithWhereUniqueWithoutDayInput[]
+    createMany?: ActivityCreateManyDayInputEnvelope
+    set?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    disconnect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    delete?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    update?: ActivityUpdateWithWhereUniqueWithoutDayInput | ActivityUpdateWithWhereUniqueWithoutDayInput[]
+    updateMany?: ActivityUpdateManyWithWhereWithoutDayInput | ActivityUpdateManyWithWhereWithoutDayInput[]
+    deleteMany?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+  }
+
+  export type ActivityUncheckedUpdateManyWithoutDayNestedInput = {
+    create?: XOR<ActivityCreateWithoutDayInput, ActivityUncheckedCreateWithoutDayInput> | ActivityCreateWithoutDayInput[] | ActivityUncheckedCreateWithoutDayInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutDayInput | ActivityCreateOrConnectWithoutDayInput[]
+    upsert?: ActivityUpsertWithWhereUniqueWithoutDayInput | ActivityUpsertWithWhereUniqueWithoutDayInput[]
+    createMany?: ActivityCreateManyDayInputEnvelope
+    set?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    disconnect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    delete?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    update?: ActivityUpdateWithWhereUniqueWithoutDayInput | ActivityUpdateWithWhereUniqueWithoutDayInput[]
+    updateMany?: ActivityUpdateManyWithWhereWithoutDayInput | ActivityUpdateManyWithWhereWithoutDayInput[]
+    deleteMany?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+  }
+
+  export type EventDayCreateNestedOneWithoutActivitiesInput = {
+    create?: XOR<EventDayCreateWithoutActivitiesInput, EventDayUncheckedCreateWithoutActivitiesInput>
+    connectOrCreate?: EventDayCreateOrConnectWithoutActivitiesInput
+    connect?: EventDayWhereUniqueInput
+  }
+
+  export type EventCreateNestedOneWithoutActivitiesInput = {
+    create?: XOR<EventCreateWithoutActivitiesInput, EventUncheckedCreateWithoutActivitiesInput>
+    connectOrCreate?: EventCreateOrConnectWithoutActivitiesInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type InvitationCreateNestedManyWithoutActivityInput = {
+    create?: XOR<InvitationCreateWithoutActivityInput, InvitationUncheckedCreateWithoutActivityInput> | InvitationCreateWithoutActivityInput[] | InvitationUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutActivityInput | InvitationCreateOrConnectWithoutActivityInput[]
+    createMany?: InvitationCreateManyActivityInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
+  export type InvitationUncheckedCreateNestedManyWithoutActivityInput = {
+    create?: XOR<InvitationCreateWithoutActivityInput, InvitationUncheckedCreateWithoutActivityInput> | InvitationCreateWithoutActivityInput[] | InvitationUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutActivityInput | InvitationCreateOrConnectWithoutActivityInput[]
+    createMany?: InvitationCreateManyActivityInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
+  export type EventDayUpdateOneRequiredWithoutActivitiesNestedInput = {
+    create?: XOR<EventDayCreateWithoutActivitiesInput, EventDayUncheckedCreateWithoutActivitiesInput>
+    connectOrCreate?: EventDayCreateOrConnectWithoutActivitiesInput
+    upsert?: EventDayUpsertWithoutActivitiesInput
+    connect?: EventDayWhereUniqueInput
+    update?: XOR<XOR<EventDayUpdateToOneWithWhereWithoutActivitiesInput, EventDayUpdateWithoutActivitiesInput>, EventDayUncheckedUpdateWithoutActivitiesInput>
+  }
+
+  export type EventUpdateOneRequiredWithoutActivitiesNestedInput = {
+    create?: XOR<EventCreateWithoutActivitiesInput, EventUncheckedCreateWithoutActivitiesInput>
+    connectOrCreate?: EventCreateOrConnectWithoutActivitiesInput
+    upsert?: EventUpsertWithoutActivitiesInput
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutActivitiesInput, EventUpdateWithoutActivitiesInput>, EventUncheckedUpdateWithoutActivitiesInput>
+  }
+
+  export type InvitationUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<InvitationCreateWithoutActivityInput, InvitationUncheckedCreateWithoutActivityInput> | InvitationCreateWithoutActivityInput[] | InvitationUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutActivityInput | InvitationCreateOrConnectWithoutActivityInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutActivityInput | InvitationUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: InvitationCreateManyActivityInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutActivityInput | InvitationUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutActivityInput | InvitationUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<InvitationCreateWithoutActivityInput, InvitationUncheckedCreateWithoutActivityInput> | InvitationCreateWithoutActivityInput[] | InvitationUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutActivityInput | InvitationCreateOrConnectWithoutActivityInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutActivityInput | InvitationUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: InvitationCreateManyActivityInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutActivityInput | InvitationUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutActivityInput | InvitationUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type EventCreateNestedOneWithoutInvitationsInput = {
+    create?: XOR<EventCreateWithoutInvitationsInput, EventUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutInvitationsInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type ActivityCreateNestedOneWithoutInvitationsInput = {
+    create?: XOR<ActivityCreateWithoutInvitationsInput, ActivityUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutInvitationsInput
+    connect?: ActivityWhereUniqueInput
+  }
+
+  export type EventUpdateOneRequiredWithoutInvitationsNestedInput = {
+    create?: XOR<EventCreateWithoutInvitationsInput, EventUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutInvitationsInput
+    upsert?: EventUpsertWithoutInvitationsInput
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutInvitationsInput, EventUpdateWithoutInvitationsInput>, EventUncheckedUpdateWithoutInvitationsInput>
+  }
+
+  export type ActivityUpdateOneWithoutInvitationsNestedInput = {
+    create?: XOR<ActivityCreateWithoutInvitationsInput, ActivityUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutInvitationsInput
+    upsert?: ActivityUpsertWithoutInvitationsInput
+    disconnect?: ActivityWhereInput | boolean
+    delete?: ActivityWhereInput | boolean
+    connect?: ActivityWhereUniqueInput
+    update?: XOR<XOR<ActivityUpdateToOneWithWhereWithoutInvitationsInput, ActivityUpdateWithoutInvitationsInput>, ActivityUncheckedUpdateWithoutInvitationsInput>
+  }
+
+  export type EventCreateNestedOneWithoutLogsInput = {
+    create?: XOR<EventCreateWithoutLogsInput, EventUncheckedCreateWithoutLogsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutLogsInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type EventUpdateOneRequiredWithoutLogsNestedInput = {
+    create?: XOR<EventCreateWithoutLogsInput, EventUncheckedCreateWithoutLogsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutLogsInput
+    upsert?: EventUpsertWithoutLogsInput
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutLogsInput, EventUpdateWithoutLogsInput>, EventUncheckedUpdateWithoutLogsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8952,6 +17047,83 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type NestedUuidFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
+  export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedUuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type SessionCreateWithoutUserInput = {
     id: string
     expiresAt: Date | string
@@ -9054,6 +17226,52 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type EventCreateWithoutOwnerInput = {
+    id?: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    days?: EventDayCreateNestedManyWithoutEventInput
+    activities?: ActivityCreateNestedManyWithoutEventInput
+    invitations?: InvitationCreateNestedManyWithoutEventInput
+    logs?: OrchestrationLogCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutOwnerInput = {
+    id?: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    days?: EventDayUncheckedCreateNestedManyWithoutEventInput
+    activities?: ActivityUncheckedCreateNestedManyWithoutEventInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutEventInput
+    logs?: OrchestrationLogUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutOwnerInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutOwnerInput, EventUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type EventCreateManyOwnerInputEnvelope = {
+    data: EventCreateManyOwnerInput | EventCreateManyOwnerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
@@ -9150,6 +17368,40 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"CatalogItem"> | Date | string
   }
 
+  export type EventUpsertWithWhereUniqueWithoutOwnerInput = {
+    where: EventWhereUniqueInput
+    update: XOR<EventUpdateWithoutOwnerInput, EventUncheckedUpdateWithoutOwnerInput>
+    create: XOR<EventCreateWithoutOwnerInput, EventUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type EventUpdateWithWhereUniqueWithoutOwnerInput = {
+    where: EventWhereUniqueInput
+    data: XOR<EventUpdateWithoutOwnerInput, EventUncheckedUpdateWithoutOwnerInput>
+  }
+
+  export type EventUpdateManyWithWhereWithoutOwnerInput = {
+    where: EventScalarWhereInput
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutOwnerInput>
+  }
+
+  export type EventScalarWhereInput = {
+    AND?: EventScalarWhereInput | EventScalarWhereInput[]
+    OR?: EventScalarWhereInput[]
+    NOT?: EventScalarWhereInput | EventScalarWhereInput[]
+    id?: UuidFilter<"Event"> | string
+    owner_id?: StringFilter<"Event"> | string
+    title?: StringFilter<"Event"> | string
+    description?: StringNullableFilter<"Event"> | string | null
+    event_type?: StringFilter<"Event"> | string
+    start_date?: DateTimeNullableFilter<"Event"> | Date | string | null
+    end_date?: DateTimeNullableFilter<"Event"> | Date | string | null
+    status?: StringFilter<"Event"> | string
+    location?: StringNullableFilter<"Event"> | string | null
+    orchestration_state?: JsonNullableFilter<"Event">
+    created_at?: DateTimeFilter<"Event"> | Date | string
+    updated_at?: DateTimeFilter<"Event"> | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     email: string
@@ -9166,6 +17418,7 @@ export namespace Prisma {
     updatedAt: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     catalogItems?: CatalogItemCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -9184,6 +17437,7 @@ export namespace Prisma {
     updatedAt: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     catalogItems?: CatalogItemUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -9218,6 +17472,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     catalogItems?: CatalogItemUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -9236,6 +17491,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     catalogItems?: CatalogItemUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -9254,6 +17510,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     catalogItems?: CatalogItemCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -9272,6 +17529,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     catalogItems?: CatalogItemUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -9306,6 +17564,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     catalogItems?: CatalogItemUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -9324,6 +17583,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     catalogItems?: CatalogItemUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserCreateWithoutCatalogItemsInput = {
@@ -9342,6 +17602,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutCatalogItemsInput = {
@@ -9360,6 +17621,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutCatalogItemsInput = {
@@ -9394,6 +17656,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCatalogItemsInput = {
@@ -9412,6 +17675,921 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutOwnerNestedInput
+  }
+
+  export type UserCreateWithoutEventsInput = {
+    id?: string
+    email: string
+    name?: string | null
+    role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
+    profile_data?: NullableJsonNullValueInput | InputJsonValue
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    catalogItems?: CatalogItemCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutEventsInput = {
+    id?: string
+    email: string
+    name?: string | null
+    role?: $Enums.Role
+    whatsapp?: string | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
+    profile_data?: NullableJsonNullValueInput | InputJsonValue
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    catalogItems?: CatalogItemUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEventsInput, UserUncheckedCreateWithoutEventsInput>
+  }
+
+  export type EventDayCreateWithoutEventInput = {
+    id?: string
+    date: Date | string
+    sequence_number: number
+    created_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutDayInput
+  }
+
+  export type EventDayUncheckedCreateWithoutEventInput = {
+    id?: string
+    date: Date | string
+    sequence_number: number
+    created_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutDayInput
+  }
+
+  export type EventDayCreateOrConnectWithoutEventInput = {
+    where: EventDayWhereUniqueInput
+    create: XOR<EventDayCreateWithoutEventInput, EventDayUncheckedCreateWithoutEventInput>
+  }
+
+  export type EventDayCreateManyEventInputEnvelope = {
+    data: EventDayCreateManyEventInput | EventDayCreateManyEventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityCreateWithoutEventInput = {
+    id?: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+    day: EventDayCreateNestedOneWithoutActivitiesInput
+    invitations?: InvitationCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateWithoutEventInput = {
+    id?: string
+    day_id: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+    invitations?: InvitationUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityCreateOrConnectWithoutEventInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutEventInput, ActivityUncheckedCreateWithoutEventInput>
+  }
+
+  export type ActivityCreateManyEventInputEnvelope = {
+    data: ActivityCreateManyEventInput | ActivityCreateManyEventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InvitationCreateWithoutEventInput = {
+    id?: string
+    invitee_name: string
+    invitee_email?: string | null
+    whatsapp_number: string
+    num_guests?: number
+    rsvp_status?: string
+    invite_sent?: boolean
+    access_token?: string
+    created_at?: Date | string
+    activity?: ActivityCreateNestedOneWithoutInvitationsInput
+  }
+
+  export type InvitationUncheckedCreateWithoutEventInput = {
+    id?: string
+    activity_id?: string | null
+    invitee_name: string
+    invitee_email?: string | null
+    whatsapp_number: string
+    num_guests?: number
+    rsvp_status?: string
+    invite_sent?: boolean
+    access_token?: string
+    created_at?: Date | string
+  }
+
+  export type InvitationCreateOrConnectWithoutEventInput = {
+    where: InvitationWhereUniqueInput
+    create: XOR<InvitationCreateWithoutEventInput, InvitationUncheckedCreateWithoutEventInput>
+  }
+
+  export type InvitationCreateManyEventInputEnvelope = {
+    data: InvitationCreateManyEventInput | InvitationCreateManyEventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrchestrationLogCreateWithoutEventInput = {
+    id?: string
+    agent_name: string
+    log_message: string
+    timestamp?: Date | string
+  }
+
+  export type OrchestrationLogUncheckedCreateWithoutEventInput = {
+    id?: string
+    agent_name: string
+    log_message: string
+    timestamp?: Date | string
+  }
+
+  export type OrchestrationLogCreateOrConnectWithoutEventInput = {
+    where: OrchestrationLogWhereUniqueInput
+    create: XOR<OrchestrationLogCreateWithoutEventInput, OrchestrationLogUncheckedCreateWithoutEventInput>
+  }
+
+  export type OrchestrationLogCreateManyEventInputEnvelope = {
+    data: OrchestrationLogCreateManyEventInput | OrchestrationLogCreateManyEventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutEventsInput = {
+    update: XOR<UserUpdateWithoutEventsInput, UserUncheckedUpdateWithoutEventsInput>
+    create: XOR<UserCreateWithoutEventsInput, UserUncheckedCreateWithoutEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEventsInput, UserUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type UserUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profile_data?: NullableJsonNullValueInput | InputJsonValue
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    catalogItems?: CatalogItemUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profile_data?: NullableJsonNullValueInput | InputJsonValue
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    catalogItems?: CatalogItemUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type EventDayUpsertWithWhereUniqueWithoutEventInput = {
+    where: EventDayWhereUniqueInput
+    update: XOR<EventDayUpdateWithoutEventInput, EventDayUncheckedUpdateWithoutEventInput>
+    create: XOR<EventDayCreateWithoutEventInput, EventDayUncheckedCreateWithoutEventInput>
+  }
+
+  export type EventDayUpdateWithWhereUniqueWithoutEventInput = {
+    where: EventDayWhereUniqueInput
+    data: XOR<EventDayUpdateWithoutEventInput, EventDayUncheckedUpdateWithoutEventInput>
+  }
+
+  export type EventDayUpdateManyWithWhereWithoutEventInput = {
+    where: EventDayScalarWhereInput
+    data: XOR<EventDayUpdateManyMutationInput, EventDayUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type EventDayScalarWhereInput = {
+    AND?: EventDayScalarWhereInput | EventDayScalarWhereInput[]
+    OR?: EventDayScalarWhereInput[]
+    NOT?: EventDayScalarWhereInput | EventDayScalarWhereInput[]
+    id?: UuidFilter<"EventDay"> | string
+    event_id?: UuidFilter<"EventDay"> | string
+    date?: DateTimeFilter<"EventDay"> | Date | string
+    sequence_number?: IntFilter<"EventDay"> | number
+    created_at?: DateTimeFilter<"EventDay"> | Date | string
+  }
+
+  export type ActivityUpsertWithWhereUniqueWithoutEventInput = {
+    where: ActivityWhereUniqueInput
+    update: XOR<ActivityUpdateWithoutEventInput, ActivityUncheckedUpdateWithoutEventInput>
+    create: XOR<ActivityCreateWithoutEventInput, ActivityUncheckedCreateWithoutEventInput>
+  }
+
+  export type ActivityUpdateWithWhereUniqueWithoutEventInput = {
+    where: ActivityWhereUniqueInput
+    data: XOR<ActivityUpdateWithoutEventInput, ActivityUncheckedUpdateWithoutEventInput>
+  }
+
+  export type ActivityUpdateManyWithWhereWithoutEventInput = {
+    where: ActivityScalarWhereInput
+    data: XOR<ActivityUpdateManyMutationInput, ActivityUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type ActivityScalarWhereInput = {
+    AND?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+    OR?: ActivityScalarWhereInput[]
+    NOT?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+    id?: UuidFilter<"Activity"> | string
+    day_id?: UuidFilter<"Activity"> | string
+    event_id?: UuidFilter<"Activity"> | string
+    title?: StringFilter<"Activity"> | string
+    start_time?: DateTimeFilter<"Activity"> | Date | string
+    end_time?: DateTimeFilter<"Activity"> | Date | string
+    location_type?: StringFilter<"Activity"> | string
+    location?: StringNullableFilter<"Activity"> | string | null
+    status?: StringFilter<"Activity"> | string
+    is_orchestrated?: BoolFilter<"Activity"> | boolean
+    created_at?: DateTimeFilter<"Activity"> | Date | string
+  }
+
+  export type InvitationUpsertWithWhereUniqueWithoutEventInput = {
+    where: InvitationWhereUniqueInput
+    update: XOR<InvitationUpdateWithoutEventInput, InvitationUncheckedUpdateWithoutEventInput>
+    create: XOR<InvitationCreateWithoutEventInput, InvitationUncheckedCreateWithoutEventInput>
+  }
+
+  export type InvitationUpdateWithWhereUniqueWithoutEventInput = {
+    where: InvitationWhereUniqueInput
+    data: XOR<InvitationUpdateWithoutEventInput, InvitationUncheckedUpdateWithoutEventInput>
+  }
+
+  export type InvitationUpdateManyWithWhereWithoutEventInput = {
+    where: InvitationScalarWhereInput
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type InvitationScalarWhereInput = {
+    AND?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+    OR?: InvitationScalarWhereInput[]
+    NOT?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+    id?: UuidFilter<"Invitation"> | string
+    event_id?: UuidFilter<"Invitation"> | string
+    activity_id?: UuidNullableFilter<"Invitation"> | string | null
+    invitee_name?: StringFilter<"Invitation"> | string
+    invitee_email?: StringNullableFilter<"Invitation"> | string | null
+    whatsapp_number?: StringFilter<"Invitation"> | string
+    num_guests?: IntFilter<"Invitation"> | number
+    rsvp_status?: StringFilter<"Invitation"> | string
+    invite_sent?: BoolFilter<"Invitation"> | boolean
+    access_token?: StringFilter<"Invitation"> | string
+    created_at?: DateTimeFilter<"Invitation"> | Date | string
+  }
+
+  export type OrchestrationLogUpsertWithWhereUniqueWithoutEventInput = {
+    where: OrchestrationLogWhereUniqueInput
+    update: XOR<OrchestrationLogUpdateWithoutEventInput, OrchestrationLogUncheckedUpdateWithoutEventInput>
+    create: XOR<OrchestrationLogCreateWithoutEventInput, OrchestrationLogUncheckedCreateWithoutEventInput>
+  }
+
+  export type OrchestrationLogUpdateWithWhereUniqueWithoutEventInput = {
+    where: OrchestrationLogWhereUniqueInput
+    data: XOR<OrchestrationLogUpdateWithoutEventInput, OrchestrationLogUncheckedUpdateWithoutEventInput>
+  }
+
+  export type OrchestrationLogUpdateManyWithWhereWithoutEventInput = {
+    where: OrchestrationLogScalarWhereInput
+    data: XOR<OrchestrationLogUpdateManyMutationInput, OrchestrationLogUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type OrchestrationLogScalarWhereInput = {
+    AND?: OrchestrationLogScalarWhereInput | OrchestrationLogScalarWhereInput[]
+    OR?: OrchestrationLogScalarWhereInput[]
+    NOT?: OrchestrationLogScalarWhereInput | OrchestrationLogScalarWhereInput[]
+    id?: UuidFilter<"OrchestrationLog"> | string
+    event_id?: UuidFilter<"OrchestrationLog"> | string
+    agent_name?: StringFilter<"OrchestrationLog"> | string
+    log_message?: StringFilter<"OrchestrationLog"> | string
+    timestamp?: DateTimeFilter<"OrchestrationLog"> | Date | string
+  }
+
+  export type EventCreateWithoutDaysInput = {
+    id?: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    owner: UserCreateNestedOneWithoutEventsInput
+    activities?: ActivityCreateNestedManyWithoutEventInput
+    invitations?: InvitationCreateNestedManyWithoutEventInput
+    logs?: OrchestrationLogCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutDaysInput = {
+    id?: string
+    owner_id: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutEventInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutEventInput
+    logs?: OrchestrationLogUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutDaysInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutDaysInput, EventUncheckedCreateWithoutDaysInput>
+  }
+
+  export type ActivityCreateWithoutDayInput = {
+    id?: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+    event: EventCreateNestedOneWithoutActivitiesInput
+    invitations?: InvitationCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateWithoutDayInput = {
+    id?: string
+    event_id: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+    invitations?: InvitationUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityCreateOrConnectWithoutDayInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutDayInput, ActivityUncheckedCreateWithoutDayInput>
+  }
+
+  export type ActivityCreateManyDayInputEnvelope = {
+    data: ActivityCreateManyDayInput | ActivityCreateManyDayInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventUpsertWithoutDaysInput = {
+    update: XOR<EventUpdateWithoutDaysInput, EventUncheckedUpdateWithoutDaysInput>
+    create: XOR<EventCreateWithoutDaysInput, EventUncheckedCreateWithoutDaysInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutDaysInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutDaysInput, EventUncheckedUpdateWithoutDaysInput>
+  }
+
+  export type EventUpdateWithoutDaysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutEventsNestedInput
+    activities?: ActivityUpdateManyWithoutEventNestedInput
+    invitations?: InvitationUpdateManyWithoutEventNestedInput
+    logs?: OrchestrationLogUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutDaysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    owner_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutEventNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutEventNestedInput
+    logs?: OrchestrationLogUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type ActivityUpsertWithWhereUniqueWithoutDayInput = {
+    where: ActivityWhereUniqueInput
+    update: XOR<ActivityUpdateWithoutDayInput, ActivityUncheckedUpdateWithoutDayInput>
+    create: XOR<ActivityCreateWithoutDayInput, ActivityUncheckedCreateWithoutDayInput>
+  }
+
+  export type ActivityUpdateWithWhereUniqueWithoutDayInput = {
+    where: ActivityWhereUniqueInput
+    data: XOR<ActivityUpdateWithoutDayInput, ActivityUncheckedUpdateWithoutDayInput>
+  }
+
+  export type ActivityUpdateManyWithWhereWithoutDayInput = {
+    where: ActivityScalarWhereInput
+    data: XOR<ActivityUpdateManyMutationInput, ActivityUncheckedUpdateManyWithoutDayInput>
+  }
+
+  export type EventDayCreateWithoutActivitiesInput = {
+    id?: string
+    date: Date | string
+    sequence_number: number
+    created_at?: Date | string
+    event: EventCreateNestedOneWithoutDaysInput
+  }
+
+  export type EventDayUncheckedCreateWithoutActivitiesInput = {
+    id?: string
+    event_id: string
+    date: Date | string
+    sequence_number: number
+    created_at?: Date | string
+  }
+
+  export type EventDayCreateOrConnectWithoutActivitiesInput = {
+    where: EventDayWhereUniqueInput
+    create: XOR<EventDayCreateWithoutActivitiesInput, EventDayUncheckedCreateWithoutActivitiesInput>
+  }
+
+  export type EventCreateWithoutActivitiesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    owner: UserCreateNestedOneWithoutEventsInput
+    days?: EventDayCreateNestedManyWithoutEventInput
+    invitations?: InvitationCreateNestedManyWithoutEventInput
+    logs?: OrchestrationLogCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutActivitiesInput = {
+    id?: string
+    owner_id: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    days?: EventDayUncheckedCreateNestedManyWithoutEventInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutEventInput
+    logs?: OrchestrationLogUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutActivitiesInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutActivitiesInput, EventUncheckedCreateWithoutActivitiesInput>
+  }
+
+  export type InvitationCreateWithoutActivityInput = {
+    id?: string
+    invitee_name: string
+    invitee_email?: string | null
+    whatsapp_number: string
+    num_guests?: number
+    rsvp_status?: string
+    invite_sent?: boolean
+    access_token?: string
+    created_at?: Date | string
+    event: EventCreateNestedOneWithoutInvitationsInput
+  }
+
+  export type InvitationUncheckedCreateWithoutActivityInput = {
+    id?: string
+    event_id: string
+    invitee_name: string
+    invitee_email?: string | null
+    whatsapp_number: string
+    num_guests?: number
+    rsvp_status?: string
+    invite_sent?: boolean
+    access_token?: string
+    created_at?: Date | string
+  }
+
+  export type InvitationCreateOrConnectWithoutActivityInput = {
+    where: InvitationWhereUniqueInput
+    create: XOR<InvitationCreateWithoutActivityInput, InvitationUncheckedCreateWithoutActivityInput>
+  }
+
+  export type InvitationCreateManyActivityInputEnvelope = {
+    data: InvitationCreateManyActivityInput | InvitationCreateManyActivityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventDayUpsertWithoutActivitiesInput = {
+    update: XOR<EventDayUpdateWithoutActivitiesInput, EventDayUncheckedUpdateWithoutActivitiesInput>
+    create: XOR<EventDayCreateWithoutActivitiesInput, EventDayUncheckedCreateWithoutActivitiesInput>
+    where?: EventDayWhereInput
+  }
+
+  export type EventDayUpdateToOneWithWhereWithoutActivitiesInput = {
+    where?: EventDayWhereInput
+    data: XOR<EventDayUpdateWithoutActivitiesInput, EventDayUncheckedUpdateWithoutActivitiesInput>
+  }
+
+  export type EventDayUpdateWithoutActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    sequence_number?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: EventUpdateOneRequiredWithoutDaysNestedInput
+  }
+
+  export type EventDayUncheckedUpdateWithoutActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    sequence_number?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventUpsertWithoutActivitiesInput = {
+    update: XOR<EventUpdateWithoutActivitiesInput, EventUncheckedUpdateWithoutActivitiesInput>
+    create: XOR<EventCreateWithoutActivitiesInput, EventUncheckedCreateWithoutActivitiesInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutActivitiesInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutActivitiesInput, EventUncheckedUpdateWithoutActivitiesInput>
+  }
+
+  export type EventUpdateWithoutActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutEventsNestedInput
+    days?: EventDayUpdateManyWithoutEventNestedInput
+    invitations?: InvitationUpdateManyWithoutEventNestedInput
+    logs?: OrchestrationLogUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    owner_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: EventDayUncheckedUpdateManyWithoutEventNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutEventNestedInput
+    logs?: OrchestrationLogUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type InvitationUpsertWithWhereUniqueWithoutActivityInput = {
+    where: InvitationWhereUniqueInput
+    update: XOR<InvitationUpdateWithoutActivityInput, InvitationUncheckedUpdateWithoutActivityInput>
+    create: XOR<InvitationCreateWithoutActivityInput, InvitationUncheckedCreateWithoutActivityInput>
+  }
+
+  export type InvitationUpdateWithWhereUniqueWithoutActivityInput = {
+    where: InvitationWhereUniqueInput
+    data: XOR<InvitationUpdateWithoutActivityInput, InvitationUncheckedUpdateWithoutActivityInput>
+  }
+
+  export type InvitationUpdateManyWithWhereWithoutActivityInput = {
+    where: InvitationScalarWhereInput
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyWithoutActivityInput>
+  }
+
+  export type EventCreateWithoutInvitationsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    owner: UserCreateNestedOneWithoutEventsInput
+    days?: EventDayCreateNestedManyWithoutEventInput
+    activities?: ActivityCreateNestedManyWithoutEventInput
+    logs?: OrchestrationLogCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutInvitationsInput = {
+    id?: string
+    owner_id: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    days?: EventDayUncheckedCreateNestedManyWithoutEventInput
+    activities?: ActivityUncheckedCreateNestedManyWithoutEventInput
+    logs?: OrchestrationLogUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutInvitationsInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutInvitationsInput, EventUncheckedCreateWithoutInvitationsInput>
+  }
+
+  export type ActivityCreateWithoutInvitationsInput = {
+    id?: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+    day: EventDayCreateNestedOneWithoutActivitiesInput
+    event: EventCreateNestedOneWithoutActivitiesInput
+  }
+
+  export type ActivityUncheckedCreateWithoutInvitationsInput = {
+    id?: string
+    day_id: string
+    event_id: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+  }
+
+  export type ActivityCreateOrConnectWithoutInvitationsInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutInvitationsInput, ActivityUncheckedCreateWithoutInvitationsInput>
+  }
+
+  export type EventUpsertWithoutInvitationsInput = {
+    update: XOR<EventUpdateWithoutInvitationsInput, EventUncheckedUpdateWithoutInvitationsInput>
+    create: XOR<EventCreateWithoutInvitationsInput, EventUncheckedCreateWithoutInvitationsInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutInvitationsInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutInvitationsInput, EventUncheckedUpdateWithoutInvitationsInput>
+  }
+
+  export type EventUpdateWithoutInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutEventsNestedInput
+    days?: EventDayUpdateManyWithoutEventNestedInput
+    activities?: ActivityUpdateManyWithoutEventNestedInput
+    logs?: OrchestrationLogUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    owner_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: EventDayUncheckedUpdateManyWithoutEventNestedInput
+    activities?: ActivityUncheckedUpdateManyWithoutEventNestedInput
+    logs?: OrchestrationLogUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type ActivityUpsertWithoutInvitationsInput = {
+    update: XOR<ActivityUpdateWithoutInvitationsInput, ActivityUncheckedUpdateWithoutInvitationsInput>
+    create: XOR<ActivityCreateWithoutInvitationsInput, ActivityUncheckedCreateWithoutInvitationsInput>
+    where?: ActivityWhereInput
+  }
+
+  export type ActivityUpdateToOneWithWhereWithoutInvitationsInput = {
+    where?: ActivityWhereInput
+    data: XOR<ActivityUpdateWithoutInvitationsInput, ActivityUncheckedUpdateWithoutInvitationsInput>
+  }
+
+  export type ActivityUpdateWithoutInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    day?: EventDayUpdateOneRequiredWithoutActivitiesNestedInput
+    event?: EventUpdateOneRequiredWithoutActivitiesNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day_id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventCreateWithoutLogsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    owner: UserCreateNestedOneWithoutEventsInput
+    days?: EventDayCreateNestedManyWithoutEventInput
+    activities?: ActivityCreateNestedManyWithoutEventInput
+    invitations?: InvitationCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutLogsInput = {
+    id?: string
+    owner_id: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+    days?: EventDayUncheckedCreateNestedManyWithoutEventInput
+    activities?: ActivityUncheckedCreateNestedManyWithoutEventInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutLogsInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutLogsInput, EventUncheckedCreateWithoutLogsInput>
+  }
+
+  export type EventUpsertWithoutLogsInput = {
+    update: XOR<EventUpdateWithoutLogsInput, EventUncheckedUpdateWithoutLogsInput>
+    create: XOR<EventCreateWithoutLogsInput, EventUncheckedCreateWithoutLogsInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutLogsInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutLogsInput, EventUncheckedUpdateWithoutLogsInput>
+  }
+
+  export type EventUpdateWithoutLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutEventsNestedInput
+    days?: EventDayUpdateManyWithoutEventNestedInput
+    activities?: ActivityUpdateManyWithoutEventNestedInput
+    invitations?: InvitationUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    owner_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: EventDayUncheckedUpdateManyWithoutEventNestedInput
+    activities?: ActivityUncheckedUpdateManyWithoutEventNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type SessionCreateManyUserInput = {
@@ -9448,6 +18626,20 @@ export namespace Prisma {
     category?: string | null
     currency?: string | null
     createdAt?: Date | string
+  }
+
+  export type EventCreateManyOwnerInput = {
+    id?: string
+    title: string
+    description?: string | null
+    event_type: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    status?: string
+    location?: string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -9556,6 +18748,326 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     currency?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: EventDayUpdateManyWithoutEventNestedInput
+    activities?: ActivityUpdateManyWithoutEventNestedInput
+    invitations?: InvitationUpdateManyWithoutEventNestedInput
+    logs?: OrchestrationLogUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: EventDayUncheckedUpdateManyWithoutEventNestedInput
+    activities?: ActivityUncheckedUpdateManyWithoutEventNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutEventNestedInput
+    logs?: OrchestrationLogUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    event_type?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    orchestration_state?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventDayCreateManyEventInput = {
+    id?: string
+    date: Date | string
+    sequence_number: number
+    created_at?: Date | string
+  }
+
+  export type ActivityCreateManyEventInput = {
+    id?: string
+    day_id: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+  }
+
+  export type InvitationCreateManyEventInput = {
+    id?: string
+    activity_id?: string | null
+    invitee_name: string
+    invitee_email?: string | null
+    whatsapp_number: string
+    num_guests?: number
+    rsvp_status?: string
+    invite_sent?: boolean
+    access_token?: string
+    created_at?: Date | string
+  }
+
+  export type OrchestrationLogCreateManyEventInput = {
+    id?: string
+    agent_name: string
+    log_message: string
+    timestamp?: Date | string
+  }
+
+  export type EventDayUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    sequence_number?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutDayNestedInput
+  }
+
+  export type EventDayUncheckedUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    sequence_number?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutDayNestedInput
+  }
+
+  export type EventDayUncheckedUpdateManyWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    sequence_number?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    day?: EventDayUpdateOneRequiredWithoutActivitiesNestedInput
+    invitations?: InvitationUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    invitations?: InvitationUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateManyWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitee_name?: StringFieldUpdateOperationsInput | string
+    invitee_email?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp_number?: StringFieldUpdateOperationsInput | string
+    num_guests?: IntFieldUpdateOperationsInput | number
+    rsvp_status?: StringFieldUpdateOperationsInput | string
+    invite_sent?: BoolFieldUpdateOperationsInput | boolean
+    access_token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneWithoutInvitationsNestedInput
+  }
+
+  export type InvitationUncheckedUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    activity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    invitee_name?: StringFieldUpdateOperationsInput | string
+    invitee_email?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp_number?: StringFieldUpdateOperationsInput | string
+    num_guests?: IntFieldUpdateOperationsInput | number
+    rsvp_status?: StringFieldUpdateOperationsInput | string
+    invite_sent?: BoolFieldUpdateOperationsInput | boolean
+    access_token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    activity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    invitee_name?: StringFieldUpdateOperationsInput | string
+    invitee_email?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp_number?: StringFieldUpdateOperationsInput | string
+    num_guests?: IntFieldUpdateOperationsInput | number
+    rsvp_status?: StringFieldUpdateOperationsInput | string
+    invite_sent?: BoolFieldUpdateOperationsInput | boolean
+    access_token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrchestrationLogUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    agent_name?: StringFieldUpdateOperationsInput | string
+    log_message?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrchestrationLogUncheckedUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    agent_name?: StringFieldUpdateOperationsInput | string
+    log_message?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrchestrationLogUncheckedUpdateManyWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    agent_name?: StringFieldUpdateOperationsInput | string
+    log_message?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityCreateManyDayInput = {
+    id?: string
+    event_id: string
+    title: string
+    start_time: Date | string
+    end_time: Date | string
+    location_type?: string
+    location?: string | null
+    status?: string
+    is_orchestrated?: boolean
+    created_at?: Date | string
+  }
+
+  export type ActivityUpdateWithoutDayInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: EventUpdateOneRequiredWithoutActivitiesNestedInput
+    invitations?: InvitationUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutDayInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    invitations?: InvitationUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateManyWithoutDayInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location_type?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_orchestrated?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationCreateManyActivityInput = {
+    id?: string
+    event_id: string
+    invitee_name: string
+    invitee_email?: string | null
+    whatsapp_number: string
+    num_guests?: number
+    rsvp_status?: string
+    invite_sent?: boolean
+    access_token?: string
+    created_at?: Date | string
+  }
+
+  export type InvitationUpdateWithoutActivityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invitee_name?: StringFieldUpdateOperationsInput | string
+    invitee_email?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp_number?: StringFieldUpdateOperationsInput | string
+    num_guests?: IntFieldUpdateOperationsInput | number
+    rsvp_status?: StringFieldUpdateOperationsInput | string
+    invite_sent?: BoolFieldUpdateOperationsInput | boolean
+    access_token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: EventUpdateOneRequiredWithoutInvitationsNestedInput
+  }
+
+  export type InvitationUncheckedUpdateWithoutActivityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    invitee_name?: StringFieldUpdateOperationsInput | string
+    invitee_email?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp_number?: StringFieldUpdateOperationsInput | string
+    num_guests?: IntFieldUpdateOperationsInput | number
+    rsvp_status?: StringFieldUpdateOperationsInput | string
+    invite_sent?: BoolFieldUpdateOperationsInput | boolean
+    access_token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutActivityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event_id?: StringFieldUpdateOperationsInput | string
+    invitee_name?: StringFieldUpdateOperationsInput | string
+    invitee_email?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp_number?: StringFieldUpdateOperationsInput | string
+    num_guests?: IntFieldUpdateOperationsInput | number
+    rsvp_status?: StringFieldUpdateOperationsInput | string
+    invite_sent?: BoolFieldUpdateOperationsInput | boolean
+    access_token?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

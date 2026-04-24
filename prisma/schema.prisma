@@ -42,6 +42,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   catalogItems  CatalogItem[]
+  events        Event[]
 
   @@map("user")
 }
@@ -104,4 +105,86 @@ model CatalogItem {
   createdAt   DateTime @default(now())
 
   @@map("catalog_item")
+}
+
+model Event {
+  id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  owner_id           String
+  owner              User               @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  title              String
+  description        String?
+  event_type         String
+  start_date         DateTime?
+  end_date           DateTime?
+  status             String             @default("Draft")
+  location           String?
+  orchestration_state Json?              @default("{}")
+  created_at         DateTime           @default(now())
+  updated_at         DateTime           @default(now())
+  days               EventDay[]
+  activities         Activity[]
+  invitations        Invitation[]
+  logs               OrchestrationLog[]
+
+  @@map("events")
+}
+
+model EventDay {
+  id              String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  event_id        String     @db.Uuid
+  event           Event      @relation(fields: [event_id], references: [id], onDelete: Cascade)
+  date            DateTime   @db.Date
+  sequence_number Int
+  created_at      DateTime   @default(now())
+  activities      Activity[]
+
+  @@map("event_days")
+}
+
+model Activity {
+  id              String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  day_id          String       @db.Uuid
+  day             EventDay     @relation(fields: [day_id], references: [id], onDelete: Cascade)
+  event_id        String       @db.Uuid
+  event           Event        @relation(fields: [event_id], references: [id], onDelete: Cascade)
+  title           String
+  start_time      DateTime
+  end_time        DateTime
+  location_type   String       @default("Physical")
+  location        String?
+  status          String       @default("Pending")
+  is_orchestrated Boolean      @default(false)
+  created_at      DateTime     @default(now())
+  invitations     Invitation[]
+
+  @@map("activities")
+}
+
+model Invitation {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  event_id        String    @db.Uuid
+  event           Event     @relation(fields: [event_id], references: [id], onDelete: Cascade)
+  activity_id     String?   @db.Uuid
+  activity        Activity? @relation(fields: [activity_id], references: [id], onDelete: SetNull)
+  invitee_name    String
+  invitee_email   String?
+  whatsapp_number String
+  num_guests      Int       @default(1)
+  rsvp_status     String    @default("Pending")
+  invite_sent     Boolean   @default(false)
+  access_token    String    @unique @default(dbgenerated("md5(random()::text)"))
+  created_at      DateTime  @default(now())
+
+  @@map("invitations")
+}
+
+model OrchestrationLog {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  event_id    String   @db.Uuid
+  event       Event    @relation(fields: [event_id], references: [id], onDelete: Cascade)
+  agent_name  String
+  log_message String
+  timestamp   DateTime @default(now())
+
+  @@map("orchestration_logs")
 }

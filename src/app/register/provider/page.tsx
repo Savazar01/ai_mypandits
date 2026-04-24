@@ -15,13 +15,17 @@ export default function ProviderRegistrationPage() {
 
         {/* Decorative Footer Anchor */}
         <div className="mt-12 flex flex-col items-center justify-center opacity-40">
-          <Link href="/" className="font-headline font-bold text-primary/40 tracking-widest text-xl flex items-center justify-center gap-2 mb-4">
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
-            MyPandits
+          <Link href="/" className="flex items-center justify-center gap-2 mb-4 hover:opacity-80 transition-opacity">
+            <img 
+              src="https://savazar.com/wp-content/uploads/2023/10/cropped-Transparent_Image_2-300x100.png" 
+              alt="EventicAI Logo" 
+              className="h-8 w-auto object-contain opacity-40"
+            />
+            <span className="font-headline font-bold text-primary/40 tracking-widest text-xl">EventicAI</span>
           </Link>
           <div className="flex items-center">
             <div className="h-[1px] w-12 bg-primary"></div>
-            <span className="material-symbols-outlined mx-4 text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>spa</span>
+            <span className="material-symbols-outlined mx-4 text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>handshake</span>
             <div className="h-[1px] w-12 bg-primary"></div>
           </div>
         </div>

@@ -11,7 +11,7 @@ import Image from "next/image";
 
 import { COUNTRIES } from "@/lib/countries";
 
-const ALL_SKILLS = ["Pandit", "Decorator", "Caterer", "Photographer", "Event Planner", "Venue Provider", "Puja Supplies", "Media and Design", "Temple", "DJ", "Other"];
+const ALL_SKILLS = ["Event Consultant", "Decorator", "Caterer", "Photographer", "Event Planner", "Venue Provider", "Event Supplies", "Media and Design", "Venue", "DJ", "Other"];
 
 export default function SettingsPage() {
   const { data: session, isPending } = useSession();
@@ -166,14 +166,16 @@ export default function SettingsPage() {
     <div className="min-h-screen bg-[#faf9f6] text-[#1A1C1A] font-sans pb-20">
       <nav className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-transparent shadow-sm">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#8f4e00] to-[#ff9933] rounded-xl flex items-center justify-center text-white shadow-lg shadow-saffron/10">
-              <Sparkles className="w-5 h-5" />
-            </div>
-            <span className="font-serif text-xl font-bold tracking-tight">MyPandits</span>
-          </div>
+          <Link href="/" className="flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity">
+            <img 
+              src="https://savazar.com/wp-content/uploads/2023/10/cropped-Transparent_Image_2-300x100.png" 
+              alt="EventicAI Logo" 
+              className="h-8 md:h-10 w-auto object-contain"
+            />
+            <span className="font-serif text-xl font-bold tracking-tight">EventicAI</span>
+          </Link>
           
-          <div className="hidden md:flex items-center space-x-10 text-[11px] font-bold uppercase tracking-[0.2em] text-[#887364]">
+          <div className="hidden md:flex items-center space-x-10 text-sm font-bold uppercase tracking-[0.2em] text-[#887364]">
             <Link href={`/dashboard/${session?.user?.role === "PROVIDER" ? "provider" : "customer"}`} className="hover:text-saffron transition-colors">
               {session?.user?.role === "PROVIDER" ? "Provider Dashboard" : "Customer Dashboard"}
             </Link>
@@ -415,7 +417,7 @@ export default function SettingsPage() {
                            {skill === "Temple" ? (
                               <div className="space-y-4 bg-stone-50/50 p-6 rounded-2xl border border-stone-100">
                                  <div className="space-y-1.5">
-                                    <label className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.1em]">Temple Name</label>
+                                    <label className="text-sm font-bold text-stone-400 uppercase tracking-[0.1em]">Temple Name</label>
                                     <input 
                                        type="text" 
                                        placeholder="e.g. Sri Venkateswara Swamy Temple"
@@ -425,7 +427,7 @@ export default function SettingsPage() {
                                     />
                                  </div>
                                  <div className="space-y-1.5">
-                                    <label className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.1em]">Temple Full Address</label>
+                                    <label className="text-sm font-bold text-stone-400 uppercase tracking-[0.1em]">Temple Full Address</label>
                                     <textarea 
                                        placeholder="Complete address including street, city, state and landmark..."
                                        className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-primary outline-none transition-colors h-20 resize-none text-sm"
@@ -434,7 +436,7 @@ export default function SettingsPage() {
                                     />
                                  </div>
                                  <div className="space-y-1.5">
-                                    <label className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.1em]">Temple Admin / Contact Phone</label>
+                                    <label className="text-sm font-bold text-stone-400 uppercase tracking-[0.1em]">Temple Admin / Contact Phone</label>
                                     <input 
                                        type="text" 
                                        placeholder="Contact person or office number"
@@ -445,15 +447,15 @@ export default function SettingsPage() {
                                  </div>
                                  <div className="p-3 bg-primary/5 rounded-lg border border-primary/10 flex items-start gap-2">
                                     <Info size={14} className="text-primary mt-0.5 shrink-0" />
-                                    <p className="text-[10px] text-stone-500 leading-normal">
-                                      Temple details help us recommend your services to customers looking for ritual performances at specific sanctums.
+                                    <p className="text-sm text-stone-500 leading-normal">
+                                      Venue details help us recommend your services to customers looking for event coordination at specific locations.
                                     </p>
                                  </div>
                               </div>
                            ) : skill === "Venue Provider" ? (
                               <div className="space-y-4 bg-stone-50/50 p-6 rounded-2xl border border-stone-100">
                                  <div className="space-y-1.5">
-                                    <label className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.1em]">Venue Name</label>
+                                    <label className="text-sm font-bold text-stone-400 uppercase tracking-[0.1em]">Venue Name</label>
                                     <input 
                                        type="text" 
                                        placeholder="e.g. Grand Heritage Hall"
@@ -463,7 +465,7 @@ export default function SettingsPage() {
                                     />
                                  </div>
                                  <div className="space-y-1.5">
-                                    <label className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.1em]">Venue Full Address</label>
+                                    <label className="text-sm font-bold text-stone-400 uppercase tracking-[0.1em]">Venue Full Address</label>
                                     <textarea 
                                        placeholder="Complete address for event coordination..."
                                        className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-primary outline-none transition-colors h-20 resize-none text-sm"
@@ -472,7 +474,7 @@ export default function SettingsPage() {
                                     />
                                  </div>
                                  <div className="space-y-1.5">
-                                    <label className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.1em]">Venue Contact Person / Phone</label>
+                                    <label className="text-sm font-bold text-stone-400 uppercase tracking-[0.1em]">Venue Contact Person / Phone</label>
                                     <input 
                                        type="text" 
                                        placeholder="Contact person or business number"
@@ -483,7 +485,7 @@ export default function SettingsPage() {
                                  </div>
                                  <div className="p-3 bg-primary/5 rounded-lg border border-primary/10 flex items-start gap-2">
                                     <Info size={14} className="text-primary mt-0.5 shrink-0" />
-                                    <p className="text-[10px] text-stone-500 leading-normal">
+                                    <p className="text-sm text-stone-500 leading-normal">
                                       Providing venue details helps customers book your hall for pujas, ceremonies, or weddings directly through the platform.
                                     </p>
                                  </div>
@@ -511,12 +513,12 @@ export default function SettingsPage() {
                               <br/><span className="font-bold text-stone-600">Category, Goods/Service Name, Price Unit, Description, Currency, Price</span>
                             </p>
                             <div className="flex items-center gap-3 mt-3">
-                              <a href="/sample_catalog.csv" download className="text-primary hover:text-orange-600 transition-colors uppercase tracking-widest text-[11px] font-bold inline-flex items-center gap-1 bg-white px-3 py-1.5 rounded-lg border border-stone-100 shadow-sm">
+                              <a href="/sample_catalog.csv" download className="text-primary hover:text-orange-600 transition-colors uppercase tracking-widest text-sm font-bold inline-flex items-center gap-1 bg-white px-3 py-1.5 rounded-lg border border-stone-100 shadow-sm">
                                 <Download size={14} /> Download Template
                               </a>
                               <button 
                                 onClick={() => setShowGuide(true)}
-                                className="text-stone-500 hover:text-primary transition-colors uppercase tracking-widest text-[11px] font-bold inline-flex items-center gap-1 bg-white px-3 py-1.5 rounded-lg border border-stone-100 shadow-sm"
+                                className="text-stone-500 hover:text-primary transition-colors uppercase tracking-widest text-sm font-bold inline-flex items-center gap-1 bg-white px-3 py-1.5 rounded-lg border border-stone-100 shadow-sm"
                               >
                                 <HelpCircle size={14} /> How to Update?
                               </button>
@@ -626,7 +628,7 @@ export default function SettingsPage() {
                             {formData.expertise.files.map((f, i) => (
                               <div key={i} className="text-xs bg-white py-2 px-3 rounded-lg border border-stone-200 flex items-center justify-between shadow-sm">
                                 <span className="truncate max-w-[200px] font-medium text-stone-600">{f.name}</span>
-                                <a href={f.url} target="_blank" className="text-primary hover:underline font-bold tracking-wider uppercase text-[10px]">View</a>
+                                <a href={f.url} target="_blank" className="text-primary hover:underline font-bold tracking-wider uppercase text-sm">View</a>
                               </div>
                             ))}
                           </div>
@@ -682,7 +684,7 @@ export default function SettingsPage() {
                           <p className="text-xs text-stone-600">List items like 'Ghee', 'Havan Kit'. Use 'PC' as Price Unit. Provide accurate Currency (INR/USD).</p>
                        </div>
                        <div className="p-3 bg-stone-50 rounded-lg border border-stone-100">
-                          <p className="text-xs font-bold text-stone-700 uppercase mb-1">Services (e.g. Pandit, Photographer)</p>
+                          <p className="text-xs font-bold text-stone-700 uppercase mb-1">Services (e.g. Consultant, Photographer)</p>
                           <p className="text-xs text-stone-600">List ceremonies or packages. Use 'Event', 'HR', or 'Day' as Price Unit. Feel free to add your specific local services.</p>
                        </div>
                     </div>

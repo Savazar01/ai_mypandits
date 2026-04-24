@@ -15,8 +15,14 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "MyPandits | The Digital Sanctuary",
-  description: "Your Ritual, Orchestrated by AI. Connecting ancient traditions with modern intelligence.",
+  title: "EventicAI | AI-Powered Event Orchestration",
+  description: "Next-generation event planning and orchestration. Coordinate activities, guests, and logistics with AI-powered efficiency.",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({

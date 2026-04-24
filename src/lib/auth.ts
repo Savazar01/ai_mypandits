@@ -3,14 +3,14 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { admin } from "better-auth/plugins";
 
-// BetterAuth Server Configuration: Vedic Sanctuary v1.0 [Schema Sync: Banned Fields Added]
+// BetterAuth Server Configuration: Event Orchestration Platform v1.0 [Schema Sync: Banned Fields Added]
 const isWindows = process.platform === "win32";
 const isLinux = process.platform === "linux";
 
 // 1. Get multiple origins from your new env variable
 // Example: BETTER_AUTH_ORIGINS="https://ai.mypandits.com, https://mypandits.com"
-const allowedOrigins = process.env.BETTER_AUTH_ORIGINS 
-    ? process.env.BETTER_AUTH_ORIGINS.split(',').map(o => o.trim()) 
+const allowedOrigins = process.env.BETTER_AUTH_ORIGINS
+    ? process.env.BETTER_AUTH_ORIGINS.split(',').map(o => o.trim())
     : [];
 
 const localUrl = "http://localhost:3090";
@@ -56,7 +56,7 @@ export const auth = betterAuth({
         useSecureCookies: isLinux,
         // Only trust proxy headers on Linux/Production (behind Traefik)
         // Enabling this on Windows causes origin mismatches during local dev
-        trustProxyHeaders: isLinux 
+        trustProxyHeaders: isLinux
     },
     user: {
         additionalFields: {
@@ -72,7 +72,7 @@ export const auth = betterAuth({
                 defaultValue: "CUSTOMER",
             },
             profile_data: {
-                type: "string", 
+                type: "string",
                 input: true,
                 defaultValue: "{}",
             },

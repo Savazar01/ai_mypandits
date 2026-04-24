@@ -115,14 +115,14 @@ export function RegistrationForm({ role }: RegistrationFormProps) {
   };
 
   const roleLabel = role === "CUSTOMER" ? "Customer" : "Provider";
-  const headline = role === "CUSTOMER" ? "Join the Sanctuary" : "Apply as a Provider";
-  const tagline = role === "CUSTOMER" ? "Begin your journey toward spiritual alignment" : "Digitalize your practice with AI orchestration";
+  const headline = role === "CUSTOMER" ? "Start Planning Your Event" : "Join as a Service Provider";
+  const tagline = role === "CUSTOMER" ? "Experience the future of AI-driven event orchestration for any occasion." : "Scale your service operations with our professional coordination tools.";
 
   return (
     <div className="w-full bg-surface-container-lowest/20 backdrop-blur-[16px] rounded-[2rem] md:rounded-[2.5rem] p-6 sm:p-10 md:p-16 flex flex-col items-center shadow-[0_40px_100px_-20px_rgba(143,78,0,0.06)] relative overflow-hidden">
       {/* Decorative Branding */}
       <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
-        <span className="material-symbols-outlined text-[120px]">spa</span>
+        <span className="material-symbols-outlined text-[120px]">event_available</span>
       </div>
 
       {/* Headline Group */}
@@ -155,9 +155,9 @@ export function RegistrationForm({ role }: RegistrationFormProps) {
 
           {/* WhatsApp Section */}
           <div className="relative">
-            <div className="flex">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-0">
               <select
-                className="w-24 px-2 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface focus:outline-none"
+                className="w-full sm:w-32 px-2 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface focus:outline-none"
                 value={whatsappCode}
                 onChange={(e) => setWhatsappCode(e.target.value)}
               >
@@ -167,7 +167,7 @@ export function RegistrationForm({ role }: RegistrationFormProps) {
               </select>
               <div className="relative flex-1">
                 <input 
-                  className="peer block w-full px-4 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface placeholder-transparent focus:outline-none pr-24" 
+                  className="peer block w-full px-0 sm:px-4 py-3 bg-transparent border-t-0 border-x-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all text-on-surface placeholder-transparent focus:outline-none pr-28" 
                   id="whatsapp" 
                   placeholder=" " 
                   required 
@@ -180,15 +180,15 @@ export function RegistrationForm({ role }: RegistrationFormProps) {
                   }}
                 />
                 <label 
-                  className="absolute left-4 -top-4 text-xs font-bold text-[#25D366] transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#25D366] peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-[#25D366] peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#25D366] uppercase tracking-widest pointer-events-none flex items-center gap-1.5" 
+                  className="absolute left-0 -top-4 text-xs font-bold text-[#25D366] transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#25D366] peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-[#25D366] peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#25D366] uppercase tracking-widest pointer-events-none flex items-center gap-1.5" 
                   htmlFor="whatsapp"
                 >
-                  <WhatsAppIcon size={12} /> WhatsApp Number
+                  <WhatsAppIcon size={12} /> WhatsApp
                 </label>
 
                 <div className="absolute right-0 top-1/2 -translate-y-1/2">
                   {verificationStep === "verified" ? (
-                    <span className="flex items-center gap-1 text-green-600 text-[10px] font-bold uppercase tracking-wider bg-green-50 px-2 py-1 rounded-full border border-green-100">
+                    <span className="flex items-center gap-1 text-green-600 text-sm font-bold uppercase tracking-wider bg-green-50 px-2 py-1 rounded-full border border-green-100">
                       <CheckCircle2 size={12} /> Verified
                     </span>
                   ) : (
@@ -196,7 +196,7 @@ export function RegistrationForm({ role }: RegistrationFormProps) {
                       type="button"
                       onClick={handleSendOtp}
                       disabled={verificationStep === "sending" || !whatsapp}
-                      className="text-[10px] font-bold uppercase tracking-[0.1em] text-primary hover:text-primary/80 disabled:opacity-50 transition-colors flex items-center gap-1.5 px-3 py-1.5"
+                      className="text-sm font-bold uppercase tracking-[0.1em] text-primary hover:text-primary/80 disabled:opacity-50 transition-colors flex items-center gap-1.5 px-3 py-1.5"
                     >
                       {verificationStep === "sending" ? <Loader2 size={12} className="animate-spin" /> : <ShieldCheck size={12} />}
                       {verificationStep === "sent" ? "Resend" : "Verify"}
@@ -205,14 +205,14 @@ export function RegistrationForm({ role }: RegistrationFormProps) {
                 </div>
               </div>
             </div>
-            {verificationError && <p className="text-[10px] text-red-500 font-medium mt-1 ml-2">{verificationError}</p>}
+            {verificationError && <p className="text-sm text-red-500 font-medium mt-1 ml-2">{verificationError}</p>}
             
             {/* OTP Input Section */}
             {(verificationStep === "sent" || verificationStep === "verifying") && (
               <div className="mt-4 p-5 bg-primary/5 rounded-2xl border border-primary/10 space-y-4 animate-in slide-in-from-top-2 duration-300">
                 <div className="flex items-center justify-between">
-                  <label className="text-[10px] font-bold text-primary/60 uppercase tracking-widest">Enter 6-Digit Code</label>
-                  {timer > 0 && <span className="text-[10px] font-medium text-stone-500">Resend in {timer}s</span>}
+                  <label className="text-sm font-bold text-primary/60 uppercase tracking-widest">Enter 6-Digit Code</label>
+                  {timer > 0 && <span className="text-sm font-medium text-stone-500">Resend in {timer}s</span>}
                 </div>
                 <div className="flex gap-4">
                   <input 
@@ -278,7 +278,7 @@ export function RegistrationForm({ role }: RegistrationFormProps) {
         {/* Submit Section */}
         <div className="pt-6 space-y-4">
           <button 
-            className="w-full py-5 rounded-full sacred-gradient-btn text-white font-medium text-lg tracking-wide hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50" 
+            className="w-full py-5 rounded-full primary-gradient-btn text-white font-medium text-lg tracking-wide hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50" 
             type="submit"
             disabled={loading || verificationStep !== "verified"}
           >

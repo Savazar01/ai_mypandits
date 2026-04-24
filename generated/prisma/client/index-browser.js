@@ -24,11 +24,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.6.0
+ * Prisma Client JS version: 7.7.0
  * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
  */
 Prisma.prismaVersion = {
-  client: "7.6.0",
+  client: "7.7.0",
   engine: "75cbdc1eb7150937890ad5465d861175c6624711"
 }
 
@@ -184,6 +184,65 @@ exports.Prisma.CatalogItemScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.EventScalarFieldEnum = {
+  id: 'id',
+  owner_id: 'owner_id',
+  title: 'title',
+  description: 'description',
+  event_type: 'event_type',
+  start_date: 'start_date',
+  end_date: 'end_date',
+  status: 'status',
+  location: 'location',
+  orchestration_state: 'orchestration_state',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.EventDayScalarFieldEnum = {
+  id: 'id',
+  event_id: 'event_id',
+  date: 'date',
+  sequence_number: 'sequence_number',
+  created_at: 'created_at'
+};
+
+exports.Prisma.ActivityScalarFieldEnum = {
+  id: 'id',
+  day_id: 'day_id',
+  event_id: 'event_id',
+  title: 'title',
+  start_time: 'start_time',
+  end_time: 'end_time',
+  location_type: 'location_type',
+  location: 'location',
+  status: 'status',
+  is_orchestrated: 'is_orchestrated',
+  created_at: 'created_at'
+};
+
+exports.Prisma.InvitationScalarFieldEnum = {
+  id: 'id',
+  event_id: 'event_id',
+  activity_id: 'activity_id',
+  invitee_name: 'invitee_name',
+  invitee_email: 'invitee_email',
+  whatsapp_number: 'whatsapp_number',
+  num_guests: 'num_guests',
+  rsvp_status: 'rsvp_status',
+  invite_sent: 'invite_sent',
+  access_token: 'access_token',
+  created_at: 'created_at'
+};
+
+exports.Prisma.OrchestrationLogScalarFieldEnum = {
+  id: 'id',
+  event_id: 'event_id',
+  agent_name: 'agent_name',
+  log_message: 'log_message',
+  timestamp: 'timestamp'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -220,7 +279,12 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  CatalogItem: 'CatalogItem'
+  CatalogItem: 'CatalogItem',
+  Event: 'Event',
+  EventDay: 'EventDay',
+  Activity: 'Activity',
+  Invitation: 'Invitation',
+  OrchestrationLog: 'OrchestrationLog'
 };
 
 /**

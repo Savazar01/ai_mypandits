@@ -119,7 +119,7 @@ export default function LoginPage() {
 
 
   return (
-    <div className="bg-surface font-body text-on-surface min-h-screen flex flex-col items-center justify-center vedic-gradient-bg overflow-hidden relative">
+    <div className="bg-surface font-body text-on-surface min-h-screen flex flex-col items-center justify-center professional-gradient-bg overflow-hidden relative">
       <Header />
       {/* Subtle Background Motifs - Removed ghost image as requested */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.03] flex items-center justify-center">
@@ -128,14 +128,18 @@ export default function LoginPage() {
       {/* Main Content Canvas */}
       <main className="relative z-10 w-full max-w-md px-6">
         {/* Login Card */}
-        <div className="glass-card temple-arch p-10 flex flex-col items-center shadow-2xl shadow-primary/5">
-          {/* Saffron Lotus Icon */}
+        <div className="glass-card hero-card-radius p-10 flex flex-col items-center shadow-2xl shadow-primary/5">
+          {/* Saffron Event Icon */}
           <div className="mb-6">
-            <span className="material-symbols-outlined text-primary-container text-6xl" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
+            <img 
+              src="https://savazar.com/wp-content/uploads/2023/10/cropped-Transparent_Image_2-300x100.png" 
+              alt="EventicAI Logo" 
+              className="h-16 w-auto object-contain"
+            />
           </div>
           
           {/* Card Headline */}
-          <h1 className="font-body font-light text-4xl text-on-surface tracking-tight mb-8 text-center">Login to MyPandits</h1>
+          <h1 className="font-body font-light text-4xl text-on-surface tracking-tight mb-8 text-center">Account Login</h1>
 
           {/* Mode Toggle - WhatsApp First */}
           <div className="flex bg-surface-variant/10 rounded-full p-1 mb-10 w-full max-w-[280px]">
@@ -191,7 +195,7 @@ export default function LoginPage() {
                   Password
                 </label>
               </div>
-              {error && <p className="text-[10px] text-red-500 font-medium text-center">{error}</p>}
+              {error && <p className="text-sm text-red-500 font-medium text-center">{error}</p>}
               <div className="pt-6">
                 <button 
                   className="saffron-gold-gradient w-full py-4 rounded-full text-white font-semibold text-lg tracking-wide hover:shadow-lg hover:shadow-primary/20 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50" 
@@ -226,17 +230,17 @@ export default function LoginPage() {
                     onChange={(e) => setWhatsapp(e.target.value)}
                   />
                   <label 
-                    className="absolute left-4 -top-4 text-xs font-bold text-[#25D366] transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#25D366] peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-[#25D366] peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#25D366] uppercase tracking-widest pointer-events-none flex items-center gap-1.5" 
+                    className="absolute left-0 -top-4 text-xs font-bold text-[#25D366] transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#25D366] peer-autofill:-top-4 peer-autofill:text-xs peer-autofill:text-[#25D366] peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-[#25D366] uppercase tracking-widest pointer-events-none flex items-center gap-1.5" 
                     htmlFor="whatsapp"
                   >
-                    <WhatsAppIcon size={12} /> WhatsApp Number
+                    <WhatsAppIcon size={12} /> WhatsApp
                   </label>
                   <div className="absolute right-0 top-1/2 -translate-y-1/2">
                     <button 
                       type="button"
                       onClick={handleSendLoginOtp}
                       disabled={verificationStep === "sending" || !whatsapp || timer > 0}
-                      className="text-[10px] font-bold uppercase tracking-[0.1em] text-primary hover:text-primary/80 disabled:opacity-50 transition-colors flex items-center gap-1.5 px-3 py-1.5"
+                      className="text-sm font-bold uppercase tracking-[0.1em] text-primary hover:text-primary/80 disabled:opacity-50 transition-colors flex items-center gap-1.5 px-3 py-1.5"
                     >
                       {verificationStep === "sending" ? <Loader2 size={12} className="animate-spin" /> : timer > 0 ? `${timer}s` : "Get OTP"}
                     </button>
@@ -244,7 +248,7 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              {error && <p className="text-[10px] text-red-500 font-medium text-center">{error}</p>}
+              {error && <p className="text-sm text-red-500 font-medium text-center">{error}</p>}
 
               {/* OTP Entry */}
               {(verificationStep === "sent" || verificationStep === "verifying") && (
@@ -258,7 +262,7 @@ export default function LoginPage() {
                       value={otp}
                       onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
                     />
-                    <label className="block text-center text-[10px] font-bold text-primary/40 uppercase tracking-[0.2em] mt-2 italic">Enter 6-digit code</label>
+                    <label className="block text-center text-sm font-bold text-primary/40 uppercase tracking-[0.2em] mt-2 italic">Enter 6-digit code</label>
                   </div>
                   <button 
                     onClick={handleVerifyLoginOtp}
@@ -276,30 +280,34 @@ export default function LoginPage() {
           <div className="mt-10 flex flex-col items-center space-y-4 w-full">
             <div className="w-8 h-[1px] bg-outline-variant/30"></div>
             <p className="text-xs font-label text-on-surface-variant/70 uppercase tracking-widest">
-              New to the journey? 
+              Ready to orchestrate? 
               <Link className="text-primary font-bold ml-1 hover:underline underline-offset-4" href="/register">
-                Create an Account
+                Start for Free
               </Link>
             </p>
           </div>
         </div>
         {/* Decorative Subtle Branding */}
         <div className="mt-12 text-center">
-          <Link href="/" className="font-headline font-bold text-primary/40 tracking-widest text-3xl flex items-center justify-center gap-3">
-            <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>local_florist</span>
-            MyPandits
+          <Link href="/" className="flex items-center justify-center gap-3 hover:opacity-80 transition-opacity">
+            <img 
+              src="https://savazar.com/wp-content/uploads/2023/10/cropped-Transparent_Image_2-300x100.png" 
+              alt="EventicAI Logo" 
+              className="h-10 w-auto object-contain opacity-60"
+            />
+            <span className="font-headline font-bold text-primary/40 tracking-widest text-3xl">EventicAI</span>
           </Link>
         </div>
       </main>
 
       {/* Footer Area */}
-      <footer className="fixed bottom-0 w-full flex flex-col md:flex-row justify-between items-center px-12 py-8 opacity-60">
-        <p className="text-xs uppercase tracking-widest text-orange-800/50">
-          © 2024 MyPandits. All rights reserved.
+      <footer className="w-full flex flex-col md:flex-row justify-between items-center px-6 md:px-12 py-8 mt-auto opacity-60 bg-white md:bg-transparent border-t border-primary/5 md:border-none">
+        <p className="text-[10px] md:text-xs uppercase tracking-widest text-orange-800/50 text-center md:text-left">
+          © 2024 EventicAI. All rights reserved.
         </p>
         <div className="flex space-x-6 mt-4 md:mt-0">
           <Link className="text-xs uppercase tracking-widest text-orange-800/50 hover:text-orange-900 transition-opacity" href="#">Privacy Policy</Link>
-          <Link className="text-xs uppercase tracking-widest text-orange-800/50 hover:text-orange-900 transition-opacity" href="#">Ritual Guidelines</Link>
+          <Link className="text-xs uppercase tracking-widest text-orange-800/50 hover:text-orange-900 transition-opacity" href="#">Usage Terms</Link>
         </div>
       </footer>
 

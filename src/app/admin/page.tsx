@@ -27,7 +27,7 @@ export default function AdminDashboard() {
             <Shield className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="font-serif text-2xl font-bold text-[#1A1C1A]">Vedic Sanctuary Pulse</h1>
+            <h1 className="font-serif text-2xl font-bold text-[#1A1C1A]">Global System Pulse</h1>
             <p className="text-xs uppercase tracking-widest font-bold text-[#887364]">Systems Override Dashboard</p>
           </div>
         </div>
@@ -41,12 +41,12 @@ export default function AdminDashboard() {
             <div className="glass-card p-6 rounded-3xl border border-white/50">
               <Activity className="w-5 h-5 text-saffron mb-4" />
               <div className="text-2xl font-bold">128</div>
-              <div className="text-[10px] uppercase font-bold text-[#887364]">Active Ceremonies</div>
+              <div className="text-[10px] uppercase font-bold text-[#887364]">Active Events</div>
             </div>
             <div className="glass-card p-6 rounded-3xl border border-white/50">
               <Database className="w-5 h-5 text-gold mb-4" />
               <div className="text-2xl font-bold">1.2GB</div>
-              <div className="text-[10px] uppercase font-bold text-[#887364]">Sacred Context Size</div>
+              <div className="text-[10px] uppercase font-bold text-[#887364]">System Context Size</div>
             </div>
             <div className="glass-card p-6 rounded-3xl border border-white/50">
               <Server className="w-5 h-5 text-forest mb-4" />
@@ -93,7 +93,7 @@ export default function AdminDashboard() {
 
             <div className="mt-8 pt-8 border-t border-[#DBC2B0]/20">
               <p className="text-[10px] font-bold text-[#887364] mb-4 uppercase tracking-widest text-center italic">
-                {`"Intelligence is the silent observer behind all rituals."`}
+                {`"Precision is the foundation of every successful orchestration."`}
               </p>
             </div>
           </div>

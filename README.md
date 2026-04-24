@@ -1,7 +1,7 @@
-# MyPandits: The Vedic Sanctuary Marketplace
+# MyPandits: AI-Powered Event Orchestration
 
-**Authentic Traditions, Seamlessly Orchestrated.**  
-MyPandits is a next-generation marketplace that connects customers with verified providers for every aspect of Vedic rituals, ceremonies, and spiritual events. Powered by AI-driven orchestration, we bring precision and beauty to your most sacred moments.
+**Professional Events, Seamlessly Orchestrated.**  
+MyPandits is a premium event orchestration platform that connects customers with verified providers for every aspect of professional, social, and corporate events. Powered by AI-driven coordination, we bring precision and excellence to your most important moments.
 
 ---
 
@@ -9,17 +9,24 @@ MyPandits is a next-generation marketplace that connects customers with verified
 
 ### 🏢 Unified Expertise Ecosystem
 Connect with specialized service providers across 11 core roles:
-- **Pandit/Priest**: Authentic Vedic rituals and pujas.
-- **Temple**: Physical venues for spiritual ceremonies.
-- **Venue Provider**: Banquet halls and event spaces.
-- **Decorator**: Traditional and modern event aesthetics.
-- **Caterer**: Sathvic and ritual-compliant cuisine.
-- **Photographer/Videographer**: Capturing sacred memories.
-- **Puja Supplies**: Essential ritual inventory and kits.
-- **Media & Design**: Digital invites and ritual documentation.
-- **DJ & Live Music**: Spiritual and festive musical orchestration.
-- **Event Planner**: End-to-end ritual coordination.
-- **Other**: Specialized services (e.g., Rangoli artists, Mehendi).
+- **Event Consultant**: Professional guidance and expert coordination.
+- **Venue Provider**: High-end physical venues and professional spaces.
+- **Venue Management**: Logistics and on-site event operations.
+- **Decorator**: Modern and creative event aesthetics.
+- **Caterer**: Premium cuisine tailored to your event requirements.
+- **Photographer/Videographer**: Capturing professional memories.
+- **Event Materials**: Essential supplies and logistics kits.
+- **Media & Design**: Digital invites and professional documentation.
+- **DJ & Live Entertainment**: Musical orchestration and entertainment services.
+- **Event Planner**: End-to-end event coordination.
+- **Other**: Specialized services (e.g., Design consultants, specialty acts).
+
+### 🎨 Intelligent Event Orchestrator
+A 4-stage guided workflow designed to take an event from concept to launch:
+1. **Event Basics**: Define your vision and set a **Primary Event Location** that acts as the anchor for all logistics.
+2. **Timeline Orchestration**: Schedule multiple days and activities. Use **Location Inheritance** to automatically default activity locations to the day's primary site.
+3. **Guest Management**: Intelligent list management with the ability to assign guests to the **Full Event** or specific individual activities.
+4. **Final Review & Launch**: A high-fidelity summary screen for final verification before AI-driven service matching begins.
 
 
 ### 📦 Dynamic Catalog Management
@@ -31,7 +38,7 @@ Providers can manage their entire service inventory using a **Unified Catalog Sy
 ## AI Worker Stability
 - **Headless Capabilities**: Standardized Chromium paths in the standalone **WhatsApp Service** ensure that AI workers have a 100% reliable execution environment on the VPS.
 - **Hybrid Service Orchestration**: The system automatically adapts to its environment, providing a robust micro-service isolation in production and a lightweight monolith flow for developers on the ROG.
-- **Event Orchestration**: The stable Docker base allows for the integration of low-latency message queues to manage complex Vedic ritual lifecycles.
+- **Event Orchestration**: The stable Docker base allows for the integration of low-latency message queues to manage complex event lifecycles.
 
 ## Service Awareness
 Agents should be aware that services like the WhatsApp Bridge are now **Hybrid**. At runtime, they are accessible via internal service networking (e.g., `http://whatsapp-service:3095`) on Linux, or managed via JIT-kickstarted local processes on Windows.
@@ -82,9 +89,9 @@ npm run dev
 # WhatsApp Bridge (Just-In-Time)
 # The WhatsApp bridge no longer requires a manual background process.
 # It is automatically initialized JIT (Just-In-Time) when you trigger 
-# a login or registration flow.
+# a login or registration flow. Note: Requires Node.js 20+ for stable Chromium execution.
 ```
-Open **[http://localhost:3090](http://localhost:3090)** to view the Vedic Sanctuary.
+Open **[http://localhost:3090](http://localhost:3090)** to view the MyPandits Platform.
 
 ---
 
@@ -126,10 +133,11 @@ This project utilizes **Google Stitch** for rapid UI component orchestration and
 - **Stitch-Driven Scaffolding**: Core landing and authentication screens are scaffolded using Stitch to ensure architectural consistency.
 - **Design Synchronization**: Layouts and visual hierarchies are kept in sync with the Stitch workspace.
 
-### 🍱 Design Assets
-The project's visual soul is defined in the [**`design-assets/`**](file:///c:/Users/AVASA/Downloads/ai_mypandits/design-assets) directory.
-- **Vedic Sanctuary Aesthetic**: Contains the color palettes, typography, and sacred geometry motifs that define the "Vedic Sanctuary" look and feel.
-- **Asset Management**: All brand-compliant images, mandalas, and icons are sourced from this local repository to maintain a premium, cohesive user experience.
+### 🏗️ Design Heritage: Professional Modernity
+The project's visual identity is defined in the [**`design-assets/`**](file:///c:/Users/AVASA/Downloads/ai_mypandits/design-assets) directory.
+- **Professional Modernity System**: A high-end editorial experience that honors excellence through contemporary luxury, featuring intentional asymmetry and professional geometries.
+- **Mobile-First Accessibility**: Optimized for all devices with fluid typography, stacked mobile layouts, and friendly touch targets.
+- **Asset Management**: All brand-compliant images, graphics, and icons are sourced locally to maintain a cohesive, premium user experience.
 
 ---
 

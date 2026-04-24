@@ -9,50 +9,51 @@
 ## Git Strategy
 - **Main Branch**: Current active development and source-of-truth implementation.
 - **Tag v0.1-baseline**: Initial stable state for core UI.
-- **Tag v0.2-unified-auth**: Complete 'Zero-Difference' authentication for Email and WhatsApp (High-Fidelity). Use this to restore the production-grade identity layer.
-- **Tag v0.3-ui-housekeeping**: Cleaned login/registration UI, removed 'ghost' artifacts, and enlarged brand logos.
-- **Tag v0.4-registration-refactor**: Split registration into dedicated `/customer` and `/provider` routes with a simplified Choice page and fully responsive forms.
+- **Tag v0.2-unified-auth**: Complete 'Zero-Difference' authentication for Email and WhatsApp.
+- **Tag v0.4-registration-refactor**: Split registration into dedicated `/customer` and `/provider` routes.
+- **Tag v1.0-mobile-orchestration**: Global mobile responsiveness overhaul and Event Orchestration workflow stabilization.
 
 ## Tech Stack
-- Frontend: Next.js (App Router), Tailwind CSS v4, Framer Motion
-- Auth: BetterAuth (Email/Password)
-- Database: Prisma (PostgreSQL on Port 5433)
-- Design: Vedic Sanctuary System ("Sacred Modernity")
+- **Frontend**: Next.js (App Router), Tailwind CSS v4, Framer Motion
+- **Auth**: BetterAuth v1.5.6 (Email & WhatsApp Bridge)
+- **Database**: Prisma (PostgreSQL)
+- **Design System**: Professional Modernity (Optimized for Web/Mobile)
 
-## UI Standards
-- **Headlines**: Noto Serif
-- **Body/Labels**: Public Sans
-- **Rounding**: "Temple Arch" (Large top radius, small bottom)
+## Terminology Standards (Strict Enforcement)
+- **Roles**: **Customer** (Seeker) and **Provider** (Expert).
+- **Entities**: **Event** (The overall project) and **Activity** (Specific event component).
+- **Organization**: **Event Hub** or **Customer Dashboard**.
+- **Location**: **Primary Event Location** (Inherited by activities if selected).
+- **Status**: Planned, Orchestrating, Completed.
+
+## UI & Responsiveness Standards
+- **Headlines**: Noto Serif (Fluid sizing: `text-4xl` to `text-8xl`)
+- **Body/Labels**: Public Sans (Minimum `text-sm`)
+- **Rounding**: "Professional Arch" (Large top radius: `rounded-t-[4rem]`, small bottom)
 - **Colors**: Saffron (#8f4e00), Gold (#735c00), Sandalwood (#faf9f6)
-- **Separation**: "No-Line" Rule - Use `bg-surface-container-low` for component boundaries.
+- **Mobile-First Layouts**:
+    - Use `grid-cols-1 md:grid-cols-2` for all complex sections.
+    - **Header**: Persistent Sign-In action on mobile.
+    - **Touch Targets**: Minimum 44px height for interactive elements.
+- **Separation**: "No-Line" Rule - Use tonal layering (`bg-surface-container-low`) instead of borders.
 
-## Authentication Logic
-- Authentication Bridges:
+## Feature Logic & Workflow
+- **Event Creator (4 Stages)**:
+    - **Step 1 (Basics)**: Captured title and mandatory **Primary Location**.
+    - **Step 2 (Timeline)**: Location Inheritance logic - Activities default to primary location unless updated.
+    - **Step 3 (Guests)**: Intelligent list management. Assignments can be to the full event or specific sessions.
+    - **Step 4 (Final Review)**: Verification before AI initialization.
+- **Authentication Bridges**:
   - `src/app/api/auth/get-session/route.ts`: Dual-lookup (Plain/Hashed) identification.
   - `src/app/api/auth/update-user/route.ts`: Absolute permission bridge.
-- Role Mapping: 
-  - Seeker -> `CUSTOMER`
-  - Expert -> `PROVIDER`
-- Maintenance:
-  - `npm run wa:bridge`: Required for WhatsApp Login testing.
-- **Registration Architecture**:
-  - `src/app/register/page.tsx`: Role selection 'Choice' page (simplified).
-  - `src/app/register/customer/page.tsx`: Dedicated seeker sign-up.
-  - `src/app/register/provider/page.tsx`: Dedicated expert application.
-  - `src/components/RegistrationForm.tsx`: Shared, responsive form component.
+
+## Hybrid Architecture (v2.1.0-hybrid)
+- **Platform Branching Logic**: Use `process.platform === 'win32'` vs `'linux'` for middleware verification.
+- **Development (Windows)**: Local JIT-managed monolith flow using `whatsapp-bridge.js`.
+- **Production (Linux)**: Robust Debian-based Docker architecture (`node:20-bookworm-slim`) with standalone WhatsApp service.
+- **Service Discovery**: Docker DNS (`http://whatsapp-service:3095`) vs local fallback.
 
 ## Environment Requirements
-- **Tailwind Plugins**: `@tailwindcss/forms` and `@tailwindcss/container-queries` must be installed.
-- **Next.js Images**: `lh3.googleusercontent.com` and `googleusercontent.com` are whitelisted in `next.config.ts` for Stitch-based image delivery.
-- **WhatsApp Isolation**: `.wwebjs_auth` is excluded from bundler processing via `serverExternalPackages` and `transpilePackages`.
-- **Middleware Convention**: `src/proxy.ts` implements a hybrid session check.
-  - **Linux (Production)**: Uses `auth.api.getSession` (Direct server-side API) to bypass Traefik/SSL handshake conflicts.
-  - **Windows (Development)**: Uses `fetch` for standard origin verification.
-- **Proxy Configuration**: `trustProxyHeaders` is enabled only on Linux (`isLinux`) to support Traefik-forwarded headers without breaking local dev.
-- **Hybrid Architecture (v2.1.0-hybrid)**:
-  - **VPS (Production)**: Standalone `whatsapp-service/` container (Port 3095) + Slim Main Container (Port 3090).
-  - **ROG (Development)**: Local monolith flow using `whatsapp-bridge.js`.
-  - **Platform Detection**: `src/lib/whatsapp.ts` automatically switches between `http://whatsapp-service:3095` (Linux) and `http://localhost:3095` with JIT kickstart (Windows).
-  - **Storage**: VPS requires a persistent volume: `whatsapp_data:/data/whatsapp_session`.
-  - **Build Integrity**: Uses Docker-optimized `npm ci` for all services.
-  - **Self-Healing**: Startup cleanup block removes stale Chromium locks from `/data/whatsapp_session/session`.
+- **Tailwind Plugins**: `@tailwindcss/forms` and `@tailwindcss/container-queries`.
+- **Next.js Images**: Whitelisted `lh3.googleusercontent.com` and `googleusercontent.com`.
+- **WhatsApp Isolation**: `.wwebjs_auth` is excluded from bundler processing.

@@ -20,7 +20,7 @@ export function SignOutButton() {
   return (
     <button
       onClick={handleSignOut}
-      className="flex items-center space-x-2 text-xs font-bold uppercase tracking-[0.2em] text-[#887364] hover:text-[#8f4e00] transition-colors group"
+      className="flex items-center space-x-2 text-sm font-bold uppercase tracking-wide text-[#887364] hover:text-[#8f4e00] transition-colors group"
     >
       <span className="hidden md:inline">Sign Out</span>
       <LogOut className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

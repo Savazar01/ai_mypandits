@@ -56,7 +56,9 @@ const config: Config = {
         "secondary-fixed": "#ffe088",
         "secondary": "#735c00",
         "on-secondary-fixed-variant": "#574500",
-        "surface-dim": "#dbdad7"
+        "surface-dim": "#dbdad7",
+        "saffron": "#f28c28",
+        "gold": "#d4af37"
       },
       fontFamily: {
         "headline": ["var(--font-noto-serif)", "Noto Serif", "serif"],

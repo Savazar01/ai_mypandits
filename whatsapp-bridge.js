@@ -160,7 +160,7 @@ const server = http.createServer(async (req, res) => {
 
                 const cleanNumber = number.replace(/\+/g, "");
                 const chatId = `${cleanNumber}@c.us`;
-                const message = `*Vedic Sanctuary OTP Verification*\n\nYour 6-digit verification code is: *${otp}*\n\nThis code expires in 5 minutes. Please do not share it with anyone.`;
+                const message = `*MyPandits Event Verification*\n\nYour 6-digit verification code is: *${otp}*\n\nThis code expires in 5 minutes. Please do not share it with anyone.`;
 
                 try {
                     await client.sendMessage(chatId, message);

@@ -10,7 +10,6 @@ services:
       - "3090:3090"
     depends_on:
       - ai-backend
-      - whatsapp-service
     environment:
       - NODE_ENV=${NODE_ENV:-production}
       - DATABASE_URL=${DATABASE_URL}
@@ -23,7 +22,6 @@ services:
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
     networks:
       - coolify
-      - mypandits-network
     deploy:
       resources:
         limits:
@@ -40,14 +38,11 @@ services:
     restart: always
     ports:
       - "8090:8090"
-    depends_on:
-      - whatsapp-service
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - REFRESH_MODE=${REFRESH_MODE:-false}
     networks:
       - coolify
-      - mypandits-network
     deploy:
       resources:
         limits:
@@ -55,37 +50,6 @@ services:
         reservations:
           memory: 256M
 
-  # 3. WhatsApp Service: Standalone Bridge
-  whatsapp-service:
-    build:
-      context: ./whatsapp-service
-      dockerfile: Dockerfile
-    container_name: mypandits-whatsapp
-    restart: always
-    shm_size: '2gb' # Critical for Puppeteer/Chromium on Linux
-    ports:
-      - "3095:3095"
-    volumes:
-      - whatsapp-data:/data/whatsapp_session
-    environment:
-      - WHATSAPP_SERVICE_URL=${WHATSAPP_SERVICE_URL:-http://whatsapp-service:3095}
-    networks:
-      - coolify
-      - mypandits-network
-    deploy:
-      resources:
-        limits:
-          memory: 1536M
-        reservations:
-          memory: 512M
-
 networks:
   coolify:
     external: true
-  mypandits-network:
-    driver: bridge
-
-volumes:
-  whatsapp-data:
-    external: false
-

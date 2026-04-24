@@ -1,0 +1,30 @@
+services:
+  whatsapp-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: whatsapp-service
+    restart: always
+    shm_size: '2gb' # Critical for Puppeteer/Chromium on Linux
+    ports:
+      - "3095:3095"
+    volumes:
+      - whatsapp-data:/data/whatsapp_session
+    environment:
+      - WHATSAPP_SERVICE_URL=${WHATSAPP_SERVICE_URL:-http://whatsapp-service:3095}
+    networks:
+      - coolify
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
+        reservations:
+          memory: 512M
+
+networks:
+  coolify:
+    external: true
+
+volumes:
+  whatsapp-data:
+    external: false

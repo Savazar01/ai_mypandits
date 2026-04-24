@@ -9,7 +9,7 @@ services:
     ports:
       - "3095:3095"
     volumes:
-      - whatsapp-data-v2:/data/whatsapp_session
+      - whatsapp-data:/data/whatsapp_session
     environment:
       - WHATSAPP_SERVICE_URL=${WHATSAPP_SERVICE_URL:-http://whatsapp-service:3095}
     networks:
@@ -26,5 +26,5 @@ networks:
     external: true
 
 volumes:
-  whatsapp-data-v2:
+  whatsapp-data:
     external: false

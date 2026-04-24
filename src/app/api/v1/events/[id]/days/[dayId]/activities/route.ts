@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-const PYTHON_BACKEND_URL =
-  process.env.PYTHON_BACKEND_URL || "http://localhost:8000";
+import { PYTHON_BACKEND_URL } from "@/lib/constants";
 
 // POST /api/v1/events/[id]/days/[dayId]/activities
 export async function POST(

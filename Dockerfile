@@ -22,31 +22,30 @@ COPY . .
 RUN npx prisma generate
 RUN npm run build
 
-# Stage 3: Production Runner (Optimized)
+# Stage 3: Development Runner (Hot Reloading)
+FROM node:20-bookworm AS development
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm ci --ignore-scripts
+COPY . .
+RUN npx prisma generate
+EXPOSE 3090
+CMD ["npm", "run", "dev", "--", "-p", "3090"]
+
+# Stage 4: Production Runner (Optimized)
 FROM node:20-bookworm-slim AS runner
 WORKDIR /usr/src/app
-
-# Install healthcheck utilities (Critical for Coolify Deployment)
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
-
 ENV NODE_ENV=production
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV NEXT_TELEMETRY_DISABLED=1
-
-# Copy only production dependencies (Skip Chromium)
 COPY package*.json ./
 RUN npm ci --omit=dev --ignore-scripts
-
-# Copy built application from builder stage
 COPY --from=builder /usr/src/app/.next ./.next
 COPY --from=builder /usr/src/app/public ./public
 COPY --from=builder /usr/src/app/next.config.ts ./
-
 EXPOSE 3090
-
-# Execution: Start for Production on Port 3090
 CMD ["npm", "run", "start", "--", "-p", "3090"]

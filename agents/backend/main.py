@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routes import events, orchestration
+from routes import events, orchestration
 
 app = FastAPI(title="SavazAI Event Orchestration API", version="1.0.0")
 

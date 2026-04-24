@@ -5,91 +5,125 @@ const fs = require('fs');
 const path = require('path');
 
 /**
- * WhatsApp Standalone Service (v2.1.0)
+ * WhatsApp Standalone Service (v2.1.0-hybrid)
  * 
- * Target Architecture: high-performance Debian Service (VPS)
- * Primary Goal: Decoupled, production-ready WhatsApp bridge.
+ * Target Architecture: High-performance Debian Service (VPS) & Local Dev (Windows)
+ * Goal: Decoupled, self-healing WhatsApp bridge with frame-recovery.
  */
 
 const PORT = process.env.WHATSAPP_PORT || 3095;
-const SESSION_PATH = process.env.WHATSAPP_SESSION_PATH || '/data/whatsapp_session';
+const SESSION_PATH = process.env.WHATSAPP_SESSION_PATH || path.join(__dirname, '.wwebjs_auth');
 
-console.log(`--- [v2.1.0] Starting Standalone WhatsApp Service on Port ${PORT} ---`);
+console.log(`--- [v2.1.0-hybrid] Starting Standalone WhatsApp Service on Port ${PORT} ---`);
 console.log(`--- Session Persistence Path: ${SESSION_PATH} ---`);
 
-// [STARTUP CLEANUP] Self-healing Chromium block to prevent SingletonLock errors
-const lockFiles = ['SingletonLock', 'SingletonCookie', 'SingletonSocket'];
-const sessionInnerDir = path.join(SESSION_PATH, 'session');
+let client;
+let isReady = false;
+let isInitializing = false;
 
-try {
-    if (fs.existsSync(sessionInnerDir)) {
-        const files = fs.readdirSync(sessionInnerDir);
-        files.forEach(file => {
-            if (lockFiles.includes(file)) {
-                console.log(`--- [Server] Startup Cleanup: Removing stale lock: ${file} ---`);
-                fs.unlinkSync(path.join(sessionInnerDir, file));
-            }
-        });
+async function createClient() {
+    // 1. GUARD: Prevent multiple simultaneous launch attempts
+    if (isInitializing || isReady) return;
+
+    // 2. CLINICAL CLEANUP
+    // Removes stale Singleton files that cause "Code 21" crashes in Docker/Linux
+    const lockFiles = ['SingletonLock', 'SingletonCookie', 'SingletonSocket'];
+    const sessionInnerDir = path.join(SESSION_PATH, 'session');
+    
+    try {
+        if (fs.existsSync(sessionInnerDir)) {
+            const files = fs.readdirSync(sessionInnerDir);
+            files.forEach(file => {
+                if (lockFiles.includes(file)) {
+                    console.log(`--- [Server] Startup Cleanup: Removing stale lock: ${file} ---`);
+                    fs.unlinkSync(path.join(sessionInnerDir, file));
+                }
+            });
+        }
+    } catch (err) {
+        console.warn(`[Server] Lock removal skipped: ${err.message}`);
     }
-} catch (outerErr) {
-    console.warn(`[STARTUP] Lock cleanup block skipped: ${outerErr.message}`);
-}
 
-// 1. Initialize WhatsApp Client with LocalAuth Persistence
-const client = new Client({
-    authStrategy: new LocalAuth({
-        dataPath: SESSION_PATH
-    }),
-    puppeteer: {
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium',
+    isInitializing = true;
+    isReady = false;
+
+    console.log(`--- [Server] OS Detected: ${process.platform} ---`);
+
+    // 3. PLATFORM-AWARE PUPPETEER CONFIG
+    let puppeteerConfig = {
+        headless: true,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
             '--no-zygote',
-            '--disable-dev-shm-usage', // Robustness for tight VPS RAM
-            '--disable-gpu'
         ]
+    };
+
+    if (process.platform === 'linux') {
+        console.log('[Server] Configuring Specialized Debian/Docker environment...');
+        puppeteerConfig.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium';
+    } else {
+        console.log('[Local] Windows/macOS detected. Using default Puppeteer flow.');
+        puppeteerConfig.args = ['--disable-gpu'];
     }
-});
 
-let isReady = false;
+    // 4. CONSTRUCTOR
+    client = new Client({
+        authStrategy: new LocalAuth({
+            dataPath: SESSION_PATH
+        }),
+        webVersionCache: {
+            type: 'remote',
+            remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
+        },
+        puppeteer: puppeteerConfig
+    });
 
-// 2. Lifecycle Events
-client.on('qr', (qr) => {
-    console.log('--- QR CODE RECEIVED (Log in via WhatsApp) ---');
-    qrcode.generate(qr, { small: true });
-});
+    // 5. EVENT LISTENERS
+    client.on('qr', (qr) => {
+        console.log('\n--- WHATSAPP QR CODE RECEIVED ---');
+        qrcode.generate(qr, { small: true });
+        console.log('---------------------------------\n');
+    });
 
-client.on('ready', () => {
-    console.log('--- WHATSAPP CLIENT READY ---');
-    isReady = true;
-});
+    client.on('ready', () => {
+        isReady = true;
+        isInitializing = false;
+        console.log('--- WhatsApp Service is READY ---');
+    });
 
-client.on('authenticated', () => {
-    console.log('--- WHATSAPP AUTHENTICATED ---');
-});
+    client.on('auth_failure', (msg) => {
+        console.error('--- Auth Failure ---', msg);
+        isReady = false;
+        isInitializing = false;
+    });
 
-client.on('auth_failure', (msg) => {
-    console.error('--- AUTHENTICATION FAILURE ---', msg);
-    isReady = false;
-});
+    client.on('disconnected', (reason) => {
+        console.log('--- Disconnected ---', reason);
+        isReady = false;
+        isInitializing = false;
+        // Attempt re-init after a delay
+        setTimeout(createClient, 5000);
+    });
 
-client.on('disconnected', (reason) => {
-    console.log('--- WHATSAPP DISCONNECTED ---', reason);
-    isReady = false;
-    // Note: In v2.1.0, the service stays alive and will wait for new QR or session restore.
-});
+    // 6. EXECUTION
+    try {
+        await client.initialize();
+    } catch (err) {
+        console.error('Initialization Error:', err);
+        isInitializing = false;
+    }
+}
 
-// 3. Start Client
-client.initialize().catch(err => {
-    console.error('Failed to initialize WhatsApp client:', err);
-});
+// Initial Launch
+createClient();
 
-// 4. Standalone Internal API Service
-const server = http.createServer((req, res) => {
-    // Enable CORS for internal networking
+// 7. API SERVER
+const server = http.createServer(async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
@@ -98,65 +132,57 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-    // Health Check
-    if (req.url === '/status' && req.method === 'GET') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ 
-            status: isReady ? 'ready' : 'initializing',
-            session_path: SESSION_PATH
-        }));
-        return;
-    }
-
-    // OTP Send Endpoint
-    if (req.url === '/send-otp' && req.method === 'POST') {
+    if (req.method === 'POST' && req.url === '/send-otp') {
         let body = '';
         req.on('data', chunk => { body += chunk.toString(); });
+
         req.on('end', async () => {
             try {
                 const { number, otp } = JSON.parse(body);
-                
-                if (!isReady) {
+
+                if (!isReady || !client) {
                     res.writeHead(503, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ error: 'WhatsApp Service is not ready yet' }));
+                    res.end(JSON.stringify({ error: 'WhatsApp Service is not ready' }));
                     return;
                 }
 
-                // DETECT & STRIP: Remove non-digits (like +, -, spaces) for Puppeteer/WA-Web compatibility
-                const cleanNumber = number.replace(/\D/g, '');
-                const formattedNumber = `${cleanNumber}@c.us`;
+                const cleanNumber = number.replace(/\+/g, "");
+                const chatId = `${cleanNumber}@c.us`;
+                const message = `*MyPandits Event Verification*\n\nYour 6-digit verification code is: *${otp}*\n\nThis code expires in 5 minutes. Please do not share it with anyone.`;
 
-                console.log(`>>>> [v2.1.0] Sending OTP to sanitized number: ${formattedNumber}`);
+                try {
+                    await client.sendMessage(chatId, message);
+                    console.log(`Successfully sent OTP to ${number}`);
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true }));
+                } catch (sendErr) {
+                    console.error('Send Error:', sendErr.message);
 
-                if (!isReady) {
-                    res.writeHead(503, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ error: 'WhatsApp Service is not ready yet', details: 'Client is in: initializing state' }));
-                    return;
+                    // FRAME RECOVERY LOGIC (v2.1.0-hybrid)
+                    if (sendErr.message.includes('detached Frame') || sendErr.message.includes('Execution context was destroyed')) {
+                        console.log('--- CRITICAL: Frame Detached. Attempting recovery... ---');
+                        isReady = false;
+                        try { await client.destroy(); } catch (e) { }
+                        createClient();
+                        res.writeHead(503, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: 'Bridge context lost. Recovering...' }));
+                    } else {
+                        res.writeHead(500, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: sendErr.message }));
+                    }
                 }
-
-                const message = `Your MyPandits verification code is: ${otp}`;
-                await client.sendMessage(formattedNumber, message);
-                console.log(`--- [v2.1.0] OTP Sent to ${cleanNumber} ---`);
-
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true }));
-            } catch (error) {
-                console.error('Error sending message:', error);
+            } catch (err) {
+                console.error('API Error:', err);
                 res.writeHead(500, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ 
-                    error: 'Internal Server Error', 
-                    details: error.message || 'Unknown Worker Error',
-                    code: error.code || 'SEND_FAILURE'
-                }));
+                res.end(JSON.stringify({ error: 'Malformed request or server error' }));
             }
         });
-        return;
+    } else {
+        res.writeHead(404);
+        res.end();
     }
-
-    res.writeHead(404);
-    res.end();
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`--- Standalone API Listening on 0.0.0.0:${PORT} ---`);
+    console.log(`--- WhatsApp Standalone API Listening on 0.0.0.0:${PORT} ---`);
 });

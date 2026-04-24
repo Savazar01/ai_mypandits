@@ -2,11 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-const PYTHON_BACKEND_URL =
-  process.env.PYTHON_BACKEND_URL ||
-  (process.platform === "win32"
-    ? "http://localhost:8000"
-    : "http://localhost:8000");
+import { PYTHON_BACKEND_URL } from "@/lib/constants";
 
 export async function GET(request: NextRequest) {
   // Verify the user is authenticated
@@ -48,7 +44,7 @@ export async function GET(request: NextRequest) {
         active_orchestrations: 0,
         upcoming_activities_count: 0,
         recent_events: [],
-        _error: "Could not reach the AI backend. Is the Python service running on port 8000?",
+        _error: "Could not reach the AI backend. Is the Python service running on port 8090?",
       },
       { status: 200 }
     );

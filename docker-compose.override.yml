@@ -1,0 +1,30 @@
+# MyPandits Local Development Overrides (ROG Laptop / Docker Desktop)
+
+services:
+  next-app:
+    # 1. Enable Hot Reloading by mounting source code
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules # Prevents local node_modules from overwriting container's
+      - /usr/src/app/.next
+    environment:
+      - NODE_ENV=development
+      - DOCKER_TARGET=development # Triggers the dev stage in Dockerfile
+    # Wait for DB to be healthy before starting dev server
+    depends_on:
+      db:
+        condition: service_started
+
+  ai-backend:
+    # 2. Enable Hot Reloading for Python
+    volumes:
+      - ./agents/backend:/usr/src/app
+    environment:
+      - REFRESH_MODE=true # Enables uvicorn --reload
+
+  whatsapp-service:
+    # 3. Mount local session data for visibility/persistence
+    volumes:
+      - ./.wwebjs_auth:/data/whatsapp_session
+    environment:
+      - WHATSAPP_SERVICE_URL=http://localhost:3095

@@ -226,7 +226,7 @@ export default function CustomerDashboard() {
                     <>
                       <p className="text-red-400 text-sm font-semibold mb-2">⚠ AI Backend Offline</p>
                       <p className="text-[#887364] text-xs max-w-sm mx-auto">{backendError}</p>
-                      <p className="text-[#887364] text-xs mt-2">Start the Python backend: <code className="bg-gray-100 px-1 rounded">cd agents/backend && uvicorn main:app --port 8000</code></p>
+                      <p className="text-[#887364] text-xs mt-2">Start the Python backend: <code className="bg-gray-100 px-1 rounded">cd agents/backend && uvicorn main:app --port 8090</code></p>
                     </>
                   ) : (
                     <p className="text-[#887364] text-sm">No active events found. Initialize your first event above.</p>

@@ -2,11 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-const PYTHON_BACKEND_URL =
-  process.env.PYTHON_BACKEND_URL ||
-  (process.platform === "win32"
-    ? "http://localhost:8000"
-    : "http://localhost:8000");
+import { PYTHON_BACKEND_URL } from "@/lib/constants";
 
 // POST /api/v1/events - Create a new event
 export async function POST(request: NextRequest) {
@@ -39,7 +35,7 @@ export async function POST(request: NextRequest) {
   } catch (err: any) {
     console.error("[events proxy] POST failed:", err?.message ?? err);
     return NextResponse.json(
-      { error: "Could not reach AI backend. Is the Python service running on port 8000?" },
+      { error: "Could not reach AI backend. Is the Python service running on port 8090?" },
       { status: 503 }
     );
   }

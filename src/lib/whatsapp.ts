@@ -1,4 +1,5 @@
 import { exec } from "child_process";
+import { WHATSAPP_SERVICE_URL } from "./constants";
 
 /**
  * WhatsApp Proxy Client (v2.1.0-hybrid)
@@ -7,12 +8,8 @@ import { exec } from "child_process";
  */
 
 export const sendWhatsappOTP = async (number: string, otp: string) => {
-    // [PROD CHECK] Robust Environment-Aware URL Management
-    const rawUrl = process.env.WHATSAPP_SERVICE_URL ||
-        (process.platform === 'linux' ? 'http://whatsapp-service:3095' : 'http://localhost:3095');
-
     // Standardize URL: Remove extra slashes and trim spaces
-    const SERVICE_URL = rawUrl.trim().replace(/\/+$/, "");
+    const SERVICE_URL = WHATSAPP_SERVICE_URL.trim().replace(/\/+$/, "");
 
     console.log(">>>> [PROD CHECK] WhatsApp Service URL (Normalized):", SERVICE_URL);
 

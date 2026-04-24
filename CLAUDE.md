@@ -3,8 +3,10 @@
 ## Project Structure & Source of Truth
 - **Absolute Design Authority**: `./design-assets/` (Stitch exports, DESIGN.md)
 - **Implementation Path**: `/src/app/`
-- **Development Server**: [localhost:3090](http://localhost:3090)
-- **Database (PostgreSQL/Prisma)**: [localhost:5433](http://localhost:5433)
+- **Frontend Port**: [localhost:3090](http://localhost:3090)
+- **AI Backend Port**: [localhost:8090](http://localhost:8090) (Mandatory - Standardized)
+- **Database (PostgreSQL)**: [localhost:5433](http://localhost:5433) (Internal: 5432)
+- **WhatsApp Service**: [localhost:3095](http://localhost:3095)
 
 ## Git Strategy
 - **Main Branch**: Current active development and source-of-truth implementation.
@@ -47,11 +49,17 @@
   - `src/app/api/auth/get-session/route.ts`: Dual-lookup (Plain/Hashed) identification.
   - `src/app/api/auth/update-user/route.ts`: Absolute permission bridge.
 
-## Hybrid Architecture (v2.1.0-hybrid)
-- **Platform Branching Logic**: Use `process.platform === 'win32'` vs `'linux'` for middleware verification.
-- **Development (Windows)**: Local JIT-managed monolith flow using `whatsapp-bridge.js`.
-- **Production (Linux)**: Robust Debian-based Docker architecture (`node:20-bookworm-slim`) with standalone WhatsApp service.
-- **Service Discovery**: Docker DNS (`http://whatsapp-service:3095`) vs local fallback.
+## Containerized Architecture (v2.2.0-compose)
+- **Standard Infrastructure**: Both Local (Windows Docker Desktop) and Production (Linux VPS) use `docker-compose`.
+- **Port Standardization**: AI Backend **MUST** always run on port **8090**. Port 8000 is deprecated.
+- **Service Discovery**: Frontend communicates with services via internal Docker DNS:
+  - AI Backend: `http://ai-backend:8090`
+  - WhatsApp: `http://whatsapp-service:3095`
+  - Database: `db:5432`
+- **Persistent Storage**: 
+  - Database: `postgres_data` volume.
+  - WhatsApp Session: `whatsapp_data` volume (Production) / `.wwebjs_auth` mount (Local).
+- **Proxy Layer**: Next.js serves as the absolute entry point. All `/api/v1/*` requests are proxied via `src/app/api/v1/` to the AI Backend using the `PYTHON_BACKEND_URL` constant.
 
 ## Environment Requirements
 - **Tailwind Plugins**: `@tailwindcss/forms` and `@tailwindcss/container-queries`.

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
-from ..database import get_db
-from .. import models, schemas
+from database import get_db
+import models, schemas
 from uuid import UUID
 import asyncio
 import json
@@ -49,5 +49,5 @@ async def stream_orchestration_logs(id: UUID, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Event not found")
     
     # Return streaming response
-    from ..database import SessionLocal
+    from database import SessionLocal
     return StreamingResponse(log_generator(id, SessionLocal), media_type="text/event-stream")

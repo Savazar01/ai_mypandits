@@ -19,23 +19,29 @@ export default async function middleware(request: NextRequest) {
     
     let session: any = null;
 
-    if (isLinux) {
-      // 1a. VPS Mode: Direct Session API to bypass TLS/SSL handshake conflicts
-      session = await auth.api.getSession({
-        headers: request.headers,
-      });
-    } else {
-      // 1b. ROG Mode: Original Fetch logic (Stable on Windows Localhost)
-      const sessionResponse = await fetch(`${request.nextUrl.origin}/api/auth/get-session`, {
-        headers: {
-          cookie: cookieHeader,
-        },
+    // Use internal fetch to bypass TLS/SSL handshake conflicts on VPS and Edge runtime limitations
+    const internalPort = process.env.PORT || 3090;
+    const internalUrl = `http://localhost:${internalPort}/api/auth/get-session`;
+    
+    // Copy ALL headers so BetterAuth sees the original Host, cookies, and Origin
+    const fetchHeaders = new Headers(request.headers);
+    
+    console.log(`${platformLabel} Fetching session from ${internalUrl}`);
+
+    try {
+      const sessionResponse = await fetch(internalUrl, {
+        headers: fetchHeaders,
         next: { revalidate: 0 }, 
       });
 
       if (sessionResponse.ok) {
         session = await sessionResponse.json();
+        console.log(`${platformLabel} Session JSON:`, JSON.stringify(session));
+      } else {
+        console.error(`${platformLabel} ⚠️ Session Fetch Failed: ${sessionResponse.status} ${sessionResponse.statusText}`);
       }
+    } catch (fetchErr) {
+      console.error(`${platformLabel} ⚠️ Internal Fetch Error:`, fetchErr);
     }
     
     if (!session || !session.user) {

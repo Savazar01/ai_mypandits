@@ -40,7 +40,8 @@ COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY . .
 # Generate Prisma Client (outputs to ./generated/prisma/client)
 RUN npx prisma generate
-RUN npm run build
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN NODE_OPTIONS="--max-old-space-size=2048" npm run build
 
 # Stage 3: Development Runner (Hot Reloading)
 FROM node:22-bookworm AS development

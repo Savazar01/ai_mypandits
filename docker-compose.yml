@@ -8,6 +8,9 @@ services:
     restart: always
     ports:
       - "3090:3090"
+    depends_on:
+      - ai-backend
+      - whatsapp-service
     environment:
       - NODE_ENV=${NODE_ENV:-production}
       - DATABASE_URL=${DATABASE_URL}
@@ -24,7 +27,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1024M
+          memory: 2048M
+        reservations:
+          memory: 512M
 
   # 2. AI Backend: Python FastAPI Service
   ai-backend:
@@ -35,6 +40,8 @@ services:
     restart: always
     ports:
       - "8090:8090"
+    depends_on:
+      - whatsapp-service
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - REFRESH_MODE=${REFRESH_MODE:-false}
@@ -44,7 +51,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 512M
+          memory: 1024M
+        reservations:
+          memory: 256M
 
   # 3. WhatsApp Service: Standalone Bridge
   whatsapp-service:
@@ -66,7 +75,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1024M
+          memory: 1536M
+        reservations:
+          memory: 512M
 
 networks:
   coolify:

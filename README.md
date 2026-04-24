@@ -124,6 +124,12 @@ The MyPandits ecosystem uses a decoupled, hybrid architecture to ensure maximum 
 - **Chromium Startup**: The WhatsApp Worker implements a **Self-healing Cleanup** block that automatically purges stale `SingletonLock`, `SingletonCookie`, and `SingletonSocket` files from the session directory before initialization, preventing launch failures in production.
 - **Volume Storage**: Production requires a persistent Docker volume mapped to `/data/whatsapp_session` to avoid re-authentication on container restarts.
 
+#### 4. Coolify Deployment Quirks & Troubleshooting
+- **Memory Limits**: The Next.js `turbopack` build process is highly memory-intensive. Ensure `docker-compose.yml` does **not** contain artificial memory limits (`deploy: resources: limits`) that could trigger OOM kills on high-memory VPS servers.
+- **Dependency Installation**: Coolify automatically injects `--build-arg NODE_ENV=production`. This causes `npm ci` to skip installing `devDependencies` (like `typescript` or `@tailwindcss/postcss`), breaking the static build phase. The `Dockerfile` explicitly forces `RUN NODE_ENV=development npm ci --include=dev` to bypass this constraint during the builder stage.
+- **SQLAlchemy DB Dialect**: Coolify provisions PostgreSQL databases with the `postgres://` scheme. Modern SQLAlchemy requires `postgresql://`. The backend's `database.py` automatically intercepts and rewrites this connection string to `postgresql+psycopg2://` on the fly.
+- **Empty Database Provisioning**: When Coolify spins up a fresh database, it contains no tables. The FastAPI `main.py` includes a startup hook (`models.Base.metadata.create_all`) to automatically generate all required tables (e.g., `events`, `activities`) on its first boot.
+
 ---
 
 ## 🎨 Design System & Visual Identity

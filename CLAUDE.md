@@ -14,6 +14,7 @@
 - **Tag v0.2-unified-auth**: Complete 'Zero-Difference' authentication for Email and WhatsApp.
 - **Tag v0.4-registration-refactor**: Split registration into dedicated `/customer` and `/provider` routes.
 - **Tag v1.0-mobile-orchestration**: Global mobile responsiveness overhaul and Event Orchestration workflow stabilization.
+- **Tag v2.2.0-compose-stable**: Robust Linux VPS (Coolify) deployment with memory/dependency constraints resolved.
 
 ## Tech Stack
 - **Frontend**: Next.js (App Router), Tailwind CSS v4, Framer Motion

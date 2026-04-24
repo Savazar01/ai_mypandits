@@ -1,5 +1,5 @@
 services:
-  # 1. Database Layer: Falls back to local container if no external DATABASE_URL provided
+  # 1. Database Layer
   db:
     image: postgres:16-alpine
     container_name: mypandits-db
@@ -27,7 +27,6 @@ services:
       - "3090:3090"
     environment:
       - NODE_ENV=${NODE_ENV:-production}
-      # Prioritize external DATABASE_URL (Coolify) over local container
       - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:PanditAdmin2026@db:5432/mypandits?schema=public}
       - PYTHON_BACKEND_URL=${PYTHON_BACKEND_URL:-http://ai-backend:8090}
       - WHATSAPP_SERVICE_URL=${WHATSAPP_SERVICE_URL:-http://whatsapp-service:3095}
@@ -36,6 +35,9 @@ services:
       - BETTER_AUTH_ORIGINS=${BETTER_AUTH_ORIGINS}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+    depends_on:
+      - db
+      - ai-backend
     networks:
       - mypandits-network
 
@@ -49,9 +51,10 @@ services:
     ports:
       - "8090:8090"
     environment:
-      # Prioritize external DATABASE_URL (Coolify) over local container
       - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:PanditAdmin2026@db:5432/mypandits?schema=public}
       - REFRESH_MODE=${REFRESH_MODE:-false}
+    depends_on:
+      - db
     networks:
       - mypandits-network
 

@@ -8,8 +8,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Infrastructure Foundation
 The MyPandits ecosystem utilizes a **Hybrid Architecture** for maximum cross-platform stability:
-- **Production (Linux)**: Robust **Debian-based Docker architecture** (`node:20-bookworm-slim`) with isolated standalone services.
-- **Development (Windows)**: Local JIT-managed monolith flow for rapid iteration.
+- **Production (Linux/Coolify)**: Robust **Debian-based Docker architecture** using a unified `docker-compose.yml`.
+  - **Network**: Services join the `coolify` external network for integration with managed databases and other platform services.
+  - **Database**: Utilizes a standalone managed Postgres service (via `DATABASE_URL`).
+  - **Resource Management**: Containers use `deploy.resources.limits` and optimized `shm_size` (2GB) for Chromium stability.
+- **Development (Windows)**: Local JIT-managed monolith flow or `docker compose` with local overrides for rapid iteration.
 
 ## AI Worker Stability
 - **Headless Capabilities**: Standardized Chromium paths in the standalone **WhatsApp Service** ensure that AI workers have a 100% reliable execution environment on the VPS.

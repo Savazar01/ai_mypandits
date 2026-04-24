@@ -1,22 +1,5 @@
 services:
-  # 1. Database Layer
-  db:
-    image: postgres:16-alpine
-    container_name: mypandits-db
-    restart: always
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-PanditAdmin2026}
-      - POSTGRES_DB=${POSTGRES_DB:-mypandits}
-    ports:
-      - "5433:5432"
-    volumes:
-      # Use the volume name Coolify already created
-      - postgres-data:/var/lib/postgresql/data
-    networks:
-      - mypandits-network
-
-  # 2. Frontend: Next.js Application
+  # 1. Frontend: Next.js Application
   next-app:
     build:
       context: .
@@ -28,7 +11,7 @@ services:
       - "3090:3090"
     environment:
       - NODE_ENV=${NODE_ENV:-production}
-      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:PanditAdmin2026@db:5432/mypandits?schema=public}
+      - DATABASE_URL=${DATABASE_URL}
       - PYTHON_BACKEND_URL=${PYTHON_BACKEND_URL:-http://ai-backend:8090}
       - WHATSAPP_SERVICE_URL=${WHATSAPP_SERVICE_URL:-http://whatsapp-service:3095}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
@@ -36,13 +19,15 @@ services:
       - BETTER_AUTH_ORIGINS=${BETTER_AUTH_ORIGINS}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-    depends_on:
-      - db
-      - ai-backend
     networks:
+      - coolify
       - mypandits-network
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
 
-  # 3. AI Backend: Python FastAPI Service
+  # 2. AI Backend: Python FastAPI Service
   ai-backend:
     build:
       context: ./agents/backend
@@ -52,37 +37,46 @@ services:
     ports:
       - "8090:8090"
     environment:
-      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:PanditAdmin2026@db:5432/mypandits?schema=public}
+      - DATABASE_URL=${DATABASE_URL}
       - REFRESH_MODE=${REFRESH_MODE:-false}
-    depends_on:
-      - db
     networks:
+      - coolify
       - mypandits-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
-  # 4. WhatsApp Service: Standalone Bridge
+  # 3. WhatsApp Service: Standalone Bridge
   whatsapp-service:
     build:
       context: ./whatsapp-service
       dockerfile: Dockerfile
     container_name: mypandits-whatsapp
     restart: always
+    shm_size: '2gb' # Critical for Puppeteer/Chromium on Linux
     ports:
       - "3095:3095"
     volumes:
-      # Use the volume name Coolify already created for WhatsApp session data
       - whatsapp-data:/data/whatsapp_session
     environment:
       - WHATSAPP_SERVICE_URL=${WHATSAPP_SERVICE_URL:-http://whatsapp-service:3095}
     networks:
+      - coolify
       - mypandits-network
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
 
 networks:
+  coolify:
+    external: true
   mypandits-network:
     driver: bridge
 
 volumes:
-  # Define volume names that match Coolify's existing storage to preserve data
-  postgres-data:
-    external: false
+  # Map to existing Coolify volume names
   whatsapp-data:
-    external: false
+    name: ${WHATSAPP_VOLUME_NAME:-whatsapp-data}
+

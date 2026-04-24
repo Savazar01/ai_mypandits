@@ -1,4 +1,3 @@
-
 services:
   # 1. Database Layer: Fully aligned with production standards
   db:
@@ -6,9 +5,9 @@ services:
     container_name: mypandits-db
     restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=PanditAdmin2026
-      - POSTGRES_DB=mypandits
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-PanditAdmin2026}
+      - POSTGRES_DB=${POSTGRES_DB:-mypandits}
     ports:
       - "5433:5432" # Keep 5433 for external access if needed
     volumes:
@@ -28,7 +27,7 @@ services:
       - "3090:3090"
     environment:
       - NODE_ENV=${NODE_ENV:-production}
-      - DATABASE_URL=postgresql://postgres:PanditAdmin2026@db:5432/mypandits?schema=public
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-PanditAdmin2026}@db:5432/${POSTGRES_DB:-mypandits}?schema=public
       - PYTHON_BACKEND_URL=http://ai-backend:8090
       - WHATSAPP_SERVICE_URL=http://whatsapp-service:3095
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
@@ -51,7 +50,7 @@ services:
     ports:
       - "8090:8090"
     environment:
-      - DATABASE_URL=postgresql://postgres:PanditAdmin2026@db:5432/mypandits?schema=public
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-PanditAdmin2026}@db:5432/${POSTGRES_DB:-mypandits}?schema=public
       - REFRESH_MODE=${REFRESH_MODE:-false}
     depends_on:
       - db
@@ -69,6 +68,8 @@ services:
       - "3095:3095"
     volumes:
       - whatsapp_data:/data/whatsapp_session
+    environment:
+      - WHATSAPP_SERVICE_URL=http://whatsapp-service:3095
     networks:
       - mypandits-network
 
